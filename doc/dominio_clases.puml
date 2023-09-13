@@ -1,4 +1,4 @@
-@startuml OpoTest
+@startuml OpoTestDomain
 
 class User {
     #role
@@ -6,7 +6,7 @@ class User {
 }
 
 enum Category {
-
+    create()
 }
 
 enum Subcategory {

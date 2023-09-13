@@ -1,5 +1,5 @@
 	
-@startuml OpoTest
+@startuml OpoTestPlanteamiento
 actor Usuario
 
 App -> API: Authentication Request
