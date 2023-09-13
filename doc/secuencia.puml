@@ -1,0 +1,15 @@
+	
+@startuml OpoTest
+actor Usuario
+
+App -> API: Authentication Request
+API --> App: Authentication Response
+
+App -> API: Collections Request
+API <-- App: Collections Response
+
+database OpotestDb
+
+API -> OpotestDb
+
+@enduml

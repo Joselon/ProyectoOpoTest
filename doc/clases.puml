@@ -1,0 +1,43 @@
+@startuml OpoTest
+
+class User {
+    #role
+
+}
+
+enum Category {
+
+}
+
+enum Subcategory {
+
+}
+
+class Test {
+    #List[] questions
+}
+
+class Question {
+    #creator
+    #creationDate
+    #reviewer
+    #reviewDate
+
+    #statement
+    #List[] answers
+
+}
+class Answer {
+    # isCorrect
+}
+
+
+Test *--> "1..*" Question
+Question *--> "1..*" Answer
+
+Question *--> Category
+Category *-->"0..*" Subcategory
+
+
+
+
