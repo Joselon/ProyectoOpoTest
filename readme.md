@@ -13,6 +13,9 @@ Se propone la posibilidad de formar una comunidad de usuarios para compartir est
 [domain]
 <img src="./out/doc/dominio_clases/OpoTestDomain.svg">
 
+[useCases]
+<img src="./out/doc/useCases_app/useCases_app.svg">
+
 [references]
 UML-Quiz
 Autor: https://vonfranque.com/
