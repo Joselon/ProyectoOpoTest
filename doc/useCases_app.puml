@@ -1,6 +1,7 @@
 @startuml
 left to right direction
 actor User as u
+actor Editor as e
 usecase "Login" as login
 usecase "Create Question" as createQ
 usecase "Update Question" as updateQ
@@ -8,16 +9,20 @@ usecase "Delete Question" as deleteQ
 
 usecase "Compose Test" as composeT
 usecase "Edit Test" as editT
+usecase "Delete Test" as deleteT
 usecase "Play Test" as playT
 
-u --> login
-u --> createQ
-u --> updateQ
-u --> deleteQ
+e --> login
+e --> createQ
+e --> updateQ
+e --> deleteQ
 
 u --> composeT
 u --> editT
+u --> deleteT
 u --> playT
+
+
 
 
 @enduml
