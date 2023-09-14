@@ -7,8 +7,8 @@ El usuario podrá componer conjuntos de preguntas en un Test que podrá ejecutar
 Se propone la posibilidad de formar una comunidad de usuarios para compartir estas preguntas, catalogarlas y marcar las revisiones realizadas por usuarios autorizados en la categoría del conocimiento concreto de la pregunta.
 
 
-[overview]
-<img src="./out/doc/planteamiento_secuencia/OpoTestPlanteamiento.svg">
+<!-- [overview]
+<img src="./out/doc/planteamiento_secuencia/OpoTestPlanteamiento.svg"> -->
 
 [domain]
 <img src="./out/doc/dominio_clases/OpoTestDomain.svg">

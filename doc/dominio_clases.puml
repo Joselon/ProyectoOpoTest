@@ -28,7 +28,7 @@ enum Subcategory {
 }
 
 class Test {
-    #List[] questions
+    #List questions
 }
 
 class Question {
@@ -38,7 +38,7 @@ class Question {
     #reviewDate
 
     #statement
-    #List[] answers
+    #List answers
 
 }
 class Answer {
@@ -47,9 +47,9 @@ class Answer {
 
 Community *-- "1..*" User
 
-Editor <|-- User
-Reviewer <|-- User
-Player <|-- User
+User <|-- Editor
+User <|--  Reviewer
+User <|-- Player
 
 User o-- Test
 

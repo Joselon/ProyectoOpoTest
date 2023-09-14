@@ -1,4 +1,4 @@
-@startuml
+@startuml useCases_app
 left to right direction
 actor User as u
 actor Editor as e
