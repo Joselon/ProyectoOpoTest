@@ -2,6 +2,7 @@
 @startuml OpoTestPlanteamiento
 actor Usuario
 
+database LocalDb
 App -> API: Authentication Request
 API --> App: Authentication Response
 

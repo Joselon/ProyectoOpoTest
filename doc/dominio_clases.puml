@@ -1,7 +1,21 @@
 @startuml OpoTestDomain
 
+class Community {}
+
 class User {
     #role
+    #Test composeTest()
+}
+
+class Editor {
+
+}
+
+class Reviewer {
+
+}
+
+class Player {
 
 }
 
@@ -31,6 +45,13 @@ class Answer {
     # isCorrect
 }
 
+Community *-- "1..*" User
+
+Editor <|-- User
+Reviewer <|-- User
+Player <|-- User
+
+User o-- Test
 
 Test *--> "1..*" Question
 Question *--> "1..*" Answer
