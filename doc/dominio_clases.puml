@@ -1,49 +1,28 @@
 @startuml OpoTestDomain
 
-class Community {}
+class Community
+note left: reviewedQuestions availables
 
-class User {
-    #role
-    #Test composeTest()
-}
+class User
+note left: myTests
 
-class Editor {
+class Editor 
 
-}
+class Reviewer 
 
-class Reviewer {
+class Player 
 
-}
+enum Category 
 
-class Player {
+enum Subcategory 
 
-}
+class Test 
 
-enum Category {
-    create()
-}
+class Question 
+note left :statement
+note right of Question: date, reviewed
 
-enum Subcategory {
-
-}
-
-class Test {
-    #List questions
-}
-
-class Question {
-    #creator
-    #creationDate
-    #reviewer
-    #reviewDate
-
-    #statement
-    #List answers
-
-}
-class Answer {
-    # isCorrect
-}
+class Answer 
 
 Community *-- "1..*" User
 
@@ -53,11 +32,18 @@ User <|-- Player
 
 User o-- Test
 
+Editor ..> Question
+Reviewer ..> Question
+Reviewer ..> Community
+Player ..> Test
+
 Test *--> "1..*" Question
 Question *--> "1..*" Answer
 
 Question *--> Category
 Category *-->"0..*" Subcategory
+
+
 
 
 

@@ -2,8 +2,10 @@
 left to right direction
 actor User as u
 actor Editor as e
+actor Reviewer as r
 usecase "Login" as login
 usecase "Create Question" as createQ
+usecase "Import Question" as importQ
 usecase "Update Question" as updateQ
 usecase "Delete Question" as deleteQ
 
@@ -12,16 +14,22 @@ usecase "Edit Test" as editT
 usecase "Delete Test" as deleteT
 usecase "Play Test" as playT
 
-e --> login
-e --> createQ
-e --> updateQ
-e --> deleteQ
+usecase "Edit Category" as editC
+usecase "Upload Question" as uploadQ
 
+
+u --> createQ
+u --> importQ
+u --> updateQ
+u --> deleteQ
+
+u --> login
 u --> composeT
 u --> editT
 u --> deleteT
 u --> playT
 
+u --> editC
 
 
 
