@@ -1,7 +1,7 @@
 @startuml OpoTestDomain
 
 class Community
-note left: reviewedQuestions availables
+note left: reviewedQuestions&Test availables
 
 class User
 note left: myTests
@@ -19,8 +19,9 @@ enum Subcategory
 class Test 
 
 class Question 
-note left :statement
-note right of Question: date, reviewed
+note right of Question: INFO: date, reviewed
+
+class Statement
 
 class Answer 
 
@@ -30,14 +31,16 @@ User <|-- Editor
 User <|--  Reviewer
 User <|-- Player
 
-User o-- Test
+User o-- "0..*" Test
 
 Editor ..> Question
-Reviewer ..> Question
+Reviewer <.. Question
+Reviewer <.. Test
 Reviewer ..> Community
 Player ..> Test
 
 Test *--> "1..*" Question
+Question *--> "1" Statement
 Question *--> "1..*" Answer
 
 Question *--> Category

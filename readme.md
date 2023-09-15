@@ -1,4 +1,4 @@
-# PROPUESTA DE PROYECTO OPOTEST
+# PROPUESTA DE PROYECTO OPOTEST (borrador)
 
 Se propone una aplicación que servirá de herramienta para recopilar preguntas tipo Test para la autoevaluación de alumnos. Debe contemplar una manera sencilla para recopilar las preguntas de distintas fuentes y ofrecer consejos para facilitar la creación de preguntas en dispositivos móviles.
 
@@ -10,13 +10,22 @@ Se propone la posibilidad de formar una comunidad de usuarios para compartir est
 <!-- [overview]
 <img src="./out/doc/planteamiento_secuencia/OpoTestPlanteamiento.svg"> -->
 
+## Dominio
+
 [domain]
 <img src="./out/doc/dominio_clases/OpoTestDomain.svg">
+
+## Casos de uso
 
 [useCases]
 <img src="./out/doc/useCases_app/useCases_app.svg">
 
-[references]
-UML-Quiz
-Autor: https://vonfranque.com/
+## Referencias
+
+-UML-Quiz: 
+Autor: https://vonfranque.com/ (Universidad de Viena)
 https://publik.tuwien.ac.at/files/PubDat_237457.pdf
+
+-DAYPO: Web de test oposiciones colaborativa https://www.daypo.com 
+
+

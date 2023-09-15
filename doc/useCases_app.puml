@@ -17,11 +17,14 @@ usecase "Play Test" as playT
 usecase "Edit Category" as editC
 usecase "Upload Question" as uploadQ
 
+e --|>u
+r --|>u
 
 u --> createQ
 u --> importQ
 u --> updateQ
 u --> deleteQ
+r --> uploadQ
 
 u --> login
 u --> composeT
