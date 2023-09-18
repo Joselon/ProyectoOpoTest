@@ -1,8 +1,8 @@
 @startuml useCases_app
 left to right direction
-actor User as u
-actor Editor as e
-actor Reviewer as r
+actor User
+actor Editor
+actor Reviewer
 usecase "Login" as login
 usecase "Create Question" as createQ
 usecase "Import Question" as importQ
@@ -17,22 +17,22 @@ usecase "Play Test" as playT
 usecase "Edit Category" as editC
 usecase "Upload Question" as uploadQ
 
-e --|>u
-r --|>u
+Editor --|>User
+Reviewer --|>User
 
-u --> createQ
-u --> importQ
-u --> updateQ
-u --> deleteQ
-r --> uploadQ
+User --> createQ
+User --> importQ
+User --> updateQ
+User --> deleteQ
+Reviewer --> uploadQ
 
-u --> login
-u --> composeT
-u --> editT
-u --> deleteT
-u --> playT
+User --> login
+User --> composeT
+User --> editT
+User --> deleteT
+User --> playT
 
-u --> editC
+User --> editC
 
 
 

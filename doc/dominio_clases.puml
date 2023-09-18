@@ -12,9 +12,9 @@ class Reviewer
 
 class Player 
 
-enum Category 
+class Category 
 
-enum Subcategory 
+class Subcategory 
 
 class Test 
 
