@@ -1,47 +1,69 @@
 @startuml OpoTestDomain
 
 class Community
-note left: reviewedQuestions&Test availables
 
 class User
-note left: myTests
+
+class Reviewer
 
 class Editor 
 
-class Reviewer 
+class Executor 
 
-class Player 
+package Online {
 
-class Category 
+    class PublicTests
 
-class Subcategory 
+    class PendingReviewTests
 
-class Test 
+}
 
-class Question 
-note right of Question: INFO: date, reviewed
+package Offline {
 
-class Statement
+    class Category 
 
-class Answer 
+    class Subcategory 
 
-Community *-- "1..*" User
+    class Test 
+
+    class Question {
+        date
+        reviewed
+        ...
+    }
+
+    class Statement
+
+    class Answer 
+
+    class Correct
+
+    Class Wrong
+
+}
+
+Community *--> "1..*" User
+Community *--> PublicTests
+Community *--> PendingReviewTests
 
 User <|-- Editor
 User <|--  Reviewer
-User <|-- Player
+User <|-- Executor
 
-User o-- "0..*" Test
+User o--> "0..*" Test
+User ..> PublicTests
+User ..> PendingReviewTests : Upload
 
 Editor ..> Question
-Reviewer <.. Question
-Reviewer <.. Test
-Reviewer ..> Community
-Player ..> Test
+Editor ..> Test
+Reviewer ..> PendingReviewTests : Review
+Executor ..> Test
 
 Test *--> "1..*" Question
-Question *--> "1" Statement
+Question *-->  Statement
 Question *--> "1..*" Answer
+Answer <|-- Correct
+Answer <|-- Wrong
 
 Question *--> Category
 Category *-->"0..*" Subcategory

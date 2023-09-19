@@ -26,6 +26,12 @@ Se propone la posibilidad de formar una comunidad de usuarios para compartir est
 Autor: https://vonfranque.com/ (Universidad de Viena)
 https://publik.tuwien.ac.at/files/PubDat_237457.pdf
 
--DAYPO: Web de test oposiciones colaborativa https://www.daypo.com 
+-Webs de test oposiciones
+
+https://www.daypo.com  
+http://OpositaTest.com  
+http://hacertest.com  
+http://Oposito.es  
+
 
 
