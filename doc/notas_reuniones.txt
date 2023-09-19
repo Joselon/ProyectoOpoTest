@@ -1,0 +1,21 @@
+2023_09_15 : 
+-------------------------------------------------------------------------------------------------------------------
+Web de test oposiciones colaborativa https://daypo.com 
+http://OpositaTest.com
+http://hacertest.com
+http://Oposito.es
+
+-------------------------------------------------------------------------------------------------------------------
+
+2023_09_16 : 
+-------------------------------------------------------------------------------------------------------------------
+Ideas nombre Document Eagle: DEagle
+Un aguililla que se lleva las preguntas de examen buenas
+
+Ver formatos de importacion/exportación  para poder pasar de un dispositivo a otro sin pasar por revisión central.
+O respaldo en bbdd central para cada usuario.
+
+Idea de desarrollo futuro: sacar con chatGPT preguntas de test de un texto. Preguntas falsas creibles.
+
+-------------------------------------------------------------------------------------------------------------------
+

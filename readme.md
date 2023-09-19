@@ -1,4 +1,4 @@
-# PROPUESTA DE PROYECTO OPOTEST (borrador)
+# PROPUESTA DE PROYECTO (borrador)
 
 Se propone una aplicación que servirá de herramienta para recopilar preguntas tipo Test para la autoevaluación de alumnos. Debe contemplar una manera sencilla para recopilar las preguntas de distintas fuentes y ofrecer consejos para facilitar la creación de preguntas en dispositivos móviles.
 
