@@ -3,7 +3,8 @@ left to right direction
 actor User
 actor Editor
 actor Reviewer
-usecase "Login & Register" as login
+usecase "Login" as login
+usecase "Register" as register
 usecase "Create Question" as createQ
 usecase "Import Question" as importQ
 usecase "Update Question" as updateQ
@@ -20,22 +21,23 @@ usecase "Upload Question" as uploadQ
 usecase "Review Question" as review
 
 Editor --|> User
-Reviewer --|> User
+Reviewer --|> Editor
 Executor --|> User
 
-User --> createQ
-User --> importQ
-User --> updateQ
-User --> deleteQ
-User --> uploadQ
+Editor --> createQ
+Editor --> importQ
+Editor --> updateQ
+Editor --> deleteQ
+Editor --> uploadQ
 
 User --> login
+User --> register
 User --> composeT
 User --> editT
 User --> deleteT
 Executor --> playT
 
-User --> editC
+Editor --> editC
 
 Reviewer --> review
 

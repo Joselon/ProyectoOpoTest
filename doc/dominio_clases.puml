@@ -10,15 +10,15 @@ class Editor
 
 class Executor 
 
-package Online {
+package Public {
 
-    class PublicTests
+    class Tests
 
     class PendingReviewTests
 
 }
 
-package Offline {
+package Private {
 
     class Category 
 
@@ -38,26 +38,27 @@ package Offline {
 
     class Correct
 
-    Class Wrong
+    Class Wrong {
+        difficulty
+    }
 
 }
 
 Community *--> "1..*" User
-Community *--> PublicTests
-Community *--> PendingReviewTests
+Community *--> Tests
+
 
 User <|-- Editor
-User <|--  Reviewer
+Editor <|--  Reviewer
 User <|-- Executor
 
 User o--> "0..*" Test
-User ..> PublicTests
+User ..> Tests
 User ..> PendingReviewTests : Upload
+Test ..> PendingReviewTests
 
 Editor ..> Question
-Editor ..> Test
 Reviewer ..> PendingReviewTests : Review
-Executor ..> Test
 
 Test *--> "1..*" Question
 Question *-->  Statement
