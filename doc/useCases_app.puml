@@ -13,10 +13,10 @@ usecase "Delete Question" as deleteQ
 usecase "Compose Test" as composeT
 usecase "Edit Test" as editT
 usecase "Delete Test" as deleteT
-usecase "Play Test" as playT
+usecase "Execute Test" as execT
 
 usecase "Edit Category" as editC
-usecase "Upload Question" as uploadQ
+usecase "Send To Review Question" as sendQ
 
 usecase "Review Question" as review
 
@@ -28,19 +28,17 @@ Editor --> createQ
 Editor --> importQ
 Editor --> updateQ
 Editor --> deleteQ
-Editor --> uploadQ
+Editor --> sendQ
 
 User --> login
 User --> register
 User --> composeT
 User --> editT
 User --> deleteT
-Executor --> playT
+Executor --> execT
 
 Editor --> editC
 
 Reviewer --> review
-
-
 
 @enduml

@@ -8,13 +8,15 @@ class Reviewer
 
 class Editor 
 
-class Executor 
+class Executor
+
+class Evaluation
 
 package Public {
 
     class Tests
 
-    class PendingReviewTests
+    class PendingReviewQuestions
 
 }
 
@@ -29,10 +31,14 @@ package Private {
     class Question {
         date
         reviewed
+        difficulty
+        type
         ...
     }
 
-    class Statement
+    class Statement {
+        difficulty
+    }
 
     class Answer 
 
@@ -54,11 +60,13 @@ User <|-- Executor
 
 User o--> "0..*" Test
 User ..> Tests
-User ..> PendingReviewTests : Upload
-Test ..> PendingReviewTests
+Question ..> PendingReviewQuestions
+
+Executor --> Evaluation
+Evaluation --> Test
 
 Editor ..> Question
-Reviewer ..> PendingReviewTests : Review
+Reviewer ..> PendingReviewQuestions : Review
 
 Test *--> "1..*" Question
 Question *-->  Statement
@@ -68,6 +76,7 @@ Answer <|-- Wrong
 
 Question *--> Category
 Category *-->"0..*" Subcategory
+Subcategory *-->"0..*" Subcategory
 
 
 

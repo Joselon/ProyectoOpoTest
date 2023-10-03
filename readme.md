@@ -20,6 +20,10 @@ Se propone la posibilidad de formar una comunidad de usuarios para compartir est
 [useCases]
 <img src="./out/doc/useCases_app/useCases_app.svg">
 
+## Elaboración de una Pregunta
+<img src="./out/doc/questionStates/questionStates.svg">
+
+
 ## Referencias
 
 -UML-Quiz: 

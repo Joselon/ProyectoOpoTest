@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="121px" preserveAspectRatio="none" style="width:1048px;height:121px;background:#FFFFFF;" version="1.1" viewBox="0 0 1048 121" width="1048px" zoomAndPan="magnify"><defs/><g><g id="Created"><rect fill="#F1F1F1" height="108.0469" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="113" x="194.5" y="7"/><line style="stroke:#181818;stroke-width:0.5;" x1="194.5" x2="307.5" y1="34.6094" y2="34.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="51" x="225.5" y="26.5332">Created</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="58" x="199.5" y="54.1426">Category</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="80" x="199.5" y="71.752">Subcategory</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="64" x="199.5" y="89.3613">Statement</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="199.5" y="106.9707">CorrectAnswer</text></g><g id="InProgress"><rect fill="#F1F1F1" height="55.2188" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="116" x="431" y="33.5"/><line style="stroke:#181818;stroke-width:0.5;" x1="431" x2="547" y1="61.1094" y2="61.1094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68" x="455" y="53.0332">InProgress</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="436" y="80.6426">+WrongAnswer</text></g><g id="InReview"><rect fill="#F1F1F1" height="55.2188" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="81" x="689.5" y="33.5"/><line style="stroke:#181818;stroke-width:0.5;" x1="689.5" x2="770.5" y1="61.1094" y2="61.1094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="702" y="53.0332">InReview</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="61" x="694.5" y="80.6426">Reviewed</text></g><g id="Ready"><rect fill="#F1F1F1" height="55.2188" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="181" x="860.5" y="33.5"/><line style="stroke:#181818;stroke-width:0.5;" x1="860.5" x2="1041.5" y1="61.1094" y2="61.1094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="41" x="930.5" y="53.0332">Ready</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="161" x="865.5" y="80.6426">Available to add to a Test</text></g><ellipse cx="16" cy="61" fill="#222222" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><!--MD5=[fce0a99ff020773a13d941767c2fc94a]
+link *start to Created--><g id="link_*start_Created"><path d="M26.1,61 C53.81,61 132.76,61 189.28,61 " fill="none" id="*start-to-Created" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="194.34,61,185.34,57,189.34,61,185.34,65,194.34,61" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="132" x="44.25" y="54.4951">Editor: CreateQuestion</text></g><!--MD5=[af0927b23d9d4ad750fb6d9de106dfbc]
+link Created to InProgress--><g id="link_Created_InProgress"><path d="M307.7,61 C343.09,61 388.7,61 425.33,61 " fill="none" id="Created-to-InProgress" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="430.66,61,421.66,57,425.66,61,421.66,65,430.66,61" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="87" x="325.75" y="54.4951">Editor / Editors</text></g><!--MD5=[649528836960090a26aac61fd9c636be]
+link InProgress to InReview--><g id="link_InProgress_InReview"><path d="M547.03,61 C589.15,61 645.35,61 684.3,61 " fill="none" id="InProgress-to-InReview" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="689.44,61,680.44,57,684.44,61,680.44,65,689.44,61" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="106" x="565.25" y="54.4951">4answer ToReview</text></g><!--MD5=[e411a600d596350b863cd1f2a776d21f]
+link InReview to InProgress--><g id="link_InReview_InProgress"><path d="M689.18,75.04 C679.03,77.92 668.1,80.53 657.75,82 C622.99,86.95 613.63,86.03 578.75,82 C570.03,80.99 560.93,79.45 552.01,77.66 " fill="none" id="InReview-to-InProgress" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="547.07,76.63,555.0529,82.3983,551.9627,77.6601,556.701,74.5699,547.07,76.63" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="77" x="579.75" y="78.4951">Not Approved</text></g><!--MD5=[e012b007ff30cff8ab930288c54867f6]
+link InReview to Ready--><g id="link_InReview_Ready"><path d="M770.53,61 C794.33,61 825.48,61 855.18,61 " fill="none" id="InReview-to-Ready" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="860.32,61,851.32,57,855.32,61,851.32,65,860.32,61" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="53" x="789" y="54.4951">Approved</text></g><!--MD5=[3d2c9489e2ff823f7737086e09e6f19f]
+@startuml QuestionStates
+
+state Created
+state InProgress
+state InReview
+state Ready
+
+Created :  Category
+Created : Subcategory
+Created : Statement
+Created : CorrectAnswer
+
+InProgress : +WrongAnswer
+
+InReview : Reviewed
+
+Ready : Available to add to a Test
+
+[*] -> Created : Editor: CreateQuestion
+Created -> InProgress : Editor / Editors
+InProgress -> InReview : 4answer ToReview
+InReview -> InProgress : Not Approved
+InReview -> Ready : Approved
+
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: es
+Country: ES
+--></g></svg>
