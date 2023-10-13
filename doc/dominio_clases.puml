@@ -24,8 +24,6 @@ package Private {
 
     class Category 
 
-    class Subcategory 
-
     class Test 
 
     class Question {
@@ -75,8 +73,8 @@ Answer <|-- Correct
 Answer <|-- Wrong
 
 Question *--> Category
-Category *-->"0..*" Subcategory
-Subcategory *-->"0..*" Subcategory
+Category *-->"1..*" Category
+
 
 
 
