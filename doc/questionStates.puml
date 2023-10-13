@@ -17,7 +17,7 @@ InReview : Reviewed
 Ready : Available to add to a Test
 
 [*] -> Created : Editor: CreateQuestion
-Created -> InProgress : Editor / Editors
+Created -> InProgress : Editor / Editors : AddAnswers
 InProgress -> InReview : 4answer ToReview
 InReview -> InProgress : Not Approved
 InReview -> Ready : Approved

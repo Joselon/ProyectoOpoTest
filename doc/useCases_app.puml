@@ -6,7 +6,7 @@ actor Reviewer
 usecase "Login" as login
 usecase "Register" as register
 usecase "Create Question" as createQ
-usecase "Import Question" as importQ
+
 usecase "Add Answer" as addAnswerQ
 usecase "Delete Question" as deleteQ
 
@@ -14,17 +14,17 @@ usecase "Assign Test" as assignT
 usecase "Unassign Test" as unassignT
 usecase "Execute Test" as execT
 
-usecase "Edit Category" as editC
+usecase "Create Category" as createC
 usecase "Mark ToReview Question" as markQ
-
-usecase "Review Question" as review
+usecase "Approve / reject Answer" as approveRejectA
+usecase "Review Question" as reviewQ
+usecase "Publish Question" as publishQ
 
 Editor --|> User
 Reviewer --|> Editor
 Executor --|> User
 
 Editor --> createQ
-Editor --> importQ
 Editor --> addAnswerQ
 Editor --> deleteQ
 Editor --> markQ
@@ -35,8 +35,9 @@ User --> assignT
 User --> unassignT
 Executor --> execT
 
-Editor --> editC
-
-Reviewer --> review
+Reviewer --> createC
+Reviewer --> approveRejectA
+Reviewer --> reviewQ
+Reviewer --> publishQ
 
 @enduml

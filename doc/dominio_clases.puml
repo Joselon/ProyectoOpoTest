@@ -12,44 +12,33 @@ class Executor
 
 class Evaluation
 
-package Public {
+class Category 
 
-    class Tests
+class Test
 
-    class PendingReviewQuestions
+class PendingReviewQuestions
 
+class AvailableQuestions 
+
+class Question {
+    date
+    reviewed
+    type
+    public/private
+    ...
 }
 
-package Private {
+class Statement
 
-    class Category 
+class Answer 
 
-    class Test 
+class Correct
 
-    class Question {
-        date
-        reviewed
-        difficulty
-        type
-        ...
-    }
+Class Wrong
 
-    class Statement {
-        difficulty
-    }
-
-    class Answer 
-
-    class Correct
-
-    Class Wrong {
-        difficulty
-    }
-
-}
 
 Community *--> "1..*" User
-Community *--> Tests
+Community *--> AvailableQuestions
 
 
 User <|-- Editor
@@ -57,8 +46,8 @@ Editor <|--  Reviewer
 User <|-- Executor
 
 User o--> "0..*" Test
-User ..> Tests
-Question ..> PendingReviewQuestions
+PendingReviewQuestions *--> Question
+AvailableQuestions *--> PendingReviewQuestions
 
 Executor --> Evaluation
 Evaluation --> Test
@@ -66,7 +55,7 @@ Evaluation --> Test
 Editor ..> Question
 Reviewer ..> PendingReviewQuestions : Review
 
-Test *--> "1..*" Question
+Test *--> "10..*" Question
 Question *-->  Statement
 Question *--> "1..*" Answer
 Answer <|-- Correct

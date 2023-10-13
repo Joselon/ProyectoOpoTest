@@ -39,3 +39,8 @@ http://Oposito.es
 
 
 
+## Propuestas:
+
+<img src="./doc/marcosJPG/MarcosDominio20231013.jpg">
+
+<img src="./doc/marcosJPG/MarcosCasosUso20231013.jpg">
