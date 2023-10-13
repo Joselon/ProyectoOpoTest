@@ -39,8 +39,8 @@ http://Oposito.es
 
 
 
-## Propuestas:
+## Propuestas Marcos 13/10/2023:
 
-<img src="./doc/marcosJPG/MarcosDominio20231013.jpg">
+<img src="./doc/marcosUML/Modelo_dominio_Opotest.svg">
 
-<img src="./doc/marcosJPG/MarcosCasosUso20231013.jpg">
+<img src="./doc/marcosUML/DiagramaCasosdeUso-Opotest.svg">

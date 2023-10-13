@@ -49,14 +49,14 @@ User o--> "0..*" Test
 PendingReviewQuestions *--> Question
 AvailableQuestions *--> PendingReviewQuestions
 
-Executor --> Evaluation
+Executor --> "0..*" Evaluation
 Evaluation --> Test
 
 Editor ..> Question
 Reviewer ..> PendingReviewQuestions : Review
 
 Test *--> "10..*" Question
-Question *-->  Statement
+Question *-->   Statement
 Question *--> "1..*" Answer
 Answer <|-- Correct
 Answer <|-- Wrong
