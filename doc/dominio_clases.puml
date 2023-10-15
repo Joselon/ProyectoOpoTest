@@ -45,7 +45,6 @@ User <|-- Editor
 Editor <|--  Reviewer
 User <|-- Executor
 
-User o--> "0..*" Test
 PendingReviewQuestions *--> Question
 AvailableQuestions *--> PendingReviewQuestions
 
@@ -62,7 +61,7 @@ Answer <|-- Correct
 Answer <|-- Wrong
 
 Question *--> Category
-Category *-->"1..*" Category
+Category *-->"0..*" Category
 
 
 

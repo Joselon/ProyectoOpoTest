@@ -17,8 +17,9 @@ usecase "Execute Test" as execT
 
 usecase "Create Category" as createC
 usecase "Mark ToReview Question" as markQ
-usecase "** Approve / reject Answer" as approveRejectA
+usecase "** Approve / reject Question" as approveRejectA
 usecase "Review Question" as reviewQ
+usecase "Edit Category" as editC
 usecase "**Publish Question" as publishQ
 
 Editor --|> User
@@ -38,6 +39,7 @@ Executor --> unassignT
 Executor --> execT
 
 Reviewer --> createC
+Reviewer --> editC
 Reviewer --> approveRejectA
 Reviewer --> reviewQ
 Reviewer --> publishQ
