@@ -18,13 +18,12 @@ class Test
 
 class PendingReviewQuestions
 
-class AvailableQuestions 
+class ReviewedQuestions 
 
 class Question {
     date
     reviewed
     type
-    public/private
     ...
 }
 
@@ -34,11 +33,13 @@ class Answer
 
 class Correct
 
-Class Wrong
+Class Incorrect
+
+Class Explication
 
 
 Community *--> "1..*" User
-Community *--> AvailableQuestions
+Community *--> ReviewedQuestions
 
 
 User <|-- Editor
@@ -46,7 +47,7 @@ Editor <|--  Reviewer
 User <|-- Executor
 
 PendingReviewQuestions *--> Question
-AvailableQuestions *--> PendingReviewQuestions
+ReviewedQuestions *--> PendingReviewQuestions
 
 Executor --> "0..*" Evaluation
 Evaluation --> Test
@@ -58,7 +59,8 @@ Test *--> "10..*" Question
 Question *-->   Statement
 Question *--> "1..*" Answer
 Answer <|-- Correct
-Answer <|-- Wrong
+Answer <|-- Incorrect
+Wrong --> Explication
 
 Question *--> Category
 Category *-->"0..*" Category

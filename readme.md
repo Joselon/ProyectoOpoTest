@@ -37,10 +37,41 @@ http://OpositaTest.com
 http://hacertest.com  
 http://Oposito.es  
 
+https://opexams.com/es/ai-quiz-generator/#solution-features
+
+https://testualia.com/test-online-con-inteligencia-artificial/
+
+https://parafrasist.com/creador-de-cuestionarios
+
+https://pregunta2.com/crear
 
 
-## Propuestas Marcos 13/10/2023:
 
-<img src="./doc/marcosUML/Modelo_dominio_Opotest.svg">
 
-<img src="./doc/marcosUML/DiagramaCasosdeUso-Opotest.svg">
+## Decálogo para crear preguntas:
+https://www.evolmind.com/blog/como-crear-examen-tipo-test-las-6-herramientas-que-triunfan/
+
+1.Centra cada pregunta del examen en el contenido que realmente es importante.
+
+2.Evita redactar las cuestiones tal cual aparecen en los apuntes de clase. La idea es averiguar si el alumno ha comprendido los conceptos y ciertamente entiende sobre qué se le está preguntando.
+
+3.Elabora preguntas cortas, nada de verborrea ni largas lecturas.
+
+4.Utiliza un lenguaje simple y acorde a tu grupo de alumnos.
+
+5.Cuida la ortografía y gramática. Como sabes, el uso inadecuado de un signo de puntuación o una frase mal construida pueden dar a entender otro significado.
+
+6.Sugiere, de ser posible, tres opciones de respuesta y comprueba que solo una sea la correcta.
+
+7.Formula las preguntas en positivo. De usar negativas, resáltalas con mayúscula y negrita.
+
+8.Cambia el orden en que aparece la respuesta correcta. Por ejemplo, si en la pregunta 1 la respuesta correcta es la ‘A’, en la 2 haz que sea la ‘B’ o la ‘C’.
+
+9.Prescinde de respuestas muy absurdas y ridículas.
+
+10.Aporta un toque de humor si ves que encaja con tu perfil de alumnos.
+
+
+##Tipos de Statement - solución.
+
+SVG
