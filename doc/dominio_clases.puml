@@ -60,7 +60,7 @@ Question *-->   Statement
 Question *--> "1..*" Answer
 Answer <|-- Correct
 Answer <|-- Incorrect
-Wrong --> Explication
+Incorrect --> Explication
 
 Question *--> Category
 Category *-->"0..*" Category
