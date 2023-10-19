@@ -1,21 +1,27 @@
 @startuml QuestionStates
 
-state Created
-state InReview
-state Ready
+state CategoryCreated
+state ConceptCreated
+state QuestionCreated
+state QuestionInReview
+state QuestionReady
 
-Created :  Category
-Created : Statement
-Created : CorrectAnswer
+CategoryCreated: Hierarchy
+ConceptCreated : Category
 
-InReview : Reviewed
+QuestionCreated :  Category
+QuestionCreated : Statement
+QuestionCreated : 4Answer
 
-Ready : Available to add to a Test
+QuestionInReview : Reviewed
 
-[*] -> Created : Editor: CreateQuestion
-Created -> InReview : 4answer ToReview
-InReview -> Created : Not Approved
-InReview -> Ready : Approved
+QuestionReady : available in Public Test
 
+[*] -> CategoryCreated : Reviewer:createCategory
+CategoryCreated -> ConceptCreated : Editor:createConcept
+ConceptCreated-> QuestionCreated : Editor:createQuestion
+QuestionCreated -> QuestionInReview : Editor: mark ToReview
+QuestionInReview -> QuestionCreated : Reviewer: Not Approved
+QuestionInReview -> QuestionReady : Reviewer: Approved
 
 @enduml

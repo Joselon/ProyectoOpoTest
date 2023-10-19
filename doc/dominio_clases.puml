@@ -18,12 +18,18 @@ class Test
 
 class PendingReviewQuestions
 
-class ReviewedQuestions 
+class ReviewedQuestions
+
+class Concept {
+    correctDefinition
+    incorrectDefinition
+    strategy
+}
 
 class Question {
     date
-    reviewed
-    type
+    isReviewed
+    isPublic
     ...
 }
 
@@ -52,7 +58,8 @@ ReviewedQuestions *--> PendingReviewQuestions
 Executor --> "0..*" Evaluation
 Evaluation --> Test
 
-Editor ..> Question
+Editor ..> Concept
+Concept ..> Question
 Reviewer ..> PendingReviewQuestions : Review
 
 Test *--> "10..*" Question
