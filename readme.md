@@ -15,6 +15,11 @@ Se propone la posibilidad de formar una comunidad de usuarios para compartir est
 [domain]
 <img src="./out/doc/dominio_clases/OpoTestDomain.svg">
 
+## Detalle : Tipos de Estrategias Statement - solución.
+
+[domain detail]
+<img src="./doc/marcosUML/conceptDomainDetail.png">
+
 ## Casos de uso
 
 [useCases]
@@ -72,6 +77,5 @@ https://www.evolmind.com/blog/como-crear-examen-tipo-test-las-6-herramientas-que
 10.Aporta un toque de humor si ves que encaja con tu perfil de alumnos.
 
 
-##Tipos de Statement - solución.
 
-SVG
+
