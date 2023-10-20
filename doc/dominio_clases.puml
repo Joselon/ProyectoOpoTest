@@ -43,7 +43,7 @@ class Correct
 
 Class Incorrect
 
-Class Explication
+Class Justification
 
 
 Community *--> "1..*" User
@@ -66,10 +66,11 @@ Reviewer ..> PendingReviewQuestions : Review
 
 Test *--> "10..*" Question
 Question *-->   Statement
-Question *--> "4" Answer
+Question *--> "3" Incorrect
+Question *-->   Correct
 Answer <|-- Correct
 Answer <|-- Incorrect
-Incorrect o-- Explication
+Incorrect o-- Justification
 
 Question *--> Category
 Category *-->"0..*" Category

@@ -18,4 +18,23 @@ O respaldo en bbdd central para cada usuario.
 Idea de desarrollo futuro: sacar con chatGPT preguntas de test de un texto. Preguntas falsas creibles.
 
 -------------------------------------------------------------------------------------------------------------------
+2023_10_20 : 
+-------------------------------------------------------------------------------------------------------------------
 
+Un concepto tiene una clave, y unas definiciones correctas e incorrectas, con una justificación correctas e incorrectas.
+
+2 niveles
+- ¿Qué es la clave? : (abierta, corrección manual)
+- ¿Qué es esta definición? (solo para definiciones correctas)(abierta, corrección manual)
+- ¿La clave es esta definición?
+- Señala qué definiciones son correctas: varias definiciones
+
+3 niveles
+- Es cierto que el SOFTWARE no son los ficheros del disco duro PORQUE
+ no contempla el FIRMWARE
+
+
+Si el concepto tiene relaciones de clasificación y composición se pueden usar otras estrategias
+- Dime los distintos tipos de SOFTWARE (la clave es padre)
+- Hay software de un tipo, ¿cúal es el otro tipo?
+- 
