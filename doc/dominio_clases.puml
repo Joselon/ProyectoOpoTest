@@ -14,7 +14,9 @@ class Evaluation
 
 class Category 
 
-class Test
+class Test {
+    categories
+}
 
 class PendingReviewQuestions
 
@@ -64,10 +66,10 @@ Reviewer ..> PendingReviewQuestions : Review
 
 Test *--> "10..*" Question
 Question *-->   Statement
-Question *--> "1..*" Answer
+Question *--> "4" Answer
 Answer <|-- Correct
 Answer <|-- Incorrect
-Incorrect --> Explication
+Incorrect o-- Explication
 
 Question *--> Category
 Category *-->"0..*" Category

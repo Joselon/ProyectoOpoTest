@@ -15,10 +15,12 @@ Se propone la posibilidad de formar una comunidad de usuarios para compartir est
 [domain]
 <img src="./out/doc/dominio_clases/OpoTestDomain.svg">
 
-## Detalle : Tipos de Estrategias Statement - solución.
+## Detalle : Tipos de Estrategias Statement
 
 [domain detail]
 <img src="./doc/marcosUML/conceptDomainDetail.png">
+
+<img src="./doc/marcosUML/strategyDomainDetail.png">
 
 ## Casos de uso
 

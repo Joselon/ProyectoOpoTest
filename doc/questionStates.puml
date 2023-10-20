@@ -8,6 +8,7 @@ state QuestionReady
 
 CategoryCreated: Hierarchy
 ConceptCreated : Category
+ConceptCreated : *Correct/Incorrect Definitions
 
 QuestionCreated :  Category
 QuestionCreated : Statement
@@ -19,7 +20,7 @@ QuestionReady : available in Public Test
 
 [*] -> CategoryCreated : Reviewer:createCategory
 CategoryCreated -> ConceptCreated : Editor:createConcept
-ConceptCreated-> QuestionCreated : Editor:createQuestion
+ConceptCreated-> QuestionCreated : Editor:selectStrategy
 QuestionCreated -> QuestionInReview : Editor: mark ToReview
 QuestionInReview -> QuestionCreated : Reviewer: Not Approved
 QuestionInReview -> QuestionReady : Reviewer: Approved

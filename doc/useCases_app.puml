@@ -6,42 +6,47 @@ actor Reviewer
 usecase "Login" as login
 usecase "Register" as register
 usecase "Logout" as logout
-usecase "Create Question" as createQ
 
-usecase "Add Answer" as addAnswerQ
+usecase "Create Concept" as createConcept
+usecase "Select Strategy" as selectStrategy
+usecase "Create Question" as createQ
 usecase "Delete Question" as deleteQ
 
-usecase "Assign Test" as assignT
-usecase "Unassign Test" as unassignT
+usecase "Select Categories" as selectCats
+usecase "Select Options" as selectOps
 usecase "Execute Test" as execT
 
-usecase "Create Category" as createC
+usecase "Create Category" as createCat
+usecase "Edit Category" as editC
 usecase "Mark ToReview Question" as markQ
 usecase "** Approve / reject Question" as approveRejectA
 usecase "Review Question" as reviewQ
-usecase "Edit Category" as editC
 usecase "**Publish Question" as publishQ
+
 
 Editor --|> User
 Reviewer --|> Editor
 Executor --|> User
 
+Editor --> createConcept
+Editor --> selectStrategy
 Editor --> createQ
-Editor --> addAnswerQ
 Editor --> deleteQ
 Editor --> markQ
 
 User --> login
 User --> register
 User --> logout
-Executor --> assignT
-Executor --> unassignT
+
+Executor --> selectCats
+Executor --> selectOps
 Executor --> execT
 
-Reviewer --> createC
+Reviewer --> createCat
 Reviewer --> editC
-Reviewer --> approveRejectA
 Reviewer --> reviewQ
-Reviewer --> publishQ
+    reviewQ ..> approveRejectA :include
+    reviewQ ..> publishQ :include
+
 
 @enduml
