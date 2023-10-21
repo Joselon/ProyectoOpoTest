@@ -33,7 +33,6 @@ Un concepto tiene una clave, y unas definiciones correctas e incorrectas, con un
 - Es cierto que el SOFTWARE no son los ficheros del disco duro PORQUE
  no contempla el FIRMWARE
 
-
 Si el concepto tiene relaciones de clasificación y composición se pueden usar otras estrategias
 - Dime los distintos tipos de SOFTWARE (la clave es padre)
 - Hay software de un tipo, ¿cúal es el otro tipo?

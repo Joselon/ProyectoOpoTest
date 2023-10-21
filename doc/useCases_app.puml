@@ -19,7 +19,7 @@ usecase "Execute Test" as execT
 usecase "Create Category" as createCat
 usecase "Edit Category" as editC
 usecase "Mark ToReview Question" as markQ
-usecase "** Approve / reject Question" as approveRejectA
+usecase "** Reject Question" as rejectA
 usecase "Review Question" as reviewQ
 usecase "**Publish Question" as publishQ
 
@@ -45,7 +45,7 @@ Executor --> execT
 Reviewer --> createCat
 Reviewer --> editC
 Reviewer --> reviewQ
-    reviewQ ..> approveRejectA :include
+    reviewQ ..> rejectA :include
     reviewQ ..> publishQ :include
 
 
