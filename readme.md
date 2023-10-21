@@ -18,9 +18,7 @@ Se propone la posibilidad de formar una comunidad de usuarios para compartir est
 ## Detalle : Tipos de Estrategias Statement
 
 [domain detail]
-<img src="./doc/marcosUML/conceptDomainDetail.png">
-
-<img src="./doc/marcosUML/strategyDomainDetail.png">
+<img src="./out/doc/dominio_detail_concept/ConceptDomainDetail.svg">
 
 ## Casos de uso
 

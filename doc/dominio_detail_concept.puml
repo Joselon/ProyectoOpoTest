@@ -1,0 +1,82 @@
+@startuml ConceptDomainDetail
+
+class Category 
+
+class Concept
+
+class Keyword
+
+Class Definition 
+
+Class FakeDefinition
+
+Class Justification
+
+Class FakeJustification
+
+Class Relation
+
+Class Assortment
+
+Class Sort
+
+Class Composition
+
+Class Component
+
+Class Strategy
+
+class Question 
+
+class Statement
+
+class Answer 
+
+class Correct
+
+Class Incorrect
+
+Category o--"0..n" Category
+
+Category --* Concept
+Concept *-- Keyword
+Concept o--"0..n" Definition
+Concept o-- "0..n" FakeDefinition
+
+FakeDefinition o-- Justification
+FakeDefinition o-- FakeJustification
+
+Concept o-- Relation
+Relation <|-- Assortment
+Relation <|-- Composition
+Assortment *-- "2..n" Sort
+Composition *-- "1..n" Component
+
+Category --* Question
+Strategy <.. Concept 
+
+'Strategies
+ Strategy <|-- Open
+ 'Strategy <|-- DefineKeyword
+ Strategy <|-- WithDefinition
+ 'Strategy <|-- CombineDefinitions
+ Strategy <|-- WithJustification
+ Strategy <|-- WithRelations
+
+Strategy ..> Question
+Question *-->   Statement
+Question *--> "3" Incorrect
+Question *-->   Correct
+Answer <|-- Correct
+Answer <|-- Incorrect
+
+ 
+
+
+
+
+
+
+
+
+
