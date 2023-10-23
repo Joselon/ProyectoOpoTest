@@ -23,9 +23,14 @@ class PendingReviewQuestions
 class ReviewedQuestions
 
 class Concept {
-    correctDefinition
-    incorrectDefinition
-    strategy
+    keyword
+    definition
+    fakeDefinition
+    ...
+}
+
+class Strategy {
+    template
 }
 
 class Question {
@@ -43,9 +48,6 @@ class Correct
 
 Class Incorrect
 
-Class Justification
-
-
 Community *--> "1..*" User
 Community *--> ReviewedQuestions
 
@@ -61,7 +63,8 @@ Executor --> "0..*" Evaluation
 Evaluation --> Test
 
 Editor ..> Concept
-Concept ..> Question
+Concept <.. Strategy
+Strategy --> Question
 Reviewer ..> PendingReviewQuestions : Review
 
 Test *--> "10..*" Question
@@ -70,7 +73,6 @@ Question *--> "3" Incorrect
 Question *-->   Correct
 Answer <|-- Correct
 Answer <|-- Incorrect
-Incorrect o-- Justification
 
 Question *--> Category
 Category *-->"0..*" Category

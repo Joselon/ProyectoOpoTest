@@ -24,7 +24,9 @@ Class Composition
 
 Class Component
 
-Class Strategy
+Class Strategy {
+    template
+}
 
 class Question 
 
@@ -60,8 +62,10 @@ Strategy <.. Concept
  'Strategy <|-- DefineKeyword
  Strategy <|-- WithDefinition
  'Strategy <|-- CombineDefinitions
- Strategy <|-- WithJustification
+ WithDefinition <|-- WithJustification
  Strategy <|-- WithRelations
+ WithRelations <|-- WithComposition
+ WithRelations <|-- WithAssortment
 
 Strategy ..> Question
 Question *-->   Statement

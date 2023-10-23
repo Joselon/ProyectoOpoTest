@@ -15,11 +15,38 @@ Se propone la posibilidad de formar una comunidad de usuarios para compartir est
 [domain]
 <img src="./out/doc/dominio_clases/OpoTestDomain.svg">
 
-## Detalle : Tipos de Estrategias Statement
+## Detalle : Tipos de Estrategias
+### (según lo completo que esté implementado un concepto)
 
 [domain detail]
 <img src="./out/doc/dominio_detail_concept/ConceptDomainDetail.svg">
 
+Algunos ejemplos de plantillas según la estrategia:
+
+- With Definition (2 levels)
+  * Statement: "¿Qué es KEYWORD?"
+  * Correct: DEFINITION
+  * 3 Incorrects: 3 FAKEDEFINITION
+
+- With Definition Reverse (2 levels)
+  * Statement: "¿Qué es DEFINITION?"
+  * Correct: KEYWORD
+  * 3 Incorrects: 3 FAKE KEYWORDS
+
+- With Definition Multiple (2 levels)
+  * Statement: " Señala las definiciones correctas: A,B,..."
+  * Correct: DEFINITIONS combination
+  * 3 Incorrects: wrong combination
+
+- With Justification (3 levels)
+  * Statement: "El KEYWORD es FAKEDEFINITION?"
+  * Correct: No, porque JUSTIFICATION.
+  * Incorrect: No, porque FAKEJUSTIFICATION
+- With Relations - Assortment 
+  * Statement: "¿Cuáles son los tipos de KEYWORD?"
+  * Correct: Sorts keywords
+  * 3 Incorrects: 1 non-child sort keywords, 2 child sorts.
+  
 ## Casos de uso
 
 [useCases]
