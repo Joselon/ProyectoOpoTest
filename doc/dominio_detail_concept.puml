@@ -6,26 +6,61 @@ class Concept
 
 class Keyword
 
-Class Definition 
+class Definition
 
-Class FakeDefinition
+class RealDefinition
 
-Class Justification
+class FakeDefinition
 
-Class FakeJustification
+class Justification
 
-Class Relation
+class RealJustification
 
-Class Assortment
+class FakeJustification
 
-Class Sort
+class Relation
 
-Class Composition
+class Classification
 
-Class Component
+class Composition
 
-Class Strategy {
-    template
+class Level
+
+class Primary {
+    withKeyword
+}
+
+class Secundary {
+    withDefinition
+}
+
+class Tertiary {
+    withJustification
+}
+
+class WithRelations
+
+class BasicQuestion {
+    + statement: "¿Qué es KEYWORD?"
+    + 1 answer open
+   manual correction 
+}
+
+class ReverseQuestion {
+    +statement: "¿Qué es esta DEFINITION?"
+    + 1 answer open
+    manual correction 
+}
+
+class AdvancedQuestion {
+    +statement: "¿La KEYWORD es esta DEFINITION?¿Por qué?"
+    + 1 answer open
+    manual correction 
+}
+
+class CompleteQuestion {
+    +statement: "Es cierto que la CLAVE no es DEFINICION porque
+FAKEJUSTIFICACION"
 }
 
 class Question 
@@ -43,34 +78,62 @@ Category o--"0..n" Category
 Category --* Concept
 Concept *-- Keyword
 Concept o--"0..n" Definition
-Concept o-- "0..n" FakeDefinition
+Definition <|-- RealDefinition
+Definition <|-- FakeDefinition
 
-FakeDefinition o-- Justification
-FakeDefinition o-- FakeJustification
+RealDefinition o-- "0..n" Justification
+FakeDefinition o-- "0..n" Justification
 
-Concept o-- Relation
-Relation <|-- Assortment
+Justification <|-- RealJustification
+Justification <|-- FakeJustification
+
+Concept o-- "0..n" Relation
+Relation <|-- Classification
 Relation <|-- Composition
-Assortment *-- "2..n" Sort
-Composition *-- "1..n" Component
+Classification *-- "2..n" Concept
+Composition *-- "1..n" Concept
 
 Category --* Question
-Strategy <.. Concept 
 
-'Strategies
- Strategy <|-- Open
- 'Strategy <|-- DefineKeyword
- Strategy <|-- WithDefinition
- 'Strategy <|-- CombineDefinitions
- WithDefinition <|-- WithJustification
- Strategy <|-- WithRelations
- WithRelations <|-- WithComposition
- WithRelations <|-- WithAssortment
+Level <|-- Primary
+Level <|-- Secundary
+Level <|-- Tertiary
+Level <|-- WithRelations
+  WithRelations <|-- WithComposition
+  WithRelations <|-- WithClassification
+ 'WithRelations <|-- WithAsociation
+ 'WithRelations <|-- WithUse
 
-Strategy ..> Question
-Question *-->   Statement
-Question *--> "3" Incorrect
-Question *-->   Correct
+ 'Primary <.. Keyword
+ 
+ Primary <|-- BasicQuestion
+ 'BasicQuestion --|> Open
+ 'BasicQuestion --> Definition
+
+ 'Secundary <.. Keyword
+ 'Secundary <.. Definition
+
+ Secundary <|-- ReverseQuestion
+ ' ReverseQuestion --|> Open
+ ' ReverseQuestion --> Relation
+ Secundary <|-- AdvancedQuestion
+ ' AdvancedQuestion --> Justification
+
+ 'Tertiary <.. Keyword
+ 'Tertiary <.. Definition
+ Tertiary <.. Justification
+ 
+    Tertiary <|-- CompleteQuestion
+
+'Type --* Question
+'Type <|-- Open
+'Type <|-- Automatic
+
+
+Level --* Question
+Question *-->  Statement
+Question o-->  Incorrect
+Question o-->  Correct
 Answer <|-- Correct
 Answer <|-- Incorrect
 

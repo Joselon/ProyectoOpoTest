@@ -22,13 +22,15 @@ Idea de desarrollo futuro: sacar con chatGPT preguntas de test de un texto. Preg
 -------------------------------------------------------------------------------------------------------------------
 
 Un concepto tiene una clave, y unas definiciones correctas e incorrectas, con una justificación correctas e incorrectas.
+1 nivel
+- ¿Qué es la clave? : (abierta, corrección manual)
 
 2 niveles
-- ¿Qué es la clave? : (abierta, corrección manual)
 - ¿Qué es esta definición? (solo para definiciones correctas)(abierta, corrección manual)
-- ¿La clave es esta definición?
 - Señala qué definiciones son correctas: varias definiciones
+- ¿Cuál de estas definiciones es incorrecta?
 
+- ¿La clave es esta definición? *genera justificaciones incorrectas.(abierta, corrección manual)
 3 niveles
 - Es cierto que el SOFTWARE no son los ficheros del disco duro PORQUE
  no contempla el FIRMWARE
@@ -37,3 +39,16 @@ Si el concepto tiene relaciones de clasificación y composición se pueden usar 
 - Dime los distintos tipos de SOFTWARE (la clave es padre)
 - Hay software de un tipo, ¿cúal es el otro tipo?
 - 
+
+-------------------------------------------------------------------------------------------------------------------
+2023_10_23 : 
+-------------------------------------------------------------------------------------------------------------------
+
+La finalidad de la aplicación es hacer preguntas y recopilar respuestas,
+para generar finalmente un test = una serie de cuestiones a partir de unos cuantos
+ conceptos.
+
+Caso de uso principal de alumno es meter conceptos con definiciones correctas o incorrectas.
+Caso de uso principal del profesor es decidir si las definiciones son correctas o incorrectas y marcar para guardar.
+Caso de uso generación test será la generación de cuestiones a partir de unos cuantos
+ conceptos.

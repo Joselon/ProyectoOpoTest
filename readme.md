@@ -7,6 +7,8 @@ El usuario podrá componer conjuntos de preguntas en un Test que podrá ejecutar
 Se propone la posibilidad de formar una comunidad de usuarios para compartir estas preguntas, catalogarlas y marcar las revisiones realizadas por usuarios autorizados en la categoría del conocimiento concreto de la pregunta.
 
 
+
+
 <!-- [overview]
 <img src="./out/doc/planteamiento_secuencia/OpoTestPlanteamiento.svg"> -->
 
@@ -19,11 +21,24 @@ Se propone la posibilidad de formar una comunidad de usuarios para compartir est
 ### (según lo completo que esté implementado un concepto)
 
 [domain detail]
+
+La finalidad de la aplicación es hacer preguntas y recopilar respuestas,
+para generar finalmente un test = una serie de cuestiones a partir de unos cuantos
+ conceptos.
+
+
 <img src="./out/doc/dominio_detail_concept/ConceptDomainDetail.svg">
 
-Algunos ejemplos de plantillas según la estrategia:
+Algunos ejemplos de tipos de preguntas según el nivel de elementos usados del concepto:
 
-- With Definition (2 levels)
+- BasicQuestion (1 level):
+ * Statement: "¿Qué es KEYWORD?"
+ * Answer: OPEN
+ * Manual correction
+
+...(meter el resto del detalle)
+
+- With Definition (2 level- automatic)
   * Statement: "¿Qué es KEYWORD?"
   * Correct: DEFINITION
   * 3 Incorrects: 3 FAKEDEFINITION
@@ -48,6 +63,11 @@ Algunos ejemplos de plantillas según la estrategia:
   * 3 Incorrects: 1 non-child sort keywords, 2 child sorts.
   
 ## Casos de uso
+
+Caso de uso principal de alumno es meter conceptos con definiciones, correctas o incorrectas.
+Caso de uso principal del profesor es decidir si las definiciones son correctas o incorrectas y marcar para guardar.
+Caso de uso generación test será la generación de cuestiones a partir de unos cuantos
+ conceptos.
 
 [useCases]
 <img src="./out/doc/useCases_app/useCases_app.svg">
