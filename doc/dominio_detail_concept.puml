@@ -31,10 +31,13 @@ class Primary {
 }
 
 class Secundary {
+    withKeyword
     withDefinition
 }
 
 class Tertiary {
+    withKeyword
+    withDefinition
     withJustification
 }
 
@@ -43,24 +46,33 @@ class WithRelations
 class BasicQuestion {
     + statement: "¿Qué es KEYWORD?"
     + 1 answer open
-   manual correction 
+   manual correction
 }
 
 class ReverseQuestion {
-    +statement: "¿Qué es esta DEFINITION?"
+    +statement: "¿Qué es esta REALDEFINITION?"
     + 1 answer open
     manual correction 
 }
 
-class AdvancedQuestion {
+class JustificationQuestion {
     +statement: "¿La KEYWORD es esta DEFINITION?¿Por qué?"
     + 1 answer open
     manual correction 
 }
 
-class CompleteQuestion {
-    +statement: "Es cierto que la CLAVE no es DEFINICION porque
+class NotFakeDefFakeJustQuestion {
+    +statement: "Es cierto que la CLAVE no es FAKEDEFINITION porque
 FAKEJUSTIFICACION"
+    + 1 correct answer: "No porque la justificación es falsa"
+    + 3 incorrect answer: "Sí, por FAKEJUSTIFICATION"
+    automatic correction
+}
+
+class BasicTypeQuestion  {
+    +statement: Dime los distintos tipos de KEYWORD
+    + 1 answer open
+    manual correction 
 }
 
 class Question 
@@ -71,8 +83,27 @@ class Answer
 
 class Correct
 
-Class Incorrect
+class Incorrect
 
+class AnswersToReviewDefinition {
+    answers
+    saveDefinition(keyword)
+}
+
+class AnswersToReviewJustification {
+    answers
+    saveJustification(keyword,definition)
+}
+
+class AnswerToReviewIncorrectAnswer {
+    answers
+    saveFakeKeyword(AutomaticReverseQuestion)
+}
+
+class AnswersToReviewRelation {
+    answers
+    saveClassification(otherConceptKeyword,relation)
+}
 Category o--"0..n" Category
 
 Category --* Concept
@@ -103,39 +134,42 @@ Level <|-- WithRelations
   WithRelations <|-- WithClassification
  'WithRelations <|-- WithAsociation
  'WithRelations <|-- WithUse
-
+Primary <|-- BasicQuestion
  'Primary <.. Keyword
- 
- Primary <|-- BasicQuestion
  'BasicQuestion --|> Open
- 'BasicQuestion --> Definition
-
+ BasicQuestion --> AnswersToReviewDefinition
+ 'AnswersToReview --> RealDefinition
+ 'AnswersToReview --> FakeDefinition
+Secundary <|-- ReverseQuestion
+ReverseQuestion --> AnswerToReviewIncorrectAnswer 
  'Secundary <.. Keyword
  'Secundary <.. Definition
-
- Secundary <|-- ReverseQuestion
  ' ReverseQuestion --|> Open
  ' ReverseQuestion --> Relation
- Secundary <|-- AdvancedQuestion
+ Secundary <|-- JustificationQuestion
+  JustificationQuestion --> AnswersToReviewJustification
  ' AdvancedQuestion --> Justification
-
+ 
  'Tertiary <.. Keyword
  'Tertiary <.. Definition
- Tertiary <.. Justification
- 
-    Tertiary <|-- CompleteQuestion
+ 'Tertiary <.. Justification
+    Tertiary <|-- NotFakeDefFakeJustQuestion
+
+WithClassification <|-- BasicTypeQuestion
+BasicTypeQuestion --> AnswersToReviewRelation
 
 'Type --* Question
-'Type <|-- Open
-'Type <|-- Automatic
+Answer <|-- Open
+Answer <|-- Automatic
 
-
+Level --* Concept
 Level --* Question
-Question *-->  Statement
-Question o-->  Incorrect
-Question o-->  Correct
-Answer <|-- Correct
-Answer <|-- Incorrect
+Question *--  Statement
+Question o--"3" Incorrect
+Question o-- Correct
+Question *-- Answer
+Automatic <|-- Correct
+Automatic <|-- Incorrect
 
  
 

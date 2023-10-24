@@ -23,7 +23,7 @@ Se propone la posibilidad de formar una comunidad de usuarios para compartir est
 [domain detail]
 
 La finalidad de la aplicación es hacer preguntas y recopilar respuestas,
-para generar finalmente un test = una serie de cuestiones a partir de unos cuantos
+para generar finalmente un test, que es una serie de cuestiones a partir de unos cuantos
  conceptos.
 
 
@@ -31,36 +31,44 @@ para generar finalmente un test = una serie de cuestiones a partir de unos cuant
 
 Algunos ejemplos de tipos de preguntas según el nivel de elementos usados del concepto:
 
-- BasicQuestion (1 level):
+1. Nivel 1 - solo la palabre clave (keyword)
+
+- BasicQuestion:
  * Statement: "¿Qué es KEYWORD?"
  * Answer: OPEN
  * Manual correction
+ 
+2. Nivel 2 - palabra clave y definiciones
 
-...(meter el resto del detalle)
+- JustificationQuestion:
+ * Statement: "¿La KEYWORD es esta DEFINITION?¿Por qué?"
+ * Answer: OPEN
+ * Manual correction
 
-- With Definition (2 level- automatic)
+- WithDefinitionAutomatic: 
   * Statement: "¿Qué es KEYWORD?"
   * Correct: DEFINITION
   * 3 Incorrects: 3 FAKEDEFINITION
 
-- With Definition Reverse (2 levels)
+- ReverseQuestion (2 levels)
   * Statement: "¿Qué es DEFINITION?"
   * Correct: KEYWORD
   * 3 Incorrects: 3 FAKE KEYWORDS
 
-- With Definition Multiple (2 levels)
+- With Definition Multiple
   * Statement: " Señala las definiciones correctas: A,B,..."
   * Correct: DEFINITIONS combination
   * 3 Incorrects: wrong combination
 
+3- Nivel 3 - palabra clave definiciones y justificaciones.
+
+
 - With Justification (3 levels)
-  * Statement: "El KEYWORD es FAKEDEFINITION?"
-  * Correct: No, porque JUSTIFICATION.
-  * Incorrect: No, porque FAKEJUSTIFICATION
-- With Relations - Assortment 
+  * Statement: "¿Es cierto que KEYWORD no es FAKEDEFINITION porque FAKEJUSTIFICATION"
+
+- With Relations - Classification 
   * Statement: "¿Cuáles son los tipos de KEYWORD?"
-  * Correct: Sorts keywords
-  * 3 Incorrects: 1 non-child sort keywords, 2 child sorts.
+  * Answer: OPEN
   
 ## Casos de uso
 

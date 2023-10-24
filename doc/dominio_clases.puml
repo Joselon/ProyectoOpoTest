@@ -18,26 +18,19 @@ class Test {
     categories
 }
 
-class PendingReviewQuestions
-
-class ReviewedQuestions
+class AnswersToReview
 
 class Concept {
     keyword
-    definition
-    fakeDefinition
+    level
     ...
 }
 
-class Strategy {
+class OpenQuestion {
     template
 }
 
 class Question {
-    date
-    isReviewed
-    isPublic
-    ...
 }
 
 class Statement
@@ -49,23 +42,29 @@ class Correct
 Class Incorrect
 
 Community *--> "1..*" User
-Community *--> ReviewedQuestions
+Community *--> Concept
 
 
 User <|-- Editor
 Editor <|--  Reviewer
 User <|-- Executor
 
-PendingReviewQuestions *--> Question
-ReviewedQuestions *--> PendingReviewQuestions
+AnswersToReview <-- OpenQuestion
+Definition <-- AnswersToReview
+Justification <-- AnswersToReview
+Relation <-- AnswersToReview
+
+Concept o-- Definition
+Concept o-- Justification
+Concept o-- Relation
 
 Executor --> "0..*" Evaluation
 Evaluation --> Test
 
 Editor ..> Concept
-Concept <.. Strategy
-Strategy --> Question
-Reviewer ..> PendingReviewQuestions : Review
+Concept <.. OpenQuestion
+'OpenQuestion --> Question
+Reviewer ..> AnswersToReview : Review
 
 Test *--> "10..*" Question
 Question *-->   Statement
