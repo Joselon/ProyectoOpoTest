@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="516px" preserveAspectRatio="none" style="width:738px;height:516px;background:#FFFFFF;" version="1.1" viewBox="0 0 738 516" width="738px" zoomAndPan="magnify"><defs/><g><g id="ConceptCreated"><rect fill="#F1F1F1" height="72.8281" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="124" x="185" y="7"/><line style="stroke:#181818;stroke-width:0.5;" x1="185" x2="309" y1="34.6094" y2="34.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="104" x="195" y="26.5332">ConceptCreated</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="55" x="190" y="54.1426">category</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="52" x="190" y="71.752">keyword</text></g><g id="ConceptWaitingforDefinition"><rect fill="#F1F1F1" height="108.0469" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="196" x="149" y="158"/><line style="stroke:#181818;stroke-width:0.5;" x1="149" x2="345" y1="185.6094" y2="185.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="176" x="159" y="177.5332">ConceptWaitingforDefinition</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="55" x="154" y="205.1426">category</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="52" x="154" y="222.752">keyword</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="168" x="154" y="240.3613">DefinitionQuestion opened</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="174" x="154" y="257.9707">AnswersToReviewDefinition</text></g><g id="ConceptWaitingforClassification"><rect fill="#F1F1F1" height="50" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="220" x="511" y="18.5"/><line style="stroke:#181818;stroke-width:0.5;" x1="511" x2="731" y1="46.1094" y2="46.1094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="200" x="521" y="38.0332">ConceptWaitingforClassification</text></g><g id="ConceptWithDefinitions"><rect fill="#F1F1F1" height="55.2188" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="167" x="163.5" y="344"/><line style="stroke:#181818;stroke-width:0.5;" x1="163.5" x2="330.5" y1="371.6094" y2="371.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="147" x="173.5" y="363.5332">ConceptWithDefinitions</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="135" x="168.5" y="391.1426">Real/Fake Definitions</text></g><g id="ConceptWithJustifications"><rect fill="#F1F1F1" height="50" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="181" x="156.5" y="460"/><line style="stroke:#181818;stroke-width:0.5;" x1="156.5" x2="337.5" y1="487.6094" y2="487.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="161" x="166.5" y="479.5332">ConceptWithJustifications</text></g><ellipse cx="16" cy="43.5" fill="#222222" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><!--MD5=[96078515fb4e5b5c239caa450619bcf1]
+link *start to ConceptCreated--><g id="link_*start_ConceptCreated"><path d="M26.22,43.5 C52.66,43.5 125.02,43.5 179.75,43.5 " fill="none" id="*start-to-ConceptCreated" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="184.99,43.5,175.99,39.5,179.99,43.5,175.99,47.5,184.99,43.5" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="122" x="44.5" y="36.9951">Editor:createConcept</text></g><!--MD5=[baf3b4a549484554ffc7ce439bfe6193]
+link ConceptCreated to ConceptWaitingforDefinition--><g id="link_ConceptCreated_ConceptWaitingforDefinition"><path d="M247,80.22 C247,101.36 247,128.65 247,152.83 " fill="none" id="ConceptCreated-to-ConceptWaitingforDefinition" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="247,157.94,251,148.94,247,152.94,243,148.94,247,157.94" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="181" x="248" y="124.4951">Editor:CreateDefinitionQuestion</text></g><!--MD5=[dd9427ebd8cd4ec8773fa9ae8af39bd1]
+link ConceptCreated to ConceptWaitingforClassification--><g id="link_ConceptCreated_ConceptWaitingforClassification"><path d="M309.18,43.5 C362.62,43.5 441.1,43.5 505.95,43.5 " fill="none" id="ConceptCreated-to-ConceptWaitingforClassification" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="510.99,43.5,501.99,39.5,505.99,43.5,501.99,47.5,510.99,43.5" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="165" x="327.5" y="36.9951">Editor: CreateClassQuestion</text></g><!--MD5=[e428a199c657dbca2615e1ccedf52640]
+link ConceptWaitingforDefinition to ConceptWithDefinitions--><g id="link_ConceptWaitingforDefinition_ConceptWithDefinitions"><path d="M247,266.32 C247,290.35 247,317.9 247,338.64 " fill="none" id="ConceptWaitingforDefinition-to-ConceptWithDefinitions" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="247,343.76,251,334.76,247,338.76,243,334.76,247,343.76" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="145" x="248" y="310.4951">Reviewer:ReviewAnswers</text></g><!--MD5=[d3e6d891c5c5c2d183495d9048bded63]
+link ConceptWithDefinitions to ConceptWithJustifications--><g id="link_ConceptWithDefinitions_ConceptWithJustifications"><path d="M247,399.21 C247,415.91 247,437.43 247,454.61 " fill="none" id="ConceptWithDefinitions-to-ConceptWithJustifications" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="247,459.79,251,450.79,247,454.79,243,450.79,247,459.79" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[f3cdbbf31034e7c8dc056eff1cebb169]
+@startuml CategoryStates
+
+state ConceptCreated
+state ConceptWaitingforDefinition
+state ConceptWaitingforClassification
+state ConceptWithDefinitions
+state ConceptWithJustifications
+
+
+ConceptCreated: category
+ConceptCreated: keyword
+ConceptWaitingforDefinition:category
+ConceptWaitingforDefinition:keyword
+ConceptWaitingforDefinition: DefinitionQuestion opened
+ConceptWaitingforDefinition: AnswersToReviewDefinition
+
+ConceptWithDefinitions: Real/Fake Definitions
+
+[*] -> ConceptCreated : Editor:createConcept
+ConceptCreated - -> ConceptWaitingforDefinition : Editor:CreateDefinitionQuestion
+ConceptCreated -> ConceptWaitingforClassification : Editor: CreateClassQuestion
+ConceptWaitingforDefinition - -> ConceptWithDefinitions : Reviewer:ReviewAnswers
+ConceptWithDefinitions - -> ConceptWithJustifications
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: es
+Country: ES
+--></g></svg>

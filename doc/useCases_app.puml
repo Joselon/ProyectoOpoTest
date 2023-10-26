@@ -8,20 +8,20 @@ usecase "Register" as register
 usecase "Logout" as logout
 
 usecase "Create Concept" as createConcept
-usecase "Select Strategy" as selectStrategy
-usecase "Create Question" as createQ
-usecase "Delete Question" as deleteQ
+usecase "Select Level" as selectLevel
+usecase "Create Open Question" as createQ
+usecase "Close Question" as deleteQ
 
-usecase "Select Categories" as selectCats
-usecase "Select Options" as selectOps
+'usecase "Select Categories" as selectCats
+usecase "Show stats" as stats
 usecase "Execute Test" as execT
 
 usecase "Create Category" as createCat
 usecase "Edit Category" as editC
 usecase "Mark ToReview Question" as markQ
-usecase "** Reject Question" as rejectA
-usecase "Review Question" as reviewQ
-usecase "**Publish Question" as publishQ
+usecase "** Evaluate" as rejectA
+usecase "Review Answers" as reviewQ
+usecase "**Save Concept Element" as publishQ
 
 
 Editor --|> User
@@ -29,7 +29,7 @@ Reviewer --|> Editor
 Executor --|> User
 
 Editor --> createConcept
-Editor --> selectStrategy
+Editor --> selectLevel
 Editor --> createQ
 Editor --> deleteQ
 Editor --> markQ
@@ -38,8 +38,8 @@ User --> login
 User --> register
 User --> logout
 
-Executor --> selectCats
-Executor --> selectOps
+'Executor --> selectCats
+Executor --> stats
 Executor --> execT
 
 Reviewer --> createCat

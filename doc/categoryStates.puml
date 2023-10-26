@@ -1,0 +1,11 @@
+@startuml CategoryStates
+
+state CategoryCreated
+
+CategoryCreated: id
+CategoryCreated: ancestorId
+CategoryCreated: name
+
+[*] -> CategoryCreated : Reviewer:createCategory
+
+@enduml

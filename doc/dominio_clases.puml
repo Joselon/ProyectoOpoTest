@@ -27,7 +27,6 @@ class Concept {
 }
 
 class OpenQuestion {
-    template
 }
 
 class Question {
@@ -55,7 +54,7 @@ Justification <-- AnswersToReview
 Relation <-- AnswersToReview
 
 Concept o-- Definition
-Concept o-- Justification
+Definition o-- Justification
 Concept o-- Relation
 
 Executor --> "0..*" Evaluation
