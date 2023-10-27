@@ -59,16 +59,9 @@ class JustificationQuestion {
     + 1 open answer
 }
 
-class KeywordNotFakeDefinitionFakeJustQuestion {
-    +statement:
-"Es cierto que la CLAVE no es FAKEDEFINITION porque
-FAKEJUSTIFICACION"
-automatic answers
-    + 1 correct answer:
-"No porque la justificación es falsa"
-    + 3 incorrect answer:
-"Sí, por FAKEJUSTIFICATION"...
-    
+class MultipleChoiceTertiaryX {
+    +statement
+    autocorrection
 }
 
 class ClassQuestion  {
@@ -77,7 +70,11 @@ class ClassQuestion  {
     + 1 open answer 
 }
 
-class Question 
+class Open 
+
+class Question
+
+class MultipleChoice
 
 class Statement
 
@@ -86,6 +83,8 @@ class Answer
 class Correct
 
 class Incorrect
+
+class AnswersToReview
 
 class AnswersToReviewDefinition {
     answers
@@ -97,7 +96,7 @@ class AnswersToReviewJustification {
     addJustification(keyword,definition)
 }
 
-class AnswerToReviewIncorrectAnswer {
+class AnswersToReviewIncorrectAnswer {
     answers
     addFakeKeyword(AutomaticReverseQuestion)
 }
@@ -131,51 +130,46 @@ Category --* Question
 Level <|-- Primary
 Level <|-- Secundary
 Level <|-- Tertiary
-'Level <|-- WithRelations
-  'WithRelations <|-- WithComposition
-  'WithRelations <|-- WithClassification
- 'WithRelations <|-- WithAsociation
- 'WithRelations <|-- WithUse
+
 Primary <|-- DefinitionQuestion
- 'Primary <.. Keyword
- 'DefinitionQuestion --|> Open
- DefinitionQuestion --> AnswersToReviewDefinition
- 'AnswersToReview --> RealDefinition
- 'AnswersToReview --> FakeDefinition
+
+DefinitionQuestion --> AnswersToReview
+AnswersToReview<|--AnswersToReviewDefinition
+
 Secundary <|-- ReverseDefinitionQuestion
-ReverseDefinitionQuestion --> AnswerToReviewIncorrectAnswer 
- 'Secundary <.. Keyword
- 'Secundary <.. Definition
- ' ReverseDefinitionQuestion --|> Open
- ' ReverseDefinitionQuestion --> Relation
- Secundary <|-- JustificationQuestion
-  JustificationQuestion --> AnswersToReviewJustification
- ' AdvancedQuestion --> Justification
- 
- 'Tertiary <.. Keyword
- 'Tertiary <.. Definition
- 'Tertiary <.. Justification
-Tertiary <|-- KeywordNotFakeDefinitionFakeJustQuestion
+ReverseDefinitionQuestion --> AnswersToReview
+AnswersToReview<|--AnswersToReviewIncorrectAnswer 
 
-'WithClassification <|-- ClassQuestion
+Secundary <|-- JustificationQuestion
+JustificationQuestion --> AnswersToReview
+AnswersToReview<|--AnswersToReviewJustification
+
+Tertiary <|-- MultipleChoiceTertiaryX
+
 Primary <|-- ClassQuestion
-ClassQuestion --> AnswersToReviewClasses
-
-Answer <|-- Open
-Answer <|-- Automatic
+ClassQuestion --> AnswersToReview
+AnswersToReview<|--AnswersToReviewClasses
 
 Level --* Concept
 Level --* Question
+Question <|-- MultipleChoice
+Question <|-- Open
 Question *--  Statement
-Question o--"3" Incorrect
-Question o-- Correct
-Question *-- Answer
-Automatic <|-- Correct
-Automatic <|-- Incorrect
+MultipleChoice *--"3" Incorrect
+MultipleChoice *-- Correct
+Answer <|-- Correct
+Answer <|-- Incorrect
+Answer <|-- OpenField
+Open *--OpenField
 @enduml
  
-
-
+'MultipleChoiceTertiaryX:
+'"Es cierto que la CLAVE no es FAKEDEFINITION porque FAKEJUSTIFICACION"
+'    + 1 correct answer:
+'"No porque la justificación es falsa"
+ '   + 3 incorrect answer:
+'"Sí, por FAKEJUSTIFICATION"...
+    
 
 
 
