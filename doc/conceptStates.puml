@@ -11,11 +11,21 @@ ConceptCreated: category
 ConceptCreated: keyword
 ConceptWaitingforDefinition:category
 ConceptWaitingforDefinition:keyword
-ConceptWaitingforDefinition: DefinitionQuestion opened limited time
-ConceptWaitingforDefinition: AnswersToReviewDefinition
-
+ConceptWaitingforDefinition: DefinitionQuestion open for a limited time
+ConceptWaitingforDefinition: AnswersToReview
+ConceptWithDefinitions: category
+ConceptWithDefinitions: keyword
 ConceptWithDefinitions: Real/Fake Definitions
 ConceptWithDefinitions: DefinitionQuestion Closed
+ConceptWaitingforJustification:  JustificationQuestion open for a limited time
+ConceptWaitingforJustification: AnswersToReview
+
+ConceptWithJustifications: category
+ConceptWithJustifications: keyword
+ConceptWithJustifications: Real/Fake Definitions
+ConceptWithJustifications: Real/Fake Justifications
+ConceptWithJustifications: JustificationQuestion Closed
+
 
 [*] --> ConceptCreated : Editor:createConcept
 ConceptCreated --> ConceptWaitingforDefinition : Editor:OpenDefinitionQuestion
@@ -24,6 +34,6 @@ ConceptWithDefinitions --> ConceptWaitingforJustification : Editor: OpenJustific
 ConceptWaitingforJustification -->ConceptWithJustifications : Reviewer : ReviewAnswers
 ConceptCreated -> ConceptWaitingforClassification : Editor: OpenClassQuestion
 ConceptWaitingforClassification --> ConceptWithClassification : Reviewer: ReviewAnswer
-ConceptWithDefinitions -> ConceptWaitingforClassification : Editor: OpenClassQuestion
-ConceptWithJustifications -> ConceptWaitingforClassification : Editor: OpenClassQuestion
+'ConceptWithDefinitions -> ConceptWaitingforClassification : Editor: OpenClassQuestion
+'ConceptWithJustifications -> ConceptWaitingforClassification : Editor: OpenClassQuestion
 @enduml
