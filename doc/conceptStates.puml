@@ -1,4 +1,4 @@
-@startuml CategoryStates
+@startuml ConceptStates
 
 state ConceptCreated
 state ConceptWaitingforDefinition
@@ -11,15 +11,19 @@ ConceptCreated: category
 ConceptCreated: keyword
 ConceptWaitingforDefinition:category
 ConceptWaitingforDefinition:keyword
-ConceptWaitingforDefinition: DefinitionQuestion opened
+ConceptWaitingforDefinition: DefinitionQuestion opened limited time
 ConceptWaitingforDefinition: AnswersToReviewDefinition
 
 ConceptWithDefinitions: Real/Fake Definitions
+ConceptWithDefinitions: DefinitionQuestion Closed
 
-[*] -> ConceptCreated : Editor:createConcept
-ConceptCreated --> ConceptWaitingforDefinition : Editor:CreateDefinitionQuestion
-ConceptCreated -> ConceptWaitingforClassification : Editor: CreateClassQuestion
+[*] --> ConceptCreated : Editor:createConcept
+ConceptCreated --> ConceptWaitingforDefinition : Editor:OpenDefinitionQuestion
 ConceptWaitingforDefinition --> ConceptWithDefinitions : Reviewer:ReviewAnswers
-ConceptWithDefinitions --> ConceptWithJustifications
-
+ConceptWithDefinitions --> ConceptWaitingforJustification : Editor: OpenJustificationQuestion
+ConceptWaitingforJustification -->ConceptWithJustifications : Reviewer : ReviewAnswers
+ConceptCreated -> ConceptWaitingforClassification : Editor: OpenClassQuestion
+ConceptWaitingforClassification --> ConceptWithClassification : Reviewer: ReviewAnswer
+ConceptWithDefinitions -> ConceptWaitingforClassification : Editor: OpenClassQuestion
+ConceptWithJustifications -> ConceptWaitingforClassification : Editor: OpenClassQuestion
 @enduml

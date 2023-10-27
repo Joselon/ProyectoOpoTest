@@ -14,9 +14,7 @@ class Evaluation
 
 class Category 
 
-class Test {
-    categories
-}
+class Test 
 
 class AnswersToReview
 
@@ -41,7 +39,7 @@ class Correct
 Class Incorrect
 
 Community *--> "1..*" User
-Community *--> Concept
+'Community *--> Concept
 
 
 User <|-- Editor
@@ -53,6 +51,7 @@ Definition <-- AnswersToReview
 Justification <-- AnswersToReview
 Relation <-- AnswersToReview
 
+Concept *-- Category
 Concept o-- Definition
 Definition o-- Justification
 Concept o-- Relation
@@ -76,7 +75,7 @@ Question *--> Category
 Category *-->"0..*" Category
 
 
-
+@enduml
 
 
 

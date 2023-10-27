@@ -7,46 +7,47 @@ usecase "Login" as login
 usecase "Register" as register
 usecase "Logout" as logout
 
+usecase "Show Categories & Concepts" as showCat
+usecase "Show Concept" as showCon
 usecase "Create Concept" as createConcept
-usecase "Select Level" as selectLevel
-usecase "Create Open Question" as createQ
-usecase "Close Question" as deleteQ
+usecase "Open Question" as createQ
+usecase "Close Question" as closeQ
 
-'usecase "Select Categories" as selectCats
+usecase "Search Available Tests" as searchT
 usecase "Show stats" as stats
 usecase "Execute Test" as execT
 
 usecase "Create Category" as createCat
-usecase "Edit Category" as editC
-usecase "Mark ToReview Question" as markQ
-usecase "** Evaluate" as rejectA
+usecase "Answer Open Question" as answerQ
+usecase "Evaluate" as eval
 usecase "Review Answers" as reviewQ
-usecase "**Save Concept Element" as publishQ
+usecase "Save Concept Element" as saveToC
 
 
 Editor --|> User
 Reviewer --|> Editor
 Executor --|> User
 
-Editor --> createConcept
-Editor --> selectLevel
-Editor --> createQ
-Editor --> deleteQ
-Editor --> markQ
+Editor --> showCat
+ showCat ..> showCon: include
+ showCat ..> createConcept : include
+ createConcept ..> createQ : include
+ showCon ..> createQ : include
+Editor --> answerQ
 
 User --> login
 User --> register
 User --> logout
 
-'Executor --> selectCats
+Executor --> searchT
 Executor --> stats
 Executor --> execT
 
 Reviewer --> createCat
-Reviewer --> editC
 Reviewer --> reviewQ
-    reviewQ ..> rejectA :include
-    reviewQ ..> publishQ :include
+    reviewQ ..> eval :include
+    eval ..> saveToC :include
+    saveToC ..> closeQ :include
 
 
 @enduml
