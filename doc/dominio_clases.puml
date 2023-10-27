@@ -24,11 +24,11 @@ class Concept {
     ...
 }
 
-class OpenQuestion {
-}
+class Open 
 
-class Question {
-}
+class Question
+
+class MultipleChoice
 
 class Statement
 
@@ -46,7 +46,7 @@ User <|-- Editor
 Editor <|--  Reviewer
 User <|-- Executor
 
-AnswersToReview <-- OpenQuestion
+AnswersToReview <-- OpenField
 Definition <-- AnswersToReview
 Justification <-- AnswersToReview
 Relation <-- AnswersToReview
@@ -60,19 +60,23 @@ Executor --> "0..*" Evaluation
 Evaluation --> Test
 
 Editor ..> Concept
-Concept <.. OpenQuestion
+Concept <.. Open
 'OpenQuestion --> Question
 Reviewer ..> AnswersToReview : Review
-
-Test *--> "10..*" Question
+Question <|-- MultipleChoice
+Question <|-- Open
+Test *--> "10..*" MultipleChoice
 Question *-->   Statement
-Question *--> "3" Incorrect
-Question *-->   Correct
+MultipleChoice *--> "3" Incorrect
+MultipleChoice *-->   Correct
 Answer <|-- Correct
 Answer <|-- Incorrect
+Answer <|-- OpenField
+Open *--OpenField
 
 Question *--> Category
 Category *-->"0..*" Category
+
 
 
 @enduml
