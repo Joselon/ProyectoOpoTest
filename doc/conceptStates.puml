@@ -27,13 +27,16 @@ ConceptWithJustifications: Real/Fake Justifications
 ConceptWithJustifications: JustificationQuestion Closed
 
 
-[*] --> ConceptCreated : Editor:createConcept
-ConceptCreated --> ConceptWaitingforDefinition : Editor:OpenDefinitionQuestion
-ConceptWaitingforDefinition --> ConceptWithDefinitions : Reviewer:ReviewAnswers
-ConceptWithDefinitions --> ConceptWaitingforJustification : Editor: OpenJustificationQuestion
-ConceptWaitingforJustification -->ConceptWithJustifications : Reviewer : ReviewAnswers
-ConceptCreated -> ConceptWaitingforClassification : Editor: OpenClassQuestion
-ConceptWaitingforClassification --> ConceptWithClassification : Reviewer: ReviewAnswer
+[*] --> ConceptCreated : Teacher:createConcept
+ConceptCreated --> ConceptWaitingforDefinition : Teacher:OpenDefinitionQuestion
+ConceptWaitingforDefinition -> ConceptWaitingforDefinition : Student: AddAnswer
+ConceptWaitingforDefinition --> ConceptWithDefinitions : Teacher:ReviewAnswers
+ConceptWithDefinitions --> ConceptWaitingforJustification : Teacher: OpenJustificationQuestion
+ConceptWaitingforJustification -->ConceptWithJustifications : Teacher : ReviewAnswers
+ConceptWaitingforJustification -> ConceptWaitingforJustification : Student: AddAnswer
+ConceptCreated -> ConceptWaitingforClassification : Teacher: OpenClassQuestion
+ConceptWaitingforClassification -> ConceptWaitingforClassification : Student : AddAnswer
+ConceptWaitingforClassification --> ConceptWithClassification : Teacher: ReviewAnswer
 'ConceptWithDefinitions -> ConceptWaitingforClassification : Editor: OpenClassQuestion
 'ConceptWithJustifications -> ConceptWaitingforClassification : Editor: OpenClassQuestion
 @enduml

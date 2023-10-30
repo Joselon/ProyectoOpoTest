@@ -4,11 +4,9 @@ class Community
 
 class User
 
-class Reviewer
+class Teacher
 
-class Editor 
-
-class Executor
+class Student
 
 class Evaluation
 
@@ -20,8 +18,6 @@ class AnswersToReview
 
 class Concept {
     keyword
-    level
-    ...
 }
 
 class Open 
@@ -38,44 +34,43 @@ class Correct
 
 Class Incorrect
 
-Community *--> "1..*" User
-'Community *--> Concept
+Community *-- "2..n" User
+Community o-- "0..n" Category
 
+User <|-- Teacher
+User <|-- Student
 
-User <|-- Editor
-Editor <|--  Reviewer
-User <|-- Executor
-
-AnswersToReview <-- OpenField
-Definition <-- AnswersToReview
-Justification <-- AnswersToReview
-Relation <-- AnswersToReview
-
-Concept *-- Category
+Teacher ..> Category
+Teacher ..> Concept
+Concept --o Category
+Question --o Concept
 Concept o-- Definition
 Definition o-- Justification
 Concept o-- Relation
 
-Executor --> "0..*" Evaluation
+Student --> "0..n" Evaluation
 Evaluation --> Test
 
-Editor ..> Concept
-Concept <.. Open
-'OpenQuestion --> Question
-Reviewer ..> AnswersToReview : Review
-Question <|-- MultipleChoice
-Question <|-- Open
-Test *--> "10..*" MultipleChoice
-Question *-->   Statement
-MultipleChoice *--> "3" Incorrect
-MultipleChoice *-->   Correct
+Teacher ..> AnswersToReview : Review
+AnswersToReview *-- "1..n" Open
+Definition <.. AnswersToReview
+Justification <.. AnswersToReview
+Relation <.. AnswersToReview
+
+'Question <|-- MultipleChoice
+'Question <|-- Open
+Test *-- "1..n" Question
+Question *--   Statement
+Question o-- Answer
+MultipleChoice *-- Incorrect
+MultipleChoice *-- Correct
 Answer <|-- Correct
 Answer <|-- Incorrect
-Answer <|-- OpenField
-Open *--OpenField
+Answer <|-- Open
+Answer <|-- MultipleChoice
 
-Question *--> Category
-Category *-->"0..*" Category
+
+Category o--"0..n" Category : Subcategories
 
 
 

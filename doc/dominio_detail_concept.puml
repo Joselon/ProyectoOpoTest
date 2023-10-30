@@ -6,6 +6,8 @@ class Concept
 
 class Keyword
 
+class FakeKeyword
+
 class Definition
 
 class RealDefinition
@@ -17,6 +19,8 @@ class Justification
 class RealJustification
 
 class FakeJustification
+
+class Explanation
 
 class Relation
 
@@ -32,7 +36,7 @@ class Primary {
 
 class Secundary {
     withKeyword
-    withDefinition
+    withDefinition or withRelation
 }
 
 class Tertiary {
@@ -41,126 +45,135 @@ class Tertiary {
     withJustification
 }
 
-class DefinitionQuestion {
-    + statement:
-     "¿Qué es KEYWORD?"
-    + 1 open answer
-}
+class OpenDefinitionQuestion 
 
-class ReverseDefinitionQuestion {
-    + statement:
-     "¿Qué es esta REALDEFINITION?"
-    + 1 open answer
-}
+class OpenClassQuestion
 
-class JustificationQuestion {
-    +statement:
-"¿La KEYWORD es esta DEFINITION?¿Por qué?"
-    + 1 open answer
-}
+class OpenCompositionQuestion 
 
-class MultipleChoiceTertiaryX {
-    +statement
-    autocorrection
-}
+class OpenReverseDefinitionQuestion
 
-class ClassQuestion  {
-    +statement:
-"Dime los distintos tipos de KEYWORD"
-    + 1 open answer 
-}
-
-class Open 
+class OpenJustificationQuestion
 
 class Question
 
-class MultipleChoice
-
 class Statement
 
-class Answer 
+class Template
+
+class DefinitionTemplate {
+    "¿Qué es KEYWORD?"
+}
+
+class ClassTemplate {
+    "Qué tipos hay de KEYWORD"
+}
+
+class CompositionTemplate {
+ "¿Qué conceptos destacarias del KEYWORD?"
+}
+
+class JustificationTemplate {
+ "¿La KEYWORD es esta DEFINITION?¿Por qué?"
+}
+
+class ReverseDefinitionTemplate {
+    "¿Qué es REALDEFINITION?"
+}
+
+class Answer
+
+class Open 
+
+class MultipleChoice
 
 class Correct
 
 class Incorrect
 
-class AnswersToReview
+class AnswersToReviewDefinition
 
-class AnswersToReviewDefinition {
-    answers
-    addDefinition(keyword)
-}
+class AnswersToReviewJustification  
 
-class AnswersToReviewJustification {
-    answers
-    addJustification(keyword,definition)
-}
+class AnswersToReviewFakeKeywordsAnswer
 
-class AnswersToReviewIncorrectAnswer {
-    answers
-    addFakeKeyword(AutomaticReverseQuestion)
-}
+class AnswersToReviewClasses 
 
-class AnswersToReviewClasses {
-    answers
-    addClassification(otherConceptKeyword,relation)
-}
-Category o--"0..n" Category
+Category o--"0..n" Category : Subcategories
 
-Category --* Concept
+Category o-- "0..n" Concept
 Concept *-- Keyword
+Keyword o-- FakeKeyword
 Concept o--"0..n" Definition
 Definition <|-- RealDefinition
 Definition <|-- FakeDefinition
-
-RealDefinition o-- "0..n" Justification
 FakeDefinition o-- "0..n" Justification
-
 Justification <|-- RealJustification
 Justification <|-- FakeJustification
+FakeJustification o-- Explanation
 
 Concept o-- "0..n" Relation
 Relation <|-- Classification
 Relation <|-- Composition
+'CONSULTAR SENTIDO DE RELACION A OTROS CONCEPTOS
 Classification *-- "2..n" Concept
 Composition *-- "1..n" Concept
-
-Category --* Question
 
 Level <|-- Primary
 Level <|-- Secundary
 Level <|-- Tertiary
 
-Primary <|-- DefinitionQuestion
+Template <|-- DefinitionTemplate
+Template <|-- ClassTemplate
+Template <|-- CompositionTemplate
 
-DefinitionQuestion --> AnswersToReview
-AnswersToReview<|--AnswersToReviewDefinition
+Primary <|-- OpenDefinitionQuestion
+OpenDefinitionQuestion *-- DefinitionTemplate
+'DefinitionTemplate ..> Keyword
+OpenDefinitionQuestion o-- AnswersToReviewDefinition
+AnswersToReviewDefinition *-- "1..n" Open
+AnswersToReviewDefinition <.. Definition
 
-Secundary <|-- ReverseDefinitionQuestion
-ReverseDefinitionQuestion --> AnswersToReview
-AnswersToReview<|--AnswersToReviewIncorrectAnswer 
+Primary <|-- OpenClassQuestion
+OpenClassQuestion *-- ClassTemplate
+'ClassTemplate ..> Keyword
+OpenClassQuestion o-- AnswersToReviewClasses
+AnswersToReviewClasses *-- "1..n" Open
+AnswersToReviewClasses <.. Classification
 
-Secundary <|-- JustificationQuestion
-JustificationQuestion --> AnswersToReview
-AnswersToReview<|--AnswersToReviewJustification
+Primary <|-- OpenCompositionQuestion
+OpenCompositionQuestion *-- CompositionTemplate
+'CompositionTemplate..> Keyword
+OpenCompositionQuestion o-- AnswersToReviewComponents
+AnswersToReviewComponents *-- "1..n" Open
+AnswersToReviewComponents <.. Composition
 
-Tertiary <|-- MultipleChoiceTertiaryX
+Secundary <|-- OpenReverseDefinitionQuestion
+OpenReverseDefinitionQuestion *-- ReverseDefinitionTemplate
+OpenReverseDefinitionQuestion o-- AnswersToReviewFakeKeywordsAnswer
+AnswersToReviewFakeKeywordsAnswer *-- "1..n" Open
+AnswersToReviewFakeKeywordsAnswer <.. FakeKeyword
 
-Primary <|-- ClassQuestion
-ClassQuestion --> AnswersToReview
-AnswersToReview<|--AnswersToReviewClasses
+Secundary <|-- OpenJustificationQuestion
+OpenJustificationQuestion *-- JustificationTemplate
+OpenJustificationQuestion o-- AnswersToReviewJustification
+AnswersToReviewJustification *-- "1..n" Open
+AnswersToReviewJustification <.. Justification
 
-Level --* Concept
+Question "0..n" --o Concept
 Level --* Question
-Question <|-- MultipleChoice
-Question <|-- Open
+'Question <|-- MultipleChoice
+'Question <|-- Open
 Question *--  Statement
-MultipleChoice *--"3" Incorrect
+Statement ..> Template
+Question o-- Answer
+MultipleChoice *--"1..n" Incorrect
 MultipleChoice *-- Correct
 Answer <|-- Correct
 Answer <|-- Incorrect
-Answer <|-- OpenField
-Open *--OpenField
+Answer <|-- Open
+Answer <|-- MultipleChoice
+
 @enduml
  
 'MultipleChoiceTertiaryX:

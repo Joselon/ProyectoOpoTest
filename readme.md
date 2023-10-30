@@ -13,6 +13,8 @@ Se propone la posibilidad de formar una comunidad de usuarios para compartir est
 La finalidad de la aplicación es hacer preguntas y recopilar respuestas,
 para generar finalmente un test, que será una serie de cuestiones a partir de unos cuantos conceptos.
 
+Se reducen a dos roles los actores del sistema, profesor y alumno.
+
 <!-- [overview]
 <img src="./out/doc/planteamiento_secuencia/OpoTestPlanteamiento.svg"> -->
 
@@ -23,7 +25,7 @@ para generar finalmente un test, que será una serie de cuestiones a partir de u
 
 ### Detalle : Definiendo Conceptos a través de Preguntas Abiertas
 
-Incialmente un editor-revisor propone una categoría y añade el indice del temario como categorías hijas, para que los editores puedan ir abriendo preguntas y aportando posibles definiciones, justificaciones y relaciones, que tendrá que corregir un revisor para añadir al concepto.
+Incialmente un profesor propone una categoría y añade el indice del temario como categorías hijas, para puedan ir los profesores dando de alta conceptos con los que plantear preguntas para que los alumnos aporten posibles definiciones, justificaciones y relaciones, que tendrá que corregir un profesor para decidir si añadir al concepto.
 Conforme se complete un concepto se abre la posibilidad de generar preguntas de tipo test.
 
 <img src="./out/doc/categoryStates/CategoryStates.svg">

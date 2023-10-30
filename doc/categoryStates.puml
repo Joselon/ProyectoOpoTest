@@ -6,6 +6,6 @@ CategoryCreated: id
 CategoryCreated: ancestorId
 CategoryCreated: name
 
-[*] -> CategoryCreated : Reviewer:createCategory
+[*] -> CategoryCreated : Teacher:createCategory
 
 @enduml
