@@ -1,0 +1,28 @@
+{
+  "name": "elaboratest",
+  "version": "0.0.1",
+  "description": "App para elaborar preguntas de test basadas en conceptos que se completan con las propias respuestas a las preguntas abiertas.",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joselon/ProyectoOpoTest.git"
+  },
+  "keywords": [
+    "concepts",
+    "learning",
+    "tests"
+  ],
+  "author": "EscuelaITMasters",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Joselon/ProyectoOpoTest/issues"
+  },
+  "homepage": "https://github.com/Joselon/ProyectoOpoTest#readme",
+  "dependencies": {
+    "console-mpds": "^1.0.4"
+  }
+}
