@@ -13,15 +13,15 @@ Se propone la posibilidad de formar una comunidad de usuarios para compartir est
 La finalidad de la aplicación es hacer preguntas y recopilar respuestas,
 para generar finalmente un test, que será una serie de cuestiones a partir de unos cuantos conceptos.
 
-Se reducen a dos roles los actores del sistema, profesor y alumno.
+Se reducen a dos roles los actores del sistema, profesor y estudiante.
 
-Se propone, para trabajar la idea de tener los conceptos en una base de conocimiento disponible para ir generando preguntas de distinto tipo, desarrollar un programa con interfaz de consola en la que se puedan ir formando los modelos.
+Se propone, para trabajar la idea de tener los conceptos en una base de conocimiento disponible para ir generando preguntas de distinto tipo, desarrollar un programa con interfaz de CONSOLA en la que se puedan ir formando los modelos.
 
 - Lo primero será mostrar lo que hay. Listar las categorías con sus conceptos creados hasta el momento.
-- El programa, por el momento, para no entrar en gestión de usuarios y login, debería comenzar con un menú preguntando si eres profesor o usuario, para a continuación mostrar el menú de profesor o el de alumno.
+- El programa, por el momento, para no entrar en gestión de usuarios y login, debería comenzar con un menú preguntando si eres profesor o estudiante, para a continuación mostrar el menú de profesor o el de estudiante.
 - El profesor podrá  gestionar (CRUD) las categorías y los conceptos, así como gestionar preguntas asociadas al concepto, revisar respuestas si las hubiese, y salir. El resultado de la revisión será agregar esas respuestas al concepto como componentes.
-- El alumno podrá solicitar hacer un test de las preguntas dadas de alta en ese momento o consultar evaluaciones que se hayan realizado y salir.
-- Las respuestas deben estar asociadas a la pregunta (que a su vez nos lleva al concepto y al componente del concepto que podemos agregarle) como al alumno (al que se le devuelve la evaluación).
+- El estudiante podrá solicitar hacer un test de las preguntas dadas de alta en ese momento o consultar evaluaciones que se hayan realizado y salir.
+- Las respuestas deben estar asociadas a la pregunta (que a su vez nos lleva al concepto y al componente del concepto que podemos agregarle) como al estudiante (al que se le devuelve la evaluación).
 
 <!-- [overview]
 <img src="./out/doc/planteamiento_secuencia/OpoTestPlanteamiento.svg"> -->
@@ -31,16 +31,7 @@ Se propone, para trabajar la idea de tener los conceptos en una base de conocimi
 [domain]
 <img src="./out/doc/dominio_clases/OpoTestDomain.svg">
 
-### Detalle : Definiendo Conceptos a través de Preguntas Abiertas
-
-Incialmente un profesor propone una categoría y añade el indice del temario como categorías hijas, para puedan ir los profesores dando de alta conceptos con los que plantear preguntas para que los alumnos aporten posibles definiciones, justificaciones y relaciones, que tendrá que corregir un profesor para decidir si añadir al concepto.
-Conforme se complete un concepto se abre la posibilidad de generar preguntas de tipo test.
-
-<img src="./out/doc/categoryStates/CategoryStates.svg">
-
-### Elaboración de un Concepto
-
-<img src="./out/doc/conceptStates/ConceptStates.svg">
+### Detalle del dominio: Nivel y Relación entre pregunta abierta y concepto.
 
 [domain detail]
 <img src="./out/doc/dominio_detail_concept/ConceptDomainDetail.svg">
@@ -91,6 +82,9 @@ With Justification (3 levels)
   
 ## Casos de uso
 
+[useCases]
+<img src="./out/doc/useCases_app/useCases_app.svg">
+
 * Caso de uso principal del profesor es meter conceptos con una palabra clave.
 * Otro caso de uso del profesor es crear una pregunta relacionada con un concepto
 * Otro Caso de uso del profesor es decidir si las definiciones son correctas o incorrectas
@@ -98,9 +92,17 @@ With Justification (3 levels)
 * Caso de uso principal del alumno es ejecutar test, respondiendo a las cuestiones disponibles.
 * Otro Caso de uso del alumno es generación test, que será la generación de cuestiones a partir de unos cuantos conceptos.
 
-[useCases]
-<img src="./out/doc/useCases_app/useCases_app.svg">
 
+## Analisis de Casos de Uso:
+
+<img src="./out/doc/categoryStates/CategoryStates.svg">
+
+<img src="./out/doc/conceptStates/ConceptStates.svg">
+
+### Detalle : Definiendo Conceptos a través de Preguntas Abiertas
+
+Incialmente un profesor propone una categoría y añade el indice del temario como categorías hijas, para puedan ir los profesores dando de alta conceptos con los que plantear preguntas para que los alumnos aporten posibles definiciones, justificaciones y relaciones, que tendrá que corregir un profesor para decidir si añadir al concepto.
+Conforme se complete un concepto se abre la posibilidad de generar preguntas de tipo test.
 
 ## Referencias
 
