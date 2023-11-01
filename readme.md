@@ -91,9 +91,12 @@ With Justification (3 levels)
   
 ## Casos de uso
 
-* Caso de uso principal del editor es meter conceptos con definiciones, correctas o incorrectas, así como justificaciones y relaciones.
-* Caso de uso principal del revisor es decidir si las definiciones son correctas o incorrectas y relacionarlas con los conceptos.
-* Caso de uso generación test será la generación de cuestiones a partir de unos cuantos conceptos.
+* Caso de uso principal del profesor es meter conceptos con una palabra clave.
+* Otro caso de uso del profesor es crear una pregunta relacionada con un concepto
+* Otro Caso de uso del profesor es decidir si las definiciones son correctas o incorrectas
+* Otro caso de uso del profesor es relacionar las respuestas escogidas con el concepto, al que agregará definiciones, correctas o incorrectas, así como justificaciones, explicaciones y relaciones.
+* Caso de uso principal del alumno es ejecutar test, respondiendo a las cuestiones disponibles.
+* Otro Caso de uso del alumno es generación test, que será la generación de cuestiones a partir de unos cuantos conceptos.
 
 [useCases]
 <img src="./out/doc/useCases_app/useCases_app.svg">
