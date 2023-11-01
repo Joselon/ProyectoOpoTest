@@ -1,19 +1,28 @@
-import { YesNoDialog }  from './utils/view/Dialog.js';
-import { MainMenu , Connect4ConfigurationMenu} from './views/Menu.js';
+import { YesNoDialog } from './utils/view/Dialog.js';
+import { MainMenu, Connect4ConfigurationMenu } from './views/Menu.js';
 
 class ElaboraTest {
     //#users;
     #categories;
-    #concepts
 
-    constructor(){
+    constructor() {
         //Asignar new de categorias, vistas y modelos
     }
 
-    start(){
+    start() {
         do {
-            new MainMenu(new Connect4ConfigurationMenu()).interact();
+            //showCategories
+            //showMainManu
+            //new MainMenu(new Connect4ConfigurationMenu()).interact();
         } while (this.#isResumed());
+    }
+
+    teacherStart(){
+        //showTeacherMainMenu
+    }
+
+    studentStart(){
+        //showStudentMainMenu
     }
 
     #isResumed() {

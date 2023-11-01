@@ -10,6 +10,8 @@ class Student
 
 class Evaluation
 
+class Result
+
 class Category 
 
 class Test 
@@ -20,28 +22,38 @@ class Concept {
     keyword
 }
 
-class Open 
-
-class Question
-
-class MultipleChoice
+class Question {
+    level
+}
 
 class Statement
 
 class Answer 
 
+class Open 
+
+class MultipleChoice
+
+class Option
+
 class Correct
 
 Class Incorrect
 
+class OpenField
+
+Class SelectedOption
+
+
 Community *-- "2..n" User
 Community o-- "0..n" Category
+
+Category o--"0..n" Category : Subcategories
 
 User <|-- Teacher
 User <|-- Student
 
-Teacher ..> Category
-Teacher ..> Concept
+Teacher -->"0..n" Concept
 Concept --o Category
 Question --o Concept
 Concept o-- Definition
@@ -50,29 +62,31 @@ Concept o-- Relation
 
 Student --> "0..n" Evaluation
 Evaluation --> Test
+Evaluation --> Result
 
-Teacher ..> AnswersToReview : Review
-AnswersToReview *-- "1..n" Open
+Teacher ..> Evaluation
+AnswersToReview *-- "1..n" OpenField
 Definition <.. AnswersToReview
 Justification <.. AnswersToReview
 Relation <.. AnswersToReview
 
-'Question <|-- MultipleChoice
-'Question <|-- Open
+Evaluation <.. AnswersToReview : manual
+Evaluation <.. SelectedOption : automatic
+
 Test *-- "1..n" Question
+Question <|-- MultipleChoice
+Question <|-- Open
 Question *--   Statement
-Question o-- Answer
-MultipleChoice *-- Incorrect
+MultipleChoice *-- "2..n" Option
+Option <|-- Incorrect
+Option <|-- Correct
 MultipleChoice *-- Correct
-Answer <|-- Correct
-Answer <|-- Incorrect
-Answer <|-- Open
-Answer <|-- MultipleChoice
-
-
-Category o--"0..n" Category : Subcategories
-
-
+MultipleChoice *-- "1..n" Incorrect
+MultipleChoice *-- SelectedOption
+Open *-- OpenField
+Answer <|-- OpenField
+Answer <|-- SelectedOption
+Question o-- AnswersToReview
 
 @enduml
 

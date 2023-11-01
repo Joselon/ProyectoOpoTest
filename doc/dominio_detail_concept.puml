@@ -1,7 +1,5 @@
 @startuml ConceptDomainDetail
 
-class Category 
-
 class Concept
 
 class Keyword
@@ -39,12 +37,6 @@ class Secundary {
     withDefinition or withRelation
 }
 
-class Tertiary {
-    withKeyword
-    withDefinition
-    withJustification
-}
-
 class OpenDefinitionQuestion 
 
 class OpenClassQuestion
@@ -55,11 +47,12 @@ class OpenReverseDefinitionQuestion
 
 class OpenJustificationQuestion
 
-class Question
+class OpenQuestion
 
 class Statement
 
-class Template
+class StatementTemplate
+
 
 class DefinitionTemplate {
     "¿Qué es KEYWORD?"
@@ -81,15 +74,7 @@ class ReverseDefinitionTemplate {
     "¿Qué es REALDEFINITION?"
 }
 
-class Answer
-
-class Open 
-
-class MultipleChoice
-
-class Correct
-
-class Incorrect
+class OpenFieldAnswer
 
 class AnswersToReviewDefinition
 
@@ -99,11 +84,11 @@ class AnswersToReviewFakeKeywordsAnswer
 
 class AnswersToReviewClasses 
 
-Category o--"0..n" Category : Subcategories
+OpenQuestion "0..n" -o Concept
+OpenQuestion *-- OpenFieldAnswer
 
-Category o-- "0..n" Concept
 Concept *-- Keyword
-Keyword o-- FakeKeyword
+
 Concept o--"0..n" Definition
 Definition <|-- RealDefinition
 Definition <|-- FakeDefinition
@@ -119,62 +104,55 @@ Relation <|-- Composition
 Classification *-- "2..n" Concept
 Composition *-- "1..n" Concept
 
+
+OpenQuestion *-- Level
+OpenQuestion *-- Statement
+Statement ..> StatementTemplate
+
 Level <|-- Primary
 Level <|-- Secundary
-Level <|-- Tertiary
 
-Template <|-- DefinitionTemplate
-Template <|-- ClassTemplate
-Template <|-- CompositionTemplate
+StatementTemplate <|-- DefinitionTemplate
+StatementTemplate <|-- ClassTemplate
+StatementTemplate <|-- CompositionTemplate
 
 Primary <|-- OpenDefinitionQuestion
 OpenDefinitionQuestion *-- DefinitionTemplate
-'DefinitionTemplate ..> Keyword
 OpenDefinitionQuestion o-- AnswersToReviewDefinition
-AnswersToReviewDefinition *-- "1..n" Open
+AnswersToReviewDefinition *-- "1..n" OpenFieldAnswer
 AnswersToReviewDefinition <.. Definition
 
 Primary <|-- OpenClassQuestion
 OpenClassQuestion *-- ClassTemplate
-'ClassTemplate ..> Keyword
 OpenClassQuestion o-- AnswersToReviewClasses
-AnswersToReviewClasses *-- "1..n" Open
+OpenFieldAnswer "1..n"--* AnswersToReviewClasses
 AnswersToReviewClasses <.. Classification
 
 Primary <|-- OpenCompositionQuestion
 OpenCompositionQuestion *-- CompositionTemplate
-'CompositionTemplate..> Keyword
 OpenCompositionQuestion o-- AnswersToReviewComponents
-AnswersToReviewComponents *-- "1..n" Open
+OpenFieldAnswer "1..n"--* AnswersToReviewComponents
 AnswersToReviewComponents <.. Composition
 
 Secundary <|-- OpenReverseDefinitionQuestion
 OpenReverseDefinitionQuestion *-- ReverseDefinitionTemplate
 OpenReverseDefinitionQuestion o-- AnswersToReviewFakeKeywordsAnswer
-AnswersToReviewFakeKeywordsAnswer *-- "1..n" Open
+OpenFieldAnswer "1..n"--* AnswersToReviewFakeKeywordsAnswer 
 AnswersToReviewFakeKeywordsAnswer <.. FakeKeyword
+Keyword o--- FakeKeyword
 
 Secundary <|-- OpenJustificationQuestion
 OpenJustificationQuestion *-- JustificationTemplate
 OpenJustificationQuestion o-- AnswersToReviewJustification
-AnswersToReviewJustification *-- "1..n" Open
+OpenFieldAnswer "1..n"--* AnswersToReviewJustification
 AnswersToReviewJustification <.. Justification
 
-Question "0..n" --o Concept
-Level --* Question
-'Question <|-- MultipleChoice
-'Question <|-- Open
-Question *--  Statement
-Statement ..> Template
-Question o-- Answer
-MultipleChoice *--"1..n" Incorrect
-MultipleChoice *-- Correct
-Answer <|-- Correct
-Answer <|-- Incorrect
-Answer <|-- Open
-Answer <|-- MultipleChoice
-
 @enduml
+'class Tertiary {
+'    withKeyword
+'    withDefinition
+ '   withJustification
+'}
  
 'MultipleChoiceTertiaryX:
 '"Es cierto que la CLAVE no es FAKEDEFINITION porque FAKEJUSTIFICACION"

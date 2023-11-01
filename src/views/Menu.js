@@ -1,12 +1,12 @@
-import { DynamicMenu, IterativeMenu, ModelOption } from "../utils/view/Menu";
-import  {console}  from '../utils/view/console';
+import { DynamicMenu, IterativeMenu, ModelOption } from "../utils/view/Menu.js";
+import { console } from '../utils/view/console.js';
 
 // model
 
 class GameModesModel {
 
     #gameModes;
-    #selectedMode=0;
+    #selectedMode = 0;
 
     constructor() {
         this.#gameModes = [];
@@ -22,82 +22,26 @@ class GameModesModel {
         return this.#gameModes.length;
     }
 
-    setSelectedMode (index){
-        this.#selectedMode=index;
+    setSelectedMode(index) {
+        this.#selectedMode = index;
     }
 
-    getSelectedMode (){
+    getSelectedMode() {
         return this.#selectedMode;
-    }
-
-}
-
-
-// ModelMenus
-
-class GameModesMenu extends DynamicMenu {
-
-    #model;
-
-    constructor(model) {
-        super("Game Modes Menu");
-        this.#model = model;
-        this.addOptions();
-
-    }
-
-    addOptions() {
-        for (let i = 0; i < this.#model.size(); i++) {
-            this.add(new SelectModelOption(this.#model, i));
-        }
-    }
-
-}
-
-class Connect4ConfigurationMenu extends IterativeMenu {
-
-    #model;
-
-    constructor(model) {
-        super("Connec4 Configuration Menu"); 
-        this.#model = model;
-    }
-
-    addOptions() {
-        this.add(new ShowSelectedModeOption(this.#model));
-        this.add(new SetSelectedModeOption(this.#model));
-    }
-
-}
-
-class MainMenu extends IterativeMenu {
-
-    #model;
-
-    constructor(model) {
-        super("Main Menu"); 
-        this.#model = model;
-    }
-
-    addOptions() {
-        this.add(new PlayOption(this.#model));
-        this.add(new ConfigurationOption(this.#model));
     }
 
 }
 
 // ModelOptions
 
-
-
 class PlayOption extends ModelOption {
 
     constructor(model) {
-        super("Play", model);        
+        super("Play", model);
     }
 
-    interact() { 
-       // console.writeln(`play`)`;`
+    interact() {
+        // console.writeln(`play`)`;`
     }
 }
 
@@ -107,7 +51,7 @@ class ConfigurationOption extends ModelOption {
         super("Configuration", model);
     }
 
-    interact() { 
+    interact() {
         new Connect4ConfigurationMenu(new GameModesModel()).interact();
     }
 
@@ -121,7 +65,7 @@ class ShowSelectedModeOption extends ModelOption {
 
     interact() {
         console.writeln();
-        console.writeln((this.model.getSelectedMode()+1)+ ". " + this.model.get(this.model.getSelectedMode()));
+        console.writeln((this.model.getSelectedMode() + 1) + ". " + this.model.get(this.model.getSelectedMode()));
         console.writeln();
     }
 
@@ -159,4 +103,58 @@ class SelectModelOption extends ModelOption {
 
 }
 
-export {MainMenu, Connect4ConfigurationMenu}
+// ModelMenus
+
+class GameModesMenu extends DynamicMenu {
+
+    #model;
+
+    constructor(model) {
+        super("Game Modes Menu");
+        this.#model = model;
+        this.addOptions();
+
+    }
+
+    addOptions() {
+        for (let i = 0; i < this.#model.size(); i++) {
+            this.add(new SelectModelOption(this.#model, i));
+        }
+    }
+
+}
+
+class Connect4ConfigurationMenu extends IterativeMenu {
+
+    #model;
+
+    constructor(model) {
+        super("Connec4 Configuration Menu");
+        this.#model = model;
+    }
+
+    addOptions() {
+        this.add(new ShowSelectedModeOption(this.#model));
+        this.add(new SetSelectedModeOption(this.#model));
+    }
+
+}
+
+class MainMenu extends IterativeMenu {
+
+    #model;
+
+    constructor(model) {
+        super("Main Menu");
+        this.#model = model;
+    }
+
+    addOptions() {
+        this.add(new PlayOption(this.#model));
+        this.add(new ConfigurationOption(this.#model));
+    }
+
+}
+
+
+export { MainMenu, Connect4ConfigurationMenu };

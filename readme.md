@@ -15,6 +15,14 @@ para generar finalmente un test, que será una serie de cuestiones a partir de u
 
 Se reducen a dos roles los actores del sistema, profesor y alumno.
 
+Se propone, para trabajar la idea de tener los conceptos en una base de conocimiento disponible para ir generando preguntas de distinto tipo, desarrollar un programa con interfaz de consola en la que se puedan ir formando los modelos.
+
+- Lo primero será mostrar lo que hay. Listar las categorías con sus conceptos creados hasta el momento.
+- El programa, por el momento, para no entrar en gestión de usuarios y login, debería comenzar con un menú preguntando si eres profesor o usuario, para a continuación mostrar el menú de profesor o el de alumno.
+- El profesor podrá  gestionar (CRUD) las categorías y los conceptos, así como gestionar preguntas asociadas al concepto, revisar respuestas si las hubiese, y salir. El resultado de la revisión será agregar esas respuestas al concepto como componentes.
+- El alumno podrá solicitar hacer un test de las preguntas dadas de alta en ese momento o consultar evaluaciones que se hayan realizado y salir.
+- Las respuestas deben estar asociadas a la pregunta (que a su vez nos lleva al concepto y al componente del concepto que podemos agregarle) como al alumno (al que se le devuelve la evaluación).
+
 <!-- [overview]
 <img src="./out/doc/planteamiento_secuencia/OpoTestPlanteamiento.svg"> -->
 

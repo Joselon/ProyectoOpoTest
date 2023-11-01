@@ -1,53 +1,55 @@
 @startuml useCases_app
 left to right direction
 actor User
-actor Editor
-actor Reviewer
+actor Teacher
+actor Student
 usecase "Login" as login
 usecase "Register" as register
 usecase "Logout" as logout
 
-usecase "Show Categories & Concepts" as showCat
+usecase "Show Categories" as showCats
+usecase "Show Category" as showCat
 usecase "Show Concept" as showCon
 usecase "Create Concept" as createConcept
-usecase "Open Question" as createQ
+usecase "Create Question" as createQ
+usecase "Fix Statement" as fixQ
 usecase "Close Question" as closeQ
 
-usecase "Search Available Tests" as searchT
-usecase "Show stats" as stats
+usecase "Show Results" as showRes
 usecase "Execute Test" as execT
 
 usecase "Create Category" as createCat
 usecase "Answer Open Question" as answerQ
 usecase "Evaluate" as eval
 usecase "Review Answers" as reviewQ
-usecase "Save Concept Element" as saveToC
-
-
-Editor --|> User
-Reviewer --|> Editor
-Executor --|> User
-
-Editor --> showCat
- showCat ..> showCon: include
- showCat ..> createConcept : include
- createConcept ..> createQ : include
- showCon ..> createQ : include
-Editor --> answerQ
+usecase "Create Concept Component" as createCC
 
 User --> login
 User --> register
 User --> logout
+User --> showCats
 
-Executor --> searchT
-Executor --> stats
-Executor --> execT
+Teacher --|> User
+Student --|> User
 
-Reviewer --> createCat
-Reviewer --> reviewQ
-    reviewQ ..> eval :include
-    eval ..> saveToC :include
-    saveToC ..> closeQ :include
+Teacher --> showCat
+ showCat ..> showCon: include
+ showCat ..> createConcept : include
+ createConcept ..> createQ : include
+ showCon ..> createQ : include
+ createQ .> fixQ :include
+Teacher --> createCat
+ createCat ..> createConcept :include
+Teacher --> reviewQ
+ reviewQ ..> eval :include
+ reviewQ ..> createCC :include
+ createCC ..> closeQ :include
+
+Student --> showRes
+Student --> execT
+ execT ..> answerQ  :include
+
+
 
 
 @enduml

@@ -186,4 +186,4 @@ class ModelOption extends Option {
 
 }
 
-export {DynamicMenu, IterativeMenu, ModelOption}
+export {DynamicMenu, IterativeMenu, ModelOption};
