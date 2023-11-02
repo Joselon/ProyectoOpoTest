@@ -1,17 +1,15 @@
-import ClosedInterval   from '../model/ClosedInterval.js'
-import  {console}  from './console.js';
-// Options
+import ClosedInterval from '../model/ClosedInterval.js'
+import { console } from './console.js';
 
 class Option {
 
-    //static console = new Console();
     #title;
 
     constructor(title) {
         this.#title = title;
     }
 
-    interact() {};
+    interact() { };
 
     showTitle(index) {
         console.writeln(index + ". " + this.getTitle());
@@ -28,7 +26,7 @@ class QuitOption extends Option {
     #executed;
 
     constructor() {
-        super("Exit");
+        super("Salir");
         this.#executed = false;
     }
 
@@ -42,11 +40,8 @@ class QuitOption extends Option {
 
 }
 
-// menus
-
 class Menu {
 
-   // static console = new Console();
     #title;
     #options;
 
@@ -60,7 +55,7 @@ class Menu {
         this.interact_();
     }
 
-    addOptions(){
+    addOptions() {
     };
 
     interact_() {
@@ -86,10 +81,10 @@ class Menu {
     execChoosedOption() {
         let answer;
         let ok;
-        
+
         do {
             answer = this.#readInt("Opción? [1-" + this.#options.length + "]: ") - 1;
-            const interval= new ClosedInterval(0,this.#options.length-1);
+            const interval = new ClosedInterval(0, this.#options.length - 1);
             ok = interval.isIncluded(answer);
             if (!ok) {
                 console.writeln("Error!!!");
@@ -98,7 +93,7 @@ class Menu {
         this.#options[answer].interact();
     }
 
-    #readInt(prompt){
+    #readInt(prompt) {
         return Number.parseInt(console.readNumber(prompt));
     }
 
@@ -182,8 +177,8 @@ class ModelOption extends Option {
         this.model = model;
     }
 
-    interact() {};
+    interact() { };
 
 }
 
-export {DynamicMenu, IterativeMenu, ModelOption};
+export { DynamicMenu, IterativeMenu, ModelOption };

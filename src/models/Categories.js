@@ -1,3 +1,5 @@
+import { Category } from './Category.js';
+
 class Categories {
 
     #categories;
@@ -5,6 +7,7 @@ class Categories {
 
     constructor() {
         this.#categories = [];
+        //Recuperar Categories de JSON o BBDD. orginal.json-> current.json JSON-to-CATEGORY[]
         for (let string of [`Informática`, `Oposiciones Bibliotecario`, `Test de Conducir`])
             this.#categories.push(string);
     }
@@ -27,4 +30,4 @@ class Categories {
 
 }
 
-export {Categories}
+export { Categories }

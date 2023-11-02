@@ -1,36 +1,6 @@
 import { DynamicMenu, IterativeMenu, ModelOption } from "../utils/view/Menu.js";
 import { console } from '../utils/view/console.js';
 
-// Options
-
-class UserTypeOption extends ModelOption {
-
-    constructor(model) {
-        super("Seleccionar Tipo de usuario...", model);
-    }
-
-    interact() {
-        console.writeln(`
-         Profesor 
-         Alumno 
-         `);
-    }
-}
-
-class CategoriesOption extends ModelOption {
-    #categories
-
-    constructor(model, categories) {
-        super("Ir a Menú de Categorías...", model);
-        this.#categories = categories;
-    }
-
-    interact() {
-        new CategoriesMenu(this.#categories).interact();
-    }
-
-}
-
 class ShowSelectedCatOption extends ModelOption {
 
     constructor(model) {
@@ -84,7 +54,7 @@ class CategoryMenu extends DynamicMenu {
     #model;
 
     constructor(model) {
-        super("Menú de Categorías");
+        super("Seleccione una categoría...");
         this.#model = model;
         this.addOptions();
 
@@ -114,23 +84,4 @@ class CategoriesMenu extends IterativeMenu {
 
 }
 
-class MainMenu extends IterativeMenu {
-
-    #model;
-    #categories;
-
-    constructor(model,categories) {
-        super("ElaboraTest Menú");
-        this.#model = model;
-        this.#categories = categories
-    }
-
-    addOptions() {
-        this.add(new UserTypeOption(this.#model));
-        this.add(new CategoriesOption(this.#model,this.#categories));
-    }
-
-}
-
-
-export { MainMenu, CategoriesMenu };
+export { CategoriesMenu }

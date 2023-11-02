@@ -1,27 +1,28 @@
+import { UserTypes } from './models/UserTypes.js';
 import { Categories } from './models/Categories.js';
 import { YesNoDialog } from './utils/view/Dialog.js';
-import { MainMenu, CategoriesMenu } from './views/Menu.js';
+import { MainMenu } from './views/MainMenu.js';
 
 class ElaboraTest {
-    //#users;
+    #users;
     #categories;
 
     constructor() {
+        this.#users = new UserTypes();
         this.#categories = new Categories();
-        //Asignar new de categorias, vistas y modelos
     }
 
     start() {
         do {
-            new MainMenu(new CategoriesMenu(),this.#categories).interact();
+            new MainMenu(this.#users, this.#categories).interact();
         } while (this.#isRestarted());
     }
 
-    teacherStart(){
+    teacherStart() {
         //showTeacherMainMenu
     }
 
-    studentStart(){
+    studentStart() {
         //showStudentMainMenu
     }
 
@@ -29,7 +30,7 @@ class ElaboraTest {
         let yesNoDialog = new YesNoDialog();
         yesNoDialog.read(`¿Quiere reiniciar`);
         if (yesNoDialog.isAffirmative()) {
-            //
+            //Reload original json
         }
         return yesNoDialog.isAffirmative();
     }

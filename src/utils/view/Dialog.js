@@ -1,5 +1,5 @@
-import ClosedInterval   from '../model/ClosedInterval.js'
-import  {console}  from './console.js';
+import ClosedInterval from '../model/ClosedInterval.js'
+import { console } from './console.js';
 
 
 
@@ -12,7 +12,7 @@ class Dialog {
     constructor() {
         this.message = ``;
         this.suffix = ``;
-        this.errorMessage=``;
+        this.errorMessage = ``;
     }
 
     read(message) {
