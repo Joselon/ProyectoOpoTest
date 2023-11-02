@@ -58,6 +58,7 @@ Concept --o Category
 Question --o Concept
 Concept o-- Definition
 Definition o-- Justification
+Justification o-- Explication
 Concept o-- Relation
 
 Student --> "0..n" Evaluation

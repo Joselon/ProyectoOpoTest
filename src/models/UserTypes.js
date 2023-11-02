@@ -1,7 +1,7 @@
 class UserTypes {
 
     #userTypes;
-    #currentType = 0;
+    #currentTypeIndex = 0;
 
     constructor() {
         this.#userTypes = [];
@@ -17,12 +17,12 @@ class UserTypes {
         return this.#userTypes.length;
     }
 
-    setSelectedMode(index) {
-        this.#currentType = index;
+    setSelectedType(index) {
+        this.#currentTypeIndex = index;
     }
 
-    getSelectedMode() {
-        return this.#currentType;
+    getSelectedType() {
+        return this.#currentTypeIndex;
     }
 
 }

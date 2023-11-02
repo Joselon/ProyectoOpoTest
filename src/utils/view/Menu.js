@@ -137,7 +137,7 @@ class QuitMenu extends Menu {
 
 }
 
-class IterativeMenu extends QuitMenu {
+class IterativeQuitMenu extends QuitMenu {
 
     constructor(title) {
         super(title);
@@ -152,7 +152,7 @@ class IterativeMenu extends QuitMenu {
 
 }
 
-class DynamicMenu extends IterativeMenu {
+class DynamicQuitMenu extends IterativeQuitMenu {
 
     constructor(title) {
         super(title);
@@ -168,17 +168,18 @@ class DynamicMenu extends IterativeMenu {
 
 }
 
-class ModelOption extends Option {
+class DynamicMenu extends Menu {
 
-    model;
-
-    constructor(string, model) {
-        super(string);
-        this.model = model;
+    constructor(title) {
+        super(title);
     }
 
-    interact() { };
+    interact() {
+        this.removeOptions();
+        this.addOptions();
+        this.interact_();
+    }
 
 }
 
-export { DynamicMenu, IterativeMenu, ModelOption };
+export {  DynamicMenu , DynamicQuitMenu, IterativeQuitMenu , Option };

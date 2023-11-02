@@ -3,7 +3,7 @@ import { Category } from './Category.js';
 class Categories {
 
     #categories;
-    #currentCategory = 0;
+    #currentCategoryIndex = 0;
 
     constructor() {
         this.#categories = [];
@@ -20,12 +20,16 @@ class Categories {
         return this.#categories.length;
     }
 
-    setSelectedMode(index) {
-        this.#currentCategory = index;
+    setSelectedCat(index) {
+        this.#currentCategoryIndex = index;
     }
 
-    getSelectedMode() {
-        return this.#currentCategory;
+    getSelectedCat() {
+        return this.#currentCategoryIndex;
+    }
+
+    addCategory(string) {
+        this.#categories.push(string);
     }
 
 }

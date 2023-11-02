@@ -101,8 +101,8 @@ Concept o-- "0..n" Relation
 Relation <|-- Classification
 Relation <|-- Composition
 'CONSULTAR SENTIDO DE RELACION A OTROS CONCEPTOS
-Classification *-- "2..n" Concept
-Composition *-- "1..n" Concept
+Classification *-- "2..n" Concept: others
+Composition *-- "1..n" Concept: others
 
 
 OpenQuestion *-- Level

@@ -87,7 +87,7 @@ With Justification (3 levels)
 
 * Caso de uso principal del profesor es meter conceptos con una palabra clave.
 * Otro caso de uso del profesor es crear una pregunta relacionada con un concepto
-* Otro Caso de uso del profesor es decidir si las definiciones son correctas o incorrectas
+* Otro Caso de uso del profesor es decidir si las respuestas son correctas o incorrectas
 * Otro caso de uso del profesor es relacionar las respuestas escogidas con el concepto, al que agregará definiciones, correctas o incorrectas, así como justificaciones, explicaciones y relaciones.
 * Caso de uso principal del alumno es ejecutar test, respondiendo a las cuestiones disponibles.
 * Otro Caso de uso del alumno es generación test, que será la generación de cuestiones a partir de unos cuantos conceptos.

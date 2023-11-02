@@ -1,6 +1,18 @@
-import { DynamicMenu, IterativeMenu, ModelOption } from "../utils/view/Menu.js";
+import { DynamicQuitMenu, IterativeQuitMenu , Option } from "../utils/view/Menu.js";
 import { console } from '../utils/view/console.js';
 
+class ModelOption extends Option {
+
+    model;
+
+    constructor(string, model) {
+        super(string);
+        this.model = model;
+    }
+
+    interact() { };
+
+}
 class ShowSelectedCatOption extends ModelOption {
 
     constructor(model) {
@@ -9,7 +21,7 @@ class ShowSelectedCatOption extends ModelOption {
 
     interact() {
         console.writeln();
-        console.writeln((this.model.getSelectedMode() + 1) + ". " + this.model.get(this.model.getSelectedMode()));
+        console.writeln((this.model.getSelectedCat() + 1) + ". " + this.model.get(this.model.getSelectedCat()));
         console.writeln();
     }
 
@@ -18,7 +30,7 @@ class ShowSelectedCatOption extends ModelOption {
 class SelectCatOption extends ModelOption {
 
     constructor(model) {
-        super("Mostrar categorías...", model);
+        super("Cambiar de categoría...", model);
     }
 
     interact() {
@@ -42,14 +54,14 @@ class SelectModelOption extends ModelOption {
     }
 
     interact() {
-        this.model.setSelectedMode(this.#index);
+        this.model.setSelectedCat(this.#index);
     }
 
 }
 
 // ModelMenus
 
-class CategoryMenu extends DynamicMenu {
+class CategoryMenu extends DynamicQuitMenu {
 
     #model;
 
@@ -68,18 +80,42 @@ class CategoryMenu extends DynamicMenu {
 
 }
 
-class CategoriesMenu extends IterativeMenu {
+class CategoriesMenu extends IterativeQuitMenu {
 
     #model;
+    #subtitle;
 
     constructor(model) {
         super("Menú de Categorías");
         this.#model = model;
     }
 
+    addSubtitle () {
+        this.#subtitle = "Categoría actual: "+this.#model.get(this.#model.getSelectedCat());
+    }
+
     addOptions() {
-        this.add(new ShowSelectedCatOption(this.#model));
+       // this.add(new ShowSelectedCatOption(this.#model));
         this.add(new SelectCatOption(this.#model));
+    }
+
+    interact() {
+        do {
+            this.removeOptions();
+            this.addSubtitle();
+            this.addOptions();
+            this.interact_();
+        } while (!this.isExecutedquitOption());
+    }
+
+    showSubtitle() {
+        console.writeln(this.#subtitle);
+    }
+
+    interact_(){
+        this.showTitles();
+        this.showSubtitle();
+        this.execChoosedOption();
     }
 
 }
