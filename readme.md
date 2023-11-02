@@ -13,7 +13,7 @@ Se propone la posibilidad de formar una comunidad de usuarios para compartir est
 La finalidad de la aplicación es hacer preguntas y recopilar respuestas,
 para generar finalmente un test, que será una serie de cuestiones a partir de unos cuantos conceptos.
 
-Se reducen a dos roles los actores del sistema, profesor y estudiante.
+Se reducen a dos roles de usuarios que serán los actores del sistema, profesor y estudiante.
 
 Se propone, para trabajar la idea de tener los conceptos en una base de conocimiento disponible para ir generando preguntas de distinto tipo, desarrollar un programa con interfaz de CONSOLA en la que se puedan ir formando los modelos.
 

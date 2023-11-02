@@ -1,19 +1,19 @@
+import { Categories } from './models/Categories.js';
 import { YesNoDialog } from './utils/view/Dialog.js';
-import { MainMenu, Connect4ConfigurationMenu } from './views/Menu.js';
+import { MainMenu, CategoriesMenu } from './views/Menu.js';
 
 class ElaboraTest {
     //#users;
     #categories;
 
     constructor() {
+        this.#categories = new Categories();
         //Asignar new de categorias, vistas y modelos
     }
 
     start() {
         do {
-            //showCategories
-            //showMainManu
-            //new MainMenu(new Connect4ConfigurationMenu()).interact();
+            new MainMenu(new CategoriesMenu(),this.#categories).interact();
         } while (this.#isResumed());
     }
 
@@ -27,7 +27,7 @@ class ElaboraTest {
 
     #isResumed() {
         let yesNoDialog = new YesNoDialog();
-        yesNoDialog.read(`¿Quiere continuar`);
+        yesNoDialog.read(`Reiniciar`);
         if (yesNoDialog.isAffirmative()) {
             //
         }

@@ -1,66 +1,40 @@
 import { DynamicMenu, IterativeMenu, ModelOption } from "../utils/view/Menu.js";
 import { console } from '../utils/view/console.js';
 
-// model
+// Options
 
-class GameModesModel {
-
-    #gameModes;
-    #selectedMode = 0;
-
-    constructor() {
-        this.#gameModes = [];
-        for (let string of [`Demo`, `1 Player`, `2 Players`])
-            this.#gameModes.push(string);
-    }
-
-    get(index) {
-        return this.#gameModes[index];
-    }
-
-    size() {
-        return this.#gameModes.length;
-    }
-
-    setSelectedMode(index) {
-        this.#selectedMode = index;
-    }
-
-    getSelectedMode() {
-        return this.#selectedMode;
-    }
-
-}
-
-// ModelOptions
-
-class PlayOption extends ModelOption {
+class UserTypeOption extends ModelOption {
 
     constructor(model) {
-        super("Play", model);
+        super("Seleccionar Tipo de usuario...", model);
     }
 
     interact() {
-        // console.writeln(`play`)`;`
+        console.writeln(`
+         Profesor 
+         Alumno 
+         `);
     }
 }
 
-class ConfigurationOption extends ModelOption {
+class CategoriesOption extends ModelOption {
+    #categories
 
-    constructor(model) {
-        super("Configuration", model);
+    constructor(model, categories) {
+        super("Ir a Menú de Categorías...", model);
+        this.#categories = categories;
     }
 
     interact() {
-        new Connect4ConfigurationMenu(new GameModesModel()).interact();
+        new CategoriesMenu(this.#categories).interact();
     }
 
 }
 
-class ShowSelectedModeOption extends ModelOption {
+class ShowSelectedCatOption extends ModelOption {
 
     constructor(model) {
-        super("Active Mode", model);
+        super("Mostrar categoria seleccionada...", model);
     }
 
     interact() {
@@ -71,14 +45,14 @@ class ShowSelectedModeOption extends ModelOption {
 
 }
 
-class SetSelectedModeOption extends ModelOption {
+class SelectCatOption extends ModelOption {
 
     constructor(model) {
-        super("Change Mode", model);
+        super("Mostrar categorías...", model);
     }
 
     interact() {
-        new GameModesMenu(this.model).interact();
+        new CategoryMenu(this.model).interact();
     }
 
 }
@@ -88,13 +62,13 @@ class SelectModelOption extends ModelOption {
     #index;
 
     constructor(model, index) {
-        super("Select ", model);
+        super("Seleccionar ", model);
         this.model = model;
         this.#index = index;
     }
 
     getTitle() {
-        return super.getTitle() + ": " + this.model.get(this.#index);
+        return super.getTitle() + ": " + this.model.get(this.#index) +"(nPreguntas)";
     }
 
     interact() {
@@ -105,12 +79,12 @@ class SelectModelOption extends ModelOption {
 
 // ModelMenus
 
-class GameModesMenu extends DynamicMenu {
+class CategoryMenu extends DynamicMenu {
 
     #model;
 
     constructor(model) {
-        super("Game Modes Menu");
+        super("Menú de Categorías");
         this.#model = model;
         this.addOptions();
 
@@ -124,18 +98,18 @@ class GameModesMenu extends DynamicMenu {
 
 }
 
-class Connect4ConfigurationMenu extends IterativeMenu {
+class CategoriesMenu extends IterativeMenu {
 
     #model;
 
     constructor(model) {
-        super("Connec4 Configuration Menu");
+        super("Menú de Categorías");
         this.#model = model;
     }
 
     addOptions() {
-        this.add(new ShowSelectedModeOption(this.#model));
-        this.add(new SetSelectedModeOption(this.#model));
+        this.add(new ShowSelectedCatOption(this.#model));
+        this.add(new SelectCatOption(this.#model));
     }
 
 }
@@ -143,18 +117,20 @@ class Connect4ConfigurationMenu extends IterativeMenu {
 class MainMenu extends IterativeMenu {
 
     #model;
+    #categories;
 
-    constructor(model) {
-        super("Main Menu");
+    constructor(model,categories) {
+        super("ElaboraTest Menú");
         this.#model = model;
+        this.#categories = categories
     }
 
     addOptions() {
-        this.add(new PlayOption(this.#model));
-        this.add(new ConfigurationOption(this.#model));
+        this.add(new UserTypeOption(this.#model));
+        this.add(new CategoriesOption(this.#model,this.#categories));
     }
 
 }
 
 
-export { MainMenu, Connect4ConfigurationMenu };
+export { MainMenu, CategoriesMenu };
