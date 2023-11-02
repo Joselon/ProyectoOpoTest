@@ -4,17 +4,17 @@ import { YesNoDialog } from './utils/view/Dialog.js';
 import { MainMenu } from './views/MainMenu.js';
 
 class ElaboraTest {
-    #users;
+    #userTypes;
     #categories;
 
     constructor() {
-        this.#users = new UserTypes();
+        this.#userTypes = new UserTypes();
         this.#categories = new Categories();
     }
 
     start() {
         do {
-            new MainMenu(this.#users, this.#categories).interact();
+            new MainMenu(this.#userTypes, this.#categories).interact();
         } while (this.#isRestarted());
     }
 

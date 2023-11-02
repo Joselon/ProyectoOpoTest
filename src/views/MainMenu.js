@@ -32,21 +32,21 @@ class ShowCategoriesMenuOption extends ModelOption {
 }
 
 class MainMenu extends IterativeMenu {
-    #users;
+    #userTypes;
     #usersModelMenu;
     #categories;
     #categoriesModelMenu;
 
-    constructor(users, categories) {
+    constructor(userTypes, categories) {
         super("ElaboraTest Menú");
-        this.#users = users;
-        this.#usersModelMenu = new UserTypesMenu(this.#users);
+        this.#userTypes = userTypes;
+        this.#usersModelMenu = new UserTypesMenu(this.#userTypes);
         this.#categories = categories;
         this.#categoriesModelMenu = new CategoriesMenu();
     }
 
     addOptions() {
-        this.add(new UserTypeOption(this.#usersModelMenu,this.#users));
+        this.add(new UserTypeOption(this.#usersModelMenu,this.#userTypes));
         this.add(new ShowCategoriesMenuOption(this.#categoriesModelMenu, this.#categories));
     }
 
