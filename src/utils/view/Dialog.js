@@ -1,5 +1,4 @@
 import ClosedInterval   from '../model/ClosedInterval.js'
-import { Message } from '../../views/Message.js';
 import  {console}  from './console.js';
 
 
@@ -19,11 +18,11 @@ class Dialog {
     read(message) {
         let ok;
         do {
-            new Message(message).write();
+            console.write(message);
             this.#answer = this.readWithSuffix();
             ok = this.isOk();
             if (!ok) {
-                new Message(this.errorMessage).writeln();
+                console.writeln(this.errorMessage);
             }
         } while (!ok);
     }
@@ -62,7 +61,7 @@ class InIntervalDialog extends Dialog {
 
 class YesNoDialog extends Dialog {
 
-    static #AFFIRMATIVE = `y`;
+    static #AFFIRMATIVE = `s`;
     static #NEGATIVE = `n`;
 
     constructor() {

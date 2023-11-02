@@ -14,7 +14,7 @@ class ElaboraTest {
     start() {
         do {
             new MainMenu(new CategoriesMenu(),this.#categories).interact();
-        } while (this.#isResumed());
+        } while (this.#isRestarted());
     }
 
     teacherStart(){
@@ -25,9 +25,9 @@ class ElaboraTest {
         //showStudentMainMenu
     }
 
-    #isResumed() {
+    #isRestarted() {
         let yesNoDialog = new YesNoDialog();
-        yesNoDialog.read(`Reiniciar`);
+        yesNoDialog.read(`¿Quiere reiniciar`);
         if (yesNoDialog.isAffirmative()) {
             //
         }

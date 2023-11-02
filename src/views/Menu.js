@@ -68,7 +68,7 @@ class SelectModelOption extends ModelOption {
     }
 
     getTitle() {
-        return super.getTitle() + ": " + this.model.get(this.#index) +"(nPreguntas)";
+        return `${super.getTitle()}: ${this.model.get(this.#index)} -(${this.model.get(this.#index).length})`;
     }
 
     interact() {
