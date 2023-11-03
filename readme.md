@@ -106,6 +106,8 @@ Conforme se complete un concepto se abre la posibilidad de generar preguntas de 
 
 ## Despliegue 
 
+Fase de pruebas de modelos:
+
 Usando NODE.js instalamos las dependencias ("console-mpds" por ahora) con npm install y ejecutamos >node ./app.js
 Usaremos los Menús que se vieron en las clases del Máster.
 
