@@ -17,11 +17,11 @@ class UserTypes {
         return this.#userTypes.length;
     }
 
-    setSelectedType(index) {
+    setSelected(index) {
         this.#currentTypeIndex = index;
     }
 
-    getSelectedType() {
+    getSelected() {
         return this.#currentTypeIndex;
     }
 

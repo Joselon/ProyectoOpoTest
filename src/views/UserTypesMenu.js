@@ -18,7 +18,7 @@ class SelectAndOpenMenuOption extends Option {
     }
 
     interact() {
-        this.#model.setSelectedType(this.#index);
+        this.#model.setSelected(this.#index);
         this.#menu.interact();
     }
 
@@ -60,7 +60,7 @@ class UserTypesMenu extends IterativeQuitMenu {
     }
 
     addState() {
-        this.#state = "Actual: " + this.#model.get(this.#model.getSelectedType());
+        this.#state = "Actual: " + this.#model.get(this.#model.getSelected());
     }
     interact() {
         do {

@@ -16,7 +16,7 @@ class ElaboraTest {
     start() {
         do {
             new MainMenu(this.#userTypes, this.#categories).interact();
-        } while (this.#isRestarted());
+        } while (!this.#isResumed());
     }
 
     teacherStart() {
@@ -27,11 +27,11 @@ class ElaboraTest {
         //showStudentMainMenu
     }
 
-    #isRestarted() {
+    #isResumed() {
         let yesNoDialog = new YesNoDialog();
-        yesNoDialog.read(`¿Volver al menú principal`);
-        if (yesNoDialog.isAffirmative()) {
-            //Reload original json
+        yesNoDialog.read(`Los cambios no se guardarán, ¿seguro que quiere salir`);
+        if (yesNoDialog.isNegative()) {
+            //Guardar
         }
         return yesNoDialog.isAffirmative();
     }

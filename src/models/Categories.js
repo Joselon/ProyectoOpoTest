@@ -20,11 +20,11 @@ class Categories {
         return this.#categories.length;
     }
 
-    setSelectedCat(index) {
+    setSelected(index) {
         this.#currentCategoryIndex = index;
     }
 
-    getSelectedCat() {
+    getSelected() {
         return this.#currentCategoryIndex;
     }
 

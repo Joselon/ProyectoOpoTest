@@ -29,7 +29,7 @@ class GenerateTestOption extends Option {
 
     interact() {
         console.writeln(`
-        Generando test de ${this.#model.get(this.#model.getSelectedCat())}...`)
+        Generando test de ${this.#model.get(this.#model.getSelected())}...`)
     }
 }
 
@@ -50,7 +50,7 @@ class MainMenu extends DynamicQuitMenu {
     addOptions() {
         this.add(new OpenMenuOption("Seleccionar Tipo de usuario...", this.#userTypesMenu));
         this.add(new OpenMenuOption("Menú de Categorías...", this.#categoriesMenu));
-        if (this.#userTypes.getSelectedType() === 0) {
+        if (this.#userTypes.getSelected() === 0) {
             this.add(new AddCategoryOption(this.#categories));
             this.add(new Option("Añadir Concepto"));
             this.add(new Option("Añadir Pregunta"));

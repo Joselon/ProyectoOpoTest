@@ -17,7 +17,7 @@ class SelectModelOption extends Option {
     }
 
     interact() {
-        this.#model.setSelectedCat(this.#index);
+        this.#model.setSelected(this.#index);
     }
 
 }
@@ -60,7 +60,7 @@ class CategoriesMenu extends IterativeQuitMenu {
     }
 
     addState() {
-        this.#state = "Categoría actual: " + this.#model.get(this.#model.getSelectedCat());
+        this.#state = "Categoría actual: " + this.#model.get(this.#model.getSelected());
     }
 
     interact() {
