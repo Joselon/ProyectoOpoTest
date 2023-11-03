@@ -1,67 +1,30 @@
-import { DynamicQuitMenu, IterativeQuitMenu , Option } from "../utils/view/Menu.js";
+import { DynamicMenu, IterativeQuitMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
 import { console } from '../utils/view/console.js';
 
-class ModelOption extends Option {
 
-    model;
-
-    constructor(string, model) {
-        super(string);
-        this.model = model;
-    }
-
-    interact() { };
-
-}
-class ShowSelectedCatOption extends ModelOption {
-
-    constructor(model) {
-        super("Mostrar categoria seleccionada...", model);
-    }
-
-    interact() {
-        console.writeln();
-        console.writeln((this.model.getSelectedCat() + 1) + ". " + this.model.get(this.model.getSelectedCat()));
-        console.writeln();
-    }
-
-}
-
-class SelectCatOption extends ModelOption {
-
-    constructor(model) {
-        super("Cambiar de categoría...", model);
-    }
-
-    interact() {
-        new CategoryMenu(this.model).interact();
-    }
-
-}
-
-class SelectModelOption extends ModelOption {
-
+class SelectModelOption extends Option {
+    #model
     #index;
 
     constructor(model, index) {
         super("Seleccionar ", model);
-        this.model = model;
+        this.#model = model;
         this.#index = index;
     }
 
     getTitle() {
-        return `${super.getTitle()}: ${this.model.get(this.#index)} -(${this.model.get(this.#index).length})`;
+        return `${super.getTitle()}: ${this.#model.get(this.#index)} -(${this.#model.get(this.#index).length})`;
     }
 
     interact() {
-        this.model.setSelectedCat(this.#index);
+        this.#model.setSelectedCat(this.#index);
     }
 
 }
 
 // ModelMenus
 
-class CategoryMenu extends DynamicQuitMenu {
+class CategoryMenu extends DynamicMenu {
 
     #model;
 
@@ -83,38 +46,39 @@ class CategoryMenu extends DynamicQuitMenu {
 class CategoriesMenu extends IterativeQuitMenu {
 
     #model;
-    #subtitle;
+    #state;
+    #selectCatMenu
 
     constructor(model) {
         super("Menú de Categorías");
         this.#model = model;
-    }
-
-    addSubtitle () {
-        this.#subtitle = "Categoría actual: "+this.#model.get(this.#model.getSelectedCat());
+        this.#selectCatMenu = new CategoryMenu(this.#model);
     }
 
     addOptions() {
-       // this.add(new ShowSelectedCatOption(this.#model));
-        this.add(new SelectCatOption(this.#model));
+        this.add(new OpenMenuOption("Cambiar categoría", this.#selectCatMenu));
+    }
+
+    addState() {
+        this.#state = "Categoría actual: " + this.#model.get(this.#model.getSelectedCat());
     }
 
     interact() {
         do {
             this.removeOptions();
-            this.addSubtitle();
+            this.addState();
             this.addOptions();
             this.interact_();
         } while (!this.isExecutedquitOption());
     }
 
-    showSubtitle() {
-        console.writeln(this.#subtitle);
+    showState() {
+        console.writeln(this.#state);
     }
 
-    interact_(){
+    interact_() {
         this.showTitles();
-        this.showSubtitle();
+        this.showState();
         this.execChoosedOption();
     }
 

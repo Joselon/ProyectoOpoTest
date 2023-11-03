@@ -1,57 +1,16 @@
-import {  DynamicMenu, IterativeQuitMenu , Option } from "../utils/view/Menu.js";
+import { DynamicMenu, IterativeQuitMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
 import { console } from '../utils/view/console.js';
 
-class ModelOption extends Option {
-
-    model;
-
-    constructor(string, model) {
-        super(string);
-        this.model = model;
-    }
-
-    interact() { };
-
-}
-
-class ShowSelectedTypeOption extends ModelOption {
-    #model;
-
-    constructor(model) {
-        super("Mostrar tipo seleccionado...", model);
-        this.#model = model
-    }
-
-    interact() {
-        console.writeln();
-        console.writeln((this.#model.getSelectedType() + 1) + ". " + this.#model.get(this.#model.getSelectedType()));
-        console.writeln();
-    }
-
-}
-
-class TypeMenuOption extends ModelOption {
-    #model;
-
-    constructor(model) {
-        super("Cambiar tipo", model);
-        this.#model = model;
-    }
-
-    interact() {
-        new TypeMenu(this.#model).interact();
-    }
-
-}
-
-class SelectTypeOption extends ModelOption {
+class SelectAndOpenMenuOption extends Option {
+    #menu;
     #model;
     #index;
 
-    constructor(model, index) {
+    constructor(menu, model, index) {
         super("Seleccionar ", model);
         this.#model = model;
         this.#index = index;
+        this.#menu = menu;
     }
 
     getTitle() {
@@ -60,7 +19,7 @@ class SelectTypeOption extends ModelOption {
 
     interact() {
         this.#model.setSelectedType(this.#index);
-        new UserTypesMenu(this.#model).interact();
+        this.#menu.interact();
     }
 
 }
@@ -80,7 +39,7 @@ class TypeMenu extends DynamicMenu {
 
     addOptions() {
         for (let i = 0; i < this.#model.size(); i++) {
-            this.add(new SelectTypeOption(this.#model, i));
+            this.add(new SelectAndOpenMenuOption(new UserTypesMenu(this.#model), this.#model, i));
         }
     }
 
@@ -89,6 +48,7 @@ class TypeMenu extends DynamicMenu {
 class UserTypesMenu extends IterativeQuitMenu {
 
     #model;
+    #state;
 
     constructor(model) {
         super("Menú de Usuarios");
@@ -96,8 +56,28 @@ class UserTypesMenu extends IterativeQuitMenu {
     }
 
     addOptions() {
-        this.add(new ShowSelectedTypeOption(this.#model));
-        this.add(new TypeMenuOption(this.#model));
+        this.add(new OpenMenuOption("Cambiar tipo", this.#model));
+    }
+
+    addState() {
+        this.#state = "Actual: " + this.#model.get(this.#model.getSelectedType());
+    }
+    interact() {
+        do {
+            this.removeOptions();
+            this.addState();
+            this.addOptions();
+            this.interact_();
+        } while (!this.isExecutedquitOption());
+    }
+    showState() {
+        console.writeln(this.#state);
+    }
+
+    interact_() {
+        this.showTitles();
+        this.showState();
+        this.execChoosedOption();
     }
 
 }

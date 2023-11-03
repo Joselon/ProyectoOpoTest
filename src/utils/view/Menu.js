@@ -40,6 +40,19 @@ class QuitOption extends Option {
 
 }
 
+class OpenMenuOption extends Option {
+    #menu;
+
+    constructor(title, menu) {
+        super(title);
+        this.#menu = menu
+    }
+
+    interact() {
+        this.#menu.interact();
+    }
+}
+
 class Menu {
 
     #title;
@@ -182,4 +195,4 @@ class DynamicMenu extends Menu {
 
 }
 
-export {  DynamicMenu , DynamicQuitMenu, IterativeQuitMenu , Option };
+export { DynamicMenu, DynamicQuitMenu, IterativeQuitMenu, OpenMenuOption, Option };

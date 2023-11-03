@@ -104,6 +104,11 @@ With Justification (3 levels)
 Incialmente un profesor propone una categoría y añade el indice del temario como categorías hijas, para puedan ir los profesores dando de alta conceptos con los que plantear preguntas para que los alumnos aporten posibles definiciones, justificaciones y relaciones, que tendrá que corregir un profesor para decidir si añadir al concepto.
 Conforme se complete un concepto se abre la posibilidad de generar preguntas de tipo test.
 
+## Despliegue 
+
+Usando NODE.js instalamos las dependencias ("console-mpds" por ahora) con npm install y ejecutamos >node ./app.js
+Usaremos los Menús que se vieron en las clases del Máster.
+
 ## Referencias
 
 -UML-Quiz: 

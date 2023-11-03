@@ -4,6 +4,7 @@ import { YesNoDialog } from './utils/view/Dialog.js';
 import { MainMenu } from './views/MainMenu.js';
 
 class ElaboraTest {
+    //#users;
     #userTypes;
     #categories;
 
@@ -28,7 +29,7 @@ class ElaboraTest {
 
     #isRestarted() {
         let yesNoDialog = new YesNoDialog();
-        yesNoDialog.read(`¿Quiere reiniciar`);
+        yesNoDialog.read(`¿Volver al menú principal`);
         if (yesNoDialog.isAffirmative()) {
             //Reload original json
         }
