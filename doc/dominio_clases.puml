@@ -19,11 +19,11 @@ class Test
 class AnswersToReview
 
 class Concept {
-    keyword
+    - keyword
 }
 
 class Question {
-    level
+    - level
 }
 
 class Statement
@@ -40,13 +40,16 @@ class Correct
 
 Class Incorrect
 
-class OpenField
+class OpenField {
+    - isEvaluated
+    - isToConcept
+}
 
 Class SelectedOption
 
 
-Community *-- "2..n" User
-Community o-- "0..n" Category
+Community *--"2..n" User
+Community o--"0..n" Category
 
 Category o--"0..n" Category : Subcategories
 
@@ -61,33 +64,33 @@ Definition o-- Justification
 Justification o-- Explication
 Concept o-- Relation
 
-Student --> "0..n" Evaluation
+Student -->"0..n" Evaluation
 Evaluation --> Test
 Evaluation --> Result
 
 Teacher ..> Evaluation
-AnswersToReview *-- "1..n" OpenField
-Definition <.. AnswersToReview
-Justification <.. AnswersToReview
-Relation <.. AnswersToReview
+'AnswersToReview *--  OpenField
+Definition <.. OpenField :isToConcept
+Justification <.. OpenField :isToConcept
+Relation <.. OpenField :isToConcept
 
-Evaluation <.. AnswersToReview : manual
+Evaluation <.. OpenField : manual (! isEvaluated)
 Evaluation <.. SelectedOption : automatic
 
-Test *-- "1..n" Question
+Test *--"1..n" Question
 Question <|-- MultipleChoice
 Question <|-- Open
 Question *--   Statement
-MultipleChoice *-- "2..n" Option
+MultipleChoice *--"2..n" Option
 Option <|-- Incorrect
 Option <|-- Correct
 MultipleChoice *-- Correct
-MultipleChoice *-- "1..n" Incorrect
+MultipleChoice *--"1..n" Incorrect
 MultipleChoice *-- SelectedOption
-Open *-- OpenField
+Open o--"1..n" OpenField
 Answer <|-- OpenField
 Answer <|-- SelectedOption
-Question o-- AnswersToReview
+
 
 @enduml
 

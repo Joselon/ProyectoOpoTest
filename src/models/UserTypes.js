@@ -1,7 +1,7 @@
 class UserTypes {
 
     #userTypes;
-    #currentTypeIndex = 0;
+    #currentIndex = 0;
 
     constructor() {
         this.#userTypes = [];
@@ -18,11 +18,11 @@ class UserTypes {
     }
 
     setSelected(index) {
-        this.#currentTypeIndex = index;
+        this.#currentIndex = index;
     }
 
     getSelected() {
-        return this.#currentTypeIndex;
+        return this.#currentIndex;
     }
 
 }

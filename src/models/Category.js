@@ -1,12 +1,12 @@
 class Category {
-    #ancestor;
+    #idAncestor;
     #name;
     #concepts;
-    #currentIndex;
+    #currentIndex; //Debería guardarlo el usuario no el modelo
 
     constructor(name, category) {
         this.#name = name;
-        this.#ancestor = category;
+        this.#idAncestor = category;
         this.#concepts = ["Software", "Patron"]
     }
 

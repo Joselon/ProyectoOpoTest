@@ -4,19 +4,13 @@ class Concept
 
 class Keyword
 
-class FakeKeyword
+class Definition {
+    -Real/Fake
+}
 
-class Definition
-
-class RealDefinition
-
-class FakeDefinition
-
-class Justification
-
-class RealJustification
-
-class FakeJustification
+class Justification {
+    -Real/Fake
+}
 
 class Explanation
 
@@ -37,17 +31,19 @@ class Secundary {
     withDefinition or withRelation
 }
 
-class OpenDefinitionQuestion 
+class OpenDefinitionQuestion
 
 class OpenClassQuestion
 
-class OpenCompositionQuestion 
+class OpenCompositionQuestion
 
 class OpenReverseDefinitionQuestion
 
 class OpenJustificationQuestion
 
-class OpenQuestion
+class Question
+
+class Open
 
 class Statement
 
@@ -63,51 +59,38 @@ class ClassTemplate {
 }
 
 class CompositionTemplate {
- "¿Qué conceptos destacarias del KEYWORD?"
+    "¿Qué conceptos destacarias del KEYWORD?"
 }
 
 class JustificationTemplate {
- "¿La KEYWORD es esta DEFINITION?¿Por qué?"
+    "¿La KEYWORD es esta DEFINITION?¿Por qué?"
 }
 
 class ReverseDefinitionTemplate {
     "¿Qué es REALDEFINITION?"
 }
 
-class OpenFieldAnswer
+class Answer
 
-class AnswersToReviewDefinition
+class OpenField
 
-class AnswersToReviewJustification  
-
-class AnswersToReviewFakeKeywordsAnswer
-
-class AnswersToReviewClasses 
-
-OpenQuestion "0..n" -o Concept
-OpenQuestion *-- OpenFieldAnswer
+Question <|-- Open
+Open "0..n" -o Concept
+Answer <|-- OpenField
+Open o-- OpenField
+Open *-- Level
+Open *-- Statement
+Statement ..> StatementTemplate
 
 Concept *-- Keyword
-
 Concept o--"0..n" Definition
-Definition <|-- RealDefinition
-Definition <|-- FakeDefinition
-FakeDefinition o-- "0..n" Justification
-Justification <|-- RealJustification
-Justification <|-- FakeJustification
-FakeJustification o-- Explanation
+Definition o-- "0..n" Justification:Fake
+Justification o-- Explanation:Fake
 
 Concept o-- "0..n" Relation
 Relation <|-- Classification
 Relation <|-- Composition
-'CONSULTAR SENTIDO DE RELACION A OTROS CONCEPTOS
-Classification *-- "2..n" Concept: others
-Composition *-- "1..n" Concept: others
-
-
-OpenQuestion *-- Level
-OpenQuestion *-- Statement
-Statement ..> StatementTemplate
+'Relation -->"1..m" Concept
 
 Level <|-- Primary
 Level <|-- Secundary
@@ -118,49 +101,44 @@ StatementTemplate <|-- CompositionTemplate
 
 Primary <|-- OpenDefinitionQuestion
 OpenDefinitionQuestion *-- DefinitionTemplate
-OpenDefinitionQuestion o-- AnswersToReviewDefinition
-AnswersToReviewDefinition *-- "1..n" OpenFieldAnswer
-AnswersToReviewDefinition <.. Definition
+OpenField "1..n" --o OpenDefinitionQuestion
+OpenDefinitionQuestion <.. Definition: OpenField
 
 Primary <|-- OpenClassQuestion
 OpenClassQuestion *-- ClassTemplate
-OpenClassQuestion o-- AnswersToReviewClasses
-OpenFieldAnswer "1..n"--* AnswersToReviewClasses
-AnswersToReviewClasses <.. Classification
+OpenField "1..n"--o OpenClassQuestion
+OpenClassQuestion <.. Classification :OpenField
 
 Primary <|-- OpenCompositionQuestion
 OpenCompositionQuestion *-- CompositionTemplate
-OpenCompositionQuestion o-- AnswersToReviewComponents
-OpenFieldAnswer "1..n"--* AnswersToReviewComponents
-AnswersToReviewComponents <.. Composition
+OpenField "1..n"--o OpenCompositionQuestion
+OpenCompositionQuestion <.. Composition :OpenField
 
 Secundary <|-- OpenReverseDefinitionQuestion
 OpenReverseDefinitionQuestion *-- ReverseDefinitionTemplate
-OpenReverseDefinitionQuestion o-- AnswersToReviewFakeKeywordsAnswer
-OpenFieldAnswer "1..n"--* AnswersToReviewFakeKeywordsAnswer 
-AnswersToReviewFakeKeywordsAnswer <.. FakeKeyword
-Keyword o--- FakeKeyword
+OpenField "1..n" --o OpenReverseDefinitionQuestion
+OpenReverseDefinitionQuestion <.. Keyword :Fake <- OpenField
 
 Secundary <|-- OpenJustificationQuestion
 OpenJustificationQuestion *-- JustificationTemplate
-OpenJustificationQuestion o-- AnswersToReviewJustification
-OpenFieldAnswer "1..n"--* AnswersToReviewJustification
-AnswersToReviewJustification <.. Justification
+OpenJustificationQuestion o--"1..n" OpenField
+OpenJustificationQuestion <.. Justification :OpenField
 
 @enduml
 'class Tertiary {
-'    withKeyword
-'    withDefinition
- '   withJustification
-'}
- 
+    '    withKeyword
+    '    withDefinition
+    '   withJustification
+    '
+}
+
 'MultipleChoiceTertiaryX:
 '"Es cierto que la CLAVE no es FAKEDEFINITION porque FAKEJUSTIFICACION"
 '    + 1 correct answer:
 '"No porque la justificación es falsa"
- '   + 3 incorrect answer:
+'   + 3 incorrect answer:
 '"Sí, por FAKEJUSTIFICATION"...
-    
+
 
 
 
