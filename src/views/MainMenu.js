@@ -2,6 +2,7 @@ import { DynamicQuitMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
 import { TypeMenu } from "./UserTypesMenu.js";
 import { CategoriesMenu } from "./CategoriesMenu.js";
 import { console } from "../utils/view/console.js";
+import { UserState } from "../models/UserState.js";
 
 //Teacher Options
 class AddCategoryOption extends Option {
@@ -34,23 +35,25 @@ class GenerateTestOption extends Option {
 }
 
 class MainMenu extends DynamicQuitMenu {
+    #userState;
     #userTypes;
     #userTypesMenu;
     #categories;
     #categoriesMenu;
 
-    constructor(userTypes, categories) {
+    constructor(userState ,userTypes, categories) {
         super("ElaboraTest Menú");
+        this.#userState = userState;
         this.#userTypes = userTypes;
-        this.#userTypesMenu = new TypeMenu(this.#userTypes);
+        this.#userTypesMenu = new TypeMenu(this.#userState , this.#userTypes);
         this.#categories = categories;
-        this.#categoriesMenu = new CategoriesMenu(this.#categories);
+        this.#categoriesMenu = new CategoriesMenu(this.#userState ,this.#categories);
     }
 
     addOptions() {
         this.add(new OpenMenuOption("Seleccionar Tipo de usuario...", this.#userTypesMenu));
         this.add(new OpenMenuOption("Menú de Categorías...", this.#categoriesMenu));
-        if (this.#userTypes.getSelected() === 0) {
+        if (this.#userState.getCurrentType() === 0) {
             this.add(new AddCategoryOption(this.#categories));
             this.add(new Option("Añadir Concepto"));
             this.add(new Option("Añadir Pregunta"));

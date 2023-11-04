@@ -1,7 +1,6 @@
 class UserTypes {
 
     #userTypes;
-    #currentIndex = 0;
 
     constructor() {
         this.#userTypes = [];
@@ -15,14 +14,6 @@ class UserTypes {
 
     size() {
         return this.#userTypes.length;
-    }
-
-    setSelected(index) {
-        this.#currentIndex = index;
-    }
-
-    getSelected() {
-        return this.#currentIndex;
     }
 
 }
