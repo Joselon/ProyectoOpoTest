@@ -31,7 +31,7 @@ class CategoryMenu extends DynamicMenu {
     #model;
     #state;
 
-    constructor(state ,model) {
+    constructor(state, model) {
         super("Seleccione una categoría...");
         this.#model = model;
         this.#state = state;
@@ -58,7 +58,7 @@ class CategoriesMenu extends IterativeQuitMenu {
         super("Menú de Categorías");
         this.#model = model;
         this.#state = state;
-        this.#selectCatMenu = new CategoryMenu(this.#state ,this.#model);
+        this.#selectCatMenu = new CategoryMenu(this.#state, this.#model);
     }
 
     addOptions() {

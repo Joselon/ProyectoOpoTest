@@ -6,10 +6,10 @@ class Categories {
 
     constructor() {
         this.#categories = [];
-        
+
         //Recuperar Categories de JSON o BBDD. orginal.json-> current.json JSON-to-CATEGORY[]
         for (let string of [`Informática`, `Oposiciones Bibliotecario`, `Test de Conducir`])
-            this.#categories.push(new Category(string,0));
+            this.#categories.push(new Category(string, 0));
     }
 
     get(index) {
@@ -21,7 +21,7 @@ class Categories {
     }
 
     addCategory(string) {
-        this.#categories.push(new Category(string,0));
+        this.#categories.push(new Category(string, 0));
     }
 
 }

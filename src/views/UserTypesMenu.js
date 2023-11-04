@@ -33,7 +33,7 @@ class TypeMenu extends DynamicMenu {
     #state;
     #model;
 
-    constructor(state , model) {
+    constructor(state, model) {
         super("Seleccione un tipo de usuario...");
         this.#state = state;
         this.#model = model;
@@ -43,7 +43,7 @@ class TypeMenu extends DynamicMenu {
 
     addOptions() {
         for (let i = 0; i < this.#model.size(); i++) {
-            this.add(new SelectAndOpenMenuOption(new UserTypesMenu(this.#state ,this.#model), this.#model, i, this.#state));
+            this.add(new SelectAndOpenMenuOption(new UserTypesMenu(this.#state, this.#model), this.#model, i, this.#state));
         }
     }
 

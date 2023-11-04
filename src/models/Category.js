@@ -2,7 +2,6 @@ class Category {
     #idAncestor;
     #name;
     #concepts;
-    #currentIndex; //Debería guardarlo el usuario no el modelo
 
     constructor(name, category) {
         this.#name = name;
@@ -23,20 +22,12 @@ class Category {
         return this.size > 0;
     }
 
-    get(index) {
+    getConcept(index) {
         return this.#concepts[index];
     }
 
     size() {
         return this.#concepts.length;
-    }
-
-    setSelected(index) {
-        this.#currentIndex = index;
-    }
-
-    getSelected() {
-        return this.#currentIndex;
     }
 
     addConcept(concept) {

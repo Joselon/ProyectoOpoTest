@@ -22,15 +22,17 @@ class AddCategoryOption extends Option {
 //Student Options
 class GenerateTestOption extends Option {
     #model;
+    #state;
 
-    constructor(model) {
+    constructor(state, model) {
         super("Ejecutar Tests");
         this.#model = model;
+        this.#state = state;
     }
 
     interact() {
         console.writeln(`
-        Generando test de ${this.#model.get(this.#model.getSelected())}...`)
+        Generando test de ${this.#model.get(this.#state.getCurrentCategory())}...`)
     }
 }
 
@@ -41,13 +43,13 @@ class MainMenu extends DynamicQuitMenu {
     #categories;
     #categoriesMenu;
 
-    constructor(userState ,userTypes, categories) {
+    constructor(userState, userTypes, categories) {
         super("ElaboraTest Menú");
         this.#userState = userState;
         this.#userTypes = userTypes;
-        this.#userTypesMenu = new TypeMenu(this.#userState , this.#userTypes);
+        this.#userTypesMenu = new TypeMenu(this.#userState, this.#userTypes);
         this.#categories = categories;
-        this.#categoriesMenu = new CategoriesMenu(this.#userState ,this.#categories);
+        this.#categoriesMenu = new CategoriesMenu(this.#userState, this.#categories);
     }
 
     addOptions() {
@@ -60,7 +62,7 @@ class MainMenu extends DynamicQuitMenu {
             this.add(new Option("Revisar Respuestas"))
         }
         else {
-            this.add(new GenerateTestOption(this.#categories));
+            this.add(new GenerateTestOption(this.#userState, this.#categories));
             this.add(new Option("Consultar Resultados"))
         }
     }
