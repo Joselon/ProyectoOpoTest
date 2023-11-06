@@ -1,24 +1,42 @@
 import { DynamicMenu, IterativeQuitMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
 import { console } from '../utils/view/console.js';
+import { InIntervalDialog } from "../utils/view/Dialog.js";
 
+//Teacher Options
+class AddCategoryOption extends Option {
+    #categories;
 
-class SelectModelOption extends Option {
-    #model
+    constructor(categories) {
+        super("Añadir Categoría");
+        this.#categories = categories;
+    }
+
+    interact() {
+        let cat = console.readString(`
+        Escribe la categoría:`);
+        let catIndex = console.readNumber(`Escribe la categoría a la que pertenece (0 default): `)
+        this.#categories.addCategory(cat, catIndex);
+    }
+}
+
+class SelectCategoryOption extends Option {
+    #categories
     #index;
     #state;
 
-    constructor(model, index, state) {
-        super("Seleccionar ", model);
-        this.#model = model;
+    constructor(categories, index, state) {
+        super("Seleccionar ");
+        this.#categories = categories;
         this.#index = index;
         this.#state = state;
     }
 
     getTitle() {
-        return `${super.getTitle()}: ${this.#model.get(this.#index)} -(${this.#model.get(this.#index).length})`;
+        return `${super.getTitle()}: ${this.#categories.getName(this.#index)} -(${this.#categories.getName(this.#index).length})`;
     }
 
     interact() {
+        super.interact();
         this.#state.setCurrentCategory(this.#index);
     }
 
@@ -28,20 +46,28 @@ class SelectModelOption extends Option {
 
 class CategoryMenu extends DynamicMenu {
 
-    #model;
+    #categories;
     #state;
 
-    constructor(state, model) {
+    constructor(state, categories) {
         super("Seleccione una categoría...");
-        this.#model = model;
+        this.#categories = categories;
         this.#state = state;
         this.addOptions();
 
     }
 
     addOptions() {
-        for (let i = 0; i < this.#model.size(); i++) {
-            this.add(new SelectModelOption(this.#model, i, this.#state));
+        for (let i = 0; i < this.#categories.size(); i++) {
+            this.add(new SelectCategoryOption(this.#categories, i, this.#state));
+        }
+        for (let i = 0; i < this.#categories.size(); i++)
+            if (this.#categories.get(i).subcategoriesSize() > 0) {
+                this.add(new OpenMenuOption(`--- Ver Subcategorías de ${i+1}-${this.#categories.getName(i)} ->`, new CategoryMenu(this.#state , this.#categories.get(i).getSubcategories())));
+                //for (let j = 0; j < this.#categories.get(i).subcategoriesSize(); j++) {
+            }
+        if (this.#state.getCurrentType() === 0) {
+            this.add(new AddCategoryOption(this.#categories));
         }
     }
 
@@ -52,7 +78,7 @@ class CategoriesMenu extends IterativeQuitMenu {
     #model;
     #state;
     #stateTitle;
-    #selectCatMenu
+    #selectCatMenu;
 
     constructor(state, model) {
         super("Menú de Categorías");
@@ -62,11 +88,11 @@ class CategoriesMenu extends IterativeQuitMenu {
     }
 
     addOptions() {
-        this.add(new OpenMenuOption("Cambiar categoría", this.#selectCatMenu));
+        this.add(new OpenMenuOption("Añadir o Cambiar de Categoría...", this.#selectCatMenu));
     }
 
     addStateTitle() {
-        this.#stateTitle = "Categoría actual: " + this.#model.get(this.#state.getCurrentCategory());
+        this.#stateTitle = "Categoría actual: " + this.#model.getName(this.#state.getCurrentCategory());
     }
 
     interact() {

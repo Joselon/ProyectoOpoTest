@@ -49,6 +49,7 @@ class OpenMenuOption extends Option {
     }
 
     interact() {
+        super.interact();
         this.#menu.interact();
     }
 }

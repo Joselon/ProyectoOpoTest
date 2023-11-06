@@ -4,15 +4,19 @@ class Categories {
 
     #categories;
 
-    constructor() {
+    constructor(categories) {
         this.#categories = [];
-
-        //Recuperar Categories de JSON o BBDD. orginal.json-> current.json JSON-to-CATEGORY[]
-        for (let string of [`Informática`, `Oposiciones Bibliotecario`, `Test de Conducir`])
-            this.#categories.push(new Category(string, 0));
+        if (categories === undefined)
+            categories = [];
+        for (let category of categories)
+            this.#categories.push(category);
     }
 
     get(index) {
+        return this.#categories[index];
+    }
+
+    getName(index) {
         return this.#categories[index].getName();
     }
 
@@ -20,10 +24,16 @@ class Categories {
         return this.#categories.length;
     }
 
-    addCategory(string) {
-        this.#categories.push(new Category(string, 0));
+    addCategory(string, index) {
+        if (index === undefined) {
+            this.#categories.push(new Category(string));
+        }
+        else {
+            this.get(index-1).addSubcategory(string);
+        }
+        
     }
 
 }
 
-export { Categories }
+export { Category, Categories }

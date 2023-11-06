@@ -1,18 +1,14 @@
-import { DynamicMenu, IterativeQuitMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
-import { console } from '../utils/view/console.js';
-import { UserState } from "../models/UserState.js";
+import { DynamicMenu,  Option } from "../utils/view/Menu.js";
 
-class SelectAndOpenMenuOption extends Option {
-    #menu;
+class SelectUserTypeOption extends Option {
     #model;
     #index;
     #state;
 
-    constructor(menu, model, index, state) {
-        super("Seleccionar ", model);
+    constructor(model, index, state) {
+        super("Seleccionar ");
         this.#model = model;
         this.#index = index;
-        this.#menu = menu;
         this.#state = state;
     }
 
@@ -21,8 +17,9 @@ class SelectAndOpenMenuOption extends Option {
     }
 
     interact() {
+        super.interact();
         this.#state.setCurrentType(this.#index);
-        this.#menu.interact();
+        
     }
 
 }
@@ -43,47 +40,8 @@ class TypeMenu extends DynamicMenu {
 
     addOptions() {
         for (let i = 0; i < this.#model.size(); i++) {
-            this.add(new SelectAndOpenMenuOption(new UserTypesMenu(this.#state, this.#model), this.#model, i, this.#state));
+            this.add(new SelectUserTypeOption(this.#model, i, this.#state));
         }
-    }
-
-}
-
-class UserTypesMenu extends IterativeQuitMenu {
-
-    #model;
-    #state;
-    #stateTitle;
-
-    constructor(state, model) {
-        super("Menú de Usuarios");
-        this.#state = state;
-        this.#model = model;
-    }
-
-    addOptions() {
-        this.add(new OpenMenuOption("Cambiar tipo", this.#model));
-    }
-
-    addStateTitle() {
-        this.#stateTitle = "Actual: " + this.#model.get(this.#state.getCurrentType());
-    }
-    interact() {
-        do {
-            this.removeOptions();
-            this.addStateTitle();
-            this.addOptions();
-            this.interact_();
-        } while (!this.isExecutedquitOption());
-    }
-    showState() {
-        console.writeln(this.#stateTitle);
-    }
-
-    interact_() {
-        this.showTitles();
-        this.showState();
-        this.execChoosedOption();
     }
 
 }

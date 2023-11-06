@@ -2,22 +2,9 @@ import { DynamicQuitMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
 import { TypeMenu } from "./UserTypesMenu.js";
 import { CategoriesMenu } from "./CategoriesMenu.js";
 import { console } from "../utils/view/console.js";
-import { UserState } from "../models/UserState.js";
 
-//Teacher Options
-class AddCategoryOption extends Option {
-    #model;
 
-    constructor(model) {
-        super("Añadir Categoría");
-        this.#model = model;
-    }
 
-    interact() {
-        this.#model.addCategory(console.readString(`
-        Escribe la categoría:`));
-    }
-}
 
 //Student Options
 class GenerateTestOption extends Option {
@@ -32,12 +19,13 @@ class GenerateTestOption extends Option {
 
     interact() {
         console.writeln(`
-        Generando test de ${this.#model.get(this.#state.getCurrentCategory())}...`)
+        Generando test de ${this.#model.getName(this.#state.getCurrentCategory())}...`)
     }
 }
 
 class MainMenu extends DynamicQuitMenu {
     #userState;
+    #userStateTitle;
     #userTypes;
     #userTypesMenu;
     #categories;
@@ -56,7 +44,6 @@ class MainMenu extends DynamicQuitMenu {
         this.add(new OpenMenuOption("Seleccionar Tipo de usuario...", this.#userTypesMenu));
         this.add(new OpenMenuOption("Menú de Categorías...", this.#categoriesMenu));
         if (this.#userState.getCurrentType() === 0) {
-            this.add(new AddCategoryOption(this.#categories));
             this.add(new Option("Añadir Concepto"));
             this.add(new Option("Añadir Pregunta"));
             this.add(new Option("Revisar Respuestas"))
@@ -65,6 +52,29 @@ class MainMenu extends DynamicQuitMenu {
             this.add(new GenerateTestOption(this.#userState, this.#categories));
             this.add(new Option("Consultar Resultados"))
         }
+    }
+    addStateTitle() {
+        this.#userStateTitle = `Usuario: ${this.#userTypes.get(this.#userState.getCurrentType())}
+        Categoría actual: ${this.#categories.getName(this.#userState.getCurrentCategory())}`;
+    }
+
+    interact() {
+        do {
+            this.removeOptions();
+            this.addStateTitle();
+            this.addOptions();
+            this.interact_();
+        } while (!this.isExecutedquitOption());
+    }
+
+    showState() {
+        console.writeln(this.#userStateTitle);
+    }
+
+    interact_() {
+        this.showTitles();
+        this.showState();
+        this.execChoosedOption();
     }
 
 }
