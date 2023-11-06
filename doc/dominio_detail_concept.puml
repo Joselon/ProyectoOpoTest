@@ -37,9 +37,9 @@ class OpenClassQuestion
 
 class OpenCompositionQuestion
 
-class OpenReverseDefinitionQuestion
+'class OpenReverseDefinitionQuestion
 
-class OpenJustificationQuestion
+'class OpenJustificationQuestion
 
 class Question
 
@@ -62,13 +62,13 @@ class CompositionTemplate {
     "¿Qué conceptos destacarias del KEYWORD?"
 }
 
-class JustificationTemplate {
-    "¿La KEYWORD es esta DEFINITION?¿Por qué?"
-}
+'class JustificationTemplate {
+'    "¿La KEYWORD es esta DEFINITION?¿Por qué?"
+'}
 
-class ReverseDefinitionTemplate {
-    "¿Qué es REALDEFINITION?"
-}
+'class ReverseDefinitionTemplate {
+'    "¿Qué es REALDEFINITION?"
+'}
 
 class Answer
 
@@ -114,15 +114,15 @@ OpenCompositionQuestion *-- CompositionTemplate
 OpenField "1..n"--o OpenCompositionQuestion
 OpenCompositionQuestion <.. Composition :OpenField
 
-Secundary <|-- OpenReverseDefinitionQuestion
-OpenReverseDefinitionQuestion *-- ReverseDefinitionTemplate
-OpenField "1..n" --o OpenReverseDefinitionQuestion
-OpenReverseDefinitionQuestion <.. Keyword :Fake <- OpenField
+'Secundary <|-- OpenReverseDefinitionQuestion
+'OpenReverseDefinitionQuestion *-- ReverseDefinitionTemplate
+'OpenField "1..n" --o OpenReverseDefinitionQuestion
+'OpenReverseDefinitionQuestion <.. Keyword :Fake <- OpenField
 
-Secundary <|-- OpenJustificationQuestion
-OpenJustificationQuestion *-- JustificationTemplate
-OpenJustificationQuestion o--"1..n" OpenField
-OpenJustificationQuestion <.. Justification :OpenField
+'Secundary <|-- OpenJustificationQuestion
+'OpenJustificationQuestion *-- JustificationTemplate
+'OpenJustificationQuestion o--"1..n" OpenField
+'OpenJustificationQuestion <.. Justification :OpenField
 
 @enduml
 'class Tertiary {

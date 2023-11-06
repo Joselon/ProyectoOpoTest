@@ -16,8 +16,6 @@ class Category
 
 class Test 
 
-class AnswersToReview
-
 class Concept {
     - keyword
 }
