@@ -39,7 +39,6 @@ class MainMenu extends DynamicQuitMenu {
         this.add(new OpenMenuOption("Seleccionar Tipo de usuario...", this.#userTypesMenu));
         this.add(new OpenMenuOption("Menú de Categorías...", this.#categoriesMenu));
         if (this.#userState.getCurrentType() === 0) {
-            this.add(new Option("Añadir Concepto"));
             this.add(new Option("Añadir Pregunta"));
             this.add(new Option("Revisar Respuestas"))
         }
@@ -50,7 +49,8 @@ class MainMenu extends DynamicQuitMenu {
     }
     addStateTitle() {
         this.#userStateTitle = `Usuario: ${this.#userTypes.get(this.#userState.getCurrentType())}
-        Categoría actual: ${this.#userState.getCurrentCategoryName()}`;
+        Categoría actual: ${this.#userState.getCurrentCategoryName()}
+        Concepto actual: ${this.#userState.getCurrentConceptKeyWord()}`;
     }
 
     interact() {

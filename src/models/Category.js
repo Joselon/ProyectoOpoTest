@@ -1,10 +1,10 @@
 class Category {
     #ancestor;
     #name;
-    #concepts;
+    #concepts = [];
     #subcategories = [];
 
-    constructor(name, ancestor, subcategories) {
+    constructor(name, ancestor, subcategories, concepts) {
         this.#name = name;
         if (ancestor === undefined)
             ancestor = null;
@@ -13,9 +13,10 @@ class Category {
             subcategories = [];
         for (let category of subcategories)
             this.#subcategories.push(category);
-        this.#concepts = [];
-        for (let string of ["Software", "Patron"])
-            this.#concepts.push(string);
+        if (concepts === undefined)
+            concepts = [];
+        for (let concept of concepts)
+            this.#concepts.push(concept);
     }
 
     getAncestor() {
@@ -30,24 +31,44 @@ class Category {
         return this.#concepts[index];
     }
 
-    conceptsSize() {
-        let subconcepts = 0;
-        if (this.#subcategories.length > 0) {
-            for (let category of this.#subcategories) {
-                subconcepts += category.conceptsSize();
-            }
-        }
-        return this.#concepts.length + subconcepts;
-    }
-
-    subcategoriesSize() {
-        return this.#subcategories.length;
-
+    getConcepts() {
+        return this.#concepts;
     }
 
     getSubcategories() {
         return this.#subcategories;
     }
+
+    conceptsSize() {
+        let subconcepts = 0;
+        for (let category of this.#subcategories) {
+            subconcepts += category.conceptsSize();
+        }
+        return this.#concepts.length + subconcepts;
+    }
+
+    subcategoriesSize() {
+        let subsubcategories = 0;
+        if (this.#subcategories.length > 1)
+            for (let category of this.#subcategories) {
+                subsubcategories += category.subcategoriesSize();
+            }
+        return this.#subcategories.length + subsubcategories;
+
+    }
+
+    questionsSize() {
+        let nquestions = 0;
+        for (let concept of this.#concepts)
+            nquestions += concept.questionsSize();
+        for (let category of this.#subcategories) {
+            for (let concept of category.getConcepts())
+                nquestions += concept.questionsSize();
+        }
+        return nquestions;
+    }
+
+ 
 
     addConcept(concept) {
         this.#concepts.push(concept);

@@ -1,10 +1,12 @@
 class UserState {
     #typeCurrentIndex;
     #currentCategory;
+    #currentConcept;
 
-    constructor(type, category) {
+    constructor(type, category, concept) {
         this.#typeCurrentIndex = type;
         this.#currentCategory = category;
+        this.#currentConcept = concept;
     }
 
     getCurrentType() {
@@ -24,7 +26,14 @@ class UserState {
     }
 
     setCurrentType(index) {
-        return this.#typeCurrentIndex = index;
+        this.#typeCurrentIndex = index;
+    }
+
+    getCurrentConceptKeyWord() {
+        return this.#currentConcept.getKeyword();
+    }
+    setCurrentConcept(concept) {
+        this.#currentConcept = concept;
     }
 
 }
