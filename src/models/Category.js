@@ -1,57 +1,48 @@
-import { Categories } from "./Categories.js";
-
 class Category {
     #ancestor;
     #name;
     #concepts;
-    #subcategories;
+    #subcategories = [];
 
     constructor(name, ancestor, subcategories) {
         this.#name = name;
-        if (ancestor === undefined) {
-            ancestor = 0;
-        }
+        if (ancestor === undefined)
+            ancestor = null;
         this.#ancestor = ancestor;
+        if (subcategories === undefined)
+            subcategories = [];
+        for (let category of subcategories)
+            this.#subcategories.push(category);
         this.#concepts = [];
-        for (let string of ["Software", "Patron"]) {
+        for (let string of ["Software", "Patron"])
             this.#concepts.push(string);
-        }
-        if (subcategories === undefined) {
-            this.#subcategories = new Categories();
-        }
-        else {
-            this.#subcategories = new Categories(subcategories);
-        }
+    }
+
+    getAncestor() {
+        return this.#ancestor
     }
 
     getName() {
         return this.#name;
-    }
-    getAncestorName(index) {
-        return this.#ancestor.getName(index);
-    }
-    hasAncestor() {
-        return this.#ancestor !== undefined;
-    }
-    hasConcepts() {
-        return this.size > 0;
     }
 
     getConcept(index) {
         return this.#concepts[index];
     }
 
-    size() {
-        return this.#concepts.length;
+    conceptsSize() {
+        let subconcepts = 0;
+        if (this.#subcategories.length > 0) {
+            for (let category of this.#subcategories) {
+                subconcepts += category.conceptsSize();
+            }
+        }
+        return this.#concepts.length + subconcepts;
     }
 
     subcategoriesSize() {
-        let value;
-        if (this.#subcategories.size()===undefined)
-            value=0;
-        else 
-            value = this.#subcategories.size()
-        return value;
+        return this.#subcategories.length;
+
     }
 
     getSubcategories() {
@@ -62,8 +53,8 @@ class Category {
         this.#concepts.push(concept);
     }
 
-    addSubcategory(string) {
-        this.#subcategories.addCategory(string);
+    addSubcategory(category) {
+        this.#subcategories.push(category);
     }
 
 }

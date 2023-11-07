@@ -3,23 +3,18 @@ import { TypeMenu } from "./UserTypesMenu.js";
 import { CategoriesMenu } from "./CategoriesMenu.js";
 import { console } from "../utils/view/console.js";
 
-
-
-
 //Student Options
 class GenerateTestOption extends Option {
-    #model;
     #state;
 
-    constructor(state, model) {
+    constructor(state) {
         super("Ejecutar Tests");
-        this.#model = model;
         this.#state = state;
     }
 
     interact() {
         console.writeln(`
-        Generando test de ${this.#model.getName(this.#state.getCurrentCategory())}...`)
+        Generando test de ${this.#state.getCurrentCategoryName()}...`)
     }
 }
 
@@ -55,7 +50,7 @@ class MainMenu extends DynamicQuitMenu {
     }
     addStateTitle() {
         this.#userStateTitle = `Usuario: ${this.#userTypes.get(this.#userState.getCurrentType())}
-        Categoría actual: ${this.#categories.getName(this.#userState.getCurrentCategory())}`;
+        Categoría actual: ${this.#userState.getCurrentCategoryName()}`;
     }
 
     interact() {

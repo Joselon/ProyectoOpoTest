@@ -1,5 +1,6 @@
-import { DynamicMenu, IterativeQuitMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
+import { DynamicMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
 import { console } from '../utils/view/console.js';
+import { Category } from "../models/Category.js";
 import { InIntervalDialog } from "../utils/view/Dialog.js";
 
 //Teacher Options
@@ -12,10 +13,14 @@ class AddCategoryOption extends Option {
     }
 
     interact() {
-        let cat = console.readString(`
-        Escribe la categoría:`);
-        let catIndex = console.readNumber(`Escribe la categoría a la que pertenece (0 default): `)
-        this.#categories.addCategory(cat, catIndex);
+        super.interact();
+        let name = console.readString(`
+        Escribe el nombre de la categoría:`);
+        let index = console.readNumber(`Escribe la categoría a la que pertenece (0 default): `)
+        if (index === 0)
+            this.#categories.push(new Category(name, this.#categories[0].getAncestor()));
+        else
+            this.#categories[index - 1].addSubcategory(new Category(name, this.#categories[index - 1]))
     }
 }
 
@@ -26,31 +31,34 @@ class SelectCategoryOption extends Option {
 
     constructor(categories, index, state) {
         super("Seleccionar ");
-        this.#categories = categories;
+        this.#categories = []
+        for (let category of categories)
+            this.#categories.push(category);
         this.#index = index;
         this.#state = state;
     }
 
     getTitle() {
-        return `${super.getTitle()}: ${this.#categories.getName(this.#index)} -(${this.#categories.getName(this.#index).length})`;
+        return `${super.getTitle()}: ${this.#categories[this.#index].getName()} -(${this.#categories[this.#index].conceptsSize()})`;
     }
 
     interact() {
         super.interact();
-        this.#state.setCurrentCategory(this.#index);
+        this.#state.setCurrentCategory(this.#categories[this.#index]);
     }
 
 }
 
 // ModelMenus
 
-class CategoryMenu extends DynamicMenu {
+class CategoriesMenu extends DynamicMenu {
 
     #categories;
     #state;
+    #stateTitle;
 
     constructor(state, categories) {
-        super("Seleccione una categoría...");
+        super("Menú de Categorías");
         this.#categories = categories;
         this.#state = state;
         this.addOptions();
@@ -58,50 +66,24 @@ class CategoryMenu extends DynamicMenu {
     }
 
     addOptions() {
-        for (let i = 0; i < this.#categories.size(); i++) {
+        for (let i = 0; i < this.#categories.length; i++) {
             this.add(new SelectCategoryOption(this.#categories, i, this.#state));
         }
-        for (let i = 0; i < this.#categories.size(); i++)
-            if (this.#categories.get(i).subcategoriesSize() > 0) {
-                this.add(new OpenMenuOption(`--- Ver Subcategorías de ${i+1}-${this.#categories.getName(i)} ->`, new CategoryMenu(this.#state , this.#categories.get(i).getSubcategories())));
-                //for (let j = 0; j < this.#categories.get(i).subcategoriesSize(); j++) {
+        for (let i = 0; i < this.#categories.length; i++)
+            if (this.#categories[i].subcategoriesSize() > 0) {
+                this.add(new OpenMenuOption(`--- Ver Subcategorías de ${i + 1}-${this.#categories[i].getName()} ...`, new CategoriesMenu(this.#state, this.#categories[i].getSubcategories())));
             }
         if (this.#state.getCurrentType() === 0) {
             this.add(new AddCategoryOption(this.#categories));
         }
     }
-
-}
-
-class CategoriesMenu extends IterativeQuitMenu {
-
-    #model;
-    #state;
-    #stateTitle;
-    #selectCatMenu;
-
-    constructor(state, model) {
-        super("Menú de Categorías");
-        this.#model = model;
-        this.#state = state;
-        this.#selectCatMenu = new CategoryMenu(this.#state, this.#model);
-    }
-
-    addOptions() {
-        this.add(new OpenMenuOption("Añadir o Cambiar de Categoría...", this.#selectCatMenu));
-    }
-
     addStateTitle() {
-        this.#stateTitle = "Categoría actual: " + this.#model.getName(this.#state.getCurrentCategory());
+        this.#stateTitle = "Categoría actual: " + this.#state.getCurrentCategoryName();
     }
 
     interact() {
-        do {
-            this.removeOptions();
-            this.addStateTitle();
-            this.addOptions();
-            this.interact_();
-        } while (!this.isExecutedquitOption());
+        super.interact();
+        this.addStateTitle();
     }
 
     showState() {
@@ -109,9 +91,8 @@ class CategoriesMenu extends IterativeQuitMenu {
     }
 
     interact_() {
-        this.showTitles();
-        this.showState();
-        this.execChoosedOption();
+        super.interact_();
+        this.addStateTitle();
     }
 
 }

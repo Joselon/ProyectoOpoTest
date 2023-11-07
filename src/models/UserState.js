@@ -1,10 +1,10 @@
 class UserState {
     #typeCurrentIndex;
-    #categoryCurrentIndex;
+    #currentCategory;
 
     constructor(type, category) {
         this.#typeCurrentIndex = type;
-        this.#categoryCurrentIndex = category;
+        this.#currentCategory = category;
     }
 
     getCurrentType() {
@@ -12,11 +12,15 @@ class UserState {
     }
 
     getCurrentCategory() {
-        return this.#categoryCurrentIndex;
+        return this.#currentCategory;
     }
 
-    setCurrentCategory(index) {
-        this.#categoryCurrentIndex = index;
+    getCurrentCategoryName() {
+        return this.#currentCategory.getName();
+    }
+
+    setCurrentCategory(category) {
+        this.#currentCategory = category;
     }
 
     setCurrentType(index) {
