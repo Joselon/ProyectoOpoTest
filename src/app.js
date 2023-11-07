@@ -25,14 +25,6 @@ class ElaboraTest {
         } while (!this.#isResumed());
     }
 
-    teacherStart() {
-        //showTeacherMainMenu
-    }
-
-    studentStart() {
-        //showStudentMainMenu
-    }
-
     #isResumed() {
         let yesNoDialog = new YesNoDialog();
         yesNoDialog.read(`Los cambios no se guardarán, ¿seguro que quiere salir`);

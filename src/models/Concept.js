@@ -32,6 +32,10 @@ class Concept {
         return this.#questions;
     }
 
+    getQuestion(index){
+        return this.#questions[index];
+    }
+
     addQuestion(question) {
         this.#questions.push(question);
     }

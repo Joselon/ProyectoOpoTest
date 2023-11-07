@@ -1,10 +1,10 @@
 import { DynamicMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
+import { ConceptsMenu, AddConceptOption } from "./ConceptsMenu.js";
 import { console } from '../utils/view/console.js';
 import { Category } from "../models/Category.js";
-import { Concept } from '../models/Concept.js'
+
 //import { InIntervalDialog } from "../utils/view/Dialog.js";
 
-//Teacher Options
 class AddCategoryOption extends Option {
     #categories;
 
@@ -14,7 +14,6 @@ class AddCategoryOption extends Option {
     }
 
     interact() {
-        super.interact();
         let name = console.readString(`
         Escribe el nombre de la categoría:`);
         let index = console.readNumber(`Escribe la categoría a la que pertenece (0 default): `)
@@ -22,23 +21,6 @@ class AddCategoryOption extends Option {
             this.#categories.push(new Category(name, this.#categories[0].getAncestor()));
         else
             this.#categories[index - 1].addSubcategory(new Category(name, this.#categories[index - 1]))
-    }
-}
-
-class AddConceptOption extends Option {
-    #concepts;
-
-    constructor(concepts) {
-        super("Añadir Concepto");
-        this.#concepts = concepts;
-    }
-
-    interact() {
-        super.interact();
-        let keyword = console.readString(`
-        Escribe la palabra clave del concepto:`);
-        this.#concepts.push(new Concept(keyword));
-
     }
 }
 
@@ -61,53 +43,6 @@ class SelectCategoryOption extends Option {
     interact() {
         super.interact();
         this.#state.setCurrentCategory(this.#categories[this.#index]);
-    }
-
-}
-
-class SelectConceptOption extends Option {
-    #concepts
-    #index;
-    #state;
-
-    constructor(concepts, index, state) {
-        super("Seleccionar ");
-        this.#concepts = concepts;
-        this.#index = index;
-        this.#state = state;
-    }
-
-    getTitle() {
-        return `${super.getTitle()}: ${this.#concepts[this.#index].getKeyword()} -(${this.#concepts[this.#index].questionsSize()})`;
-    }
-
-    interact() {
-        super.interact();
-        this.#state.setCurrentConcept(this.#concepts[this.#index]);
-    }
-
-}
-
-class ConceptsMenu extends DynamicMenu {
-
-    #concepts;
-    #state;
-
-    constructor(state, concepts) {
-        super("Menú de Conceptos - (Definiciones / Relaciones / Preguntas)");
-        this.#concepts = concepts;
-        this.#state = state;
-        this.addOptions();
-
-    }
-
-    addOptions() {
-        for (let i = 0; i < this.#concepts.length; i++) {
-            this.add(new SelectConceptOption(this.#concepts, i, this.#state));
-        }
-        if (this.#state.getCurrentType() === 0) {
-            this.add(new Option("Añadir Pregunta"));
-        }
     }
 
 }

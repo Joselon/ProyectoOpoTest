@@ -21,6 +21,14 @@ class UserState {
         return this.#currentCategory.getName();
     }
 
+    getCurrentConcept(){
+        return this.#currentConcept;
+    }
+
+    getCurrentConceptKeyWord() {
+        return this.#currentConcept.getKeyword();
+    }
+
     setCurrentCategory(category) {
         this.#currentCategory = category;
     }
@@ -29,9 +37,7 @@ class UserState {
         this.#typeCurrentIndex = index;
     }
 
-    getCurrentConceptKeyWord() {
-        return this.#currentConcept.getKeyword();
-    }
+
     setCurrentConcept(concept) {
         this.#currentConcept = concept;
     }

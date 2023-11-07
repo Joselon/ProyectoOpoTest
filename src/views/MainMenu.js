@@ -1,14 +1,31 @@
 import { DynamicQuitMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
 import { TypeMenu } from "./UserTypesMenu.js";
 import { CategoriesMenu } from "./CategoriesMenu.js";
+import { OpenQuestion } from "../models/Question.js";
 import { console } from "../utils/view/console.js";
+
+class AddQuestionOption extends Option {
+    #state;
+
+    constructor(title, state) {
+        super(title);
+        this.#state = state;
+    }
+
+    interact() {
+        let statement = console.readString(`
+        Escribe el enunciado de la pregunta:`);
+        this.#state.getCurrentConcept().addQuestion(new OpenQuestion(statement));
+
+    }
+}
 
 //Student Options
 class GenerateTestOption extends Option {
     #state;
 
-    constructor(state) {
-        super("Ejecutar Tests");
+    constructor(title, state) {
+        super(title);
         this.#state = state;
     }
 
@@ -39,12 +56,12 @@ class MainMenu extends DynamicQuitMenu {
         this.add(new OpenMenuOption("Seleccionar Tipo de usuario...", this.#userTypesMenu));
         this.add(new OpenMenuOption("Menú de Categorías...", this.#categoriesMenu));
         if (this.#userState.getCurrentType() === 0) {
-            this.add(new Option("Añadir Pregunta"));
-            this.add(new Option("Revisar Respuestas"))
+            this.add(new AddQuestionOption("Añadir Pregunta al concepto actual", this.#userState));
+            this.add(new Option("Revisar Respuestas*"))
         }
         else {
-            this.add(new GenerateTestOption(this.#userState, this.#categories));
-            this.add(new Option("Consultar Resultados"))
+            this.add(new GenerateTestOption("Ejecutar Tests", this.#userState));
+            this.add(new Option("Consultar Resultados*"))
         }
     }
     addStateTitle() {
