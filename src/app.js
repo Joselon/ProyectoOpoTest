@@ -3,17 +3,21 @@ import { UserState } from './models/UserState.js';
 import { YesNoDialog } from './utils/view/Dialog.js';
 import { MainMenu } from './views/MainMenu.js';
 import { Concept } from './models/Concept.js';
-import fs from 'fs';
+import { readFile } from 'fs';
 
 class ElaboraTest {
     #userState;
     #categories;
+
 
     constructor() {
         this.#setUp();
     }
 
     start() {
+        this.#categories = [];
+        this.readJSONfile();
+        //new Category(name, ancestor, subcategories, concepts)
         do {
             new MainMenu(this.#userState, this.#categories).interact();
         } while (this.#isResumed());
@@ -29,13 +33,22 @@ class ElaboraTest {
     }
 
     #setUp() {
+        this.#userState = new UserState(0, new Category("---"), new Concept("---"));
+    }
 
-        //Initial Scene
-        this.#categories = [];
-        for (let name of [`Informática`, `Oposiciones Bibliotecario`, `Test de Conducir`])
-            this.#categories.push(new Category(name));
-        this.#categories[0].addConcept(new Concept(`Software`));
-        this.#userState = new UserState(0, this.#categories[0], this.#categories[0].getConcept(0));
+    async readJSONfile() {
+        try {
+            const data = await readFile('data/database.json', (err,data)=>data +=data); // Lee el archivo JSON como texto
+            const dataobject = JSON.parse(data); // Convierte el texto en un objeto JavaScript
+
+            console.log('Nombre:', dataobject.categories[0].name);
+
+          /*  for (let category of datos.categories)
+                this.#categories.push(new Category(category.name, category.ancestor, category.subcategories, category.concepts));
+*/
+        } catch (err) {
+            console.error('Error al leer el archivo de base de datos:', err);
+        }
     }
 }
 

@@ -1,5 +1,5 @@
 class UserState {
-    #userTypes = ["Profesor", "Alumno"];
+    #userTypes;
     #typeCurrentIndex;
     #currentCategory;
     #currentConcept;
@@ -8,6 +8,7 @@ class UserState {
         this.#typeCurrentIndex = type;
         this.#currentCategory = category;
         this.#currentConcept = concept;
+        this.#userTypes = ["Profesor", "Alumno"]
     }
 
     getCurrentType() {

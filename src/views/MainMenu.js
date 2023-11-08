@@ -1,5 +1,6 @@
 import { DynamicQuitMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
 import { TypeMenu } from "./UserTypesMenu.js";
+import { UserState } from "../models/UserState.js";
 import { CategoriesMenu } from "./CategoriesMenu.js";
 import { QuestionMenu } from "./QuestionMenu.js";
 import { OpenQuestion } from "../models/Question.js";

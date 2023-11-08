@@ -18,7 +18,12 @@ class AddCategoryOption extends Option {
         Escribe el nombre de la categoría:`);
         let index = console.readNumber(`Escribe la categoría a la que pertenece (0 default): `)
         if (index === 0)
-            this.#categories.push(new Category(name, this.#categories[0].getAncestor()));
+            if (this.#categories.length > 0) {
+                this.#categories.push(new Category(name, this.#categories[0].getAncestor()));
+            }
+            else {
+                this.#categories.push(new Category(name));
+            }
         else
             this.#categories[index - 1].addSubcategory(new Category(name, this.#categories[index - 1]))
     }
