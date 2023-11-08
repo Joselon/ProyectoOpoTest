@@ -1,18 +1,20 @@
 import { DynamicQuitMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
 import { TypeMenu } from "./UserTypesMenu.js";
 import { CategoriesMenu } from "./CategoriesMenu.js";
+import { QuestionMenu } from "./QuestionMenu.js";
 import { OpenQuestion } from "../models/Question.js";
 import { console } from "../utils/view/console.js";
 
-class AddQuestionOption extends Option {
+class AddQuestionOption extends OpenMenuOption {
     #state;
 
-    constructor(title, state) {
-        super(title);
+    constructor(title, menu, state) {
+        super(title ,menu);
         this.#state = state;
     }
 
     interact() {
+        super.interact();
         let statement = console.readString(`
         Escribe el enunciado de la pregunta:`);
         this.#state.getCurrentConcept().addQuestion(new OpenQuestion(statement));
@@ -56,7 +58,7 @@ class MainMenu extends DynamicQuitMenu {
         this.add(new OpenMenuOption("Seleccionar Tipo de usuario...", this.#userTypesMenu));
         this.add(new OpenMenuOption("Menú de Categorías...", this.#categoriesMenu));
         if (this.#userState.getCurrentType() === 0) {
-            this.add(new AddQuestionOption("Añadir Pregunta al concepto actual", this.#userState));
+            this.add(new AddQuestionOption("Añadir Pregunta al concepto actual",new QuestionMenu(this.#userState.getCurrentConcept()), this.#userState));
             this.add(new Option("Revisar Respuestas*"))
         }
         else {

@@ -12,11 +12,7 @@ class ElaboraTest {
 
     constructor() {
         this.#userTypes = new UserTypes();
-        this.#categories = [];
-        for (let name of [`Informática`, `Oposiciones Bibliotecario`, `Test de Conducir`])
-            this.#categories.push(new Category(name));
-        this.#categories[0].addConcept(new Concept(`Software`));
-        this.#userState = new UserState(0, this.#categories[0],this.#categories[0].getConcept(0));
+        this.#setUp();
     }
 
     start() {
@@ -32,6 +28,14 @@ class ElaboraTest {
             //Guardar
         }
         return yesNoDialog.isAffirmative();
+    }
+
+    #setUp() {
+        this.#categories = [];
+        for (let name of [`Informática`, `Oposiciones Bibliotecario`, `Test de Conducir`])
+            this.#categories.push(new Category(name));
+        this.#categories[0].addConcept(new Concept(`Software`));
+        this.#userState = new UserState(0, this.#categories[0], this.#categories[0].getConcept(0));
     }
 }
 
