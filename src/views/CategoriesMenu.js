@@ -56,8 +56,6 @@ class CategoriesMenu extends DynamicMenu {
         super("Menú de Categorías - (Subcategorías / Conceptos / Preguntas)");
         this.#categories = categories;
         this.#state = state;
-        this.addOptions();
-
     }
 
     addOptions() {

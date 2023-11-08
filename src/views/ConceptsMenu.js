@@ -1,5 +1,6 @@
 import { DynamicMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
-import { Concept } from '../models/Concept.js'
+import { Concept } from '../models/Concept.js';
+import { console } from '../utils/view/console.js';
 
 class AddConceptOption extends Option {
     #concepts;
@@ -62,4 +63,4 @@ class ConceptsMenu extends DynamicMenu {
 
 }
 
-export {ConceptsMenu , AddConceptOption }
+export { ConceptsMenu, AddConceptOption }

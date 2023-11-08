@@ -3,6 +3,7 @@ import { UserState } from './models/UserState.js';
 import { YesNoDialog } from './utils/view/Dialog.js';
 import { MainMenu } from './views/MainMenu.js';
 import { Concept } from './models/Concept.js';
+import fs from 'fs';
 
 class ElaboraTest {
     #userState;
@@ -15,14 +16,14 @@ class ElaboraTest {
     start() {
         do {
             new MainMenu(this.#userState, this.#categories).interact();
-        } while (!this.#isResumed());
+        } while (this.#isResumed());
     }
 
     #isResumed() {
         let yesNoDialog = new YesNoDialog();
-        yesNoDialog.read(`Los cambios no se guardarán, ¿seguro que quiere salir`);
-        if (yesNoDialog.isNegative()) {
-            //Guardar
+        yesNoDialog.read(`¿Desea salvar antes de salir`);
+        if (yesNoDialog.isAffirmative()) {
+            //Save Scence to JSON
         }
         return yesNoDialog.isAffirmative();
     }
