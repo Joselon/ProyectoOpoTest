@@ -3,7 +3,7 @@ import { UserState } from './models/UserState.js';
 import { YesNoDialog } from './utils/view/Dialog.js';
 import { MainMenu } from './views/MainMenu.js';
 import { Concept } from './models/Concept.js';
-import { readFile } from 'fs';
+import { readFileSync , writeFileSync } from 'node:fs';
 
 class ElaboraTest {
     #userState;
@@ -27,7 +27,7 @@ class ElaboraTest {
         let yesNoDialog = new YesNoDialog();
         yesNoDialog.read(`¿Desea salvar antes de salir`);
         if (yesNoDialog.isAffirmative()) {
-            //Save Scence to JSON
+            this.writeJSONfile();
         }
         return yesNoDialog.isAffirmative();
     }
@@ -38,16 +38,44 @@ class ElaboraTest {
 
     async readJSONfile() {
         try {
-            const data = await readFile('data/database.json', (err,data)=>data +=data); // Lee el archivo JSON como texto
-            const dataobject = JSON.parse(data); // Convierte el texto en un objeto JavaScript
+            const data = readFileSync('data/database.json', 'utf-8');
+            const dataobject = JSON.parse(data);
 
-            console.log('Nombre:', dataobject.categories[0].name);
+            //console.log(dataobject.categories);
+            let index = 0;
+            for (let category of dataobject.categories) {
+                this.#categories.push(new Category(category.name, category.ancestor, [], []));
+                let indexSub = 0;
+                for (let subcategory of category.subcategories) {
+                    this.#categories[index].addSubcategory(new Category(subcategory.name, this.#categories[index], []));
+                    let indexCon = 0;
+                    for (let concept of subcategory.concepts) {
+                        this.#categories[index].getSubcategory(indexSub).addConcept(new Concept(concept.keyword));
+                        /*for (let question of concept){
+                            this.#categories[index].getSubcategory(indexSub).getConcept(indexCon).addQuestion(new Question(question))
+                        }*/
+                        indexCon++;
+                    }
+                    indexSub++;
+                }
+                for (let concept of category.concepts) {
+                    this.#categories[index].addConcept(new Concept(concept.keyword))
+                }
+                index++;
+            }
 
-          /*  for (let category of datos.categories)
-                this.#categories.push(new Category(category.name, category.ancestor, category.subcategories, category.concepts));
-*/
-        } catch (err) {
-            console.error('Error al leer el archivo de base de datos:', err);
+        } catch (error) {
+            console.error('Error al leer el archivo de base de datos:', error);
+        }
+    }
+
+    async writeJSONfile() {
+        try {
+            console.log(this.#categories)
+            //formatear para json this.#categories;
+            //writeFileSync('data/database.json', data);
+        } catch (error) {
+            console.error('Error al escribir en el archivo de base de datos:', error);
         }
     }
 }

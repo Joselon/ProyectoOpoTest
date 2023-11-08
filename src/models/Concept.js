@@ -1,6 +1,6 @@
 class Concept {
     #keyword;
-    #states = ["Primary","WithDefinition","WithRelation","WithDefinitionAndRelation"]
+    #states = ["Primary", "WithDefinition", "WithRelation", "WithDefinitionAndRelation"]
     #state;
     #definitions = [];
     #relations = [];
@@ -12,7 +12,7 @@ class Concept {
             questions = [];
         for (let question of questions)
             this.#questions.push(question);
-        if (definitions === undefined){
+        if (definitions === undefined) {
             definitions = [];
             this.#state = this.#states[0];
         }
@@ -34,7 +34,7 @@ class Concept {
         return this.#keyword;
     }
 
-    getState(){
+    getState() {
         return this.#state;
     }
 
@@ -46,7 +46,7 @@ class Concept {
         return this.#questions;
     }
 
-    getQuestion(index){
+    getQuestion(index) {
         return this.#questions[index];
     }
 
@@ -54,11 +54,11 @@ class Concept {
         this.#questions.push(question);
     }
 
-    addDefinition (definition) {
+    addDefinition(definition) {
         this.#definitions.push(definition);
         if (this.#state === this.#states[0])
             this.#state = this.#states[1];
-        else 
+        else
             this.#state = this.#states[3];
     }
 

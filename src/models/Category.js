@@ -35,6 +35,10 @@ class Category {
         return this.#concepts;
     }
 
+    getSubcategory(index) {
+        return this.#subcategories[index];
+    }
+
     getSubcategories() {
         return this.#subcategories;
     }
@@ -68,7 +72,7 @@ class Category {
         return nquestions;
     }
 
- 
+
 
     addConcept(concept) {
         this.#concepts.push(concept);
