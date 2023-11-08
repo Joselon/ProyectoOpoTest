@@ -1,25 +1,25 @@
-import { DynamicMenu,  Option } from "../utils/view/Menu.js";
+import { DynamicMenu, Option } from "../utils/view/Menu.js";
 
 class SelectUserTypeOption extends Option {
-    #model;
+    #array;
     #index;
     #state;
 
-    constructor(model, index, state) {
+    constructor(array, index, state) {
         super("Seleccionar ");
-        this.#model = model;
+        this.#array = array;
         this.#index = index;
         this.#state = state;
     }
 
     getTitle() {
-        return `${super.getTitle()}: ${this.#model.get(this.#index)}`;
+        return `${super.getTitle()}: ${this.#array[this.#index]}`;
     }
 
     interact() {
         super.interact();
         this.#state.setCurrentType(this.#index);
-        
+
     }
 
 }
@@ -28,19 +28,19 @@ class SelectUserTypeOption extends Option {
 
 class TypeMenu extends DynamicMenu {
     #state;
-    #model;
+    #array;
 
-    constructor(state, model) {
+    constructor(state, array) {
         super("Seleccione un tipo de usuario...");
         this.#state = state;
-        this.#model = model;
+        this.#array = array;
         this.addOptions();
 
     }
 
     addOptions() {
-        for (let i = 0; i < this.#model.size(); i++) {
-            this.add(new SelectUserTypeOption(this.#model, i, this.#state));
+        for (let i = 0; i < this.#array.length; i++) {
+            this.add(new SelectUserTypeOption(this.#array, i, this.#state));
         }
     }
 

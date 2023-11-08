@@ -1,4 +1,5 @@
 class UserState {
+    #userTypes = ["Profesor", "Alumno"];
     #typeCurrentIndex;
     #currentCategory;
     #currentConcept;
@@ -13,6 +14,14 @@ class UserState {
         return this.#typeCurrentIndex;
     }
 
+    getCurrentTypeName() {
+        return this.#userTypes[this.#typeCurrentIndex];
+    }
+
+    getTypes() {
+        return this.#userTypes;
+    }
+
     getCurrentCategory() {
         return this.#currentCategory;
     }
@@ -21,7 +30,7 @@ class UserState {
         return this.#currentCategory.getName();
     }
 
-    getCurrentConcept(){
+    getCurrentConcept() {
         return this.#currentConcept;
     }
 

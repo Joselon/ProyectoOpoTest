@@ -40,34 +40,32 @@ class GenerateTestOption extends Option {
 class MainMenu extends DynamicQuitMenu {
     #userState;
     #userStateTitle;
-    #userTypes;
     #userTypesMenu;
     #categories;
     #categoriesMenu;
 
-    constructor(userState, userTypes, categories) {
+    constructor(userState, categories) {
         super("ElaboraTest Menú");
         this.#userState = userState;
-        this.#userTypes = userTypes;
-        this.#userTypesMenu = new TypeMenu(this.#userState, this.#userTypes);
+        this.#userTypesMenu = new TypeMenu(this.#userState,this.#userState.getTypes());
         this.#categories = categories;
         this.#categoriesMenu = new CategoriesMenu(this.#userState, this.#categories);
     }
 
     addOptions() {
         this.add(new OpenMenuOption("Seleccionar Tipo de usuario...", this.#userTypesMenu));
-        this.add(new OpenMenuOption("Menú de Categorías...", this.#categoriesMenu));
+        this.add(new OpenMenuOption("Menú de Categorías y Conceptos...", this.#categoriesMenu));
         if (this.#userState.getCurrentType() === 0) {
-            this.add(new AddQuestionOption("Añadir Pregunta al concepto actual",new QuestionMenu(this.#userState.getCurrentConcept()), this.#userState));
-            this.add(new Option("Revisar Respuestas*"))
+            this.add(new AddQuestionOption("Menú de Preguntas...",new QuestionMenu(this.#userState.getCurrentConcept()),this.#userState));
+            this.add(new Option("* Revisar Respuestas"))
         }
         else {
-            this.add(new GenerateTestOption("Ejecutar Tests", this.#userState));
-            this.add(new Option("Consultar Resultados*"))
+            this.add(new GenerateTestOption("* Ejecutar Tests", this.#userState));
+            this.add(new Option("* Consultar Resultados"))
         }
     }
     addStateTitle() {
-        this.#userStateTitle = `Usuario: ${this.#userTypes.get(this.#userState.getCurrentType())}
+        this.#userStateTitle = `Usuario: ${this.#userState.getCurrentTypeName()}
         Categoría actual: ${this.#userState.getCurrentCategoryName()}
         Concepto actual: ${this.#userState.getCurrentConceptKeyWord()}`;
     }

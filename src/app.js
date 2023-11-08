@@ -1,4 +1,3 @@
-import { UserTypes } from './models/UserTypes.js';
 import { Category } from './models/Category.js';
 import { UserState } from './models/UserState.js';
 import { YesNoDialog } from './utils/view/Dialog.js';
@@ -7,17 +6,15 @@ import { Concept } from './models/Concept.js';
 
 class ElaboraTest {
     #userState;
-    #userTypes;
     #categories;
 
     constructor() {
-        this.#userTypes = new UserTypes();
         this.#setUp();
     }
 
     start() {
         do {
-            new MainMenu(this.#userState, this.#userTypes, this.#categories).interact();
+            new MainMenu(this.#userState, this.#categories).interact();
         } while (!this.#isResumed());
     }
 
@@ -31,6 +28,8 @@ class ElaboraTest {
     }
 
     #setUp() {
+
+        //Initial Scene
         this.#categories = [];
         for (let name of [`Informática`, `Oposiciones Bibliotecario`, `Test de Conducir`])
             this.#categories.push(new Category(name));

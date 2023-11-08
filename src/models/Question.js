@@ -17,11 +17,11 @@ class OpenQuestion extends Question {
     #concept;
     #statement;
 
-    constructor(statement,concept, defaultTemplate) {
+    constructor(statement, concept, defaultTemplate) {
         super(defaultTemplate);
         this.#statement = statement;
         this.#concept = concept;
-       // this.#buildStatement();
+        // this.#buildStatement();
     }
 
     #buildStatement() {
