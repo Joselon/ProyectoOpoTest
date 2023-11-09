@@ -59,8 +59,10 @@ User <|-- Teacher
 User <|-- Student
 
 Teacher ..>"0..n" Concept
-Concept --o Category
-Question --o Concept
+Category o-- Concept
+'Concept --o Category
+Concept o-- Question
+'Question --o Concept
 Concept o-- Definition
 Definition o-- Justification
 Justification o-- Explication
@@ -75,8 +77,8 @@ Definition ..> Open :isUsefulToConcept
 Justification ..> Open :isUsefulToConcept
 Relation ..> Open :isUsefulToConcept
 
-Evaluation <.. Open : manual (! isEvaluated)
-Evaluation <.. SelectedOption : automatic
+Evaluation ..> Open : manual (! isEvaluated)
+Evaluation ..> SelectedOption : automatic
 
 Test *--"1..n" Question
 Question <|-- MultipleChoiceQuestion
