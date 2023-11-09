@@ -1,5 +1,6 @@
 import { DynamicMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
 import { ConceptsMenu, AddConceptOption } from "./ConceptsMenu.js";
+import { Concept } from "../models/Concept.js";
 import { console } from '../utils/view/console.js';
 import { Category } from "../models/Category.js";
 
@@ -9,7 +10,7 @@ class AddCategoryOption extends Option {
     #categories;
 
     constructor(categories) {
-        super("Añadir Categoría");
+        super("Añadir Categoría / Subcategoría");
         this.#categories = categories;
     }
 
@@ -30,26 +31,41 @@ class AddCategoryOption extends Option {
 }
 
 class SelectCategoryOption extends Option {
-    #categories
-    #index;
+    #category
     #state;
 
-    constructor(categories, index, state) {
+    constructor(category, state) {
         super("Seleccionar ");
-        this.#categories = categories;
-        this.#index = index;
+        this.#category = category;
         this.#state = state;
     }
 
     getTitle() {
-        return `${super.getTitle()}: ${this.#categories[this.#index].getName()} -(${this.#categories[this.#index].subcategoriesSize()}/${this.#categories[this.#index].conceptsSize()}/${this.#categories[this.#index].questionsSize()})`;
+        return `${super.getTitle()}: ${this.#category.getName()} -(${this.#category.subcategoriesSize()}/${this.#category.conceptsSize()}/${this.#category.questionsSize()})`;
     }
 
     interact() {
         super.interact();
-        this.#state.setCurrentCategory(this.#categories[this.#index]);
+        this.#state.setCurrentCategory(this.#category);
+        this.#state.setCurrentConcept(new Concept("---"));
     }
 
+}
+
+class SelectCategoryAndShowConceptsOption extends OpenMenuOption {
+    #category
+    #state;
+
+    constructor(menu, category, state) {
+        super(`Seleccionar Concepto de ${category.getName()} `, menu);
+        this.#category = category;
+        this.#state = state;
+    }
+
+    interact() {
+        super.interact();
+        this.#state.setCurrentCategory(this.#category);
+    }
 }
 
 class CategoriesMenu extends DynamicMenu {
@@ -65,17 +81,18 @@ class CategoriesMenu extends DynamicMenu {
 
     addOptions() {
         for (let i = 0; i < this.#categories.length; i++) {
-            this.add(new SelectCategoryOption(this.#categories, i, this.#state));
+            this.add(new SelectCategoryOption(this.#categories[i], this.#state));
         }
         for (let i = 0; i < this.#categories.length; i++) {
             if (this.#categories[i].subcategoriesSize() > 0)
                 this.add(new OpenMenuOption(`--- Ver Subcategorías de ${i + 1}-${this.#categories[i].getName()} ...`, new CategoriesMenu(this.#state, this.#categories[i].getSubcategories())));
         }
-        for (let i = 0; i < this.#categories.length; i++) {
-            if (this.#categories[i].getConcepts().length > 0)
-                this.add(new OpenMenuOption(`--- Ver Conceptos de ${i + 1}-${this.#categories[i].getName()} ...`, new ConceptsMenu(this.#state, this.#categories[i].getConcepts())));
-        }
+
         if (this.#state.getCurrentType() === 0) {
+            for (let i = 0; i < this.#categories.length; i++) {
+                if (this.#categories[i].getConcepts().length > 0)
+                    this.add(new SelectCategoryAndShowConceptsOption(new ConceptsMenu(this.#state, this.#categories[i].getConcepts()), this.#categories[i], this.#state));
+            }
             this.add(new AddCategoryOption(this.#categories));
             this.add(new AddConceptOption(this.#state.getCurrentCategory().getConcepts()))
         }

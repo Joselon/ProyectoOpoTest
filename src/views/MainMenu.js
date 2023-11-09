@@ -67,8 +67,11 @@ class MainMenu extends DynamicQuitMenu {
     }
     addStateTitle() {
         this.#userStateTitle = `Usuario: ${this.#userState.getCurrentTypeName()}
-        Categoría actual: ${this.#userState.getCurrentCategoryName()}
-        Concepto actual: ${this.#userState.getCurrentConceptKeyWord()}`;
+        Categoría actual: ${this.#userState.getCurrentCategoryName()}`;
+        if (this.#userState.getCurrentType() === 0) {
+            this.#userStateTitle +=`
+             Concepto actual: ${this.#userState.getCurrentConceptKeyWord()}`;
+        }
     }
 
     interact() {

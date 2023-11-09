@@ -1,44 +1,53 @@
 class Question {
+    statementTemplateTypes = ["Defintion","Classification","Composition"]
     statementTemplateType;
+    statement;
 
-    constructor(statementTemplateType) {
+    constructor(statementTemplateType,concept) {
         this.statementTemplateType = statementTemplateType;
+        this.#buildStatement(concept);
     }
 
-    buildStatement() {
-        return 1 / 0;
+    #buildStatement(concept) {
+        this.statement = this.statementTemplateType(concept);
     }
 
 }
 
 class OpenQuestion extends Question {
+    #statementTemplate;
+    #openAnswers = [];
+    statement;
 
-    #answers = [];
-    #concept;
-    #statement;
-
-    constructor(statement, concept, defaultTemplate) {
-        super(defaultTemplate);
-        this.#statement = statement;
-        this.#concept = concept;
-        // this.#buildStatement();
+    constructor(statement, statementType,concept) {
+        super(statementType,concept);
+        this.statement = statement;
+        //this.#buildStatement();
     }
 
-    #buildStatement() {
-        this.#statement = this.statementTemplateType(this.#concept)
+    #buildStatement(concept) {
+        this.#statementTemplate = this.statementTemplateType();
+
     }
 
     addAnswer(string) {
-        this.#answers.push(string)
+        this.#openAnswers.push(string)
     }
 
     getAnswers() {
-        return this.#answers;
+        return this.#openAnswers;
     }
 
     getStatement() {
-        return this.#statement;
+        return this.statement;
     }
+
+}
+
+class MultipleChoiceQuestion {
+    #statement;
+    #options = [];
+    #selectedOptionAnswers = [];
 
 }
 
