@@ -69,4 +69,4 @@ class MultipleChoiceQuestion extends Question {
 
 }
 
-export { OpenQuestion }
+export { OpenQuestion , MultipleChoiceQuestion }

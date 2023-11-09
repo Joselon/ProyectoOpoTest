@@ -3,7 +3,8 @@ import { UserState } from './models/UserState.js';
 import { YesNoDialog } from './utils/view/Dialog.js';
 import { MainMenu } from './views/MainMenu.js';
 import { Concept } from './models/Concept.js';
-import { readFileSync , writeFileSync } from 'node:fs';
+import { MultipleChoiceQuestion, OpenQuestion } from './models/Question.js'
+import { readFileSync, writeFileSync } from 'node:fs';
 
 class ElaboraTest {
     #userState;
@@ -51,15 +52,27 @@ class ElaboraTest {
                     let indexCon = 0;
                     for (let concept of subcategory.concepts) {
                         this.#categories[index].getSubcategory(indexSub).addConcept(new Concept(concept.keyword));
-                        /*for (let question of concept){
-                            this.#categories[index].getSubcategory(indexSub).getConcept(indexCon).addQuestion(new Question(question))
-                        }*/
+                        for (let question of concept.questions) {
+                            if (question.answerType === "Open")
+                                this.#categories[index].getSubcategory(indexSub).getConcept(indexCon).addQuestion(new OpenQuestion(question.statement, question.statementType, concept));
+                            else if (question.answerType === "MultipleChoice")
+                                this.#categories[index].getSubcategory(indexSub).getConcept(indexCon).addQuestion(new MultipleChoiceQuestion(question.statement, question.statementType, concept));
+                        }
                         indexCon++;
                     }
                     indexSub++;
                 }
+                let indexCon = 0;
                 for (let concept of category.concepts) {
-                    this.#categories[index].addConcept(new Concept(concept.keyword))
+                    this.#categories[index].addConcept(new Concept(concept.keyword));
+                    for (let question of concept.questions) {
+                        if (question.answerType === "Open")
+                            this.#categories[index].getConcept(indexCon).addQuestion(new OpenQuestion(question.statement, question.statementType, concept));
+                        else if (question.answerType === "MultipleChoice")
+                            this.#categories[index].getConcept(indexCon).addQuestion(new MultipleChoiceQuestion(question.statement, question.statementType, concept));
+
+                    }
+                    indexCon++;
                 }
                 index++;
             }
