@@ -42,16 +42,18 @@ class ElaboraTest {
             const data = readFileSync('data/database.json', 'utf-8');
             const dataobject = JSON.parse(data);
 
-            //console.log(dataobject.categories);
             let index = 0;
             for (let category of dataobject.categories) {
                 this.#categories.push(new Category(category.name, category.ancestor, [], []));
+                //Solo 1 nivel de subcategorías. Hacer recursivo...
                 let indexSub = 0;
                 for (let subcategory of category.subcategories) {
                     this.#categories[index].addSubcategory(new Category(subcategory.name, this.#categories[index], []));
+                    
                     let indexCon = 0;
                     for (let concept of subcategory.concepts) {
                         this.#categories[index].getSubcategory(indexSub).addConcept(new Concept(concept.keyword));
+                        //Pendiente recuperar respuestas
                         for (let question of concept.questions) {
                             if (question.answerType === "Open")
                                 this.#categories[index].getSubcategory(indexSub).getConcept(indexCon).addQuestion(new OpenQuestion(question.statement, question.statementType, concept));
@@ -62,9 +64,11 @@ class ElaboraTest {
                     }
                     indexSub++;
                 }
+                
                 let indexCon = 0;
                 for (let concept of category.concepts) {
                     this.#categories[index].addConcept(new Concept(concept.keyword));
+                    //Pendiente recuperar respuestas
                     for (let question of concept.questions) {
                         if (question.answerType === "Open")
                             this.#categories[index].getConcept(indexCon).addQuestion(new OpenQuestion(question.statement, question.statementType, concept));

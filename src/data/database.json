@@ -31,7 +31,8 @@
                         "questions": [
                             {
                                 "statement": "Qué es el software",
-                                "type": "Open",
+                                "statementType" : "Definition",
+                                "answerType": "Open",
                                 "answers": []
                             }
                         ]
