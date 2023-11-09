@@ -3,7 +3,7 @@ import { TypeMenu } from "./UserTypesMenu.js";
 import { UserState } from "../models/UserState.js";
 import { CategoriesMenu } from "./CategoriesMenu.js";
 import { QuestionMenu } from "./QuestionMenu.js";
-import { OpenQuestion } from "../models/Question.js";
+import { OpenQuestion, MultipleChoiceQuestion } from "../models/Question.js";
 import { console } from "../utils/view/console.js";
 
 class AddQuestionOption extends OpenMenuOption {
@@ -18,7 +18,10 @@ class AddQuestionOption extends OpenMenuOption {
         super.interact();
         let statement = console.readString(`
         Escribe el enunciado de la pregunta:`);
-        this.#state.getCurrentConcept().addQuestion(new OpenQuestion(statement));
+        if (this.#state.getSelectedAnswerType() === "Open")
+            this.#state.getCurrentConcept().addQuestion(new OpenQuestion(statement, this.#state.getSelectedStatementType()));
+        else if (this.#state.getSelectedAnswerType() === "MultipleChoice")
+            this.#state.getCurrentConcept().addQuestion(new MultipleChoiceQuestion(statement, this.#state.getSelectedStatementType()));
 
     }
 }
@@ -58,7 +61,7 @@ class MainMenu extends DynamicQuitMenu {
         this.add(new OpenMenuOption("Menú de Categorías y Conceptos...", this.#categoriesMenu));
         if (this.#userState.getCurrentType() === 0) {
             if (this.#userState.getCurrentConcept().getKeyword() !== '---')
-                this.add(new AddQuestionOption("Menú de Preguntas...", new QuestionMenu(this.#userState.getCurrentConcept()), this.#userState));
+                this.add(new AddQuestionOption("Menú de Preguntas...", new QuestionMenu(this.#userState), this.#userState));
             this.add(new Option("* Revisar Respuestas"))
         }
         else {

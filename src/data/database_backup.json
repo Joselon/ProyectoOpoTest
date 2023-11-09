@@ -35,12 +35,6 @@
                             "statementType": "Definition",
                             "answerType": "Open",
                             "answers": []
-                        },
-                        {
-                            "statement": "Que tipos de GIT hay",
-                            "statementType": 0,
-                            "answerType": "Open",
-                            "answers": []
                         }
                     ]
                 }
@@ -60,20 +54,7 @@
                     "concepts": [
                         {
                             "keyword": "Prohibicion",
-                            "questions": [
-                                {
-                                    "statement": "�Que indican las se�ales de prohibici�n?",
-                                    "statementType": "Definition",
-                                    "answerType": "Open",
-                                    "answers": []
-                                },
-                                {
-                                    "statement": "�Que tipos de se�ales de prohibici�n hay?",
-                                    "statementType": "Classification",
-                                    "answerType": "Open",
-                                    "answers": []
-                                }
-                            ]
+                            "questions": []
                         }
                     ]
                 }

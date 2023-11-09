@@ -4,7 +4,7 @@ class Concept {
     #state;
     #definitions = [];
     #relations = [];
-    #questions = []
+    #questions = [];
 
     constructor(keyword, questions, definitions, relations) {
         this.#keyword = keyword;
