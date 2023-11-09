@@ -1,15 +1,16 @@
 @startuml ConceptDomainDetail
 
-class Concept
-
-class Keyword
+class Concept {
+    - keyword
+    - state
+}
 
 class Definition {
-    -Real/Fake
+    - Real/Fake
 }
 
 class Justification {
-    -Real/Fake
+    - Real/Fake
 }
 
 class Explanation
@@ -20,7 +21,7 @@ class Classification
 
 class Composition
 
-class Level
+enum State
 
 class Primary {
     withKeyword
@@ -31,58 +32,43 @@ class Secundary {
     withDefinition or withRelation
 }
 
-class OpenDefinitionQuestion
+class OpenDefinitionQuestion {
+    - StatementType = "Definition"
+    - statement ="¿Qué es KEYWORD?"
 
-class OpenClassQuestion
+}
 
-class OpenCompositionQuestion
+class OpenClassQuestion {
+    - StatementType = "Classification"
+    - statement = "Qué tipos hay de KEYWORD"
 
-'class OpenReverseDefinitionQuestion
+}
 
-'class OpenJustificationQuestion
+class OpenCompositionQuestion {
+    - StatementType = "Composition"
+    - statement ="¿Qué conceptos destacarias del KEYWORD?"
 
-class Question
+}
+
+class Question {
+    - statement
+    - StatementType
+    - answers[]
+}
+
+class OpenQuestion {
+    - answerType = "Open"
+}
 
 class Open
 
-class Statement
+Question <|-- OpenQuestion
+Question "0..n" -o Concept
+Question <|-- Open :-- answerType
+OpenQuestion o--"0..n" Open
+Concept *-- State
+Question ..> State: StatementType
 
-class StatementTemplate
-
-
-class DefinitionTemplate {
-    "¿Qué es KEYWORD?"
-}
-
-class ClassTemplate {
-    "Qué tipos hay de KEYWORD"
-}
-
-class CompositionTemplate {
-    "¿Qué conceptos destacarias del KEYWORD?"
-}
-
-'class JustificationTemplate {
-'    "¿La KEYWORD es esta DEFINITION?¿Por qué?"
-'}
-
-'class ReverseDefinitionTemplate {
-'    "¿Qué es REALDEFINITION?"
-'}
-
-class Answer
-
-class OpenField
-
-Question <|-- Open
-Open "0..n" -o Concept
-Answer <|-- OpenField
-Open o-- OpenField
-Open *-- Level
-Open *-- Statement
-Statement ..> StatementTemplate
-
-Concept *-- Keyword
 Concept o--"0..n" Definition
 Definition o-- "0..n" Justification:Fake
 Justification o-- Explanation:Fake
@@ -90,29 +76,24 @@ Justification o-- Explanation:Fake
 Concept o-- "0..n" Relation
 Relation <|-- Classification
 Relation <|-- Composition
-'Relation -->"1..m" Concept
 
-Level <|-- Primary
-Level <|-- Secundary
+State <|-- Primary
+State <|-- Secundary
 
-StatementTemplate <|-- DefinitionTemplate
-StatementTemplate <|-- ClassTemplate
-StatementTemplate <|-- CompositionTemplate
+Question <|-- OpenDefinitionQuestion :--StatementType
+Question <|-- OpenClassQuestion :--StatementType
+Question <|-- OpenCompositionQuestion :--StatementType
 
-Primary <|-- OpenDefinitionQuestion
-OpenDefinitionQuestion *-- DefinitionTemplate
-OpenField "1..n" --o OpenDefinitionQuestion
-OpenDefinitionQuestion <.. Definition: OpenField
+OpenQuestion <|-- OpenDefinitionQuestion
+OpenDefinitionQuestion <.. Definition: answers
 
-Primary <|-- OpenClassQuestion
-OpenClassQuestion *-- ClassTemplate
-OpenField "1..n"--o OpenClassQuestion
-OpenClassQuestion <.. Classification :OpenField
+OpenQuestion <|-- OpenClassQuestion
+OpenClassQuestion <.. Classification :answers
 
-Primary <|-- OpenCompositionQuestion
-OpenCompositionQuestion *-- CompositionTemplate
-OpenField "1..n"--o OpenCompositionQuestion
-OpenCompositionQuestion <.. Composition :OpenField
+OpenQuestion <|-- OpenCompositionQuestion
+OpenCompositionQuestion <.. Composition :answers
+
+@enduml
 
 'Secundary <|-- OpenReverseDefinitionQuestion
 'OpenReverseDefinitionQuestion *-- ReverseDefinitionTemplate
@@ -124,13 +105,18 @@ OpenCompositionQuestion <.. Composition :OpenField
 'OpenJustificationQuestion o--"1..n" OpenField
 'OpenJustificationQuestion <.. Justification :OpenField
 
-@enduml
 'class Tertiary {
     '    withKeyword
     '    withDefinition
     '   withJustification
     '
-}
+    '
+'}
+
+'class OpenReverseDefinitionQuestion
+'    "¿Qué es REALDEFINITION?"
+'class OpenJustificationQuestion
+'    "¿La KEYWORD es esta DEFINITION?¿Por qué?"
 
 'MultipleChoiceTertiaryX:
 '"Es cierto que la CLAVE no es FAKEDEFINITION porque FAKEJUSTIFICACION"

@@ -18,19 +18,23 @@ class Test
 
 class Concept {
     - keyword
+    - state
 }
 
 class Question {
-    - level
+    - statementType
+    - answerType
 }
 
 class Statement
 
-class Answer 
+class Answer {
+    - isOK
+}
 
-class Open 
+class MultipleChoiceQuestion
 
-class MultipleChoice
+class OpenQuestion
 
 class Option
 
@@ -38,9 +42,9 @@ class Correct
 
 Class Incorrect
 
-class OpenField {
+class Open {
     - isEvaluated
-    - isToConcept
+    - isUsefulToConcept
 }
 
 Class SelectedOption
@@ -54,7 +58,7 @@ Category o--"0..n" Category : Subcategories
 User <|-- Teacher
 User <|-- Student
 
-Teacher -->"0..n" Concept
+Teacher ..>"0..n" Concept
 Concept --o Category
 Question --o Concept
 Concept o-- Definition
@@ -67,26 +71,26 @@ Evaluation --> Test
 Evaluation --> Result
 
 Teacher ..> Evaluation
-'AnswersToReview *--  OpenField
-Definition <.. OpenField :isToConcept
-Justification <.. OpenField :isToConcept
-Relation <.. OpenField :isToConcept
+Definition ..> Open :isUsefulToConcept
+Justification ..> Open :isUsefulToConcept
+Relation ..> Open :isUsefulToConcept
 
-Evaluation <.. OpenField : manual (! isEvaluated)
+Evaluation <.. Open : manual (! isEvaluated)
 Evaluation <.. SelectedOption : automatic
 
 Test *--"1..n" Question
-Question <|-- MultipleChoice
-Question <|-- Open
+Question <|-- MultipleChoiceQuestion
+Question <|-- OpenQuestion
 Question *--   Statement
-MultipleChoice *--"2..n" Option
+MultipleChoiceQuestion *--"2..n" Option
 Option <|-- Incorrect
 Option <|-- Correct
-MultipleChoice *-- Correct
-MultipleChoice *--"1..n" Incorrect
-MultipleChoice *-- SelectedOption
-Open o--"1..n" OpenField
-Answer <|-- OpenField
+MultipleChoiceQuestion *-- Correct
+MultipleChoiceQuestion *--"1..n" Incorrect
+MultipleChoiceQuestion o--"0..n" SelectedOption
+OpenQuestion o--"0..n" Open
+Question o--"0..n" Answer
+Answer <|-- Open
 Answer <|-- SelectedOption
 
 
