@@ -49,7 +49,7 @@ class ElaboraTest {
                 let indexSub = 0;
                 for (let subcategory of category.subcategories) {
                     this.#categories[index].addSubcategory(new Category(subcategory.name, this.#categories[index], []));
-                    
+
                     let indexCon = 0;
                     for (let concept of subcategory.concepts) {
                         this.#categories[index].getSubcategory(indexSub).addConcept(new Concept(concept.keyword));
@@ -64,7 +64,7 @@ class ElaboraTest {
                     }
                     indexSub++;
                 }
-                
+
                 let indexCon = 0;
                 for (let concept of category.concepts) {
                     this.#categories[index].addConcept(new Concept(concept.keyword));
@@ -88,9 +88,52 @@ class ElaboraTest {
 
     async writeJSONfile() {
         try {
-            console.log(this.#categories)
-            //formatear para json this.#categories;
-            //writeFileSync('data/database.json', data);
+            let dataObject = { categories: [] };
+            let index = 0;
+            for (let category of this.#categories) {
+                dataObject.categories.push({ name: category.getName(), subcategories: [], concepts: [] });
+                //Solo 1 nivel de subcategorías. Hacer recursivo...
+                let indexSub = 0;
+                for (let subcategory of category.getSubcategories()) {
+                    dataObject.categories[index].subcategories.push({ name: subcategory.getName(), subcategories: [], concepts: [] });
+
+                    let indexCon = 0;
+                    for (let concept of subcategory.getConcepts()) {
+                        dataObject.categories[index].subcategories[indexSub].concepts.push({ keyword: concept.getKeyword(), questions: [] });
+                        //Pendiente recuperar respuestas
+                        for (let question of concept.getQuestions()) {
+                            dataObject.categories[index].subcategories[indexSub].concepts[indexCon].questions.push(
+                                {
+                                    statement: question.getStatement(),
+                                    statementType: question.getStatementType(),
+                                    answerType: question.getAnswerType(),
+                                    answers: []
+                                });
+                        }
+                        indexCon++;
+                    }
+                    indexSub++;
+                }
+
+                let indexCon = 0;
+                for (let concept of category.getConcepts()) {
+                    dataObject.categories[index].concepts.push({ keyword: concept.getKeyword(), questions: [] });
+                    //Pendiente recuperar respuestas
+                    for (let question of concept.getQuestions()) {
+                        dataObject.categories[index].concepts[indexCon].questions.push(
+                            {
+                                statement: question.getStatement(),
+                                statementType: question.getStatementType(),
+                                answerType: question.getAnswerType(),
+                                answers: []
+                            });
+                    }
+                    indexCon++;
+                }
+                index++;
+            }
+            const data = JSON.stringify(dataObject);
+            writeFileSync('data/database.json', data);
         } catch (error) {
             console.error('Error al escribir en el archivo de base de datos:', error);
         }

@@ -1,63 +1,65 @@
 {
-        "categories": [
-        {
-            "name": "Informatica",
-            "subcategories": [
-                {
-                    "name": "MPDS",
-                    "subcategories": [
-                        {
-                            "name": "Subcategoría A1.1",
-                            "subcategories": [
-                                {
-                                    "name": "Subcategoría A1.1.1",
-                                    "subcategories": [],
-                                    "concepts": []
-                                }
-                            ],
-                            "concepts": []
-                        },
-                        {
-                            "name": "Subcategoría A1.2",
-                            "subcategories": [],
-                            "concepts": []
-                        }
-                    ],
-                    "concepts": [
-                        {
-                            "keyword": "Software",
-                            "definitions": [],
-                            "relations": [],
-                            "questions": [
-                                {
-                                    "statement": "Qué es el software",
-                                    "type": "Open",
-                                    "answers": []
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "name": "Sistemas Operativos",
-                    "subcategories": [],
-                    "concepts": []
-                }
-            ],
-            "concepts": [
-                {
-                    "keyword": "GIT",
-                    "definitions": [],
-                    "relations": [],
-                    "questions": [
-                        {
-                            "statement": "Qué es el GIT",
-                            "type": "Open",
-                            "answers": []
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
+    "categories": [
+    {
+        "name": "Informatica",
+        "subcategories": [
+            {
+                "name": "MPDS",
+                "subcategories": [
+                    {
+                        "name": "Subcategoría A1.1",
+                        "subcategories": [
+                            {
+                                "name": "Subcategoría A1.1.1",
+                                "subcategories": [],
+                                "concepts": []
+                            }
+                        ],
+                        "concepts": []
+                    },
+                    {
+                        "name": "Subcategoría A1.2",
+                        "subcategories": [],
+                        "concepts": []
+                    }
+                ],
+                "concepts": [
+                    {
+                        "keyword": "Software",
+                        "definitions": [],
+                        "relations": [],
+                        "questions": [
+                            {
+                                "statement": "Qué es el software",
+                                "statementType" : "Definition",
+                                "answerType": "Open",
+                                "answers": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Sistemas Operativos",
+                "subcategories": [],
+                "concepts": []
+            }
+        ],
+        "concepts": [
+            {
+                "keyword": "GIT",
+                "definitions": [],
+                "relations": [],
+                "questions": [
+                    {
+                        "statement": "Qué es el GIT",
+                        "statementType" : "Definition",
+                        "answerType": "Open",
+                        "answers": []
+                    }
+                ]
+            }
+        ]
+    }
+]
 }
