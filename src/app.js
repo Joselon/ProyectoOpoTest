@@ -16,9 +16,6 @@ class ElaboraTest {
     }
 
     start() {
-        this.#categories = [];
-        this.readJSONfile();
-        //new Category(name, ancestor, subcategories, concepts)
         do {
             new MainMenu(this.#userState, this.#categories).interact();
         } while (this.#isResumed());
@@ -29,12 +26,15 @@ class ElaboraTest {
         yesNoDialog.read(`¿Desea salvar antes de salir`);
         if (yesNoDialog.isAffirmative()) {
             this.writeJSONfile();
+            return yesNoDialog.isNegative();
         }
         return yesNoDialog.isAffirmative();
     }
 
     #setUp() {
         this.#userState = new UserState(0, new Category("---"), new Concept("---"));
+        this.#categories = [];
+        this.readJSONfile();
     }
 
     async readJSONfile() {
