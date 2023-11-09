@@ -10,7 +10,7 @@ class AddQuestionOption extends OpenMenuOption {
     #state;
 
     constructor(title, menu, state) {
-        super(title ,menu);
+        super(title, menu);
         this.#state = state;
     }
 
@@ -48,7 +48,7 @@ class MainMenu extends DynamicQuitMenu {
     constructor(userState, categories) {
         super("ElaboraTest Menú");
         this.#userState = userState;
-        this.#userTypesMenu = new TypeMenu(this.#userState,this.#userState.getTypes());
+        this.#userTypesMenu = new TypeMenu(this.#userState, this.#userState.getTypes());
         this.#categories = categories;
         this.#categoriesMenu = new CategoriesMenu(this.#userState, this.#categories);
     }
@@ -57,7 +57,8 @@ class MainMenu extends DynamicQuitMenu {
         this.add(new OpenMenuOption("Seleccionar Tipo de usuario...", this.#userTypesMenu));
         this.add(new OpenMenuOption("Menú de Categorías y Conceptos...", this.#categoriesMenu));
         if (this.#userState.getCurrentType() === 0) {
-            this.add(new AddQuestionOption("Menú de Preguntas...",new QuestionMenu(this.#userState.getCurrentConcept()),this.#userState));
+            if (this.#userState.getCurrentConcept().getKeyword() !== '---')
+                this.add(new AddQuestionOption("Menú de Preguntas...", new QuestionMenu(this.#userState.getCurrentConcept()), this.#userState));
             this.add(new Option("* Revisar Respuestas"))
         }
         else {
@@ -69,8 +70,8 @@ class MainMenu extends DynamicQuitMenu {
         this.#userStateTitle = `Usuario: ${this.#userState.getCurrentTypeName()}
         Categoría actual: ${this.#userState.getCurrentCategoryName()}`;
         if (this.#userState.getCurrentType() === 0) {
-            this.#userStateTitle +=`
-             Concepto actual: ${this.#userState.getCurrentConceptKeyWord()}`;
+            this.#userStateTitle += `
+             Concepto actual: ${this.#userState.getCurrentConcept().getKeyword()}`;
         }
     }
 

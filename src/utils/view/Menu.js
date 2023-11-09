@@ -195,4 +195,4 @@ class DynamicMenu extends Menu {
 
 }
 
-export { DynamicMenu, DynamicQuitMenu, IterativeQuitMenu, OpenMenuOption, Option };
+export { DynamicMenu, DynamicQuitMenu, IterativeQuitMenu, OpenMenuOption, Option, QuitOption };

@@ -1,4 +1,4 @@
-import { DynamicMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
+import { DynamicMenu, OpenMenuOption, Option, QuitOption } from "../utils/view/Menu.js";
 import { ConceptsMenu, AddConceptOption } from "./ConceptsMenu.js";
 import { Concept } from "../models/Concept.js";
 import { console } from '../utils/view/console.js';
@@ -94,8 +94,10 @@ class CategoriesMenu extends DynamicMenu {
                     this.add(new SelectCategoryAndShowConceptsOption(new ConceptsMenu(this.#state, this.#categories[i].getConcepts()), this.#categories[i], this.#state));
             }
             this.add(new AddCategoryOption(this.#categories));
-            this.add(new AddConceptOption(this.#state.getCurrentCategory().getConcepts()))
+            if (this.#state.getCurrentCategory().getName() !== "---")
+                this.add(new AddConceptOption(this.#state.getCurrentCategory().getConcepts()))
         }
+        this.add(new QuitOption());
     }
 
 }
