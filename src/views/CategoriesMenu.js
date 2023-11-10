@@ -57,7 +57,7 @@ class SelectCategoryAndShowConceptsOption extends OpenMenuOption {
     #state;
 
     constructor(menu, category, state) {
-        super(`Seleccionar Concepto de ${category.getName()} `, menu);
+        super(`- Seleccionar Concepto de ${category.getName()}... `, menu);
         this.#category = category;
         this.#state = state;
     }
