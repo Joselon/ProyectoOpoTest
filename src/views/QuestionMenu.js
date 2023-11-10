@@ -75,7 +75,7 @@ class QuestionMenu extends DynamicMenu {
 
     addOptions() {
         this.add(new SelectAnswerTypeAndShowStatementTypesOption(new OpenQuestionMenu("Tipo de enunciado", this.#userState), "Open", this.#userState));
-        if (this.#concept.getState() !== "Primary") {
+        if (this.#concept.getStage() !== "Primary") {
             this.add(new SelectAnswerTypeAndShowStatementTypesOption(new MultipleChoiceQuestionMenu("Tipo de enunciado", this.#userState), "MultipleChoice", this.#userState));
         }
     }

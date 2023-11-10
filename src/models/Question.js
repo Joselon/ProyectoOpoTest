@@ -35,7 +35,7 @@ class OpenQuestion extends Question {
     }
 
     #buildStatement(concept) {
-        this.#statementType = this.statementTemplateType(concept.getState());
+        this.#statementType = this.statementTemplateType(concept.getStage());
 
     }
 

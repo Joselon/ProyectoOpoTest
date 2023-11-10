@@ -5,20 +5,26 @@
             "subcategories": [
                 {
                     "name": "MPDS",
-                    "subcategories": [],
-                    "concepts": [
+                    "subcategories": [
                         {
-                            "keyword": "Software",
-                            "questions": [
+                            "name": "Fundamentos del Software",
+                            "subcategories": [],
+                            "concepts": [
                                 {
-                                    "statement": "Qué es el software",
-                                    "statementType": "Definition",
-                                    "answerType": "Open",
-                                    "answers": []
+                                    "keyword": "Software",
+                                    "questions": [
+                                        {
+                                            "statement": "Qué es el software",
+                                            "statementType": "Definition",
+                                            "answerType": "Open",
+                                            "answers": []
+                                        }
+                                    ]
                                 }
                             ]
                         }
-                    ]
+                    ],
+                    "concepts": []
                 },
                 {
                     "name": "Sistemas Operativos",
@@ -38,7 +44,7 @@
                         },
                         {
                             "statement": "Que tipos de GIT hay",
-                            "statementType": 0,
+                            "statementType": "Classification",
                             "answerType": "Open",
                             "answers": []
                         }

@@ -1,7 +1,7 @@
 class Concept {
     #keyword;
-    #states = ["Primary", "WithDefinition", "WithRelation", "WithDefinitionAndRelation"]
-    #state;
+    #stages = ["Primary", "WithDefinition", "WithRelation", "WithDefinitionAndRelation"]
+    #stage;
     #definitions = [];
     #relations = [];
     #questions = [];
@@ -14,17 +14,17 @@ class Concept {
             this.#questions.push(question);
         if (definitions === undefined) {
             definitions = [];
-            this.#state = this.#states[0];
+            this.#stage = this.#stages[0];
         }
         else
-            this.#state = this.#states[1];
+            this.#stage = this.#stages[1];
 
         for (let definition of definitions)
             this.#definitions.push(definition);
         if (relations === undefined)
             relations = [];
         else
-            this.#state = this.#states[2];
+            this.#stage = this.#stages[2];
 
         for (let relation of relations)
             this.#relations.push(relation);
@@ -34,8 +34,8 @@ class Concept {
         return this.#keyword;
     }
 
-    getState() {
-        return this.#state;
+    getStage() {
+        return this.#stage;
     }
 
     questionsSize() {
@@ -56,10 +56,10 @@ class Concept {
 
     addDefinition(definition) {
         this.#definitions.push(definition);
-        if (this.#state === this.#states[0])
-            this.#state = this.#states[1];
+        if (this.#stage === this.#stages[0])
+            this.#stage = this.#stages[1];
         else
-            this.#state = this.#states[3];
+            this.#stage = this.#stages[3];
     }
 
 }
