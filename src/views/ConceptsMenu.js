@@ -5,7 +5,7 @@ import { console } from '../utils/view/console.js';
 class AddConceptOption extends Option {
     #concepts;
 
-    constructor(title,concepts) {
+    constructor(title, concepts) {
         super(title);
         this.#concepts = concepts;
     }

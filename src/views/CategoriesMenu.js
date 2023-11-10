@@ -95,7 +95,7 @@ class CategoriesMenu extends DynamicMenu {
             }
             this.add(new AddCategoryOption(this.#categories));
             if (this.#state.getCurrentCategory().getName() !== "---")
-                this.add(new AddConceptOption(`Añadir Concepto a ${this.#state.getCurrentCategory().getName()}`,this.#state.getCurrentCategory().getConcepts()))
+                this.add(new AddConceptOption(`Añadir Concepto a ${this.#state.getCurrentCategory().getName()}`, this.#state.getCurrentCategory().getConcepts()))
         }
         this.add(new QuitOption());
     }

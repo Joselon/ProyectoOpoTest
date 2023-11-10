@@ -22,6 +22,11 @@
                                     ]
                                 }
                             ]
+                        },
+                        {
+                            "name": "Patrones de Diseño de Software",
+                            "subcategories": [],
+                            "concepts": []
                         }
                     ],
                     "concepts": []
@@ -68,13 +73,13 @@
                             "keyword": "Prohibicion",
                             "questions": [
                                 {
-                                    "statement": "�Que indican las se�ales de prohibici�n?",
+                                    "statement": "¿Que indican las señales de prohibicion?",
                                     "statementType": "Definition",
                                     "answerType": "Open",
                                     "answers": []
                                 },
                                 {
-                                    "statement": "�Que tipos de se�ales de prohibici�n hay?",
+                                    "statement": "¿Que tipos de señales de prohibicion hay?",
                                     "statementType": "Classification",
                                     "answerType": "Open",
                                     "answers": []

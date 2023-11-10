@@ -1,9 +1,9 @@
 import { Category } from './models/Category.js';
-import { UserState } from './models/UserState.js';
-import { YesNoDialog } from './utils/view/Dialog.js';
-import { MainMenu } from './views/MainMenu.js';
 import { Concept } from './models/Concept.js';
 import { MultipleChoiceQuestion, OpenQuestion } from './models/Question.js'
+import { UserState } from './models/UserState.js';
+import { MainMenu } from './views/MainMenu.js';
+import { YesNoDialog } from './utils/view/Dialog.js';
 import { readFileSync, writeFileSync } from 'node:fs';
 
 class ElaboraTest {
@@ -45,10 +45,8 @@ class ElaboraTest {
             let index = 0;
             for (let category of dataobject.categories) {
                 this.#categories.push(new Category(category.name, category.ancestor, [], []));
-                if(category.subcategories.length>0)
-                    this.#loadSubcategories(this.#categories[index], category);
-                if(category.concepts.length>0)
-                    this.#loadConcepts(this.#categories[index],category);
+                this.#loadSubcategories(this.#categories[index], category);
+                this.#loadConcepts(this.#categories[index], category);
                 index++;
             }
 
@@ -64,7 +62,7 @@ class ElaboraTest {
             for (let category of this.#categories) {
                 dataObject.categories.push({ name: category.getName(), subcategories: [], concepts: [] });
                 this.#formatSubcategories(dataObject.categories[index], category);
-                this.#formatConcepts(dataObject.categories[index],category);
+                this.#formatConcepts(dataObject.categories[index], category);
                 index++;
             }
             const data = JSON.stringify(dataObject);
@@ -82,15 +80,13 @@ class ElaboraTest {
         for (let subcategory of categoryOrigin.subcategories) {
             categoryTarget.addSubcategory(new Category(subcategory.name, categoryTarget, [], []));
             subcategoryTarget = categoryTarget.getSubcategory(indexSub);
-            if(subcategory.subcategories.length>0)
-                this.#loadSubcategories(subcategoryTarget, subcategory);
-            if(subcategory.concepts.length>0)
-                this.#loadConcepts(subcategoryTarget,subcategory)
+            this.#loadSubcategories(subcategoryTarget, subcategory);
+            this.#loadConcepts(subcategoryTarget, subcategory)
             indexSub++;
         }
     }
 
-    #loadConcepts(categoryTarget,categoryOrigin) {
+    #loadConcepts(categoryTarget, categoryOrigin) {
         let indexCon = 0;
         for (let concept of categoryOrigin.concepts) {
             categoryTarget.addConcept(new Concept(concept.keyword));
@@ -114,11 +110,11 @@ class ElaboraTest {
             categoryTarget.subcategories.push({ name: subcategory.getName(), subcategories: [], concepts: [] });
             subcategoryTarget = categoryTarget.subcategories[indexSub];
             this.#formatSubcategories(subcategoryTarget, subcategory);
-            this.#formatConcepts (subcategoryTarget,subcategory);
+            this.#formatConcepts(subcategoryTarget, subcategory);
             indexSub++;
         }
     }
-    #formatConcepts(categoryTarget,categoryOrigin){
+    #formatConcepts(categoryTarget, categoryOrigin) {
         let indexCon = 0;
         for (let concept of categoryOrigin.getConcepts()) {
             categoryTarget.concepts.push({ keyword: concept.getKeyword(), questions: [] });
