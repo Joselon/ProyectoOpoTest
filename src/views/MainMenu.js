@@ -7,21 +7,21 @@ import { OpenQuestion, MultipleChoiceQuestion } from "../models/Question.js";
 import { console } from "../utils/view/console.js";
 
 class AddQuestionOption extends OpenMenuOption {
-    #state;
+    #userState;
 
-    constructor(title, menu, state) {
+    constructor(title, menu, userState) {
         super(title, menu);
-        this.#state = state;
+        this.#userState = userState;
     }
 
     interact() {
         super.interact();
         let statement = console.readString(`
-        Escribe el enunciado de la pregunta:`);
-        if (this.#state.getSelectedAnswerType() === "Open")
-            this.#state.getCurrentConcept().addQuestion(new OpenQuestion(statement, this.#state.getSelectedStatementType()));
-        else if (this.#state.getSelectedAnswerType() === "MultipleChoice")
-            this.#state.getCurrentConcept().addQuestion(new MultipleChoiceQuestion(statement, this.#state.getSelectedStatementType()));
+        Escribe el enunciado de la pregunta de tipo ${this.#userState.getSelectedStatementType()}:`);
+        if (this.#userState.getSelectedAnswerType() === "Open")
+            this.#userState.getCurrentConcept().addQuestion(new OpenQuestion(statement, this.#userState.getSelectedStatementType()));
+        else if (this.#userState.getSelectedAnswerType() === "MultipleChoice")
+            this.#userState.getCurrentConcept().addQuestion(new MultipleChoiceQuestion(statement, this.#userState.getSelectedStatementType()));
 
     }
 }

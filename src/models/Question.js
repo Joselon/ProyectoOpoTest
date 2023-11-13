@@ -8,7 +8,7 @@ class Question {
         //  this.#buildStatement(concept);
     }
 
-    getStatementType(){
+    getStatementType() {
         return this.statementType;
     }
 
@@ -16,8 +16,8 @@ class Question {
         return this.statement;
     }
 
-    getAnswerType(){
-        return 1/0;
+    getAnswerType() {
+        return 1 / 0;
     }
 
     /* #buildStatement(concept) {
@@ -41,7 +41,7 @@ class OpenQuestion extends Question {
 
     }
 
-    getAnswerType(){
+    getAnswerType() {
         return "Open";
     }
 
@@ -73,7 +73,7 @@ class MultipleChoiceQuestion extends Question {
 
     }
 
-    getAnswerType(){
+    getAnswerType() {
         return "MultipleChoice";
     }
     addAnswer(optionSelectedAnswer) {
@@ -86,4 +86,4 @@ class MultipleChoiceQuestion extends Question {
 
 }
 
-export { OpenQuestion , MultipleChoiceQuestion }
+export { OpenQuestion, MultipleChoiceQuestion }

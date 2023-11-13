@@ -7,11 +7,13 @@ class Concept {
 
 'class Definition {
     '   - Real/Fake
-    '}
+    '
+}
 
 'class Justification {
     '    - Real/Fake
-    '}
+    '
+}
 
 'class Explanation
 
@@ -62,12 +64,10 @@ class OpenQuestion {
     - answerType = "Open"
 }
 
-class Open
-
 Question <|-- OpenQuestion
 Question "0..n" -o Concept
-Question <|-- Open :-- answerType
-OpenQuestion o--"0..n" Open
+'Question <|-- Open :-- answerType
+OpenQuestion o--"0..n" OpenAnswer
 Concept *-- State
 Question ..> State: StatementType
 
@@ -114,7 +114,8 @@ OpenCompositionQuestion <.. Composition :answers
     '
     '
     '
-'}
+    '
+}
 
 'class OpenReverseDefinitionQuestion
 '    "¿Qué es REALDEFINITION?"
