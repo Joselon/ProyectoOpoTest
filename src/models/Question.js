@@ -16,6 +16,10 @@ class Question {
         return this.statement;
     }
 
+    getAnswerType(){
+        return 1/0;
+    }
+
     /* #buildStatement(concept) {
          this.statement = this.statementTemplateType(concept);
      }
@@ -24,9 +28,7 @@ class Question {
 }
 
 class OpenQuestion extends Question {
-    #statementType;
     #openAnswers = [];
-    statement;
 
     constructor(statement, statementType, concept) {
         super(statementType, concept);
@@ -35,7 +37,7 @@ class OpenQuestion extends Question {
     }
 
     #buildStatement(concept) {
-        this.#statementType = this.statementTemplateType(concept.getStage());
+        this.statementType = this.statementTemplateType(concept);
 
     }
 
@@ -54,7 +56,6 @@ class OpenQuestion extends Question {
 }
 
 class MultipleChoiceQuestion extends Question {
-    statement;
     #options = [];
     #selectedOptionAnswers = [];
 

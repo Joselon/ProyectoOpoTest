@@ -31,7 +31,7 @@ class SelectConceptOption extends Option {
     }
 
     getTitle() {
-        return `${super.getTitle()}: ${this.#concepts[this.#index].getKeyword()} -(0/0/${this.#concepts[this.#index].questionsSize()})`;
+        return `${super.getTitle()}: ${this.#concepts[this.#index].getKeyword()} -(0/0/${this.#concepts[this.#index].getNumberOfQuestions()})`;
     }
 
     interact() {

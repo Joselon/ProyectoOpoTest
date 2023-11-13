@@ -1,26 +1,10 @@
 class Category {
-    #ancestor;
     #name;
     #concepts = [];
     #subcategories = [];
 
-    constructor(name, ancestor, subcategories, concepts) {
+    constructor(name) {
         this.#name = name;
-        if (ancestor === undefined)
-            ancestor = null;
-        this.#ancestor = ancestor;
-        if (subcategories === undefined)
-            subcategories = [];
-        for (let category of subcategories)
-            this.#subcategories.push(category);
-        if (concepts === undefined)
-            concepts = [];
-        for (let concept of concepts)
-            this.#concepts.push(concept);
-    }
-
-    getAncestor() {
-        return this.#ancestor
     }
 
     getName() {
@@ -43,31 +27,31 @@ class Category {
         return this.#subcategories;
     }
 
-    conceptsSize() {
+    getTotalNumberOfConcepts() {
         let subconcepts = 0;
         for (let category of this.#subcategories) {
-            subconcepts += category.conceptsSize();
+            subconcepts += category.getTotalNumberOfConcepts();
         }
         return this.#concepts.length + subconcepts;
     }
 
-    subcategoriesSize() {
+    getTotalNumberOfSubcategories() {
         let subsubcategories = 0;
         if (this.#subcategories.length > 1)
             for (let category of this.#subcategories) {
-                subsubcategories += category.subcategoriesSize();
+                subsubcategories += category.getTotalNumberOfSubcategories();
             }
         return this.#subcategories.length + subsubcategories;
 
     }
 
-    questionsSize() {
+    getTotalNumberOfQuestions() {
         let nquestions = 0;
         for (let concept of this.#concepts)
-            nquestions += concept.questionsSize();
+            nquestions += concept.getNumberOfQuestions();
         for (let category of this.#subcategories) {
             for (let concept of category.getConcepts())
-                nquestions += concept.questionsSize();
+                nquestions += concept.getNumberOfQuestions();
         }
         return nquestions;
     }

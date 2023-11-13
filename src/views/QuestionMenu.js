@@ -63,6 +63,8 @@ class OpenQuestionMenu extends DynamicMenu {
 
 class QuestionMenu extends DynamicMenu {
     // #types = ["Open", "MultipleChoice"];
+    
+    //#stages = ["Primary", "WithDefinition", "WithRelation", "WithDefinitionAndRelation"]
     #userState;
     #concept;
 
@@ -75,7 +77,7 @@ class QuestionMenu extends DynamicMenu {
 
     addOptions() {
         this.add(new SelectAnswerTypeAndShowStatementTypesOption(new OpenQuestionMenu("Tipo de enunciado", this.#userState), "Open", this.#userState));
-        if (this.#concept.getStage() !== "Primary") {
+        if (this.#concept.getNumberOfDefinitions()>0||this.#concept.getNumberOfRelations()>0) {
             this.add(new SelectAnswerTypeAndShowStatementTypesOption(new MultipleChoiceQuestionMenu("Tipo de enunciado", this.#userState), "MultipleChoice", this.#userState));
         }
     }

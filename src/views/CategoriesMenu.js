@@ -19,14 +19,9 @@ class AddCategoryOption extends Option {
         Escribe el nombre de la categoría:`);
         let index = console.readNumber(`Escribe la categoría a la que pertenece (0 default): `)
         if (index === 0)
-            if (this.#categories.length > 0) {
-                this.#categories.push(new Category(name, this.#categories[0].getAncestor()));
-            }
-            else {
-                this.#categories.push(new Category(name));
-            }
+            this.#categories.push(new Category(name));  
         else
-            this.#categories[index - 1].addSubcategory(new Category(name, this.#categories[index - 1]))
+            this.#categories[index - 1].addSubcategory(new Category(name))
     }
 }
 
@@ -41,7 +36,7 @@ class SelectCategoryOption extends Option {
     }
 
     getTitle() {
-        return `${super.getTitle()}: ${this.#category.getName()} -(${this.#category.subcategoriesSize()}/${this.#category.conceptsSize()}/${this.#category.questionsSize()})`;
+        return `${super.getTitle()}: ${this.#category.getName()} -(${this.#category.getTotalNumberOfSubcategories()}/${this.#category.getTotalNumberOfConcepts()}/${this.#category.getTotalNumberOfQuestions()})`;
     }
 
     interact() {
@@ -84,7 +79,7 @@ class CategoriesMenu extends DynamicMenu {
             this.add(new SelectCategoryOption(this.#categories[i], this.#state));
         }
         for (let i = 0; i < this.#categories.length; i++) {
-            if (this.#categories[i].subcategoriesSize() > 0)
+            if (this.#categories[i].getTotalNumberOfSubcategories() > 0)
                 this.add(new OpenMenuOption(`--- Ver Subcategorías de ${i + 1}-${this.#categories[i].getName()} ...`, new CategoriesMenu(this.#state, this.#categories[i].getSubcategories())));
         }
 

@@ -44,7 +44,7 @@ class ElaboraTest {
 
             let index = 0;
             for (let category of dataobject.categories) {
-                this.#categories.push(new Category(category.name, null, [], []));
+                this.#categories.push(new Category(category.name));
                 this.#loadSubcategories(this.#categories[index], category);
                 this.#loadConcepts(this.#categories[index], category);
                 index++;
@@ -78,7 +78,7 @@ class ElaboraTest {
         let subcategoryTarget;
 
         for (let subcategory of categoryOrigin.subcategories) {
-            categoryTarget.addSubcategory(new Category(subcategory.name, categoryTarget, [], []));
+            categoryTarget.addSubcategory(new Category(subcategory.name));
             subcategoryTarget = categoryTarget.getSubcategory(indexSub);
             this.#loadSubcategories(subcategoryTarget, subcategory);
             this.#loadConcepts(subcategoryTarget, subcategory)
