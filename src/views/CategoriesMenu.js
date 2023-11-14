@@ -17,11 +17,22 @@ class AddCategoryOption extends Option {
     interact() {
         let name = console.readString(`
         Escribe el nombre de la categoría:`);
-        let index = console.readNumber(`Escribe la categoría a la que pertenece (0 default): `)
-        if (index === 0)
-            this.#categories.push(new Category(name));  
-        else
-            this.#categories[index - 1].addSubcategory(new Category(name))
+        let isOK;
+        do {
+            let index = console.readNumber(`Escribe la categoría a la que pertenece (0 default): `)
+            if (index === 0){
+                this.#categories.push(new Category(name));
+                isOK =true;
+            }
+            else if ((0 < index) && (index < this.#categories.length)){
+                this.#categories[index - 1].addSubcategory(new Category(name));
+                isOK =true;
+            }
+            else {
+                console.writeln("ERROR: Escriba el numero de una categoría válida");
+                isOK = false;
+            }
+        } while (!isOK)
     }
 }
 
