@@ -45,13 +45,15 @@
                             "statement": "Qué es el GIT",
                             "statementType": "Definition",
                             "answerType": "Open",
-                            "answers": [{
-                                "username" : "Jaimito",
-                                "content": "Son las siglas de Global Internet Tecnologies",
-                                "isOK" : false,
-                                "isEvaluated" : false,
-                                "isUsefulForConcept" :false
-                            }]
+                            "answers": [
+                                {
+                                    "username": "Jaimito",
+                                    "content": "Son las siglas de Global Internet Tecnologies",
+                                    "isOK" : false,
+                                    "isEvaluated" : false,
+                                    "isUsefulForConcept" :false
+                                }
+                            ]
                         },
                         {
                             "statement": "Que tipos de GIT hay",

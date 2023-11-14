@@ -96,21 +96,25 @@ class ElaboraTest {
             for (let question of concept.questions) {
                 if (question.answerType === "Open") {
                     categoryTarget.getConcept(indexCon).addQuestion(new OpenQuestion(question.statement, question.statementType, concept));
+                    let indexAns = 0;
                     for (let answer of question.answers) {
                         categoryTarget.getConcept(indexCon).getQuestion(indexQuest).addAnswer(new OpenAnswer(answer.username, answer.content));
                         categoryTarget.getConcept(indexCon).getQuestion(indexQuest).getAnswer(indexAns).setIsUsefulToConcept(answer.isUsefulToConcept);
                         if (answer.isEvaluated) {
                             categoryTarget.getConcept(indexCon).getQuestion(indexQuest).getAnswer(indexAns).evaluate(answer.isOK);
                         }
+                        indexAns++;
                     }
                 }
                 else if (question.answerType === "MultipleChoice") {
                     categoryTarget.getConcept(indexCon).addQuestion(new MultipleChoiceQuestion(question.statement, question.statementType, concept));
+                    let indexAns = 0;
                     for (let answer of question.answers) {
                         categoryTarget.getConcept(indexCon).getQuestion(indexQuest).addAnswer(new SelectedOptionAnswer(answer.username, answer.content));
                         if (answer.isEvaluated) {
                             categoryTarget.getConcept(indexCon).getQuestion(indexQuest).getAnswer(indexAns).evaluate(answer.isOK);
                         }
+                        indexAns++;
                     }
                 }
                 indexQuest++;
@@ -152,7 +156,7 @@ class ElaboraTest {
                             username: answer.getUserName(),
                             content: answer.getContent(),
                             isEvaluated: answer.isEvaluated,
-                            isOK: answer.isOK()
+                            isOK: answer.getEvaluation()
                         }
                     )
                     indexAns++;
