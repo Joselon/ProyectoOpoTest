@@ -1,6 +1,7 @@
 import { Category } from './models/Category.js';
 import { Concept } from './models/Concept.js';
 import { MultipleChoiceQuestion, OpenQuestion } from './models/Question.js'
+import { OpenAnswer, SelectedOptionAnswer } from './models/Answer.js';
 import { UserState } from './models/UserState.js';
 import { MainMenu } from './views/MainMenu.js';
 import { YesNoDialog } from './utils/view/Dialog.js';
@@ -90,13 +91,29 @@ class ElaboraTest {
         let indexCon = 0;
         for (let concept of categoryOrigin.concepts) {
             categoryTarget.addConcept(new Concept(concept.keyword));
-            //Pendiente recuperar respuestas
-            for (let question of concept.questions) {
-                if (question.answerType === "Open")
-                    categoryTarget.getConcept(indexCon).addQuestion(new OpenQuestion(question.statement, question.statementType, concept));
-                else if (question.answerType === "MultipleChoice")
-                    categoryTarget.getConcept(indexCon).addQuestion(new MultipleChoiceQuestion(question.statement, question.statementType, concept));
 
+            let indexQuest = 0;
+            for (let question of concept.questions) {
+                if (question.answerType === "Open") {
+                    categoryTarget.getConcept(indexCon).addQuestion(new OpenQuestion(question.statement, question.statementType, concept));
+                    for (let answer of question.answers) {
+                        categoryTarget.getConcept(indexCon).getQuestion(indexQuest).addAnswer(new OpenAnswer(answer.username, answer.content));
+                        categoryTarget.getConcept(indexCon).getQuestion(indexQuest).getAnswer(indexAns).setIsUsefulToConcept(answer.isUsefulToConcept);
+                        if (answer.isEvaluated) {
+                            categoryTarget.getConcept(indexCon).getQuestion(indexQuest).getAnswer(indexAns).evaluate(answer.isOK);
+                        }
+                    }
+                }
+                else if (question.answerType === "MultipleChoice") {
+                    categoryTarget.getConcept(indexCon).addQuestion(new MultipleChoiceQuestion(question.statement, question.statementType, concept));
+                    for (let answer of question.answers) {
+                        categoryTarget.getConcept(indexCon).getQuestion(indexQuest).addAnswer(new SelectedOptionAnswer(answer.username, answer.content));
+                        if (answer.isEvaluated) {
+                            categoryTarget.getConcept(indexCon).getQuestion(indexQuest).getAnswer(indexAns).evaluate(answer.isOK);
+                        }
+                    }
+                }
+                indexQuest++;
             }
             indexCon++;
         }
@@ -118,7 +135,8 @@ class ElaboraTest {
         let indexCon = 0;
         for (let concept of categoryOrigin.getConcepts()) {
             categoryTarget.concepts.push({ keyword: concept.getKeyword(), questions: [] });
-            //Pendiente guardar respuestas
+
+            let indexQuest = 0;
             for (let question of concept.getQuestions()) {
                 categoryTarget.concepts[indexCon].questions.push(
                     {
@@ -127,6 +145,19 @@ class ElaboraTest {
                         answerType: question.getAnswerType(),
                         answers: []
                     });
+                let indexAns = 0;
+                for (let answer of question.getAnswers()) {
+                    categoryTarget.concepts[indexCon].questions[indexQuest].answers.push(
+                        {
+                            username: answer.getUserName(),
+                            content: answer.getContent(),
+                            isEvaluated: answer.isEvaluated,
+                            isOK: answer.isOK()
+                        }
+                    )
+                    indexAns++;
+                }
+                indexQuest++;
             }
             indexCon++;
         }

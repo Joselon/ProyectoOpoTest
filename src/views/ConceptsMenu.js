@@ -1,4 +1,4 @@
-import { DynamicMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
+import { DynamicMenu, Option } from "../utils/view/Menu.js";
 import { Concept } from '../models/Concept.js';
 import { console } from '../utils/view/console.js';
 
@@ -31,7 +31,7 @@ class SelectConceptOption extends Option {
     }
 
     getTitle() {
-        return `${super.getTitle()}: ${this.#concepts[this.#index].getKeyword()} -(0/0/${this.#concepts[this.#index].getNumberOfQuestions()})`;
+        return `${super.getTitle()}: ${this.#concepts[this.#index].getKeyword()} -(${this.#concepts[this.#index].getNumberOfDefinitions()}/${this.#concepts[this.#index].getNumberOfRelations()}/${this.#concepts[this.#index].getNumberOfQuestions()})`;
     }
 
     interact() {

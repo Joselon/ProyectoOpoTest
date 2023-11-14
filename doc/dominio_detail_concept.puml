@@ -8,12 +8,12 @@ class Concept {
 'class Definition {
     '   - Real/Fake
     '
-}
+'}
 
 'class Justification {
     '    - Real/Fake
     '
-}
+'}
 
 'class Explanation
 

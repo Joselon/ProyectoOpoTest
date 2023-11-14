@@ -2,11 +2,13 @@ class Answer {
     #userName;
     isEvaluated;
     #isOK;
+    #content;
 
-    constructor(userName) {
+    constructor(userName, content) {
         this.#userName = userName;
         this.isEvaluated = false;
         this.#isOK = false;
+        this.#content = content;
     }
 
     evaluate(isOK) {
@@ -22,27 +24,33 @@ class Answer {
         return this.#userName;
     }
 
+    getContent() {
+        return this.#content;
+    }
+
 }
 
-class OpenAnswer extends Answer{
+class OpenAnswer extends Answer {
     #isUsefulForConcept;
 
-    constructor(userName) {
-        super(userName);
+    constructor(userName, text) {
+        super(userName, text);
         this.#isUsefulForConcept = false;
     }
 
-    setIsUsefulTo (ConceptComponent){
-        this.#isUsefulForConcept =true;
+    setIsUsefulToConcept(ConceptComponent) {
+        this.#isUsefulForConcept = true;
         //AddToConcept Component
     }
-
 
 }
 
 class SelectedOptionAnswer extends Answer {
 
+    constructor(userName, option) {
+        super(userName, option);
+    }
 
 }
 
-export {OpenAnswer, SelectedOptionAnswer}
+export { OpenAnswer, SelectedOptionAnswer }

@@ -1,3 +1,5 @@
+import { OpenAnswer, SelectedOptionAnswer } from "./Answer.js";
+
 class Question {
     statementTypes = ["Defintion", "Classification", "Composition"]
     statementType;
@@ -45,8 +47,12 @@ class OpenQuestion extends Question {
         return "Open";
     }
 
-    addAnswer(string) {
-        this.#openAnswers.push(string)
+    addAnswer(username, string) {
+        this.#openAnswers.push(new OpenAnswer(username, string));
+    }
+
+    getAnswer(index) {
+        return this.#openAnswers[index];
     }
 
     getAnswers() {
@@ -69,15 +75,11 @@ class MultipleChoiceQuestion extends Question {
 
     }
 
-    #buildStatement() {
-
-    }
-
     getAnswerType() {
         return "MultipleChoice";
     }
-    addAnswer(optionSelectedAnswer) {
-        this.#selectedOptionAnswers.push(optionSelectedAnswer);
+    addAnswer(username, optionSelected) {
+        this.#selectedOptionAnswers.push(new SelectedOptionAnswer(username, optionSelected));
     }
 
     getAnswers() {

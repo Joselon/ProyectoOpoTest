@@ -40,10 +40,12 @@ class OpenQuestionMenu extends DynamicMenu {
     #concept;
     #userState;
 
-    #primaryTypesTitles;  //#withDefinitionTypesTitles
+    #primaryTypesTitles;
+    //#withDefinitionTypesTitles
     #statementTypesTitles;
-    #primaryTypes = ["Definition", "Classification", "Composition"];
 
+    #primaryTypes = ["Definition", "Classification", "Composition"];
+    //#withDefinitionTypes = ["ReverseDefinition",""];
     #statementTypes = [this.#primaryTypes];
     //#stages = ["Primary", "WithDefinition", "WithRelation", "WithDefinitionAndRelation"]
 

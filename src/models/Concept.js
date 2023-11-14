@@ -1,11 +1,14 @@
 class Concept {
     #keyword;
-    #definitions = [];
-    #relations = [];
-    #questions = [];
+    #definitions;
+    #relations;
+    #questions;
 
     constructor(keyword) {
         this.#keyword = keyword;
+        this.#questions = [];
+        this.#definitions = [];
+        this.#relations = [];
     }
 
     getKeyword() {
@@ -20,6 +23,15 @@ class Concept {
         return this.#questions[index];
     }
 
+    getOpenQuestions() {
+        let openQuestions = [];
+        for (let question of this.#questions) {
+            if (question.getAnswerType() === "Open")
+                openQuestions.push(question);
+        }
+        return openQuestions;
+    }
+
     addQuestion(question) {
         this.#questions.push(question);
     }
@@ -28,7 +40,7 @@ class Concept {
         this.#definitions.push(definition);
     }
 
-    addRelation(relation){
+    addRelation(relation) {
         this.#relations.push(relation);
     }
 

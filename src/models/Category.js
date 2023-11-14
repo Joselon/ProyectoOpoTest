@@ -50,8 +50,7 @@ class Category {
         for (let concept of this.#concepts)
             nquestions += concept.getNumberOfQuestions();
         for (let category of this.#subcategories) {
-            for (let concept of category.getConcepts())
-                nquestions += concept.getNumberOfQuestions();
+            nquestions += category.getTotalNumberOfQuestions();
         }
         return nquestions;
     }

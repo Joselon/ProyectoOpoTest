@@ -1,4 +1,5 @@
 import { DynamicMenu, Option } from "../utils/view/Menu.js";
+import { console } from "../utils/view/console.js";
 
 class SelectUserTypeOption extends Option {
     #array;
@@ -19,7 +20,8 @@ class SelectUserTypeOption extends Option {
     interact() {
         super.interact();
         this.#state.setCurrentType(this.#index);
-
+        let userName = console.readString(`Escribe nombre de usuario: `);
+        this.#state.setCurrentUserName(userName);
     }
 
 }

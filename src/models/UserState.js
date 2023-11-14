@@ -1,5 +1,6 @@
 class UserState {
     #userTypes = ["Profesor", "Alumno"];
+    #userName;
     #typeCurrentIndex;
     #currentCategory;
     #currentConcept;
@@ -26,10 +27,6 @@ class UserState {
 
     getCurrentCategory() {
         return this.#currentCategory;
-    }
-
-    getCurrentCategoryName() {
-        return this.#currentCategory.getName();
     }
 
     getCurrentConcept() {
@@ -63,6 +60,14 @@ class UserState {
 
     getSelectedStatementType() {
         return this.#selectedStatementType;
+    }
+
+    getCurrentUserName() {
+        return this.#userName;
+    }
+
+    setCurrentUserName(userName) {
+        this.#userName = userName;
     }
 
 }
