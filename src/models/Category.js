@@ -55,6 +55,18 @@ class Category {
         return nquestions;
     }
 
+    getAllQuestions() {
+        let allQuestions = [];
+        for (let concept of this.#concepts)
+            for (let question of concept.getQuestions())
+                allQuestions.push(question);
+        for (let category of this.#subcategories) {
+            for (let question of category.getAllQuestions())
+                allQuestions.push(question);
+        }
+        return allQuestions;
+    }
+
 
 
     addConcept(concept) {

@@ -14,10 +14,12 @@ class SelectAndEvaluateAnswerOption extends Option {
     }
 
     interact() {
-        super.interact();
         let isOK = console.readNumber(`
         ¿Es correcta?(1=Sí/0=No):`);
-        this.#answer.evaluate(isOK);
+        this.#answer.evaluate(isOK === 1);
+        let isUseful = console.readNumber(`
+        ¿Desea marcar la pregunta como útil?(1=Sí/0=No):`);
+        this.#answer.setIsUsefulForConcept(isUseful === 1);
     }
 
 }
@@ -30,8 +32,6 @@ class AnswersMenu extends DynamicMenu {
     constructor(answers) {
         super(" Respuestas:");
         this.#answers = answers;
-        this.addOptions();
-
     }
 
     addOptions() {

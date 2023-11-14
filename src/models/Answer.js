@@ -1,45 +1,46 @@
 class Answer {
-    #userName;
+    userName;
+    content;
     isEvaluated;
-    #isOK;
-    #content;
+    isOK;
 
     constructor(userName, content) {
-        this.#userName = userName;
+        this.userName = userName;
+        this.content = content;
         this.isEvaluated = false;
-        this.#isOK = false;
-        this.#content = content;
+        this.isOK = false;
+
     }
 
     evaluate(isOK) {
         this.isEvaluated = true;
-        this.#isOK = isOK;
+        this.isOK = isOK;
     }
 
     getEvaluation() {
-        return this.#isOK;
+        return this.isOK;
     }
 
     getUserName() {
-        return this.#userName;
+        return this.userName;
     }
 
     getContent() {
-        return this.#content;
+        return this.content;
     }
 
 }
 
 class OpenAnswer extends Answer {
-    #isUsefulForConcept;
+    isUsefulForConcept;
 
     constructor(userName, text) {
         super(userName, text);
-        this.#isUsefulForConcept = false;
+        this.isUsefulForConcept = false;
     }
 
-    setIsUsefulToConcept(ConceptComponent) {
-        this.#isUsefulForConcept = true;
+    setIsUsefulForConcept(isUsefulForConcept) {
+        this.isUsefulForConcept = isUsefulForConcept;
         //AddToConcept Component
     }
 

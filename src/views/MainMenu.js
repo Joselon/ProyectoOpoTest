@@ -3,7 +3,8 @@ import { TypeMenu } from "./UserTypesMenu.js";
 import { CategoriesMenu } from "./CategoriesMenu.js";
 import { QuestionMenu } from "./QuestionMenu.js";
 import { OpenQuestion, MultipleChoiceQuestion } from "../models/Question.js";
-import { ReviewMenu } from "./ReviewMenu.js";
+import { EvaluationMenu } from "./EvaluationMenu.js";
+import { GenerateTestMenu } from "./GenerateTestMenu.js"
 import { console } from "../utils/view/console.js";
 
 class AddQuestionOption extends OpenMenuOption {
@@ -26,21 +27,6 @@ class AddQuestionOption extends OpenMenuOption {
     }
 }
 
-//Student Options
-class GenerateTestOption extends Option {
-    #state;
-
-    constructor(title, state) {
-        super(title);
-        this.#state = state;
-    }
-
-    interact() {
-        console.writeln(`
-        Generando test de ${this.#state.getCurrentCategory().getName()}...`)
-    }
-}
-
 class MainMenu extends DynamicQuitMenu {
     #userState;
     #userStateTitle;
@@ -59,37 +45,46 @@ class MainMenu extends DynamicQuitMenu {
     addOptions() {
         this.add(new OpenMenuOption("Seleccionar Tipo de usuario...", this.#userTypesMenu));
         this.add(new OpenMenuOption("Menú de Categorías y Conceptos...", this.#categoriesMenu));
+
+        let currentCategory = this.#userState.getCurrentCategory();
+
         if (this.#userState.getCurrentType() === 0) {
-            if (this.#userState.getCurrentConcept().getKeyword() !== '---') {
-                this.add(new AddQuestionOption("Menú de Preguntas...", new QuestionMenu(this.#userState), this.#userState));
-                if (this.#userState.getCurrentConcept().getOpenQuestions().length > 0)
-                    this.add(new OpenMenuOption(`Revisar Preguntas Abiertas de ${this.#userState.getCurrentConcept().getKeyword()}`, new ReviewMenu(this.#userState.getCurrentConcept().getOpenQuestions())));
+            let currentConcept = this.#userState.getCurrentConcept();
+
+            if (currentConcept.getKeyword() !== '---' && currentCategory.getName() !== '---') {
+                this.add(new AddQuestionOption("Crear de Preguntas de ...", new QuestionMenu(this.#userState), this.#userState));
+                if (currentConcept.getOpenQuestions().length > 0)
+                    this.add(new OpenMenuOption(`(Categoría:${currentCategory.getName()}) Revisar Preguntas Abiertas de ${currentConcept.getKeyword()}`, new EvaluationMenu(currentConcept.getOpenQuestions())));
             }
-            else if (this.#userState.getCurrentCategory().getName() !== '---') {
-                for (let concept of this.#userState.getCurrentCategory().getConcepts()) {
+            else if (currentCategory.getName() !== '---') {
+                for (let concept of currentCategory.getConcepts()) {
                     if (concept.getOpenQuestions().length > 0)
-                        this.add(new OpenMenuOption(`Revisar Preguntas Abiertas de ${concept.getKeyword()} (Categoría:${this.#userState.getCurrentCategory().getName()})`, new ReviewMenu(concept.getOpenQuestions())));
+                        this.add(new OpenMenuOption(`(Categoría:${currentCategory.getName()}) Revisar Preguntas Abiertas de ${concept.getKeyword()}`, new EvaluationMenu(concept.getOpenQuestions())));
                 }
-                for (let category of this.#userState.getCurrentCategory().getSubcategories()) {
-                    for (let concept of category.getConcepts()) {
-                        if (concept.getOpenQuestions().length > 0)
-                            this.add(new OpenMenuOption(`Revisar Preguntas Abiertas de ${concept.getKeyword()} (Categoría:${category.getName()})`, new ReviewMenu(concept.getOpenQuestions())));
-                    }
-                    for (let subcategory of category.getSubcategories()) {
-                        for (let concept of subcategory.getConcepts()) {
-                            if (concept.getOpenQuestions().length > 0)
-                                this.add(new OpenMenuOption(`Revisar Preguntas Abiertas de ${concept.getKeyword()} (Subcategoría:${category.getName()}/${subcategory.getName()})`, new ReviewMenu(concept.getOpenQuestions())));
-                        }
-                    }
+                for (let category of currentCategory.getSubcategories()) {
+                    this.#addSubcategoryOption(category, currentCategory.getName());
                 }
 
             }
         }
         else {
-            this.add(new GenerateTestOption("* Ejecutar Tests", this.#userState));
+            if (currentCategory.getName() !== '---') {
+                this.add(new OpenMenuOption(`Ejecutar Tests ${this.#userState.getCurrentCategory().getName()}`, new GenerateTestMenu(currentCategory.getAllQuestions(), this.#userState.getCurrentUserName())));
+            }
             this.add(new Option("* Consultar Resultados"))
         }
     }
+
+    #addSubcategoryOption(category, parentName) {
+        for (let concept of category.getConcepts()) {
+            if (concept.getOpenQuestions().length > 0)
+                this.add(new OpenMenuOption(`-(Subcategoría: ${parentName}/${category.getName()}) Revisar Preguntas Abiertas de ${concept.getKeyword()}`, new EvaluationMenu(concept.getOpenQuestions())));
+        }
+        for (let subcategory of category.getSubcategories()) {
+            this.#addSubcategoryOption(subcategory, category.getName())
+        }
+    }
+
     addStateTitle() {
         this.#userStateTitle = `Usuario: ${this.#userState.getCurrentTypeName()}
         Categoría actual: ${this.#userState.getCurrentCategory().getName()}`;

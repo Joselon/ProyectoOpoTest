@@ -91,36 +91,40 @@ class ElaboraTest {
         let indexCon = 0;
         for (let concept of categoryOrigin.concepts) {
             categoryTarget.addConcept(new Concept(concept.keyword));
-
-            let indexQuest = 0;
-            for (let question of concept.questions) {
-                if (question.answerType === "Open") {
-                    categoryTarget.getConcept(indexCon).addQuestion(new OpenQuestion(question.statement, question.statementType, concept));
-                    let indexAns = 0;
-                    for (let answer of question.answers) {
-                        categoryTarget.getConcept(indexCon).getQuestion(indexQuest).addAnswer(new OpenAnswer(answer.username, answer.content));
-                        categoryTarget.getConcept(indexCon).getQuestion(indexQuest).getAnswer(indexAns).setIsUsefulToConcept(answer.isUsefulToConcept);
-                        if (answer.isEvaluated) {
-                            categoryTarget.getConcept(indexCon).getQuestion(indexQuest).getAnswer(indexAns).evaluate(answer.isOK);
-                        }
-                        indexAns++;
-                    }
-                }
-                else if (question.answerType === "MultipleChoice") {
-                    categoryTarget.getConcept(indexCon).addQuestion(new MultipleChoiceQuestion(question.statement, question.statementType, concept));
-                    let indexAns = 0;
-                    for (let answer of question.answers) {
-                        categoryTarget.getConcept(indexCon).getQuestion(indexQuest).addAnswer(new SelectedOptionAnswer(answer.username, answer.content));
-                        if (answer.isEvaluated) {
-                            categoryTarget.getConcept(indexCon).getQuestion(indexQuest).getAnswer(indexAns).evaluate(answer.isOK);
-                        }
-                        indexAns++;
-                    }
-                }
-                indexQuest++;
-            }
+            this.#loadQuestions(categoryTarget.getConcept(indexCon), concept);
+            //Pendiente recuperar Definitions y Relations
             indexCon++;
         }
+    }
+
+    #loadQuestions(conceptTarget, concept) {
+        let indexQuest = 0;
+        for (let question of concept.questions) {
+            if (question.answerType === "Open") {
+                conceptTarget.addQuestion(new OpenQuestion(question.statement, question.statementType, concept));
+                this.#loadAnswers(conceptTarget.getQuestion(indexQuest), question);
+
+            }
+            else if (question.answerType === "MultipleChoice") {
+                conceptTarget.addQuestion(new MultipleChoiceQuestion(question.statement, question.statementType, concept));
+                this.#loadAnswers(conceptTarget.getQuestion(indexQuest), question);
+            }
+            indexQuest++;
+        }
+    }
+
+    #loadAnswers(questionTarget, question) {
+
+        let indexAns = 0;
+        for (let answer of question.answers) {
+            questionTarget.addAnswer(answer.username, answer.content);
+            if (answer.isEvaluated)
+                questionTarget.getAnswer(indexAns).evaluate(answer.isOK);
+            if (question.getAnswerType === "Open")
+                questionTarget.getAnswer(indexAns).setIsUsefulForConcept(answer.isUsefulForConcept);
+            indexAns++;
+        }
+
     }
 
     #formatSubcategories(categoryTarget, categoryOrigin) {
@@ -128,7 +132,12 @@ class ElaboraTest {
         let indexSub = 0;
         let subcategoryTarget;
         for (let subcategory of categoryOrigin.getSubcategories()) {
-            categoryTarget.subcategories.push({ name: subcategory.getName(), subcategories: [], concepts: [] });
+            categoryTarget.subcategories.push(
+                {
+                    name: subcategory.getName(),
+                    subcategories: [],
+                    concepts: []
+                });
             subcategoryTarget = categoryTarget.subcategories[indexSub];
             this.#formatSubcategories(subcategoryTarget, subcategory);
             this.#formatConcepts(subcategoryTarget, subcategory);
@@ -138,7 +147,11 @@ class ElaboraTest {
     #formatConcepts(categoryTarget, categoryOrigin) {
         let indexCon = 0;
         for (let concept of categoryOrigin.getConcepts()) {
-            categoryTarget.concepts.push({ keyword: concept.getKeyword(), questions: [] });
+            categoryTarget.concepts.push(
+                {
+                    keyword: concept.getKeyword(),
+                    questions: []
+                });
 
             let indexQuest = 0;
             for (let question of concept.getQuestions()) {
@@ -151,18 +164,30 @@ class ElaboraTest {
                     });
                 let indexAns = 0;
                 for (let answer of question.getAnswers()) {
-                    categoryTarget.concepts[indexCon].questions[indexQuest].answers.push(
-                        {
-                            username: answer.getUserName(),
-                            content: answer.getContent(),
-                            isEvaluated: answer.isEvaluated,
-                            isOK: answer.getEvaluation()
-                        }
-                    )
+                    if (question.getAnswerType() === "Open") {
+                        categoryTarget.concepts[indexCon].questions[indexQuest].answers.push(
+                            {
+                                username: answer.getUserName(),
+                                content: answer.getContent(),
+                                isOK: answer.getEvaluation(),
+                                isEvaluated: answer.isEvaluated,
+                                isUsefulForConcept: answer.isUsefulForConcept
+                            });
+                    }
+                    else {
+                        categoryTarget.concepts[indexCon].questions[indexQuest].answers.push(
+                            {
+                                username: answer.getUserName(),
+                                content: answer.getContent(),
+                                isOK: answer.getEvaluation(),
+                                isEvaluated: true
+                            });
+                    }
                     indexAns++;
                 }
                 indexQuest++;
             }
+            //Pendiente guardar Definitions y Relations
             indexCon++;
         }
     }
