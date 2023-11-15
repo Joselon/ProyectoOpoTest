@@ -1,6 +1,7 @@
 import { Category } from './models/Category.js';
 import { Concept } from './models/Concept.js';
-import { MultipleChoiceQuestion, OpenQuestion } from './models/Question.js'
+import { Definition } from './models/Definition.js';
+import { MultipleChoiceQuestion, OpenQuestion } from './models/Question.js';
 import { UserState } from './models/UserState.js';
 import { MainMenu } from './views/MainMenu.js';
 import { YesNoDialog } from './utils/view/Dialog.js';
@@ -72,26 +73,23 @@ class ElaboraTest {
         }
     }
 
-    #loadSubcategories(categoryTarget, categoryOrigin) {
-
+    #loadSubcategories(categoryTarget, category) {
         let indexSub = 0;
-        let subcategoryTarget;
-
-        for (let subcategory of categoryOrigin.subcategories) {
+        for (let subcategory of category.subcategories) {
             categoryTarget.addSubcategory(new Category(subcategory.name));
-            subcategoryTarget = categoryTarget.getSubcategory(indexSub);
-            this.#loadSubcategories(subcategoryTarget, subcategory);
-            this.#loadConcepts(subcategoryTarget, subcategory)
+            this.#loadSubcategories(categoryTarget.getSubcategory(indexSub), subcategory);
+            this.#loadConcepts(categoryTarget.getSubcategory(indexSub), subcategory)
             indexSub++;
         }
     }
 
-    #loadConcepts(categoryTarget, categoryOrigin) {
+    #loadConcepts(categoryTarget, category) {
         let indexCon = 0;
-        for (let concept of categoryOrigin.concepts) {
+        for (let concept of category.concepts) {
             categoryTarget.addConcept(new Concept(concept.keyword));
             this.#loadQuestions(categoryTarget.getConcept(indexCon), concept);
-            //Pendiente recuperar Definitions y Relations
+            this.#loadDefinitions(categoryTarget.getConcept(indexCon), concept);
+            //Pendiente recuperar  Relations
             indexCon++;
         }
     }
@@ -116,83 +114,118 @@ class ElaboraTest {
 
         let indexAns = 0;
         for (let answer of question.answers) {
-            questionTarget.addAnswer(answer.username, answer.content, answer.createdData);
-            if (answer.isEvaluated)
-                questionTarget.getAnswer(indexAns).evaluate(answer.isOK);
-            if (question.getAnswerType === "Open") {
-                questionTarget.getAnswer(indexAns).setIsUsefulForConcept(answer.isUsefulForConcept);
+            questionTarget.addAnswer(answer.username, answer.content, answer.createdDate);
+            if (answer.isEvaluated()) {
+                if (question.getAnswerType === "Open") {
+                    questionTarget.getAnswer(indexAns).evaluate(answer.isOK, answer.evaluatedDate, answer.isUsefulForConcept);
+                }
+                else if (question.getAnswerType === "MultipleChoice") {
+                    questionTarget.getAnswer(indexAns).evaluate(answer.isOK, answer.evaluatedDate);
+                }
             }
+
             indexAns++;
         }
 
     }
 
-    #formatSubcategories(categoryTarget, categoryOrigin) {
+    #loadDefinitions(conceptTarget, concept) {
 
+        for (let definition of concept.definitions) {
+            conceptTarget.addDefinition(new Definition(definition.content, definition.isFake, definition.createdDate));
+
+        }
+    }
+
+    #formatSubcategories(categoryTarget, category) {
         let indexSub = 0;
-        let subcategoryTarget;
-        for (let subcategory of categoryOrigin.getSubcategories()) {
+        for (let subcategory of category.getSubcategories()) {
             categoryTarget.subcategories.push(
                 {
                     name: subcategory.getName(),
                     subcategories: [],
                     concepts: []
                 });
-            subcategoryTarget = categoryTarget.subcategories[indexSub];
-            this.#formatSubcategories(subcategoryTarget, subcategory);
-            this.#formatConcepts(subcategoryTarget, subcategory);
+            this.#formatSubcategories(categoryTarget.subcategories[indexSub], subcategory);
+            this.#formatConcepts(categoryTarget.subcategories[indexSub], subcategory);
             indexSub++;
         }
     }
-    #formatConcepts(categoryTarget, categoryOrigin) {
+    #formatConcepts(categoryTarget, category) {
         let indexCon = 0;
-        for (let concept of categoryOrigin.getConcepts()) {
+        for (let concept of category.getConcepts()) {
             categoryTarget.concepts.push(
                 {
                     keyword: concept.getKeyword(),
                     questions: []
                 });
-
-            let indexQuest = 0;
-            for (let question of concept.getQuestions()) {
-                categoryTarget.concepts[indexCon].questions.push(
-                    {
-                        statement: question.getStatement(),
-                        statementType: question.getStatementType(),
-                        answerType: question.getAnswerType(),
-                        answers: []
-                    });
-                let indexAns = 0;
-                for (let answer of question.getAnswers()) {
-                    if (question.getAnswerType() === "Open") {
-                        categoryTarget.concepts[indexCon].questions[indexQuest].answers.push(
-                            {
-                                username: answer.getUserName(),
-                                content: answer.getContent(),
-                                isOK: answer.getEvaluation(),
-                                isEvaluated: answer.isEvaluated,
-                                isUsefulForConcept: answer.isUsefulForConcept,
-                                createdData: answer.getCreatedData()
-                            });
-                    }
-                    else {
-                        categoryTarget.concepts[indexCon].questions[indexQuest].answers.push(
-                            {
-                                username: answer.getUserName(),
-                                content: answer.getContent(),
-                                isOK: answer.getEvaluation(),
-                                isEvaluated: true,
-                                createdData: answer.getCreatedData()
-                            });
-                    }
-                    indexAns++;
-                }
-                indexQuest++;
-            }
-            //Pendiente guardar Definitions y Relations
+            this.#formatQuestions(categoryTarget.concepts[indexCon], concept);
+            this.#formatDefinitions(categoryTarget.concepts[indexCon], concept);
+            //Pendiente guardar  Relations
             indexCon++;
         }
     }
+
+    #formatQuestions(conceptTarget, concept) {
+        let indexQuest = 0;
+        for (let question of concept.getQuestions()) {
+            conceptTarget.questions.push(
+                {
+                    statement: question.getStatement(),
+                    statementType: question.getStatementType(),
+                    answerType: question.getAnswerType(),
+                    answers: []
+                });
+            this.#formatAnswers(conceptTarget.questions[indexQuest], question);
+            indexQuest++;
+        }
+    }
+
+    #formatAnswers(questionTarget, question) {
+        let indexAns = 0;
+        for (let answer of question.getAnswers()) {
+            if (question.getAnswerType() === "Open") {
+                questionTarget.answers.push(
+                    {
+                        username: answer.getUserName(),
+                        content: answer.getContent(),
+                        isOK: answer.getEvaluation(),
+                        isEvaluated: answer.isEvaluated(),
+                        isUsefulForConcept: answer.isUsefulForConcept(),
+                        createdDate: answer.getCreatedDate(),
+                        evaluatedDate: answer.getEvaluatedDate()
+                    });
+            }
+            else if (question.getAnswerType() === "MultipleChoice") {
+                questionTarget.answers.push(
+                    {
+                        username: answer.getUserName(),
+                        content: answer.getContent(),
+                        isOK: answer.getEvaluation(),
+                        isEvaluated: answer.isEvaluated(),
+                        createdDate: answer.getCreatedDate(),
+                        evaluatedDate: answer.getEvaluatedDate()
+                    });
+            }
+            indexAns++;
+        }
+    }
+
+    #formatDefinitions(conceptTarget, concept) {
+        let indexDef = 0;
+        for (let definition of concept.getDefinitions()) {
+            conceptTarget.definitions.push(
+                {
+                    content: definition.getContent(),
+                    isFake: definition.isFake(),
+                    createdDate: definition.getCreatedDate(),
+                    justifications: []
+                });
+            //this.#formatJustificactions(conceptTarget.definitions[indexDef],definition);
+            indexDef++;
+        }
+    }
+
 }
 
 new ElaboraTest().start();

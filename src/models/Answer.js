@@ -5,6 +5,7 @@ class Answer {
     isOK;
     question;
     #createdDate;
+    #evaluatedDate;
 
     constructor(userName, content, question, date) {
         this.userName = userName;
@@ -12,17 +13,16 @@ class Answer {
         this.isEvaluated = false;
         this.isOK = false;
         this.question = question;
-        if (date === undefined) {
+        if (date === undefined)
             this.#createdDate = new Date();
-        }
         else
             this.#createdDate = date;
-
     }
 
-    evaluate(isOK) {
-        this.isEvaluated = true;
+    evaluate(isOK, date) {
         this.isOK = isOK;
+        this.isEvaluated = true;
+        this.#evaluatedDate = date;
     }
 
     getEvaluation() {
@@ -37,8 +37,20 @@ class Answer {
         return this.content;
     }
 
-    getCreatedData() {
+    getCreatedDate() {
         return this.#createdDate;
+    }
+
+    getEvaluatedDate() {
+        return this.#evaluatedDate;
+    }
+
+    getQuestion() {
+        return this.question;
+    }
+
+    isEvaluated() {
+        return this.isEvaluated;
     }
 
 }
@@ -51,22 +63,13 @@ class OpenAnswer extends Answer {
         this.isUsefulForConcept = false;
     }
 
-    setIsUsefulForConcept(isUsefulForConcept) {
+    evaluate(isOK, date, isUsefulForConcept) {
+        super.evaluate(isOK, date);
         this.isUsefulForConcept = isUsefulForConcept;
     }
 
-    addToConcept() {
-        let statementType = this.question.statementType;
-        let concept = this.question.concept;
-        if (statementType === "Definition") {
-            concept.definitions.push(new Definition(this.content, this.isOK))
-        }
-        else if (statementType === "Classification" || statementType === "Composition") {
-            concept.relations.push(new Relation(this.content, statementType, this.isOK))
-        }
-        else {
-            //error
-        }
+    isUsefulForConcept() {
+        return this.isUsefulForConcept;
     }
 
 }

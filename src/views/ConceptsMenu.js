@@ -58,6 +58,12 @@ class ConceptsMenu extends DynamicMenu {
     addOptions() {
         for (let i = 0; i < this.#concepts.length; i++) {
             this.add(new SelectConceptOption(this.#concepts, i, this.#state));
+            if(this.#concepts[i].getNumberOfDefinitions>0){
+                this.add(new Option(`* Mostrar Definiciones de ${this.#concepts[i]}...`));
+            }
+            if(this.#concepts[i].getNumberOfRelations>0){
+                this.add(new Option(`* Mostrar Relaciones de ${this.#concepts[i]}`))
+            }
         }
     }
 

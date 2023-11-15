@@ -52,7 +52,7 @@ class MainMenu extends DynamicQuitMenu {
             let currentConcept = this.#userState.getCurrentConcept();
 
             if (currentConcept.getKeyword() !== '---' && currentCategory.getName() !== '---') {
-                this.add(new AddQuestionOption("Crear de Preguntas de ...", new QuestionMenu(this.#userState), this.#userState));
+                this.add(new AddQuestionOption(`Crear de Preguntas de ${currentConcept.getKeyword()} ...`, new QuestionMenu(this.#userState), this.#userState));
                 if (currentConcept.getOpenQuestions().length > 0)
                     this.add(new OpenMenuOption(`(Categoría:${currentCategory.getName()}) Revisar Preguntas Abiertas de ${currentConcept.getKeyword()}`, new EvaluationMenu(currentConcept.getOpenQuestions())));
             }

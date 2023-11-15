@@ -15,6 +15,19 @@ class Concept {
         return this.#keyword;
     }
 
+    getDefinition(index) {
+        return this.#definitions[index];
+    }
+
+    getDefinitions() {
+        return this.#definitions;
+    }
+
+    getRelations() {
+        return this.#relations;
+    }
+
+
     getQuestions() {
         return this.#questions;
     }
@@ -44,9 +57,6 @@ class Concept {
         this.#relations.push(relation);
     }
 
-    getDefinition(index) {
-        return this.#definitions[index];
-    }
 
     getNumberOfDefinitions() {
         return this.#definitions.length;
