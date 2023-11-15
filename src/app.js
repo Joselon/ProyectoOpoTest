@@ -115,7 +115,7 @@ class ElaboraTest {
         let indexAns = 0;
         for (let answer of question.answers) {
             questionTarget.addAnswer(answer.username, answer.content, answer.createdDate);
-            if (answer.isEvaluated()) {
+            if (answer.isEvaluated) {
                 if (question.getAnswerType === "Open") {
                     questionTarget.getAnswer(indexAns).evaluate(answer.isOK, answer.evaluatedDate, answer.isUsefulForConcept);
                 }
