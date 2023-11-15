@@ -1,4 +1,4 @@
-import { DynamicMenu, Option } from "../utils/view/Menu.js";
+import { DynamicQuitMenu, Option } from "../utils/view/Menu.js";
 import { console } from "../utils/view/console.js";
 
 class AddAnswerOption extends Option {
@@ -16,7 +16,7 @@ class AddAnswerOption extends Option {
         this.#question.addAnswer(this.#username, content);
     }
 }
-class GenerateTestMenu extends DynamicMenu {
+class GenerateTestMenu extends DynamicQuitMenu {
     #username;
     #questions;
 
@@ -29,9 +29,13 @@ class GenerateTestMenu extends DynamicMenu {
     addOptions() {
 
         for (let i = 0; i < this.#questions.length; i++) {
-            //Pendiente filtrar preguntas...
-            // if (this.#questions[i].getAnswers()->!find username)
-            this.add(new AddAnswerOption(`- Responder: ${this.#questions[i].getStatement()}... `, this.#questions[i], this.#username));
+            let doneByUser = false;
+            for (let answer of this.#questions[i].getAnswers()) {
+                if (this.#username === answer.getUserName())
+                    doneByUser = true;
+            }
+            if (!doneByUser)
+                this.add(new AddAnswerOption(`- Responder: ${this.#questions[i].getStatement()}... `, this.#questions[i], this.#username));
         }
     }
 

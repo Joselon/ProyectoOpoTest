@@ -1,7 +1,6 @@
 import { Category } from './models/Category.js';
 import { Concept } from './models/Concept.js';
 import { MultipleChoiceQuestion, OpenQuestion } from './models/Question.js'
-import { OpenAnswer, SelectedOptionAnswer } from './models/Answer.js';
 import { UserState } from './models/UserState.js';
 import { MainMenu } from './views/MainMenu.js';
 import { YesNoDialog } from './utils/view/Dialog.js';
@@ -13,6 +12,7 @@ class ElaboraTest {
 
 
     constructor() {
+        this.#categories = [];
         this.#setUp();
     }
 
@@ -34,7 +34,6 @@ class ElaboraTest {
 
     #setUp() {
         this.#userState = new UserState(0, new Category("---"), new Concept("---"));
-        this.#categories = [];
         this.readJSONfile();
     }
 
@@ -117,11 +116,12 @@ class ElaboraTest {
 
         let indexAns = 0;
         for (let answer of question.answers) {
-            questionTarget.addAnswer(answer.username, answer.content);
+            questionTarget.addAnswer(answer.username, answer.content, answer.createdData);
             if (answer.isEvaluated)
                 questionTarget.getAnswer(indexAns).evaluate(answer.isOK);
-            if (question.getAnswerType === "Open")
+            if (question.getAnswerType === "Open") {
                 questionTarget.getAnswer(indexAns).setIsUsefulForConcept(answer.isUsefulForConcept);
+            }
             indexAns++;
         }
 
@@ -171,7 +171,8 @@ class ElaboraTest {
                                 content: answer.getContent(),
                                 isOK: answer.getEvaluation(),
                                 isEvaluated: answer.isEvaluated,
-                                isUsefulForConcept: answer.isUsefulForConcept
+                                isUsefulForConcept: answer.isUsefulForConcept,
+                                createdData: answer.getCreatedData()
                             });
                     }
                     else {
@@ -180,7 +181,8 @@ class ElaboraTest {
                                 username: answer.getUserName(),
                                 content: answer.getContent(),
                                 isOK: answer.getEvaluation(),
-                                isEvaluated: true
+                                isEvaluated: true,
+                                createdData: answer.getCreatedData()
                             });
                     }
                     indexAns++;

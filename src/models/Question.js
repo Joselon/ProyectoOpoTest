@@ -4,10 +4,12 @@ class Question {
     statementTypes = ["Defintion", "Classification", "Composition"]
     statementType;
     statement;
+    concept;
 
-    constructor(statementType, concept) {
+    constructor(statement, statementType, concept) {
         this.statementType = statementType;
-        //  this.#buildStatement(concept);
+        this.statement = statement;
+        this.concept = concept;
     }
 
     getStatementType() {
@@ -18,14 +20,13 @@ class Question {
         return this.statement;
     }
 
+    getConcept() {
+        return this.concept;
+    }
+
     getAnswerType() {
         return 1 / 0;
     }
-
-    /* #buildStatement(concept) {
-         this.statement = this.statementTemplateType(concept);
-     }
-     */
 
 }
 
@@ -33,22 +34,18 @@ class OpenQuestion extends Question {
     #openAnswers = [];
 
     constructor(statement, statementType, concept) {
-        super(statementType, concept);
-        this.statement = statement;
-        //this.#buildStatement();
-    }
-
-    #buildStatement(concept) {
-        this.statementType = this.statementTemplateType(concept);
-
+        super(statement, statementType, concept);
     }
 
     getAnswerType() {
         return "Open";
     }
 
-    addAnswer(username, string) {
-        this.#openAnswers.push(new OpenAnswer(username, string));
+    addAnswer(username, string, date) {
+        if (date === undefined)
+            this.#openAnswers.push(new OpenAnswer(username, string, this));
+        else
+            this.#openAnswers.push(new OpenAnswer(username, string,  this, date));
     }
 
     getAnswer(index) {
@@ -66,20 +63,19 @@ class MultipleChoiceQuestion extends Question {
     #selectedOptionAnswers = [];
 
     constructor(statement, statementType, concept) {
-        super(statementType, concept);
+        super(statementType);
         this.statement = statement;
-        //this.#buildStatement();
-    }
-
-    #buildOptions() {
-
+        //this.#buildOptions();
     }
 
     getAnswerType() {
         return "MultipleChoice";
     }
-    addAnswer(username, optionSelected) {
-        this.#selectedOptionAnswers.push(new SelectedOptionAnswer(username, optionSelected));
+    addAnswer(username, optionSelected, date) {
+        if (date === undefined)
+            this.#selectedOptionAnswers.push(new SelectedOptionAnswer(username, optionSelected, this));
+        else
+            this.#selectedOptionAnswers.push(new SelectedOptionAnswer(username, optionSelected, this, date));
     }
 
     getAnswers() {
