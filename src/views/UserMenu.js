@@ -1,7 +1,7 @@
 import { DynamicMenu, Option } from "../utils/view/Menu.js";
 import { console } from "../utils/view/console.js";
 
-class SelectUserTypeOption extends Option {
+class SelectUserOption extends Option {
     #array;
     #index;
     #state;
@@ -28,7 +28,7 @@ class SelectUserTypeOption extends Option {
 
 // ModelMenus
 
-class TypeMenu extends DynamicMenu {
+class UserMenu extends DynamicMenu {
     #state;
     #array;
 
@@ -42,10 +42,10 @@ class TypeMenu extends DynamicMenu {
 
     addOptions() {
         for (let i = 0; i < this.#array.length; i++) {
-            this.add(new SelectUserTypeOption(this.#array, i, this.#state));
+            this.add(new SelectUserOption(this.#array, i, this.#state));
         }
     }
 
 }
 
-export { TypeMenu }
+export { UserMenu }

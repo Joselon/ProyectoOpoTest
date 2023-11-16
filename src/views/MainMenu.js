@@ -1,5 +1,5 @@
 import { DynamicQuitMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
-import { TypeMenu } from "./UserTypesMenu.js";
+import { UserMenu } from "./UserMenu.js";
 import { CategoriesMenu } from "./CategoriesMenu.js";
 import { QuestionMenu } from "./QuestionMenu.js";
 import { OpenQuestion, MultipleChoiceQuestion } from "../models/Question.js";
@@ -37,7 +37,7 @@ class MainMenu extends DynamicQuitMenu {
     constructor(userState, categories) {
         super("ElaboraTest Menú");
         this.#userState = userState;
-        this.#userTypesMenu = new TypeMenu(this.#userState, this.#userState.getTypes());
+        this.#userTypesMenu = new UserMenu(this.#userState, this.#userState.getTypes());
         this.#categories = categories;
         this.#categoriesMenu = new CategoriesMenu(this.#userState, this.#categories);
     }

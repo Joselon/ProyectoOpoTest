@@ -1,27 +1,26 @@
 import { OpenAnswer, SelectedOptionAnswer } from "./Answer.js";
 
 class Question {
-    statementTypes = ["Defintion", "Classification", "Composition"]
-    statementType;
-    statement;
-    concept;
+    #statementType;
+    #statement;
+    #concept;
 
     constructor(statement, statementType, concept) {
-        this.statementType = statementType;
-        this.statement = statement;
-        this.concept = concept;
+        this.#statementType = statementType;
+        this.#statement = statement;
+        this.#concept = concept;
     }
 
     getStatementType() {
-        return this.statementType;
+        return this.#statementType;
     }
 
     getStatement() {
-        return this.statement;
+        return this.#statement;
     }
 
     getConcept() {
-        return this.concept;
+        return this.#concept;
     }
 
     getAnswerType() {
@@ -43,7 +42,7 @@ class OpenQuestion extends Question {
 
     addAnswer(username, string, date) {
         if (date === undefined)
-            this.#openAnswers.push(new OpenAnswer(username, string, this));
+            this.#openAnswers.push(new OpenAnswer(username, string, this, new Date()));
         else
             this.#openAnswers.push(new OpenAnswer(username, string,  this, date));
     }
@@ -63,7 +62,7 @@ class MultipleChoiceQuestion extends Question {
     #selectedOptionAnswers = [];
 
     constructor(statement, statementType, concept) {
-        super(statementType);
+        super(statement, statementType, concept);
         this.statement = statement;
         //this.#buildOptions();
     }
@@ -73,7 +72,7 @@ class MultipleChoiceQuestion extends Question {
     }
     addAnswer(username, optionSelected, date) {
         if (date === undefined)
-            this.#selectedOptionAnswers.push(new SelectedOptionAnswer(username, optionSelected, this));
+            this.#selectedOptionAnswers.push(new SelectedOptionAnswer(username, optionSelected, this, new Date()));
         else
             this.#selectedOptionAnswers.push(new SelectedOptionAnswer(username, optionSelected, this, date));
     }

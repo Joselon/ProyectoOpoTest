@@ -2,6 +2,7 @@ import { Category } from './models/Category.js';
 import { Concept } from './models/Concept.js';
 import { Definition } from './models/Definition.js';
 import { MultipleChoiceQuestion, OpenQuestion } from './models/Question.js';
+import { OpenAnswer , SelectedOptionAnswer} from './models/Answer.js';
 import { UserState } from './models/UserState.js';
 import { MainMenu } from './views/MainMenu.js';
 import { YesNoDialog } from './utils/view/Dialog.js';
@@ -157,7 +158,9 @@ class ElaboraTest {
             categoryTarget.concepts.push(
                 {
                     keyword: concept.getKeyword(),
-                    questions: []
+                    questions: [],
+                    definitions: [],
+                    justifications: []
                 });
             this.#formatQuestions(categoryTarget.concepts[indexCon], concept);
             this.#formatDefinitions(categoryTarget.concepts[indexCon], concept);

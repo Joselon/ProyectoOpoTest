@@ -1,40 +1,38 @@
 class Answer {
-    userName;
-    content;
-    isEvaluated;
-    isOK;
-    question;
+    #userName;
+    #content;
+    #isOK;
+    #question;
     #createdDate;
     #evaluatedDate;
 
     constructor(userName, content, question, date) {
-        this.userName = userName;
-        this.content = content;
-        this.isEvaluated = false;
-        this.isOK = false;
-        this.question = question;
+        this.#userName = userName;
+        this.#content = content;
+        this.#isOK = false;
+        this.#question = question;
         if (date === undefined)
             this.#createdDate = new Date();
         else
             this.#createdDate = date;
+        this.#evaluatedDate = null;
     }
 
     evaluate(isOK, date) {
-        this.isOK = isOK;
-        this.isEvaluated = true;
+        this.#isOK = isOK;
         this.#evaluatedDate = date;
     }
 
     getEvaluation() {
-        return this.isOK;
+        return this.#isOK;
     }
 
     getUserName() {
-        return this.userName;
+        return this.#userName;
     }
 
     getContent() {
-        return this.content;
+        return this.#content;
     }
 
     getCreatedDate() {
@@ -46,30 +44,30 @@ class Answer {
     }
 
     getQuestion() {
-        return this.question;
+        return this.#question;
     }
 
     isEvaluated() {
-        return this.isEvaluated;
+        return this.#evaluatedDate !== null;
     }
 
 }
 
 class OpenAnswer extends Answer {
-    isUsefulForConcept;
+    #isUsefulForConcept;
 
     constructor(userName, text, question, date) {
         super(userName, text, question, date);
-        this.isUsefulForConcept = false;
+        this.#isUsefulForConcept = false;
     }
 
     evaluate(isOK, date, isUsefulForConcept) {
         super.evaluate(isOK, date);
-        this.isUsefulForConcept = isUsefulForConcept;
+        this.#isUsefulForConcept = isUsefulForConcept;
     }
 
     isUsefulForConcept() {
-        return this.isUsefulForConcept;
+        return this.#isUsefulForConcept;
     }
 
 }

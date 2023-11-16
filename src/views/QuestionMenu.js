@@ -51,7 +51,7 @@ class OpenQuestionMenu extends DynamicMenu {
     #withDefinitionTypes = ["ReverseDefinition",""];
     #withRelationTypes = ["",""];
     #withJustificationTypes = ["",""];
-    #statementTypes;;
+    #statementTypes;
     
 
     constructor(title, userState) {

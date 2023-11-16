@@ -1,4 +1,5 @@
 import { DynamicMenu, OpenMenuOption, QuitOption, Option } from "../utils/view/Menu.js";
+import { Concept } from "../models/Concept.js";
 import { Definition } from "../models/Definition.js";
 import { console } from '../utils/view/console.js';
 
@@ -15,25 +16,30 @@ class SelectAndEvaluateAnswerOption extends Option {
     }
 
     interact() {
-        let isOK = console.readNumber(`
-        ¿Es correcta?(1=Sí/0=No):`) === 1;
-        let isUseful = console.readNumber(`
-        ¿Desea marcar la pregunta como útil?(1=Sí/0=No):`) === 1;
+        let isOK = 1 === console.readNumber(`
+        ¿Es correcta?(1=Sí/0=No):`);
+        let isUseful = 1 === console.readNumber(`
+        ¿Desea marcar la pregunta como útil?(1=Sí/0=No):`);
         this.#answer.evaluate(isOK, new Date(), isUseful);
         if (isUseful)
-            this.#addToConcept(this.#answer.getQuestion(), this.#answer.getContent(), isOK);
+            this.#addToConcept(!isOK);
 
     }
 
-    #addToConcept(question, content, isOK) {
-        let statementType = question.getStatementType();
+    #addToConcept(isFake) {
+        let question = this.#answer.getQuestion();
         let concept = question.getConcept();
+        let content = this.#answer.getContent();
+        console.writeln(this.#answer.getContent());
+        let statementType = question.getStatementType();
+        console.writeln(statementType);
 
         if (statementType === "Definition") {
-            concept.definitions.push(new Definition(content, isOK ,new Date()))
+            console.writeln(concept);
+            concept.addDefinition(new Definition(content, isFake, new Date()));
         }
         else if (statementType === "Classification" || statementType === "Composition") {
-            concept.relations.push(new Relation(content, statementType, isOK))
+            concept.addRelation(new Relation(content, statementType, isFake));
         }
         else {
             //...
