@@ -53,15 +53,17 @@
                                     "isOK": false,
                                     "isUsefulForConcept": false,
                                     "createdDate": "2023-11-15T13:35:58.467Z",
+                                    "evaluatedBy": "",
                                     "evaluatedDate": null
                                 },
                                 {
                                     "username": "Jorgito",
                                     "content": "Es una herramienta de control de versiones",
-                                    "isOK": true,
-                                    "isUsefulForConcept": true,
+                                    "isOK": false,
+                                    "isUsefulForConcept": false,
                                     "createdDate": "2023-11-15T13:36:32.514Z",
-                                    "evaluatedDate": "2023-11-16T08:43:10.864Z"
+                                    "evaluatedBy": "LuisDefault",
+                                    "evaluatedDate": "2023-11-16T08:49:10.864Z"
                                 }
                             ]
                         },

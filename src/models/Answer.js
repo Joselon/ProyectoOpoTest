@@ -55,19 +55,26 @@ class Answer {
 
 class OpenAnswer extends Answer {
     #isUsefulForConcept;
+    #evaluatedBy;
 
     constructor(userName, text, question, date) {
         super(userName, text, question, date);
         this.#isUsefulForConcept = false;
+        this.#evaluatedBy = "";
     }
 
-    evaluate(isOK, evaluatedDate, isUsefulForConcept) {
+    evaluate(isOK, evaluatedDate, isUsefulForConcept, evaluatedBy) {
         super.evaluate(isOK, evaluatedDate);
         this.#isUsefulForConcept = isUsefulForConcept;
+        this.#evaluatedBy = evaluatedBy;
     }
 
     isUsefulForConcept() {
         return this.#isUsefulForConcept;
+    }
+
+    getEvaluatedBy() {
+        return this.#evaluatedBy;
     }
 
 }

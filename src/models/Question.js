@@ -64,7 +64,7 @@ class OpenQuestion extends Question {
         for (let answer of question.answers) {
             this.addAnswer(answer.username, answer.content, answer.createdDate);
             if (answer.evaluatedDate !== null)
-                this.answers[indexAns].evaluate(answer.isOK, answer.evaluatedDate, answer.isUsefulForConcept);
+                this.answers[indexAns].evaluate(answer.isOK, answer.evaluatedDate, answer.isUsefulForConcept, answer.evaluatedBy);
             indexAns++;
         }
     }

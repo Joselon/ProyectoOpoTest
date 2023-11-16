@@ -17,13 +17,14 @@ class AddQuestionOption extends OpenMenuOption {
 
     interact() {
         super.interact();
-        let statement = console.readString(`
+        if (this.#userState.getSelectedQuestionType() !== undefined) {
+            let statement = console.readString(`
         Escribe el enunciado de la pregunta de tipo ${this.#userState.getSelectedStatementType()}:`);
-        if (this.#userState.getSelectedQuestionType() === "Open")
-            this.#userState.getCurrentConcept().addQuestion(new OpenQuestion(statement, this.#userState.getSelectedStatementType(), this.#userState.getCurrentConcept()));
-        else if (this.#userState.getSelectedQuestionType() === "MultipleChoice")
-            this.#userState.getCurrentConcept().addQuestion(new MultipleChoiceQuestion(statement, this.#userState.getSelectedStatementType(), this.#userState.getCurrentConcept()));
-
+            if (this.#userState.getSelectedQuestionType() === "Open")
+                this.#userState.getCurrentConcept().addQuestion(new OpenQuestion(statement, this.#userState.getSelectedStatementType(), this.#userState.getCurrentConcept()));
+            else if (this.#userState.getSelectedQuestionType() === "MultipleChoice")
+                this.#userState.getCurrentConcept().addQuestion(new MultipleChoiceQuestion(statement, this.#userState.getSelectedStatementType(), this.#userState.getCurrentConcept()));
+        }
     }
 }
 
@@ -43,6 +44,7 @@ class MainMenu extends DynamicQuitMenu {
     }
 
     addOptions() {
+        this.#addStateTitle();
         this.add(new OpenMenuOption("Seleccionar Tipo de usuario...", this.#userTypesMenu));
         this.add(new OpenMenuOption("Menú de Categorías y Conceptos...", this.#categoriesMenu));
 
@@ -59,12 +61,11 @@ class MainMenu extends DynamicQuitMenu {
             else if (currentCategory.getName() !== '---') {
                 for (let concept of currentCategory.getConcepts()) {
                     if (concept.getOpenQuestions().length > 0)
-                        this.add(new OpenMenuOption(`(Categoría:${currentCategory.getName()}) Revisar Preguntas Abiertas de ${concept.getKeyword()}`, new EvaluationMenu(concept.getOpenQuestions())));
+                        this.add(new OpenMenuOption(`(Categoría:${currentCategory.getName()}) Revisar Preguntas Abiertas de ${concept.getKeyword()}`, new EvaluationMenu(concept.getOpenQuestions(),this.#userState.getCurrentUserName())));
                 }
                 for (let category of currentCategory.getSubcategories()) {
                     this.#addSubcategoryOption(category, currentCategory.getName());
                 }
-
             }
         }
         else {
@@ -85,8 +86,9 @@ class MainMenu extends DynamicQuitMenu {
         }
     }
 
-    addStateTitle() {
-        this.#userStateTitle = `Usuario: ${this.#userState.getCurrentTypeName()}
+    #addStateTitle() {
+        this.#userStateTitle = `
+        Usuario: ${this.#userState.getCurrentTypeName()} ${this.#userState.getCurrentUserName()}
         Categoría actual: ${this.#userState.getCurrentCategory().getName()}`;
         if (this.#userState.getCurrentType() === 0) {
             this.#userStateTitle += `
@@ -94,26 +96,10 @@ class MainMenu extends DynamicQuitMenu {
         }
     }
 
-    interact() {
-        do {
-            this.removeOptions();
-            this.addStateTitle();
-            this.addOptions();
-            this.interact_();
-        } while (!this.isExecutedquitOption());
-    }
-
-    showState() {
-        console.writeln(this.#userStateTitle);
-    }
-
     interact_() {
-        this.showTitles();
-        this.showState();
-        this.execChoosedOption();
+        console.writeln(this.#userStateTitle);
+        super.interact_();
     }
-
 }
-
 
 export { MainMenu };

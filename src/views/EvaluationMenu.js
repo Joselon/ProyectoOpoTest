@@ -4,10 +4,12 @@ import { console } from '../utils/view/console.js';
 
 class SelectAndEvaluateAnswerOption extends Option {
     #answer;
+    #evaluatedBy;
 
-    constructor(answer) {
+    constructor(answer, evaluatedBy) {
         super("Evaluar ");
         this.#answer = answer;
+        this.#evaluatedBy = evaluatedBy;
     }
 
     getTitle() {
@@ -19,7 +21,8 @@ class SelectAndEvaluateAnswerOption extends Option {
         ¿Es correcta?(1=Sí/0=No):`);
         let isUseful = 1 === console.readNumber(`
         ¿Desea marcar la pregunta como útil?(1=Sí/0=No):`);
-        this.#answer.evaluate(isOK, new Date(), isUseful);
+        console.writeln("Profesor:" + this.#evaluatedBy)
+        this.#answer.evaluate(isOK, new Date(), isUseful, this.#evaluatedBy);
         if (isUseful)
             this.#addToConcept(!isOK);
 
@@ -51,16 +54,18 @@ class SelectAndEvaluateAnswerOption extends Option {
 class AnswersMenu extends DynamicQuitMenu {
 
     #answers;
+    #evaluatedBy;
 
-    constructor(answers) {
+    constructor(answers, evaluatedBy) {
         super(" Respuestas:");
         this.#answers = answers;
+        this.#evaluatedBy = evaluatedBy;
     }
 
     addOptions() {
         for (let i = 0; i < this.#answers.length; i++) {
-            if(!this.#answers[i].isEvaluated())
-                this.add(new SelectAndEvaluateAnswerOption(this.#answers[i]));
+            if (!this.#answers[i].isEvaluated())
+                this.add(new SelectAndEvaluateAnswerOption(this.#answers[i], this.#evaluatedBy));
         }
     }
 
@@ -68,17 +73,19 @@ class AnswersMenu extends DynamicQuitMenu {
 class EvaluationMenu extends DynamicQuitMenu {
 
     #questions;
+    #evaluatedBy;
 
-    constructor(questions) {
+    constructor(questions, evaluatedBy) {
         super("Menú de Revisión de Respuestas");
         this.#questions = questions;
+        this.#evaluatedBy = evaluatedBy;
     }
 
     addOptions() {
 
         for (let i = 0; i < this.#questions.length; i++) {
             if (this.#questions[i].getAnswers().length > 0)
-                this.add(new OpenMenuOption(`- Ver Respuestas de: ${this.#questions[i].getStatement()}... `, new AnswersMenu(this.#questions[i].getAnswers())));
+                this.add(new OpenMenuOption(`- Ver Respuestas de: ${this.#questions[i].getStatement()}... `, new AnswersMenu(this.#questions[i].getAnswers(), this.#evaluatedBy)));
         }
     }
 

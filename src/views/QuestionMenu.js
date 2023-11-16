@@ -104,7 +104,8 @@ class QuestionMenu extends DynamicMenu {
 
         this.add(new SelectAnswerTypeAndShowStatementTypesOption(new OpenQuestionMenu("Tipo de enunciado", this.#userState), "Open", this.#userState));
         if (this.#concept.getNumberOfDefinitions() > 0 || this.#concept.getNumberOfRelations() > 0) {
-            this.add(new SelectAnswerTypeAndShowStatementTypesOption(new MultipleChoiceQuestionMenu("Tipo de enunciado", this.#userState), "MultipleChoice", this.#userState));
+            this.add(new Option(`Tipo Test`));
+           // this.add(new SelectAnswerTypeAndShowStatementTypesOption(new MultipleChoiceQuestionMenu("Tipo de enunciado", this.#userState), "MultipleChoice", this.#userState));
         }
     }
 

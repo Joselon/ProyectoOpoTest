@@ -32,7 +32,7 @@ class ElaboraTest {
     }
 
     #setUp() {
-        this.#userState = new UserState(0, new Category("---"), new Concept("---"));
+        this.#userState = new UserState("LuisDefault",0, new Category("---"), new Concept("---"));
         this.readJSONfile();
     }
 
@@ -131,6 +131,7 @@ class ElaboraTest {
                         isOK: answer.getEvaluation(),
                         isUsefulForConcept: answer.isUsefulForConcept(),
                         createdDate: answer.getCreatedDate(),
+                        evaluatedBy: answer.getEvaluatedBy(),
                         evaluatedDate: answer.getEvaluatedDate()
                     });
             }

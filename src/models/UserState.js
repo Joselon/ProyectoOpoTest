@@ -7,11 +7,11 @@ class UserState {
     #selectedQuestionType;
     #selectedStatementType;
 
-    constructor(type, category, concept) {
+    constructor(username, type, category, concept) {
         this.#typeCurrentIndex = type;
         this.#currentCategory = category;
         this.#currentConcept = concept;
-        this.#userName = "Juan Default";
+        this.#userName = username;
     }
 
     getCurrentType() {
