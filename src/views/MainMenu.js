@@ -7,27 +7,6 @@ import { EvaluationMenu } from "./EvaluationMenu.js";
 import { GenerateTestMenu } from "./GenerateTestMenu.js"
 import { console } from "../utils/view/console.js";
 
-class AddQuestionOption extends OpenMenuOption {
-    #userState;
-
-    constructor(title, menu, userState) {
-        super(title, menu);
-        this.#userState = userState;
-    }
-
-    interact() {
-        super.interact();
-        if (this.#userState.getSelectedQuestionType() !== undefined) {
-            let statement = console.readString(`
-        Escribe el enunciado de la pregunta de tipo ${this.#userState.getSelectedStatementType()}:`);
-            if (this.#userState.getSelectedQuestionType() === "Open")
-                this.#userState.getCurrentConcept().addQuestion(new OpenQuestion(statement, this.#userState.getSelectedStatementType(), this.#userState.getCurrentConcept()));
-            else if (this.#userState.getSelectedQuestionType() === "MultipleChoice")
-                this.#userState.getCurrentConcept().addQuestion(new MultipleChoiceQuestion(statement, this.#userState.getSelectedStatementType(), this.#userState.getCurrentConcept()));
-        }
-    }
-}
-
 class MainMenu extends DynamicQuitMenu {
     #userState;
     #userStateTitle;
@@ -54,7 +33,7 @@ class MainMenu extends DynamicQuitMenu {
             let currentConcept = this.#userState.getCurrentConcept();
 
             if (currentConcept.getKeyword() !== '---' && currentCategory.getName() !== '---') {
-                this.add(new AddQuestionOption(`Crear de Preguntas de ${currentConcept.getKeyword()} ...`, new QuestionMenu(this.#userState), this.#userState));
+                this.add(new OpenMenuOption(`Menú de Preguntas de ${currentConcept.getKeyword()} ...`, new QuestionMenu(this.#userState)));
                 if (currentConcept.getOpenQuestions().length > 0)
                     this.add(new OpenMenuOption(`(Categoría:${currentCategory.getName()}) Revisar Preguntas Abiertas de ${currentConcept.getKeyword()}`, new EvaluationMenu(currentConcept.getOpenQuestions())));
             }

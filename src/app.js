@@ -32,7 +32,7 @@ class ElaboraTest {
     }
 
     #setUp() {
-        this.#userState = new UserState("LuisDefault",0, new Category("---"), new Concept("---"));
+        this.#userState = new UserState("LuisDefault", 0, new Category("---"), new Concept("---"));
         this.readJSONfile();
     }
 
@@ -48,7 +48,6 @@ class ElaboraTest {
                 this.#categories[index].loadConceptsFromDataObject(category);
                 index++;
             }
-
         } catch (error) {
             console.error('Error al leer el archivo de base de datos:', error);
         }
@@ -64,7 +63,7 @@ class ElaboraTest {
                     subcategories: [],
                     concepts: []
                 });
-                this.#formatSubcategories(dataObject.categories[index],category);
+                this.#formatSubcategories(dataObject.categories[index], category);
                 this.#formatConcepts(dataObject.categories[index], category);
                 index++;
             }
@@ -163,7 +162,6 @@ class ElaboraTest {
             indexDef++;
         }
     }
-
 }
 
 new ElaboraTest().start();

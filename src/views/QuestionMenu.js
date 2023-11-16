@@ -1,42 +1,80 @@
-import { DynamicMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
+import { DynamicQuitMenu, DynamicMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
+import { console } from "../utils/view/console.js";
 
-class SelectStatementTypeOption extends Option {
-    #array;
+class AddQuestionOption extends OpenMenuOption {
+    #userState;
+
+    constructor(title, menu, userState) {
+        super(title, menu);
+        this.#userState = userState;
+    }
+
+    interact() {
+        super.interact();
+        if (this.#userState.getSelectedQuestionType() !== undefined) {
+            let statement = console.readString(`
+        Escribe el enunciado de la pregunta de tipo ${this.#userState.getSelectedStatementType()}:`);
+            if (this.#userState.getSelectedQuestionType() === "Open")
+                this.#userState.getCurrentConcept().addQuestion(new OpenQuestion(statement, this.#userState.getSelectedStatementType(), this.#userState.getCurrentConcept()));
+            else if (this.#userState.getSelectedQuestionType() === "MultipleChoice")
+                this.#userState.getCurrentConcept().addQuestion(new MultipleChoiceQuestion(statement, this.#userState.getSelectedStatementType(), this.#userState.getCurrentConcept()));
+        }
+    }
+}
+
+class SelectStatementAndShowQuestionTypeMenuOption extends OpenMenuOption {
+    #statementTypes;
     #index;
     #userState;
 
-    constructor(title, array, index, userState) {
-        super(title);
-        this.#array = array;
+    constructor(statementTypeTitle, statementTypes, index, menu, userState) {
+        super(statementTypeTitle, menu);
+        this.#statementTypes = statementTypes;
         this.#index = index;
         this.#userState = userState;
     }
 
     interact() {
         super.interact();
-        this.#userState.setSelectedStatementType(this.#array[this.#index]);
-
+        this.#userState.setSelectedStatementType(this.#statementTypes[this.#index]);
     }
-
 }
 
-class SelectAnswerTypeAndShowStatementTypesOption extends OpenMenuOption {
-    #answerType
+class SelectQuestionTypeOption extends Option {
+    #questionType
     #userState;
 
-    constructor(menu, answerType, userState) {
-        super(` ${answerType} `, menu);
-        this.#answerType = answerType;
+    constructor(title, questionType, userState) {
+        super(title);
+        this.#questionType = questionType;
         this.#userState = userState;
     }
 
     interact() {
         super.interact();
-        this.#userState.setSelectedAnswerType(this.#answerType);
+        this.#userState.setSelectedQuestionType(this.#questionType);
     }
 }
 
-class OpenQuestionMenu extends DynamicMenu {
+class QuestionTypeMenu extends DynamicMenu {
+    // ["Open", "MultipleChoice"];
+    #concept;
+    #userState;
+
+    constructor(userState) {
+        super("Seleccione el tipo de pregunta")
+        this.#userState = userState;
+        this.#concept = this.#userState.getCurrentConcept();
+    }
+
+    addOptions() {
+        this.add(new SelectQuestionTypeOption("Abierta", "Open", this.#userState));
+        if (this.#concept.getNumberOfDefinitions() > 1 || this.#concept.getNumberOfRelations() > 1)
+            this.add(new SelectQuestionTypeOption("Opción Multiple", "MultipleChoice", this.#userState));
+    }
+}
+
+class StatementMenu extends DynamicMenu {
     //["Primary", "WithDefinition", "WithRelation", "WithDefinitionAndRelation"..]
     #concept;
     #userState;
@@ -48,11 +86,10 @@ class OpenQuestionMenu extends DynamicMenu {
     #statementTypesTitles;
 
     #primaryTypes = ["Definition", "Classification", "Composition"];
-    #withDefinitionTypes = ["ReverseDefinition",""];
-    #withRelationTypes = ["",""];
-    #withJustificationTypes = ["",""];
+    #withDefinitionTypes = ["ReverseDefinition", ""];
+    #withRelationTypes = ["", ""];
+    #withJustificationTypes = ["", ""];
     #statementTypes;
-    
 
     constructor(title, userState) {
         super(title);
@@ -65,52 +102,58 @@ class OpenQuestionMenu extends DynamicMenu {
         this.#statementTypes.push(this.#primaryTypes);
         this.#statementTypesTitles.push(this.#primaryTypesTitles);
 
-        if (this.#concept.getNumberOfDefinitions() !== 0){
-            this.#withDefinitionTypesTitles = [`Definición Inversa: ¿Qué define ${this.#concept.getDefinition(0)}`,""];
+        if (this.#concept.getNumberOfDefinitions() !== 0) {
+            this.#withDefinitionTypesTitles = [`Definición Inversa: ¿Qué define ${this.#concept.getDefinition(0)}`, ""];
             this.#statementTypes.push(this.#withDefinitionTypes);
             this.#statementTypesTitles.push(this.#withDefinitionTypesTitles);
         }
-        if (this.#concept.getNumberOfRelations() !== 0){
-            this.#withRelationTypesTitles = ["",""];
+        if (this.#concept.getNumberOfRelations() !== 0) {
+            this.#withRelationTypesTitles = ["", ""];
             this.#statementTypes.push(this.#withRelationTypes);
             this.#statementTypesTitles.push(this.#withRelationTypesTitles);
         }
-       // if(this.#concept.getDefinitions()[i].getJustifications().length)
+        // if(this.#concept.getDefinitions()[i].getJustifications().length)
     }
 
     addOptions() {
         for (let i = 0; i < this.#statementTypesTitles.length; i++) {
-                for (let j = 0; j < this.#statementTypes[i].length; j++)
-                    this.add(new SelectStatementTypeOption(`Seleccionar Tipo: ${this.#statementTypesTitles[i][j]}`, this.#statementTypes[i], j, this.#userState));
+            for (let j = 0; j < this.#statementTypes[i].length; j++)
+                this.add(new SelectStatementAndShowQuestionTypeMenuOption(`Seleccionar Tipo: ${this.#statementTypesTitles[i][j]}`, this.#statementTypes[i], j, new QuestionTypeMenu(this.#userState), this.#userState));
         }
-
     }
-
 }
 
-class QuestionMenu extends DynamicMenu {
-    // ["Open", "MultipleChoice"];
+class QuestionMenu extends DynamicQuitMenu {
     #userState;
     #concept;
+    #questionsInfoTitle;
 
     constructor(userState) {
-        super("Seleccione el tipo de pregunta")
+        super("Menú de Preguntas")
         this.#userState = userState;
         this.#concept = this.#userState.getCurrentConcept();
-
     }
 
     addOptions() {
-
-        this.add(new SelectAnswerTypeAndShowStatementTypesOption(new OpenQuestionMenu("Tipo de enunciado", this.#userState), "Open", this.#userState));
-        if (this.#concept.getNumberOfDefinitions() > 0 || this.#concept.getNumberOfRelations() > 0) {
-            this.add(new Option(`Tipo Test`));
-           // this.add(new SelectAnswerTypeAndShowStatementTypesOption(new MultipleChoiceQuestionMenu("Tipo de enunciado", this.#userState), "MultipleChoice", this.#userState));
-        }
+        this.addQuestionsInfo();
+        this.add(new AddQuestionOption(`Crear de Preguntas de ${this.#concept.getKeyword()} ...`, new StatementMenu(`Tipos de Enunciado disponibles para ${this.#concept.getKeyword()}`, this.#userState), this.#userState))
     }
 
-
-
+    addQuestionsInfo() {
+        let aindex = "a"
+        this.#questionsInfoTitle = "\nPreguntas Creadas: \n";
+        for (let question of this.#concept.getQuestions()) {
+            this.#questionsInfoTitle += aindex + ")";
+            this.#questionsInfoTitle += "Tipo Enunciado: '" + question.getStatementType() + "'/";
+            this.#questionsInfoTitle += "Tipo Pregunta: '" + question.getType() + "'\n";
+            this.#questionsInfoTitle += "Enunciado: '¿" + question.getStatement() + "?'\n";
+            this.#questionsInfoTitle += "\n";
+        }
+    }
+    interact_() {
+        console.writeln(this.#questionsInfoTitle);
+        super.interact_();
+    }
 }
 
 export { QuestionMenu }
