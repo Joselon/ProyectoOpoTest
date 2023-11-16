@@ -1,5 +1,4 @@
-import { DynamicMenu, OpenMenuOption, QuitOption, Option } from "../utils/view/Menu.js";
-import { Concept } from "../models/Concept.js";
+import { DynamicQuitMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
 import { Definition } from "../models/Definition.js";
 import { console } from '../utils/view/console.js';
 
@@ -49,7 +48,7 @@ class SelectAndEvaluateAnswerOption extends Option {
 }
 
 
-class AnswersMenu extends DynamicMenu {
+class AnswersMenu extends DynamicQuitMenu {
 
     #answers;
 
@@ -66,7 +65,7 @@ class AnswersMenu extends DynamicMenu {
     }
 
 }
-class EvaluationMenu extends DynamicMenu {
+class EvaluationMenu extends DynamicQuitMenu {
 
     #questions;
 
@@ -81,7 +80,6 @@ class EvaluationMenu extends DynamicMenu {
             if (this.#questions[i].getAnswers().length > 0)
                 this.add(new OpenMenuOption(`- Ver Respuestas de: ${this.#questions[i].getStatement()}... `, new AnswersMenu(this.#questions[i].getAnswers())));
         }
-        this.add(new QuitOption());
     }
 
 }

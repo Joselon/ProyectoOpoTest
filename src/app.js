@@ -1,8 +1,5 @@
 import { Category } from './models/Category.js';
 import { Concept } from './models/Concept.js';
-import { Definition } from './models/Definition.js';
-import { MultipleChoiceQuestion, OpenQuestion } from './models/Question.js';
-import { OpenAnswer , SelectedOptionAnswer} from './models/Answer.js';
 import { UserState } from './models/UserState.js';
 import { MainMenu } from './views/MainMenu.js';
 import { YesNoDialog } from './utils/view/Dialog.js';
@@ -47,8 +44,8 @@ class ElaboraTest {
             let index = 0;
             for (let category of dataobject.categories) {
                 this.#categories.push(new Category(category.name));
-                this.#loadSubcategories(this.#categories[index], category);
-                this.#loadConcepts(this.#categories[index], category);
+                this.#categories[index].loadSubcategoriesFromDataObject(category);
+                this.#categories[index].loadConceptsFromDataObject(category);
                 index++;
             }
 
@@ -62,8 +59,12 @@ class ElaboraTest {
             let dataObject = { categories: [] };
             let index = 0;
             for (let category of this.#categories) {
-                dataObject.categories.push({ name: category.getName(), subcategories: [], concepts: [] });
-                this.#formatSubcategories(dataObject.categories[index], category);
+                dataObject.categories.push({
+                    name: category.getName(),
+                    subcategories: [],
+                    concepts: []
+                });
+                this.#formatSubcategories(dataObject.categories[index],category);
                 this.#formatConcepts(dataObject.categories[index], category);
                 index++;
             }
@@ -71,70 +72,6 @@ class ElaboraTest {
             writeFileSync('data/database.json', data);
         } catch (error) {
             console.error('Error al escribir en el archivo de base de datos:', error);
-        }
-    }
-
-    #loadSubcategories(categoryTarget, category) {
-        let indexSub = 0;
-        for (let subcategory of category.subcategories) {
-            categoryTarget.addSubcategory(new Category(subcategory.name));
-            this.#loadSubcategories(categoryTarget.getSubcategory(indexSub), subcategory);
-            this.#loadConcepts(categoryTarget.getSubcategory(indexSub), subcategory)
-            indexSub++;
-        }
-    }
-
-    #loadConcepts(categoryTarget, category) {
-        let indexCon = 0;
-        for (let concept of category.concepts) {
-            categoryTarget.addConcept(new Concept(concept.keyword));
-            this.#loadQuestions(categoryTarget.getConcept(indexCon), concept);
-            this.#loadDefinitions(categoryTarget.getConcept(indexCon), concept);
-            //Pendiente recuperar  Relations
-            indexCon++;
-        }
-    }
-
-    #loadQuestions(conceptTarget, concept) {
-        let indexQuest = 0;
-        for (let question of concept.questions) {
-            if (question.type === "Open") {
-                conceptTarget.addQuestion(new OpenQuestion(question.statement, question.statementType, conceptTarget));
-                this.#loadAnswers(conceptTarget.getQuestion(indexQuest), question);
-
-            }
-            else if (question.type === "MultipleChoice") {
-                conceptTarget.addQuestion(new MultipleChoiceQuestion(question.statement, question.statementType, conceptTarget));
-                this.#loadAnswers(conceptTarget.getQuestion(indexQuest), question);
-            }
-            indexQuest++;
-        }
-    }
-
-    #loadAnswers(questionTarget, question) {
-
-        let indexAns = 0;
-        for (let answer of question.answers) {
-            questionTarget.addAnswer(answer.username, answer.content, answer.createdDate);
-            if (answer.evaluatedDate !== null) {
-                if (question.getType === "Open") {
-                    questionTarget.getAnswer(indexAns).evaluate(answer.isOK, answer.evaluatedDate, answer.isUsefulForConcept);
-                }
-                else if (question.getType === "MultipleChoice") {
-                    questionTarget.getAnswer(indexAns).evaluate(answer.isOK, answer.evaluatedDate);
-                }
-            }
-
-            indexAns++;
-        }
-
-    }
-
-    #loadDefinitions(conceptTarget, concept) {
-
-        for (let definition of concept.definitions) {
-            conceptTarget.addDefinition(new Definition(definition.content, definition.isFake, definition.createdDate));
-
         }
     }
 

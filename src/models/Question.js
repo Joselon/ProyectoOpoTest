@@ -4,6 +4,7 @@ class Question {
     #statementType;
     #statement;
     #concept;
+    answers = [];
 
     constructor(statement, statementType, concept) {
         this.#statementType = statementType;
@@ -26,11 +27,14 @@ class Question {
     getType() {
         //return 1 / 0;
     }
+    loadAnswersFromDataObject(question){
+
+    }
+    
 
 }
 
 class OpenQuestion extends Question {
-    #openAnswers = [];
 
     constructor(statement, statementType, concept) {
         super(statement, statementType, concept);
@@ -42,24 +46,33 @@ class OpenQuestion extends Question {
 
     addAnswer(username, string, date) {
         if (date === undefined)
-            this.#openAnswers.push(new OpenAnswer(username, string, this, new Date()));
+            this.answers.push(new OpenAnswer(username, string, this, new Date()));
         else
-            this.#openAnswers.push(new OpenAnswer(username, string,  this, date));
+            this.answers.push(new OpenAnswer(username, string,  this, date));
     }
 
     getAnswer(index) {
-        return this.#openAnswers[index];
+        return this.answers[index];
     }
 
     getAnswers() {
-        return this.#openAnswers;
+        return this.answers;
+    }
+
+    loadAnswersFromDataObject(question) {
+        let indexAns = 0;
+        for (let answer of question.answers) {
+            this.addAnswer(answer.username, answer.content, answer.createdDate);
+            if (answer.evaluatedDate !== null)
+                this.answers[indexAns].evaluate(answer.isOK, answer.evaluatedDate, answer.isUsefulForConcept);
+            indexAns++;
+        }
     }
 
 }
 
 class MultipleChoiceQuestion extends Question {
     #options = [];
-    #selectedOptionAnswers = [];
 
     constructor(statement, statementType, concept) {
         super(statement, statementType, concept);
@@ -72,15 +85,24 @@ class MultipleChoiceQuestion extends Question {
     }
     addAnswer(username, optionSelected, date) {
         if (date === undefined)
-            this.#selectedOptionAnswers.push(new SelectedOptionAnswer(username, optionSelected, this, new Date()));
+            this.answers.push(new SelectedOptionAnswer(username, optionSelected, this, new Date()));
         else
-            this.#selectedOptionAnswers.push(new SelectedOptionAnswer(username, optionSelected, this, date));
+            this.answers.push(new SelectedOptionAnswer(username, optionSelected, this, date));
     }
 
     getAnswers() {
-        return this.#selectedOptionAnswers;
+        return this.answers;
     }
 
+    loadAnswersFromDataObject(question) {
+        let indexAns = 0;
+        for (let answer of question.answers) {
+            this.addAnswer(answer.username, answer.content, answer.createdDate);
+            if (answer.evaluatedDate !== null) 
+                this.answers[indexAns].evaluate(answer.isOK, answer.evaluatedDate);
+            indexAns++;
+        }
+    }
 }
 
 export { OpenQuestion, MultipleChoiceQuestion }

@@ -1,3 +1,5 @@
+import { Concept } from "./Concept.js";
+
 class Category {
     #name;
     #concepts = [];
@@ -75,6 +77,27 @@ class Category {
 
     addSubcategory(category) {
         this.#subcategories.push(category);
+    }
+
+    loadSubcategoriesFromDataObject(category) {
+        let indexSub = 0;
+        for (let subcategory of category.subcategories) {
+            this.addSubcategory(new Category(subcategory.name));
+            this.#subcategories[indexSub].loadSubcategoriesFromDataObject(subcategory);
+            this.#subcategories[indexSub].loadConceptsFromDataObject(subcategory)
+            indexSub++;
+        }
+    }
+
+    loadConceptsFromDataObject(category) {
+        let indexCon = 0;
+        for (let concept of category.concepts) {
+            this.addConcept(new Concept(concept.keyword));
+            this.#concepts[indexCon].loadQuestionsFromDataObject(concept);
+            this.#concepts[indexCon].loadDefinitionsFromDataObject(concept);
+            //Pendiente recuperar  Relations
+            indexCon++;
+        }
     }
 
 }

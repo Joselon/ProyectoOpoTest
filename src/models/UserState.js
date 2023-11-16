@@ -11,6 +11,7 @@ class UserState {
         this.#typeCurrentIndex = type;
         this.#currentCategory = category;
         this.#currentConcept = concept;
+        this.#userName = "Juan Default";
     }
 
     getCurrentType() {

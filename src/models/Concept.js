@@ -1,3 +1,6 @@
+import { OpenQuestion, MultipleChoiceQuestion } from "./Question.js";
+import { Definition } from "./Definition.js";
+
 class Concept {
     #keyword;
     #definitions;
@@ -68,6 +71,29 @@ class Concept {
 
     getNumberOfQuestions() {
         return this.#questions.length;
+    }
+
+    loadQuestionsFromDataObject(concept) {
+        let indexQuest = 0;
+        for (let question of concept.questions) {
+            if (question.type === "Open") {
+                this.addQuestion(new OpenQuestion(question.statement, question.statementType, this));
+                this.#questions[indexQuest].loadAnswersFromDataObject(question);
+
+            }
+            else if (question.type === "MultipleChoice") {
+                this.addQuestion(new MultipleChoiceQuestion(question.statement, question.statementType, this));
+                this.#questions[indexQuest].loadAnswersFromDataObject(question);
+            }
+            indexQuest++;
+        }
+    }
+    loadDefinitionsFromDataObject(concept) {
+
+        for (let definition of concept.definitions) {
+            this.addDefinition(new Definition(definition.content, definition.isFake, definition.createdDate));
+
+        }
     }
 
 }
