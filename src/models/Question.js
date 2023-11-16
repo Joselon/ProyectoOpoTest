@@ -23,8 +23,8 @@ class Question {
         return this.#concept;
     }
 
-    getAnswerType() {
-        return 1 / 0;
+    getType() {
+        //return 1 / 0;
     }
 
 }
@@ -36,7 +36,7 @@ class OpenQuestion extends Question {
         super(statement, statementType, concept);
     }
 
-    getAnswerType() {
+    getType() {
         return "Open";
     }
 
@@ -67,7 +67,7 @@ class MultipleChoiceQuestion extends Question {
         //this.#buildOptions();
     }
 
-    getAnswerType() {
+    getType() {
         return "MultipleChoice";
     }
     addAnswer(username, optionSelected, date) {

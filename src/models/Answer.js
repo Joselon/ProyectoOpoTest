@@ -18,9 +18,9 @@ class Answer {
         this.#evaluatedDate = null;
     }
 
-    evaluate(isOK, date) {
+    evaluate(isOK, evaluatedDate) {
         this.#isOK = isOK;
-        this.#evaluatedDate = date;
+        this.#evaluatedDate = evaluatedDate;
     }
 
     getEvaluation() {
@@ -61,8 +61,8 @@ class OpenAnswer extends Answer {
         this.#isUsefulForConcept = false;
     }
 
-    evaluate(isOK, date, isUsefulForConcept) {
-        super.evaluate(isOK, date);
+    evaluate(isOK, evaluatedDate, isUsefulForConcept) {
+        super.evaluate(isOK, evaluatedDate);
         this.#isUsefulForConcept = isUsefulForConcept;
     }
 

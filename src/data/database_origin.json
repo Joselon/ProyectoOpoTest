@@ -32,7 +32,7 @@
                             {
                                 "statement": "Qué es el software",
                                 "statementType" : "Definition",
-                                "answerType": "Open",
+                                "type": "Open",
                                 "answers": []
                             }
                         ]
@@ -54,7 +54,7 @@
                     {
                         "statement": "Qué es el GIT",
                         "statementType" : "Definition",
-                        "answerType": "Open",
+                        "type": "Open",
                         "answers": []
                     }
                 ]

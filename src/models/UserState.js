@@ -4,7 +4,7 @@ class UserState {
     #typeCurrentIndex;
     #currentCategory;
     #currentConcept;
-    #selectedAnswerType;
+    #selectedQuestionType;
     #selectedStatementType;
 
     constructor(type, category, concept) {
@@ -46,12 +46,12 @@ class UserState {
         this.#currentConcept = concept;
     }
 
-    setSelectedAnswerType(type) {
-        this.#selectedAnswerType = type;
+    setSelectedQuestionType(type) {
+        this.#selectedQuestionType = type;
     }
 
-    getSelectedAnswerType() {
-        return this.#selectedAnswerType;
+    getSelectedQuestionType() {
+        return this.#selectedQuestionType;
     }
 
     setSelectedStatementType(type) {

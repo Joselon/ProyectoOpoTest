@@ -39,7 +39,7 @@ class Concept {
     getOpenQuestions() {
         let openQuestions = [];
         for (let question of this.#questions) {
-            if (question.getAnswerType() === "Open")
+            if (question.getType() === "Open")
                 openQuestions.push(question);
         }
         return openQuestions;

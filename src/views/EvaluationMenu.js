@@ -27,11 +27,11 @@ class SelectAndEvaluateAnswerOption extends Option {
     }
 
     #addToConcept(isFake) {
-        let question = this.#answer.getQuestion();
-        let concept = question.getConcept();
         let content = this.#answer.getContent();
-        console.writeln(this.#answer.getContent());
+        let question = this.#answer.getQuestion();
         let statementType = question.getStatementType();
+        let concept = question.getConcept();
+
         console.writeln(statementType);
 
         if (statementType === "Definition") {
@@ -60,7 +60,8 @@ class AnswersMenu extends DynamicMenu {
 
     addOptions() {
         for (let i = 0; i < this.#answers.length; i++) {
-            this.add(new SelectAndEvaluateAnswerOption(this.#answers[i]));
+            if(!this.#answers[i].isEvaluated())
+                this.add(new SelectAndEvaluateAnswerOption(this.#answers[i]));
         }
     }
 

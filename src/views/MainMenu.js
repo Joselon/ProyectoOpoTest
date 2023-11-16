@@ -19,9 +19,9 @@ class AddQuestionOption extends OpenMenuOption {
         super.interact();
         let statement = console.readString(`
         Escribe el enunciado de la pregunta de tipo ${this.#userState.getSelectedStatementType()}:`);
-        if (this.#userState.getSelectedAnswerType() === "Open")
+        if (this.#userState.getSelectedQuestionType() === "Open")
             this.#userState.getCurrentConcept().addQuestion(new OpenQuestion(statement, this.#userState.getSelectedStatementType(), this.#userState.getCurrentConcept()));
-        else if (this.#userState.getSelectedAnswerType() === "MultipleChoice")
+        else if (this.#userState.getSelectedQuestionType() === "MultipleChoice")
             this.#userState.getCurrentConcept().addQuestion(new MultipleChoiceQuestion(statement, this.#userState.getSelectedStatementType(), this.#userState.getCurrentConcept()));
 
     }

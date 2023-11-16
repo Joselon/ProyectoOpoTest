@@ -98,13 +98,13 @@ class ElaboraTest {
     #loadQuestions(conceptTarget, concept) {
         let indexQuest = 0;
         for (let question of concept.questions) {
-            if (question.answerType === "Open") {
-                conceptTarget.addQuestion(new OpenQuestion(question.statement, question.statementType, concept));
+            if (question.type === "Open") {
+                conceptTarget.addQuestion(new OpenQuestion(question.statement, question.statementType, conceptTarget));
                 this.#loadAnswers(conceptTarget.getQuestion(indexQuest), question);
 
             }
-            else if (question.answerType === "MultipleChoice") {
-                conceptTarget.addQuestion(new MultipleChoiceQuestion(question.statement, question.statementType, concept));
+            else if (question.type === "MultipleChoice") {
+                conceptTarget.addQuestion(new MultipleChoiceQuestion(question.statement, question.statementType, conceptTarget));
                 this.#loadAnswers(conceptTarget.getQuestion(indexQuest), question);
             }
             indexQuest++;
@@ -116,11 +116,11 @@ class ElaboraTest {
         let indexAns = 0;
         for (let answer of question.answers) {
             questionTarget.addAnswer(answer.username, answer.content, answer.createdDate);
-            if (answer.isEvaluated) {
-                if (question.getAnswerType === "Open") {
+            if (answer.evaluatedDate !== null) {
+                if (question.getType === "Open") {
                     questionTarget.getAnswer(indexAns).evaluate(answer.isOK, answer.evaluatedDate, answer.isUsefulForConcept);
                 }
-                else if (question.getAnswerType === "MultipleChoice") {
+                else if (question.getType === "MultipleChoice") {
                     questionTarget.getAnswer(indexAns).evaluate(answer.isOK, answer.evaluatedDate);
                 }
             }
@@ -159,8 +159,7 @@ class ElaboraTest {
                 {
                     keyword: concept.getKeyword(),
                     questions: [],
-                    definitions: [],
-                    justifications: []
+                    definitions: []
                 });
             this.#formatQuestions(categoryTarget.concepts[indexCon], concept);
             this.#formatDefinitions(categoryTarget.concepts[indexCon], concept);
@@ -176,7 +175,7 @@ class ElaboraTest {
                 {
                     statement: question.getStatement(),
                     statementType: question.getStatementType(),
-                    answerType: question.getAnswerType(),
+                    type: question.getType(),
                     answers: []
                 });
             this.#formatAnswers(conceptTarget.questions[indexQuest], question);
@@ -187,25 +186,23 @@ class ElaboraTest {
     #formatAnswers(questionTarget, question) {
         let indexAns = 0;
         for (let answer of question.getAnswers()) {
-            if (question.getAnswerType() === "Open") {
+            if (question.getType() === "Open") {
                 questionTarget.answers.push(
                     {
                         username: answer.getUserName(),
                         content: answer.getContent(),
                         isOK: answer.getEvaluation(),
-                        isEvaluated: answer.isEvaluated(),
                         isUsefulForConcept: answer.isUsefulForConcept(),
                         createdDate: answer.getCreatedDate(),
                         evaluatedDate: answer.getEvaluatedDate()
                     });
             }
-            else if (question.getAnswerType() === "MultipleChoice") {
+            else if (question.getType() === "MultipleChoice") {
                 questionTarget.answers.push(
                     {
                         username: answer.getUserName(),
                         content: answer.getContent(),
                         isOK: answer.getEvaluation(),
-                        isEvaluated: answer.isEvaluated(),
                         createdDate: answer.getCreatedDate(),
                         evaluatedDate: answer.getEvaluatedDate()
                     });
