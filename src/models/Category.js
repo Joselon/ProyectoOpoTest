@@ -110,8 +110,8 @@ class Category {
                     subcategories: [],
                     concepts: []
                 });
-                categorySubcategoriesObjects[indexSub].subcategories = subcategory.formatSubcategoriesObjects();
-                categorySubcategoriesObjects[indexSub].concepts = subcategory.formatConceptsObjects();
+            categorySubcategoriesObjects[indexSub].subcategories = subcategory.formatSubcategoriesObjects();
+            categorySubcategoriesObjects[indexSub].concepts = subcategory.formatConceptsObjects();
             indexSub++;
         }
         return categorySubcategoriesObjects;

@@ -27,7 +27,7 @@ class Question {
     getType() {
         //return 1 / 0;
     }
-    loadAnswersFromDataObject(question){
+    loadAnswersFromDataObject(question) {
         //return 1 / 0;
     }
     formatAnswersObjects() {
@@ -50,7 +50,7 @@ class OpenQuestion extends Question {
         if (date === undefined)
             this.answers.push(new OpenAnswer(username, string, this, new Date()));
         else
-            this.answers.push(new OpenAnswer(username, string,  this, date));
+            this.answers.push(new OpenAnswer(username, string, this, date));
     }
 
     getAnswer(index) {
@@ -74,16 +74,16 @@ class OpenQuestion extends Question {
     formatAnswersObjects() {
         let questionAnswersObjects = [];
         for (let answer of this.answers) {
-                questionAnswersObjects.push(
-                    {
-                        username: answer.getUserName(),
-                        content: answer.getContent(),
-                        isOK: answer.getEvaluation(),
-                        isUsefulForConcept: answer.isUsefulForConcept(),
-                        createdDate: answer.getCreatedDate(),
-                        evaluatedBy: answer.getEvaluatedBy(),
-                        evaluatedDate: answer.getEvaluatedDate()
-                    });
+            questionAnswersObjects.push(
+                {
+                    username: answer.getUserName(),
+                    content: answer.getContent(),
+                    isOK: answer.getEvaluation(),
+                    isUsefulForConcept: answer.isUsefulForConcept(),
+                    createdDate: answer.getCreatedDate(),
+                    evaluatedBy: answer.getEvaluatedBy(),
+                    evaluatedDate: answer.getEvaluatedDate()
+                });
         }
         return questionAnswersObjects;
     }
@@ -117,7 +117,7 @@ class MultipleChoiceQuestion extends Question {
         let indexAns = 0;
         for (let answer of question.answers) {
             this.addAnswer(answer.username, answer.content, answer.createdDate);
-            if (answer.evaluatedDate !== null) 
+            if (answer.evaluatedDate !== null)
                 this.answers[indexAns].evaluate(answer.isOK, answer.evaluatedDate);
             indexAns++;
         }
@@ -126,14 +126,14 @@ class MultipleChoiceQuestion extends Question {
     formatAnswersObjects() {
         let questionAnswersObjects = [];
         for (let answer of this.answers) {
-                questionAnswersObjects.push(
-                    {
-                        username: answer.getUserName(),
-                        content: answer.getContent(),
-                        isOK: answer.getEvaluation(),
-                        createdDate: answer.getCreatedDate(),
-                        evaluatedDate: answer.getEvaluatedDate()
-                    });
+            questionAnswersObjects.push(
+                {
+                    username: answer.getUserName(),
+                    content: answer.getContent(),
+                    isOK: answer.getEvaluation(),
+                    createdDate: answer.getCreatedDate(),
+                    evaluatedDate: answer.getEvaluatedDate()
+                });
         }
         return questionAnswersObjects;
     }
