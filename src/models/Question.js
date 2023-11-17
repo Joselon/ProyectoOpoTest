@@ -28,9 +28,11 @@ class Question {
         //return 1 / 0;
     }
     loadAnswersFromDataObject(question){
-
+        //return 1 / 0;
     }
-    
+    formatAnswersObjects() {
+        //return 1 / 0;
+    }
 
 }
 
@@ -69,6 +71,23 @@ class OpenQuestion extends Question {
         }
     }
 
+    formatAnswersObjects() {
+        let questionAnswersObjects = [];
+        for (let answer of this.answers) {
+                questionAnswersObjects.push(
+                    {
+                        username: answer.getUserName(),
+                        content: answer.getContent(),
+                        isOK: answer.getEvaluation(),
+                        isUsefulForConcept: answer.isUsefulForConcept(),
+                        createdDate: answer.getCreatedDate(),
+                        evaluatedBy: answer.getEvaluatedBy(),
+                        evaluatedDate: answer.getEvaluatedDate()
+                    });
+        }
+        return questionAnswersObjects;
+    }
+
 }
 
 class MultipleChoiceQuestion extends Question {
@@ -102,6 +121,21 @@ class MultipleChoiceQuestion extends Question {
                 this.answers[indexAns].evaluate(answer.isOK, answer.evaluatedDate);
             indexAns++;
         }
+    }
+
+    formatAnswersObjects() {
+        let questionAnswersObjects = [];
+        for (let answer of this.answers) {
+                questionAnswersObjects.push(
+                    {
+                        username: answer.getUserName(),
+                        content: answer.getContent(),
+                        isOK: answer.getEvaluation(),
+                        createdDate: answer.getCreatedDate(),
+                        evaluatedDate: answer.getEvaluatedDate()
+                    });
+        }
+        return questionAnswersObjects;
     }
 }
 

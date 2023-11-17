@@ -100,6 +100,41 @@ class Category {
         }
     }
 
+    formatSubcategoriesObjects() {
+        let categorySubcategoriesObjects = [];
+        let indexSub = 0;
+        for (let subcategory of this.#subcategories) {
+            categorySubcategoriesObjects.push(
+                {
+                    name: subcategory.getName(),
+                    subcategories: [],
+                    concepts: []
+                });
+                categorySubcategoriesObjects[indexSub].subcategories = subcategory.formatSubcategoriesObjects();
+                categorySubcategoriesObjects[indexSub].concepts = subcategory.formatConceptsObjects();
+            indexSub++;
+        }
+        return categorySubcategoriesObjects;
+    }
+
+    formatConceptsObjects() {
+        let categoryConceptsObjects = [];
+        let indexCon = 0;
+        for (let concept of this.#concepts) {
+            categoryConceptsObjects.push(
+                {
+                    keyword: concept.getKeyword(),
+                    questions: [],
+                    definitions: []
+                });
+            categoryConceptsObjects[indexCon].questions = concept.formatQuestionsObjects();
+            categoryConceptsObjects[indexCon].definitions = concept.formatDefinitionsObjects();
+            //Pendiente guardar  Relations
+            indexCon++;
+        }
+        return categoryConceptsObjects;
+    }
+
 }
 
 export { Category }

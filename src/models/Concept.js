@@ -96,6 +96,40 @@ class Concept {
         }
     }
 
+    formatQuestionsObjects() {
+        let conceptQuestionsObjects = [];
+        let indexQuest = 0;
+        for (let question of this.#questions) {
+            conceptQuestionsObjects.push(
+                {
+                    statement: question.getStatement(),
+                    statementType: question.getStatementType(),
+                    type: question.getType(),
+                    answers: []
+                });
+            conceptQuestionsObjects[indexQuest].answers = question.formatAnswersObjects();
+            indexQuest++;
+        }
+        return conceptQuestionsObjects;
+    }
+
+    formatDefinitionsObjects() {
+        let conceptDefinitionsObjects = [];
+        let indexDef = 0;
+        for (let definition of this.#definitions) {
+            conceptDefinitionsObjects.push(
+                {
+                    content: definition.getContent(),
+                    isFake: definition.isFake(),
+                    createdDate: definition.getCreatedDate(),
+                    justifications: []
+                });
+            //conceptDefinitionsObjects[indexDef].justificactions = definition.formatJustificactions();
+            indexDef++;
+        }
+        return conceptDefinitionsObjects;
+    }
+
 }
 
 export { Concept }

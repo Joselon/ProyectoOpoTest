@@ -63,103 +63,14 @@ class ElaboraTest {
                     subcategories: [],
                     concepts: []
                 });
-                this.#formatSubcategories(dataObject.categories[index], category);
-                this.#formatConcepts(dataObject.categories[index], category);
+                dataObject.categories[index].subcategories = category.formatSubcategoriesObjects();
+                dataObject.categories[index].concepts = category.formatConceptsObjects();
                 index++;
             }
             const data = JSON.stringify(dataObject);
             writeFileSync('data/database.json', data);
         } catch (error) {
             console.error('Error al escribir en el archivo de base de datos:', error);
-        }
-    }
-
-    #formatSubcategories(categoryTarget, category) {
-        let indexSub = 0;
-        for (let subcategory of category.getSubcategories()) {
-            categoryTarget.subcategories.push(
-                {
-                    name: subcategory.getName(),
-                    subcategories: [],
-                    concepts: []
-                });
-            this.#formatSubcategories(categoryTarget.subcategories[indexSub], subcategory);
-            this.#formatConcepts(categoryTarget.subcategories[indexSub], subcategory);
-            indexSub++;
-        }
-    }
-    #formatConcepts(categoryTarget, category) {
-        let indexCon = 0;
-        for (let concept of category.getConcepts()) {
-            categoryTarget.concepts.push(
-                {
-                    keyword: concept.getKeyword(),
-                    questions: [],
-                    definitions: []
-                });
-            this.#formatQuestions(categoryTarget.concepts[indexCon], concept);
-            this.#formatDefinitions(categoryTarget.concepts[indexCon], concept);
-            //Pendiente guardar  Relations
-            indexCon++;
-        }
-    }
-
-    #formatQuestions(conceptTarget, concept) {
-        let indexQuest = 0;
-        for (let question of concept.getQuestions()) {
-            conceptTarget.questions.push(
-                {
-                    statement: question.getStatement(),
-                    statementType: question.getStatementType(),
-                    type: question.getType(),
-                    answers: []
-                });
-            this.#formatAnswers(conceptTarget.questions[indexQuest], question);
-            indexQuest++;
-        }
-    }
-
-    #formatAnswers(questionTarget, question) {
-        let indexAns = 0;
-        for (let answer of question.getAnswers()) {
-            if (question.getType() === "Open") {
-                questionTarget.answers.push(
-                    {
-                        username: answer.getUserName(),
-                        content: answer.getContent(),
-                        isOK: answer.getEvaluation(),
-                        isUsefulForConcept: answer.isUsefulForConcept(),
-                        createdDate: answer.getCreatedDate(),
-                        evaluatedBy: answer.getEvaluatedBy(),
-                        evaluatedDate: answer.getEvaluatedDate()
-                    });
-            }
-            else if (question.getType() === "MultipleChoice") {
-                questionTarget.answers.push(
-                    {
-                        username: answer.getUserName(),
-                        content: answer.getContent(),
-                        isOK: answer.getEvaluation(),
-                        createdDate: answer.getCreatedDate(),
-                        evaluatedDate: answer.getEvaluatedDate()
-                    });
-            }
-            indexAns++;
-        }
-    }
-
-    #formatDefinitions(conceptTarget, concept) {
-        let indexDef = 0;
-        for (let definition of concept.getDefinitions()) {
-            conceptTarget.definitions.push(
-                {
-                    content: definition.getContent(),
-                    isFake: definition.isFake(),
-                    createdDate: definition.getCreatedDate(),
-                    justifications: []
-                });
-            //this.#formatJustificactions(conceptTarget.definitions[indexDef],definition);
-            indexDef++;
         }
     }
 }
