@@ -2,7 +2,6 @@
 
 class Concept {
     - keyword
-    - state
 }
 
 'class Definition {
@@ -26,12 +25,12 @@ class Composition
 enum State
 
 class Primary {
-    withKeyword
+    - withKeyword
 }
 
 class Secundary {
-    withKeyword
-    withDefinition or withRelation
+    - withKeyword
+    - withDefinition or withRelation
 }
 note "Link to the next detail" as link
 link .- Secundary
@@ -55,21 +54,20 @@ class OpenCompositionQuestion {
 }
 
 abstract class Question {
-    - statement
-    - StatementType
     - answers[]
 }
 
 class OpenQuestion {
-    - answerType = "Open"
+
 }
 
 Question <|-- OpenQuestion
 Question "0..n" -o Concept
 'Question <|-- Open :-- answerType
 OpenQuestion o--"0..n" OpenAnswer
-Concept *-- State
-Question ..> State: StatementType
+Question *-- StatementType
+State ..> Concept  
+StatementType ..> State
 
 Concept o--"0..n" Definition
 'Definition o-- "0..n" Justification:Fake
@@ -86,13 +84,13 @@ State <|-- Secundary
 'Question <|-- OpenClassQuestion :--StatementType
 'Question <|-- OpenCompositionQuestion :--StatementType
 
-OpenQuestion <|-- OpenDefinitionQuestion
+StatementType <|-- OpenDefinitionQuestion
 OpenDefinitionQuestion <.. Definition: answers
 
-OpenQuestion <|-- OpenClassQuestion
+StatementType <|-- OpenClassQuestion
 OpenClassQuestion <.. Classification :answers
 
-OpenQuestion <|-- OpenCompositionQuestion
+StatementType <|-- OpenCompositionQuestion
 OpenCompositionQuestion <.. Composition :answers
 
 @enduml

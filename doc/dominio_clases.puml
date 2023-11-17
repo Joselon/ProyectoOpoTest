@@ -18,18 +18,17 @@ class Test
 
 class Concept {
     - keyword
-    - state
 }
 
 class Question {
     - statementType
-    - answerType
 }
 
 class Statement
 
 class Answer {
     - isOK
+    - isEvaluated
 }
 
 class MultipleChoiceQuestion
@@ -43,7 +42,6 @@ class Correct
 Class Incorrect
 
 class Open {
-    - isEvaluated
     - isUsefulToConcept
 }
 
@@ -58,10 +56,10 @@ Category o--"0..n" Category : Subcategories
 User <|-- Teacher
 User <|-- Student
 
-Teacher ..>"0..n" Concept
-Category o-- Concept
+Teacher ..> Concept
+Category o--"0..n" Concept
 'Concept --o Category
-Concept o-- Question
+Concept o--"0..n" Question
 'Question --o Concept
 Concept o-- Definition
 Definition o-- Justification
