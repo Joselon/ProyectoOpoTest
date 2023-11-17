@@ -4,17 +4,9 @@ class Concept {
     - keyword
 }
 
-'class Definition {
-    '   - Real/Fake
-    '
-'}
-
-'class Justification {
-    '    - Real/Fake
-    '
-'}
-
-'class Explanation
+class Definition {
+  - isFake
+}
 
 class Relation
 
@@ -22,76 +14,67 @@ class Classification
 
 class Composition
 
-enum State
-
 class Primary {
     - withKeyword
 }
 
-class Secundary {
-    - withKeyword
-    - withDefinition or withRelation
-}
-note "Link to the next detail" as link
-link .- Secundary
 
-class OpenDefinitionQuestion {
-    - StatementType = "Definition"
+abstract class DefinitionQuestion {
     - statement ="¿Qué es KEYWORD?"
 
 }
 
-class OpenClassQuestion {
-    - StatementType = "Classification"
+abstract class ClassificationQuestion {
     - statement = "Qué tipos hay de KEYWORD"
 
 }
 
-class OpenCompositionQuestion {
-    - StatementType = "Composition"
+abstract class CompositionQuestion {
     - statement ="¿Qué conceptos destacarias del KEYWORD?"
 
+}
+
+class OpenDefinitionQuestion {
+    -answers[openAnswer]
+}
+class OpenClassificationQuestion{
+    -answers[openAnswer]
+}
+class OpenCompositionQuestion{
+    -answers[openAnswer]
 }
 
 abstract class Question {
     - answers[]
 }
 
-class OpenQuestion {
 
-}
-
-Question <|-- OpenQuestion
+DefinitionQuestion <|-- OpenDefinitionQuestion
+ClassificationQuestion <|-- OpenClassificationQuestion
+CompositionQuestion <|-- OpenCompositionQuestion
 Question "0..n" -o Concept
-'Question <|-- Open :-- answerType
-OpenQuestion o--"0..n" OpenAnswer
-Question *-- StatementType
-State ..> Concept  
-StatementType ..> State
+
+DefinitionQuestion ..> Concept 
+ClassificationQuestion ..> Concept 
+CompositionQuestion ..> Concept  
+
 
 Concept o--"0..n" Definition
-'Definition o-- "0..n" Justification:Fake
-'Justification o-- Explanation:Fake
 
 Concept o-- "0..n" Relation
 Relation <|-- Classification
 Relation <|-- Composition
 
-State <|-- Primary
-State <|-- Secundary
 
-'Question <|-- OpenDefinitionQuestion :--StatementType
-'Question <|-- OpenClassQuestion :--StatementType
-'Question <|-- OpenCompositionQuestion :--StatementType
-
-StatementType <|-- OpenDefinitionQuestion
+Question <|-- DefinitionQuestion
 OpenDefinitionQuestion <.. Definition: answers
 
-StatementType <|-- OpenClassQuestion
-OpenClassQuestion <.. Classification :answers
+Question <|-- ClassificationQuestion
+OpenClassificationQuestion <.. Classification :answers
 
-StatementType <|-- OpenCompositionQuestion
+Question <|-- CompositionQuestion
 OpenCompositionQuestion <.. Composition :answers
+
 
 @enduml
 
@@ -113,7 +96,7 @@ OpenCompositionQuestion <.. Composition :answers
     '
     '
     '
-}
+'}
 
 'class OpenReverseDefinitionQuestion
 '    "¿Qué es REALDEFINITION?"

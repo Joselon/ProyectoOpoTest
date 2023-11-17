@@ -42,7 +42,7 @@ class Concept {
     getOpenQuestions() {
         let openQuestions = [];
         for (let question of this.#questions) {
-            if (question.getType() === "Open")
+            if (question.getType() === "Open") //DANGER!!
                 openQuestions.push(question);
         }
         return openQuestions;
@@ -60,7 +60,6 @@ class Concept {
         this.#relations.push(relation);
     }
 
-
     getNumberOfDefinitions() {
         return this.#definitions.length;
     }
@@ -73,9 +72,9 @@ class Concept {
         return this.#questions.length;
     }
 
-    loadQuestionsFromDataObject(concept) {
+    loadQuestionsFromDataObject(conceptDataObject) {
         let indexQuest = 0;
-        for (let question of concept.questions) {
+        for (let question of conceptDataObject.questions) {
             if (question.type === "Open") {
                 this.addQuestion(new OpenQuestion(question.statement, question.statementType, this));
                 this.#questions[indexQuest].loadAnswersFromDataObject(question);
@@ -88,11 +87,9 @@ class Concept {
             indexQuest++;
         }
     }
-    loadDefinitionsFromDataObject(concept) {
-
-        for (let definition of concept.definitions) {
+    loadDefinitionsFromDataObject(conceptDataObject) {
+        for (let definition of conceptDataObject.definitions) {
             this.addDefinition(new Definition(definition.content, definition.isFake, definition.createdDate));
-
         }
     }
 

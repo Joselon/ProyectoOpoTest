@@ -1,7 +1,7 @@
 import { OpenAnswer, SelectedOptionAnswer } from "./Answer.js";
 
 class Question {
-    #statementType;
+    #statementType; //Eliminar estos Type y hacer derivadas de Question por cada clase de enunciado
     #statement;
     #concept;
     answers = [];

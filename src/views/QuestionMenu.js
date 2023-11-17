@@ -150,7 +150,7 @@ class QuestionMenu extends DynamicQuitMenu {
     }
 
     addQuestionsInfo() {
-        let aindex = "a"
+        let aindex = 'a';
         this.#questionsInfoTitle = "\nPreguntas Creadas: \n";
         this.#questionsInfoTitle += "------------------ \n";
         for (let question of this.#concept.getQuestions()) {
@@ -159,6 +159,7 @@ class QuestionMenu extends DynamicQuitMenu {
             this.#questionsInfoTitle += "Tipo Enunciado: '" + question.getStatementType() + "' - ";
             this.#questionsInfoTitle += "Tipo de Pregunta: '" + question.getType() + "'\n";
             this.#questionsInfoTitle += "\n";
+            aindex++;
         }
     }
     interact_() {
