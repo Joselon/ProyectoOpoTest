@@ -46,11 +46,8 @@ class OpenQuestion extends Question {
         return "Open";
     }
 
-    addAnswer(username, string, date) {
-        if (date === undefined)
-            this.answers.push(new OpenAnswer(username, string, this, new Date()));
-        else
-            this.answers.push(new OpenAnswer(username, string, this, date));
+    addAnswer(username, string, date = new Date()) {
+        this.answers.push(new OpenAnswer(username, string, this, date));
     }
 
     getAnswer(index) {
@@ -61,9 +58,9 @@ class OpenQuestion extends Question {
         return this.answers;
     }
 
-    loadAnswersFromDataObject(question) {
+    loadAnswersFromDataObject(questionDataObject) {
         let indexAns = 0;
-        for (let answer of question.answers) {
+        for (let answer of questionDataObject.answers) {
             this.addAnswer(answer.username, answer.content, answer.createdDate);
             if (answer.evaluatedDate !== null)
                 this.answers[indexAns].evaluate(answer.isOK, answer.evaluatedDate, answer.isUsefulForConcept, answer.evaluatedBy);
@@ -102,20 +99,17 @@ class MultipleChoiceQuestion extends Question {
     getType() {
         return "MultipleChoice";
     }
-    addAnswer(username, optionSelected, date) {
-        if (date === undefined)
-            this.answers.push(new SelectedOptionAnswer(username, optionSelected, this, new Date()));
-        else
-            this.answers.push(new SelectedOptionAnswer(username, optionSelected, this, date));
+    addAnswer(username, optionSelected, date = new Date()) {
+        this.answers.push(new SelectedOptionAnswer(username, optionSelected, this, date));
     }
 
     getAnswers() {
         return this.answers;
     }
 
-    loadAnswersFromDataObject(question) {
+    loadAnswersFromDataObject(questionDataObject) {
         let indexAns = 0;
-        for (let answer of question.answers) {
+        for (let answer of questionDataObject.answers) {
             this.addAnswer(answer.username, answer.content, answer.createdDate);
             if (answer.evaluatedDate !== null)
                 this.answers[indexAns].evaluate(answer.isOK, answer.evaluatedDate);

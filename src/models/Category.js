@@ -79,9 +79,9 @@ class Category {
         this.#subcategories.push(category);
     }
 
-    loadSubcategoriesFromDataObject(category) {
+    loadSubcategoriesFromDataObject(categoryDataObject) {
         let indexSub = 0;
-        for (let subcategory of category.subcategories) {
+        for (let subcategory of categoryDataObject.subcategories) {
             this.addSubcategory(new Category(subcategory.name));
             this.#subcategories[indexSub].loadSubcategoriesFromDataObject(subcategory);
             this.#subcategories[indexSub].loadConceptsFromDataObject(subcategory)
@@ -89,9 +89,9 @@ class Category {
         }
     }
 
-    loadConceptsFromDataObject(category) {
+    loadConceptsFromDataObject(categoryDataObject) {
         let indexCon = 0;
-        for (let concept of category.concepts) {
+        for (let concept of categoryDataObject.concepts) {
             this.addConcept(new Concept(concept.keyword));
             this.#concepts[indexCon].loadQuestionsFromDataObject(concept);
             this.#concepts[indexCon].loadDefinitionsFromDataObject(concept);

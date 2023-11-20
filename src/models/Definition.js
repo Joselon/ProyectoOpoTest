@@ -4,13 +4,10 @@ class Definition {
     #createdDate;
     #justifications = [];
 
-    constructor(content, isFake, date) {
+    constructor(content, isFake, date = new Date()) {
         this.#content = content;
         this.#isFake = isFake;
-        if (date === undefined)
-            this.#createdDate = new Date();
-        else
-            this.#createdDate = date;
+        this.#createdDate = date;
     }
 
     getContent() {

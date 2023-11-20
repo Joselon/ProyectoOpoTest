@@ -6,15 +6,12 @@ class Answer {
     #createdDate;
     #evaluatedDate;
 
-    constructor(userName, content, question, date) {
+    constructor(userName, content, question, date = new Date()) {
         this.#userName = userName;
         this.#content = content;
         this.#isOK = false;
         this.#question = question;
-        if (date === undefined)
-            this.#createdDate = new Date();
-        else
-            this.#createdDate = date;
+        this.#createdDate = date;
         this.#evaluatedDate = null;
     }
 
