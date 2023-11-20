@@ -151,11 +151,11 @@ class QuestionMenu extends DynamicQuitMenu {
     }
 
     addQuestionsInfo() {
-        let aindex = 'a';
+        let aindex = "a".charCodeAt(0);
         this.#questionsInfoTitle = "\nPreguntas Creadas: \n";
         this.#questionsInfoTitle += "------------------ \n";
         for (let question of this.#concept.getQuestions()) {
-            this.#questionsInfoTitle += aindex + ")";
+            this.#questionsInfoTitle += String.fromCharCode(aindex) + ")";
             this.#questionsInfoTitle += "Enunciado: '¿" + question.getStatement() + "?'\n";
             this.#questionsInfoTitle += "Tipo Enunciado: '" + question.getStatementType() + "' - ";
             this.#questionsInfoTitle += "Tipo de Pregunta: '" + question.getType() + "'\n";

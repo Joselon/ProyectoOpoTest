@@ -93,20 +93,32 @@ class EvaluationMenu extends DynamicQuitMenu {
 
 class EvaluationsMenu extends DynamicQuitMenu {
 
-    #questions;
+    #userState;
     #evaluatedBy;
 
-    constructor(questions, evaluatedBy) {
+    constructor(userState) {
         super("Menú de Revisión de Respuestas");
-        this.#questions = questions;
-        this.#evaluatedBy = evaluatedBy;
+        this.#userState = userState;
+        this.#evaluatedBy = this.#userState.getCurrentUserName();
     }
 
     addOptions() {
+        let currentCategory = this.#userState.getCurrentCategory();
+        this.#addSubcategoryOption(currentCategory);
+    }
 
-        for (let i = 0; i < this.#questions.length; i++) {
-            if (this.#questions[i].getAnswers().length > 0)
-                this.add(new OpenMenuOption(`- Ver Respuestas de: ${this.#questions[i].getStatement()}... `, new AnswersMenu(this.#questions[i].getAnswers(), this.#evaluatedBy)));
+    #addSubcategoryOption(category, parentName) {
+        let optionTitle = "";
+        if (parentName === undefined)
+            optionTitle = `Menú de Evaluaciones de Conceptos de la Categoría:${category.getName()} `;
+        else
+            optionTitle = `Menú de Evaluaciones de Conceptos de la Subcategoría:(${parentName}/${category.getName()}) `
+        for (let concept of category.getConcepts()) {
+            if (concept.getOpenQuestions().length > 0)
+                this.add(new OpenMenuOption(optionTitle + `- Concepto: ${concept.getKeyword()}`, new EvaluationMenu(concept.getOpenQuestions(), this.#evaluatedBy)));
+        }
+        for (let subcategory of category.getSubcategories()) {
+            this.#addSubcategoryOption(subcategory, category.getName())
         }
     }
 
