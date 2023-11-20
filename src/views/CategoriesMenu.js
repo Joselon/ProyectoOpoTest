@@ -1,10 +1,8 @@
 import { DynamicMenu, OpenMenuOption, Option, QuitOption } from "../utils/view/Menu.js";
-import { ConceptsMenu, AddConceptOption } from "./ConceptsMenu.js";
-import { Concept } from "../models/Concept.js";
-import { console } from '../utils/view/console.js';
+import { ConceptsMenu } from "./ConceptsMenu.js";
 import { Category } from "../models/Category.js";
-
-//import { InIntervalDialog } from "../utils/view/Dialog.js";
+import { Concept } from "../models/Concept.js"
+import { console } from "../utils/view/console.js";
 
 class AddCategoryOption extends Option {
     #categories;
@@ -20,13 +18,13 @@ class AddCategoryOption extends Option {
         let isOK;
         do {
             let index = console.readNumber(`Escribe la categoría a la que pertenece (0 default): `)
-            if (index === 0){
+            if (index === 0) {
                 this.#categories.push(new Category(name));
-                isOK =true;
+                isOK = true;
             }
-            else if ((0 < index) && (index < this.#categories.length)){
+            else if ((0 < index) && (index < this.#categories.length)) {
                 this.#categories[index - 1].addSubcategory(new Category(name));
-                isOK =true;
+                isOK = true;
             }
             else {
                 console.writeln("ERROR: Escriba el numero de una categoría válida");
@@ -62,14 +60,20 @@ class SelectCategoryAndShowConceptsOption extends OpenMenuOption {
     #userState;
 
     constructor(menu, category, userState) {
-        super(`- Ver Concepto de Categoría ${category.getName()}... `, menu);
+        super(`${category.getName()}`, menu);
         this.#category = category;
         this.#userState = userState;
     }
 
+    getTitle() {
+        return `${super.getTitle()}:  -(${this.#category.getTotalNumberOfSubcategories()}/${this.#category.getTotalNumberOfConcepts()}/${this.#category.getTotalNumberOfQuestions()})
+   ---(Seleccionar Categoría y mostrar Conceptos...)`;
+    }
+
     interact() {
-        super.interact();
         this.#userState.setCurrentCategory(this.#category);
+        this.#userState.setCurrentConcept(new Concept("---"));
+        super.interact();  
     }
 }
 
@@ -79,14 +83,22 @@ class CategoriesMenu extends DynamicMenu {
     #userState;
 
     constructor(userState, categories) {
-        super("Menú de Categorías - (Subcategorías / Conceptos / Preguntas)");
+        super(`Menú de Categorías - (Subcategorías / Conceptos* / Preguntas*)
+        (*Incluido contenido en subcategorías)`);
         this.#categories = categories;
         this.#userState = userState;
     }
 
     addOptions() {
-        for (let i = 0; i < this.#categories.length; i++) {
-            this.add(new SelectCategoryOption(this.#categories[i], this.#userState));
+        if (this.#userState.getCurrentType() === 0){
+            for (let i = 0; i < this.#categories.length; i++) {
+                this.add(new SelectCategoryAndShowConceptsOption(new ConceptsMenu(this.#userState), this.#categories[i], this.#userState));
+            }
+        }
+        else {
+            for (let i = 0; i < this.#categories.length; i++) {
+                this.add(new SelectCategoryOption(this.#categories[i], this.#userState));
+            }
         }
         for (let i = 0; i < this.#categories.length; i++) {
             if (this.#categories[i].getTotalNumberOfSubcategories() > 0)
@@ -95,7 +107,6 @@ class CategoriesMenu extends DynamicMenu {
 
         if (this.#userState.getCurrentType() === 0 && this.#userState.getCurrentCategory().getName() !== "---") {
             this.add(new AddCategoryOption(this.#categories));
-            this.add(new AddConceptOption(`Añadir Concepto a ${this.#userState.getCurrentCategory().getName()}`, this.#userState.getCurrentCategory().getConcepts()))
         }
         this.add(new QuitOption());
     }

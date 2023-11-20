@@ -1,5 +1,5 @@
 import { DynamicQuitMenu, DynamicMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
-import { OpenQuestion , MultipleChoiceQuestion } from "../models/Question.js"
+import { OpenQuestion, MultipleChoiceQuestion } from "../models/Question.js"
 import { console } from "../utils/view/console.js";
 
 class AddQuestionOption extends OpenMenuOption {
@@ -118,8 +118,8 @@ class StatementMenu extends DynamicMenu {
         if (this.#concept.getNumberOfRelations() !== 0) {
             this.#withRelationTypesTitles = [
                 `Relación Inversa: ¿A qué corresponden estos tipos: `,//${this.#concept.getRelation(0).getType()}
-                 `Relación Faltante: Si X es un tipo de ${this.#concept.getKeyword()} ¿Que tipo falta?`// X=${this.#concept.getRelation(0).getConcept(0)?
-                ];
+                `Relación Faltante: Si X es un tipo de ${this.#concept.getKeyword()} ¿Que tipo falta?`// X=${this.#concept.getRelation(0).getConcept(0)?
+            ];
             this.#statementTypes.push(this.#withRelationTypes);
             this.#statementTypesTitles.push(this.#withRelationTypesTitles);
         }

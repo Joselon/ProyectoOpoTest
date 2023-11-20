@@ -98,6 +98,28 @@
                             "justifications": []
                         }
                     ]
+                },
+                {
+                    "keyword": "Bases de Datos",
+                    "questions": [
+                        {
+                            "statement": "Que es una base de datos",
+                            "statementType": "Definition",
+                            "type": "Open",
+                            "answers": [
+                                {
+                                    "username": "Jaimito",
+                                    "content": "Una plataforma para alojar datos",
+                                    "isOK": false,
+                                    "isUsefulForConcept": false,
+                                    "createdDate": "2023-11-20T18:41:51.038Z",
+                                    "evaluatedBy": "",
+                                    "evaluatedDate": null
+                                }
+                            ]
+                        }
+                    ],
+                    "definitions": []
                 }
             ]
         },

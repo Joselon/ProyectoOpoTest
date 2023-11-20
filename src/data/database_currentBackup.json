@@ -59,8 +59,8 @@
                                 {
                                     "username": "Jorgito",
                                     "content": "Es una herramienta de control de versiones",
-                                    "isOK": false,
-                                    "isUsefulForConcept": false,
+                                    "isOK": true,
+                                    "isUsefulForConcept": true,
                                     "createdDate": "2023-11-15T13:36:32.514Z",
                                     "evaluatedBy": "LuisDefault",
                                     "evaluatedDate": "2023-11-16T08:49:10.864Z"
@@ -71,7 +71,17 @@
                             "statement": "Que tipos de GIT hay",
                             "statementType": "Classification",
                             "type": "Open",
-                            "answers": []
+                            "answers": [
+                                {
+                                    "username": "Jorgito",
+                                    "content": "Publicos y privado",
+                                    "isOK": false,
+                                    "isUsefulForConcept": false,
+                                    "createdDate": "2023-11-17T17:51:38.068Z",
+                                    "evaluatedBy": "",
+                                    "evaluatedDate": null
+                                }
+                            ]
                         },
                         {
                             "statement": "De que se compone GIT",
@@ -88,6 +98,28 @@
                             "justifications": []
                         }
                     ]
+                },
+                {
+                    "keyword": "Bases de Datos",
+                    "questions": [
+                        {
+                            "statement": "Que es una base de datos",
+                            "statementType": "Definition",
+                            "type": "Open",
+                            "answers": [
+                                {
+                                    "username": "Jaimito",
+                                    "content": "Una plataforma para alojar datos",
+                                    "isOK": false,
+                                    "isUsefulForConcept": false,
+                                    "createdDate": "2023-11-20T18:41:51.038Z",
+                                    "evaluatedBy": "",
+                                    "evaluatedDate": null
+                                }
+                            ]
+                        }
+                    ],
+                    "definitions": []
                 }
             ]
         },

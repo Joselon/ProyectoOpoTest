@@ -1,4 +1,4 @@
-import { DynamicMenu, Option } from "../utils/view/Menu.js";
+import { DynamicQuitMenu, Option } from "../utils/view/Menu.js";
 import { Concept } from '../models/Concept.js';
 import { console } from '../utils/view/console.js';
 
@@ -19,51 +19,86 @@ class AddConceptOption extends Option {
 }
 
 class SelectConceptOption extends Option {
-    #concepts
-    #index;
-    #state;
+    #concept
+    #userState;
 
-    constructor(concepts, index, state) {
+    constructor(concept, userState) {
         super("Seleccionar ");
-        this.#concepts = concepts;
-        this.#index = index;
-        this.#state = state;
+        this.#concept = concept;
+        this.#userState = userState;
     }
 
     getTitle() {
-        return `${super.getTitle()}: ${this.#concepts[this.#index].getKeyword()} -(${this.#concepts[this.#index].getNumberOfDefinitions()}/${this.#concepts[this.#index].getNumberOfRelations()}/${this.#concepts[this.#index].getNumberOfQuestions()})`;
+        return `${super.getTitle()}: ${this.#concept.getKeyword()} -(${this.#concept.getNumberOfDefinitions()}/${this.#concept.getNumberOfRelations()}/${this.#concept.getNumberOfQuestions()})`;
     }
 
     interact() {
         super.interact();
-        this.#state.setCurrentConcept(this.#concepts[this.#index]);
+        this.#userState.setCurrentConcept(this.#concept);
+    }
+
+}
+
+class ShowConceptOption extends Option {
+    #concept
+
+    constructor(title, concept) {
+        super(title);
+        this.#concept = concept;
+    }
+
+    interact() {
+        super.interact();
+        console.writeln("\nDefiniciones:");
+        for (let definition of this.#concept.getDefinitions())
+            console.writeln(`- "${definition.getContent()}" - ${definition.isFake() ? "Falsa" : ""}`);
+        console.writeln("Relaciones:");
+        for (let relation of this.#concept.getRelations())
+            console.writeln(`- "${relation.getContent()}"`);
+    }
+
+}
+
+class ModifyConceptOption extends Option {
+    #concept
+
+    constructor(title, concept) {
+        super(title);
+        this.#concept = concept;
+    }
+
+    interact() {
+        super.interact();
+        console.writeln("\nDefiniciones:");
+        for (let definition of this.#concept.getDefinitions())
+            console.writeln(`- "${definition.getContent()}" - ${definition.isFake() ? "Falsa" : ""}`);
+        console.writeln("Relaciones:");
+        for (let relation of this.#concept.getRelations())
+            console.writeln(`- "${relation.getContent()}"`);
     }
 
 }
 
 
-class ConceptsMenu extends DynamicMenu {
+class ConceptsMenu extends DynamicQuitMenu {
+    #userState;
 
-    #concepts;
-    #state;
-
-    constructor(state, concepts) {
+    constructor(userState) {
         super("Menú de Conceptos - (Definiciones / Relaciones / Preguntas)");
-        this.#concepts = concepts;
-        this.#state = state;
-        this.addOptions();
-
+        this.#userState = userState;
     }
 
     addOptions() {
-        for (let i = 0; i < this.#concepts.length; i++) {
-            this.add(new SelectConceptOption(this.#concepts, i, this.#state));
-            if(this.#concepts[i].getNumberOfDefinitions>0){
-                this.add(new Option(`* Mostrar Definiciones de ${this.#concepts[i]}...`));
+        let concepts = this.#userState.getCurrentCategory().getConcepts();
+        for (let i = 0; i < concepts.length; i++) {
+            this.add(new SelectConceptOption(concepts[i], this.#userState));
+            if (concepts[i].getNumberOfDefinitions() > 0 || concepts[i].getNumberOfRelations() > 0) {
+                this.add(new ShowConceptOption(`- Mostrar Concepto ${concepts[i].getKeyword()}...`, concepts[i]));
             }
-            if(this.#concepts[i].getNumberOfRelations>0){
-                this.add(new Option(`* Mostrar Relaciones de ${this.#concepts[i]}`))
-            }
+        }
+        this.add(new AddConceptOption(`Añadir Concepto a ${this.#userState.getCurrentCategory().getName()}`, concepts));
+        if (this.#userState.getCurrentConcept().getKeyword() !== '---') {
+            this.add(new ModifyConceptOption(`* Modificar Concepto Seleccionado: ${this.#userState.getCurrentConcept().getKeyword()}`, this.#userState.getCurrentConcept()));
         }
     }
 
