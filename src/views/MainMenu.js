@@ -2,7 +2,7 @@ import { DynamicQuitMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
 import { UserMenu } from "./UserMenu.js";
 import { CategoriesMenu } from "./CategoriesMenu.js";
 import { QuestionMenu } from "./QuestionMenu.js";
-import { OpenQuestion, MultipleChoiceQuestion } from "../models/Question.js";
+import { ConceptsMenu } from "./ConceptsMenu.js";
 import { EvaluationMenu } from "./EvaluationMenu.js";
 import { GenerateTestMenu } from "./GenerateTestMenu.js"
 import { console } from "../utils/view/console.js";
@@ -32,15 +32,15 @@ class MainMenu extends DynamicQuitMenu {
         if (this.#userState.getCurrentType() === 0) {
             let currentConcept = this.#userState.getCurrentConcept();
 
-            if (currentConcept.getKeyword() !== '---' && currentCategory.getName() !== '---') {
-                this.add(new OpenMenuOption(`Menú de Preguntas de ${currentConcept.getKeyword()} ...`, new QuestionMenu(this.#userState)));
-                if (currentConcept.getOpenQuestions().length > 0)
-                    this.add(new OpenMenuOption(`(Categoría:${currentCategory.getName()}) Revisar Preguntas Abiertas de ${currentConcept.getKeyword()}`, new EvaluationMenu(currentConcept.getOpenQuestions())));
-            }
-            else if (currentCategory.getName() !== '---') {
+            if (currentCategory.getName() !== '---') {
+                this.add(new OpenMenuOption(`- Seleccionar Concepto de la Categoría: ${currentCategory.getName()}... `, new ConceptsMenu(this.#userState, currentCategory.getConcepts())));
+                if (currentConcept.getKeyword() !== '---') {
+                    this.add(new OpenMenuOption(`Menú de Preguntas del Concepto: ${currentConcept.getKeyword()} ...`, new QuestionMenu(this.#userState)));
+                }
+                //Menú de Evaluaciones de Preguntas Abiertas
                 for (let concept of currentCategory.getConcepts()) {
                     if (concept.getOpenQuestions().length > 0)
-                        this.add(new OpenMenuOption(`(Categoría:${currentCategory.getName()}) Revisar Preguntas Abiertas de ${concept.getKeyword()}`, new EvaluationMenu(concept.getOpenQuestions(),this.#userState.getCurrentUserName())));
+                        this.add(new OpenMenuOption(`-Menú de Respuestas Abiertas dentro de Categoría:(Categoría:${currentCategory.getName()})- Concepto: ${concept.getKeyword()}...`, new EvaluationMenu(concept.getOpenQuestions(), this.#userState.getCurrentUserName())));
                 }
                 for (let category of currentCategory.getSubcategories()) {
                     this.#addSubcategoryOption(category, currentCategory.getName());
@@ -58,7 +58,7 @@ class MainMenu extends DynamicQuitMenu {
     #addSubcategoryOption(category, parentName) {
         for (let concept of category.getConcepts()) {
             if (concept.getOpenQuestions().length > 0)
-                this.add(new OpenMenuOption(`-(Subcategoría: ${parentName}/${category.getName()}) Revisar Preguntas Abiertas de ${concept.getKeyword()}`, new EvaluationMenu(concept.getOpenQuestions())));
+                this.add(new OpenMenuOption(`-- Menú de Respuestas Abiertas de la Subcategoría:(Subcategoría: ${parentName}/${category.getName()}) - Concepto: ${concept.getKeyword()}`, new EvaluationMenu(concept.getOpenQuestions())));
         }
         for (let subcategory of category.getSubcategories()) {
             this.#addSubcategoryOption(subcategory, category.getName())

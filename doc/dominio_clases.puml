@@ -8,9 +8,9 @@ class Teacher
 
 class Student
 
-class Evaluation
-
-class Result
+class Evaluation {
+    - result
+}
 
 class Category 
 
@@ -41,7 +41,7 @@ class Correct
 
 Class Incorrect
 
-class Open {
+class OpenAnswer {
     - isUsefulToConcept
 }
 
@@ -61,21 +61,20 @@ Category o--"0..n" Concept
 'Concept --o Category
 Concept o--"0..n" Question
 'Question --o Concept
-Concept o-- Definition
-Definition o-- Justification
+Concept o--"0..n" Definition
+Definition o--"0..n" Justification
 Justification o-- Explication
-Concept o-- Relation
+Concept o--"0..n" Relation
 
 Student -->"0..n" Evaluation
 Evaluation --> Test
-Evaluation --> Result
 
 Teacher ..> Evaluation
-Definition ..> Open :isUsefulToConcept
-Justification ..> Open :isUsefulToConcept
-Relation ..> Open :isUsefulToConcept
+Definition ..> OpenAnswer :isUsefulToConcept
+Justification ..> OpenAnswer :isUsefulToConcept
+Relation ..> OpenAnswer :isUsefulToConcept
 
-Evaluation ..> Open : manual (! isEvaluated)
+Evaluation ..> OpenAnswer : manual (! isEvaluated)
 Evaluation ..> SelectedOption : automatic
 
 Test *--"1..n" Question
@@ -88,10 +87,11 @@ Option <|-- Correct
 MultipleChoiceQuestion *-- Correct
 MultipleChoiceQuestion *--"1..n" Incorrect
 MultipleChoiceQuestion o--"0..n" SelectedOption
-OpenQuestion o--"0..n" Open
+OpenQuestion o--"0..n" OpenAnswer
 Question o--"0..n" Answer
-Answer <|-- Open
+Answer <|-- OpenAnswer
 Answer <|-- SelectedOption
+OpenAnswer --> Solution
 
 
 @enduml

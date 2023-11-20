@@ -1,4 +1,5 @@
 import { DynamicQuitMenu, DynamicMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
+import { OpenQuestion , MultipleChoiceQuestion } from "../models/Question.js"
 import { console } from "../utils/view/console.js";
 
 class AddQuestionOption extends OpenMenuOption {

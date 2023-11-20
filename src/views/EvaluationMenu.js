@@ -91,4 +91,25 @@ class EvaluationMenu extends DynamicQuitMenu {
 
 }
 
-export { EvaluationMenu }
+class EvaluationsMenu extends DynamicQuitMenu {
+
+    #questions;
+    #evaluatedBy;
+
+    constructor(questions, evaluatedBy) {
+        super("Menú de Revisión de Respuestas");
+        this.#questions = questions;
+        this.#evaluatedBy = evaluatedBy;
+    }
+
+    addOptions() {
+
+        for (let i = 0; i < this.#questions.length; i++) {
+            if (this.#questions[i].getAnswers().length > 0)
+                this.add(new OpenMenuOption(`- Ver Respuestas de: ${this.#questions[i].getStatement()}... `, new AnswersMenu(this.#questions[i].getAnswers(), this.#evaluatedBy)));
+        }
+    }
+
+}
+
+export { EvaluationsMenu }
