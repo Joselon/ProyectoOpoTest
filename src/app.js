@@ -1,7 +1,8 @@
 import { Category } from './models/Category.js';
-import { Concept } from './models/Concept.js';
 import { UserState } from './models/UserState.js';
-import { MainMenu } from './views/MainMenu.js';
+import { UserType } from './models/UserTypes.js'
+import { UserMenu } from './views/UserMenu.js'
+import { MainMenu, TeacherMainMenu } from './views/MainMenu.js';
 import { YesNoDialog } from './utils/view/Dialog.js';
 import { readFileSync, writeFileSync } from 'node:fs';
 
@@ -17,7 +18,14 @@ class ElaboraTest {
 
     start() {
         do {
-            new MainMenu(this.#userState, this.#categories).interact();
+            new UserMenu(this.#userState).interact();
+
+            if (this.#userState.getCurrentUserType() === UserType.TEACHER) {
+                new TeacherMainMenu(this.#userState, this.#categories).interact();
+            }
+            else {
+                new MainMenu(this.#userState, this.#categories).interact();
+            }
         } while (this.#isResumed());
     }
 
@@ -32,7 +40,7 @@ class ElaboraTest {
     }
 
     #setUp() {
-        this.#userState = new UserState("LuisDefault", 0, new Category("---"), new Concept("---"));
+        this.#userState = new UserState();
         this.readJSONfile();
     }
 

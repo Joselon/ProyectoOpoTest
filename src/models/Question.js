@@ -27,7 +27,7 @@ class Question {
     getType() {
         //return 1 / 0;
     }
-    loadAnswersFromDataObject(question) {
+    loadAnswersFromDataObject(questionDataObject) {
         //return 1 / 0;
     }
     formatAnswersObjects() {

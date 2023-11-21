@@ -45,7 +45,7 @@ class SelectCategoryOption extends Option {
     }
 
     getTitle() {
-        return `${super.getTitle()}: ${this.#category.getName()} -(${this.#category.getTotalNumberOfSubcategories()}/${this.#category.getTotalNumberOfConcepts()}/${this.#category.getTotalNumberOfQuestions()})`;
+        return `${super.getTitle()}: ${this.#category.getName()} -(${this.#category.getTotalNumberOfSubcategories()}/${this.#category.getTotalNumberOfQuestions()})`;
     }
 
     interact() {
@@ -73,11 +73,35 @@ class SelectCategoryAndShowConceptsOption extends OpenMenuOption {
     interact() {
         this.#userState.setCurrentCategory(this.#category);
         this.#userState.setCurrentConcept(new Concept("---"));
-        super.interact();  
+        super.interact();
     }
 }
 
 class CategoriesMenu extends DynamicMenu {
+
+    #categories;
+    #userState;
+
+    constructor(userState, categories) {
+        super(`Menú de Categorías - (Subcategorías / Preguntas*) (*Incluido contenido en subcategorías)`);
+        this.#categories = categories;
+        this.#userState = userState;
+    }
+
+    addOptions() {
+        for (let i = 0; i < this.#categories.length; i++) {
+            this.add(new SelectCategoryOption(this.#categories[i], this.#userState));
+        }
+
+        for (let i = 0; i < this.#categories.length; i++) {
+            if (this.#categories[i].getTotalNumberOfSubcategories() > 0)
+                this.add(new OpenMenuOption(`--- Ver Subcategorías de ${i + 1}-${this.#categories[i].getName()} ...`, new CategoriesMenu(this.#userState, this.#categories[i].getSubcategories())));
+        }
+        this.add(new QuitOption());
+    }
+}
+
+class TeacherCategoriesMenu extends DynamicMenu {
 
     #categories;
     #userState;
@@ -90,26 +114,18 @@ class CategoriesMenu extends DynamicMenu {
     }
 
     addOptions() {
-        if (this.#userState.getCurrentType() === 0){
-            for (let i = 0; i < this.#categories.length; i++) {
-                this.add(new SelectCategoryAndShowConceptsOption(new ConceptsMenu(this.#userState), this.#categories[i], this.#userState));
-            }
-        }
-        else {
-            for (let i = 0; i < this.#categories.length; i++) {
-                this.add(new SelectCategoryOption(this.#categories[i], this.#userState));
-            }
+        for (let i = 0; i < this.#categories.length; i++) {
+            this.add(new SelectCategoryAndShowConceptsOption(new ConceptsMenu(this.#userState), this.#categories[i], this.#userState));
         }
         for (let i = 0; i < this.#categories.length; i++) {
             if (this.#categories[i].getTotalNumberOfSubcategories() > 0)
                 this.add(new OpenMenuOption(`--- Ver Subcategorías de ${i + 1}-${this.#categories[i].getName()} ...`, new CategoriesMenu(this.#userState, this.#categories[i].getSubcategories())));
         }
-
-        if (this.#userState.getCurrentType() === 0 && this.#userState.getCurrentCategory().getName() !== "---") {
+        if (this.#userState.getCurrentCategory().getName() !== "---") {
             this.add(new AddCategoryOption(this.#categories));
         }
         this.add(new QuitOption());
     }
 }
 
-export { CategoriesMenu }
+export { CategoriesMenu, TeacherCategoriesMenu }

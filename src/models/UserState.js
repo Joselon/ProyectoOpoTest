@@ -1,29 +1,28 @@
+import { UserType } from './UserTypes.js'
+import { Category } from './Category.js';
+import { Concept } from './Concept.js';
+
 class UserState {
-    #userTypes = ["Profesor", "Alumno"];
     #userName;
-    #typeCurrentIndex;
+    #type;
     #currentCategory;
     #currentConcept;
     #selectedQuestionType;
     #selectedStatementType;
 
-    constructor(username, type, category, concept) {
-        this.#typeCurrentIndex = type;
+    constructor(username = "", type = UserType.TEACHER, category = new Category("---"), concept = new Concept("---")) {
+        this.#type = type;
         this.#currentCategory = category;
         this.#currentConcept = concept;
         this.#userName = username;
     }
 
-    getCurrentType() {
-        return this.#typeCurrentIndex;
+    getCurrentUserType() {
+        return this.#type;
     }
 
-    getCurrentTypeName() {
-        return this.#userTypes[this.#typeCurrentIndex];
-    }
-
-    getTypes() {
-        return this.#userTypes;
+    getCurrentUserTypeName() {
+        return this.#type.toString();
     }
 
     getCurrentCategory() {
@@ -38,8 +37,8 @@ class UserState {
         this.#currentCategory = category;
     }
 
-    setCurrentType(index) {
-        this.#typeCurrentIndex = index;
+    setCurrentUserType(type) {
+        this.#type = type;
     }
 
 
