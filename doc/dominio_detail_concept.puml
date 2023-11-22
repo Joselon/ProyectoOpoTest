@@ -45,13 +45,19 @@ class OpenCompositionQuestion{
 }
 
 abstract class Question {
-    - answers[]
+    - statementImplementor
+    - answers[ ]
+    # void setStatementImplementor()
+    + bool isAnsweredBy(studentName)
 }
 
 
 DefinitionQuestion <|-- OpenDefinitionQuestion
+DefinitionQuestion <|-- MultiChoiceDefinitionQuestion
 ClassificationQuestion <|-- OpenClassificationQuestion
+ClassificationQuestion <|-- MultipleChoiceClassificationQuestion
 CompositionQuestion <|-- OpenCompositionQuestion
+CompositionQuestion <|-- MultipleChoiceCompositionQuestion
 Question "0..n" -o Concept
 
 DefinitionQuestion ..> Concept 

@@ -2,9 +2,14 @@
 
 class Community
 
-class User
+class User {
+    - username
+    - categorySelected
+}
 
-class Teacher
+class Teacher {
+    -conceptSelected
+}
 
 class Student
 
@@ -12,23 +17,59 @@ class Evaluation {
     - result
 }
 
-class Category 
+class Category {
+    -subcategories
+    -concepts
+}
 
-class Test 
+class Test {
+    - questions[ category.getAllQuestions() ]
+}
 
 class Concept {
     - keyword
+    - fakekeywords[ ]
+    - definitions[ ]
+    - relations[ ]
+    - questions[ ]
+}
+
+class Definition {
+    - content
+    - isFake
+    - createdDate
+    - justifications[ ]
+}
+
+class Justification {
+    - content
+    - isFake
+    - createdDate
+    - explication
+}
+
+class Relation {
+    - contents[ ]
+    - isFake
+    - createdDate
 }
 
 class Question {
-    - statementType
+    - statementImplementor
+    - answers[ ]
+    # void setStatementImplementor()
+    + bool isAnsweredBy(studentName)
 }
 
 class Statement
 
 class Answer {
+    - content
     - isOK
     - isEvaluated
+    - studentName
+    - createdDate
+    - evaluatedDate
 }
 
 class MultipleChoiceQuestion
@@ -43,9 +84,13 @@ Class Incorrect
 
 class OpenAnswer {
     - isUsefulToConcept
+    - content
+    - evaluatedBy
 }
 
-Class SelectedOption
+Class SelectedOption {
+
+}
 
 
 Community *--"2..n" User
@@ -62,8 +107,8 @@ Category o--"0..n" Concept
 Concept o--"0..n" Question
 'Question --o Concept
 Concept o--"0..n" Definition
-Definition o--"0..n" Justification
-Justification o-- Explication
+Definition o--"0..n" Justification: isFake = true
+Justification o-- Explication: isFake = true
 Concept o--"0..n" Relation
 
 Student -->"0..n" Evaluation

@@ -58,6 +58,15 @@ class OpenQuestion extends Question {
         return this.answers;
     }
 
+    isAnsweredBy(studentName) {
+        let isAnsweredByUser = false;
+        for (let answer of this.getAnswers()) {
+            if (studentName === answer.getStudentName())
+                isAnsweredByUser = true;
+        }
+        return isAnsweredByUser;
+    }
+
     loadAnswersFromDataObject(questionDataObject) {
         let indexAns = 0;
         for (let answer of questionDataObject.answers) {
@@ -73,7 +82,7 @@ class OpenQuestion extends Question {
         for (let answer of this.answers) {
             questionAnswersObjects.push(
                 {
-                    username: answer.getUserName(),
+                    username: answer.getStudentName(),
                     content: answer.getContent(),
                     isOK: answer.getEvaluation(),
                     isUsefulForConcept: answer.isUsefulForConcept(),

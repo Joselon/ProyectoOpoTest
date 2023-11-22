@@ -1,13 +1,13 @@
 class Answer {
-    #userName;
+    #studentName;
     #content;
     #isOK;
     #question;
     #createdDate;
     #evaluatedDate;
 
-    constructor(userName, content, question, date = new Date()) {
-        this.#userName = userName;
+    constructor(studentName, content, question, date = new Date()) {
+        this.#studentName = studentName;
         this.#content = content;
         this.#isOK = false;
         this.#question = question;
@@ -24,8 +24,8 @@ class Answer {
         return this.#isOK;
     }
 
-    getUserName() {
-        return this.#userName;
+    getStudentName() {
+        return this.#studentName;
     }
 
     getContent() {

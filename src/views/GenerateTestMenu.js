@@ -12,6 +12,7 @@ class AddAnswerOption extends Option {
     }
 
     interact() {
+        //QuestionVisitor para leer un string o una opción.
         let content = console.readString(`Respuesta :`);
         this.#question.addAnswer(this.#username, content);
     }
@@ -28,13 +29,8 @@ class GenerateTestMenu extends DynamicQuitMenu {
 
     addOptions() {
 
-        for (let i = 0; i < this.#questions.length; i++) {
-            let doneByUser = false;
-            for (let answer of this.#questions[i].getAnswers()) {
-                if (this.#username === answer.getUserName())
-                    doneByUser = true;
-            }
-            if (!doneByUser)
+        for (let i = 0; i < this.#questions.length; i++) {    
+            if (!question.isAnsweredBy(this.#username))
                 this.add(new AddAnswerOption(`- Responder: ${this.#questions[i].getStatement()}... `, this.#questions[i], this.#username));
         }
     }
