@@ -128,8 +128,16 @@ class StatementMenu extends DynamicMenu {
 
     addOptions() {
         for (let i = 0; i < this.#statementTypesTitles.length; i++) {
-            for (let j = 0; j < this.#statementTypes[i].length; j++)
-                this.add(new SelectStatementAndShowQuestionTypeMenuOption(`Seleccionar Tipo: ${this.#statementTypesTitles[i][j]}`, this.#statementTypes[i], j, new QuestionTypeMenu(this.#userState), this.#userState));
+            for (let j = 0; j < this.#statementTypes[i].length; j++) {
+                let isCreated = false;
+                for (let question of this.#concept.getQuestions()) {
+                    if (question.getStatementType() === this.#statementTypes[i][j]) {
+                        isCreated = true;
+                    }
+                }
+                if (!isCreated)
+                    this.add(new SelectStatementAndShowQuestionTypeMenuOption(`Seleccionar Tipo: ${this.#statementTypesTitles[i][j]}`, this.#statementTypes[i], j, new QuestionTypeMenu(this.#userState), this.#userState));
+            }
         }
     }
 }
