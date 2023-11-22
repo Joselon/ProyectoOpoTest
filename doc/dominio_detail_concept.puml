@@ -14,11 +14,7 @@ class Classification
 
 class Composition
 
-class Primary {
-    - withKeyword
-}
-
-
+package Primary:withKeyword{
 abstract class DefinitionQuestion {
     - statement ="¿Qué es KEYWORD?"
 
@@ -33,7 +29,7 @@ abstract class CompositionQuestion {
     - statement ="¿Qué conceptos destacarias del KEYWORD?"
 
 }
-
+}
 class OpenDefinitionQuestion {
     -answers[openAnswer]
 }
@@ -45,9 +41,9 @@ class OpenCompositionQuestion{
 }
 
 abstract class Question {
-    - statementImplementor
+   ' - statementImplementor
     - answers[ ]
-    # void setStatementImplementor()
+   ' # void setStatementImplementor()
     + bool isAnsweredBy(studentName)
 }
 
