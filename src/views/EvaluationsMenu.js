@@ -97,7 +97,7 @@ class EvaluationsMenu extends DynamicQuitMenu {
     #evaluatedBy;
 
     constructor(userState) {
-        super("Menú de Revisión de Respuestas");
+        super("Menú de Evaluación de Respuestas Abiertas");
         this.#userState = userState;
         this.#evaluatedBy = this.#userState.getCurrentUserName();
     }

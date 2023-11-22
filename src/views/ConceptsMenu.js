@@ -84,7 +84,7 @@ class ConceptsMenu extends DynamicQuitMenu {
     #userState;
 
     constructor(userState) {
-        super("Menú de Conceptos - (Definiciones / Relaciones / Preguntas)");
+        super(`Menú de Conceptos de la Categoría - (Definiciones / Relaciones / Preguntas)`);
         this.#userState = userState;
     }
 
