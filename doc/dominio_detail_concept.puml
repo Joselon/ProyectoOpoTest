@@ -1,10 +1,14 @@
-@startuml ConceptDomainDetailBridge
+@startuml ConceptDomainDetailBridge2
 
 class Concept {
     - keyword
+    - definitions[ ]
+    - relations[ ]
+    - questions[ ]
 }
 
 class Definition {
+    - content
     - isFake
 }
 
@@ -15,57 +19,63 @@ class Classification
 class Composition
 
 package Primary:conceptElementUsed=Keyword {
-    class DefinitionStatement {
+    abstract class DefinitionQuestion {
         - statement ="¿Qué es KEYWORD?"
         - conceptElementTarget = Definition
     }
 
-    class ClassificationStatement {
+    abstract  class ClassificationQuestion {
         - statement = "Qué tipos hay de KEYWORD"
         - conceptElementTarget = Classification
     }
 
-    class CompositionStatement {
+    abstract class CompositionQuestion {
         - statement ="¿Qué conceptos destacarias del KEYWORD?"
         - conceptElementTarget = Composition
     }
 }
 
-abstract class OpenQuestion {
-    -answers[openAnswer]
+class OpenAnswer {
+    - content
+    - isUsefulToConcept
+    - isEvaluatedBy
 }
 
-abstract class MultipleChoiceQuestion {
-    - options
-    - answers[selectedOption]
+class MultipleChoiceAnswer {
+    - options [ ]
+    - selectedOption
+}
+
+class Option {
+    -content
 }
 
 package Bridge {
     abstract class Question {
-        - statementImplementor
+        - answersImplementor
         - answers[ ]
-        # void setStatementImplementor()
+        # void setAnswerImplementor()
         + bool isAnsweredBy(studentName)
     }
 
-    class StatementImplementor {
-        - concept
-        - conceptElementUsed
-        - conceptElementTarget
+    class AnswersImplementor {
+        - studentName
+        - isOk
+        - isEvaluated
+        - evaluatedDate
     }
-
 }
 
-Question *-> StatementImplementor
-Question <|-- OpenQuestion
-Question <|-- MultipleChoiceQuestion
+Question o- AnswersImplementor
+AnswersImplementor <|-- OpenAnswer
+AnswersImplementor <|-- MultipleChoiceAnswer
 
-OpenQuestion o--"0..n" OpenAnswer
-MultipleChoiceQuestion *-- Option
 
-DefinitionStatement ..> Concept
-ClassificationStatement ..> Concept
-CompositionStatement ..> Concept
+MultipleChoiceAnswer *-- Option
+
+DefinitionQuestion ..> Concept
+ClassificationQuestion ..> Concept
+CompositionQuestion ..> Concept
 
 Concept o-- "0..n" Question
 Concept o--"0..n" Definition
@@ -75,15 +85,16 @@ Relation <|-- Classification
 Relation <|-- Composition
 
 
-StatementImplementor <|-- DefinitionStatement
-OpenAnswer <.. Definition:statementImplementorTarget=Definition
-Option ..> Definition :statementImplementorTarget= Definition
-StatementImplementor <|-- ClassificationStatement
-'OpenClassificationQuestion <.. Classification :answers
+Question <|-- DefinitionQuestion
+OpenAnswer <.. Definition:conceptElementTarget=Definition
+Option ..> Definition :conceptElementTarget= Definition
+Question <|-- ClassificationQuestion
+OpenAnswer <.. Classification :conceptElementTarget= Classification
+Option ..> Classification :conceptElementTarget= Classification
 
-StatementImplementor <|-- CompositionStatement
-'OpenCompositionQuestion <.. Composition :answers
-
+Question <|-- CompositionQuestion
+'OpenAnswer <.. Composition :conceptElementTarget= Composition
+'Option ..> Composition:conceptElementTarget= Composition 
 
 @enduml
 
@@ -101,11 +112,6 @@ StatementImplementor <|-- CompositionStatement
     '    withKeyword
     '    withDefinition
     '   withJustification
-    '
-    '
-    '
-    '
-    '
 '}
 
 'class OpenReverseDefinitionQuestion

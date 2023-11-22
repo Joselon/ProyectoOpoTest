@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="786px" preserveAspectRatio="none" style="width:1455px;height:786px;background:#FFFFFF;" version="1.1" viewBox="0 0 1455 786" width="1455px" zoomAndPan="magnify"><defs/><g><!--MD5=[2b927b3a1f5e04350326ca5369519571]
+cluster Primary:conceptElementUsed=Keyword--><g id="cluster_Primary:conceptElementUsed=Keyword"><path d="M52.87,209 L328.87,209 A3.75,3.75 0 0 1 331.37,211.5 L338.37,232.6094 L1093.87,232.6094 A2.5,2.5 0 0 1 1096.37,235.1094 L1096.37,341.5 A2.5,2.5 0 0 1 1093.87,344 L52.87,344 A2.5,2.5 0 0 1 50.37,341.5 L50.37,211.5 A2.5,2.5 0 0 1 52.87,209 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="50.37" x2="338.37" y1="232.6094" y2="232.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="275" x="54.37" y="225.5332">Primary:conceptElementUsed=Keyword</text></g><!--MD5=[f524f4843046d594e03236310757e034]
+cluster Bridge--><g id="cluster_Bridge"><path d="M698.87,6 L746.87,6 A3.75,3.75 0 0 1 749.37,8.5 L756.37,29.6094 L1160.87,29.6094 A2.5,2.5 0 0 1 1163.37,32.1094 L1163.37,173.5 A2.5,2.5 0 0 1 1160.87,176 L698.87,176 A2.5,2.5 0 0 1 696.37,173.5 L696.37,8.5 A2.5,2.5 0 0 1 698.87,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="696.37" x2="756.37" y1="29.6094" y2="29.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="47" x="700.37" y="22.5332">Bridge</text></g><!--MD5=[a8cb140b744031715f533a7b2982ca3a]
+class DefinitionQuestion--><g id="elem_DefinitionQuestion"><rect codeLine="21" fill="#F1F1F1" height="83.2188" id="DefinitionQuestion" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="248" x="832.37" y="245"/><ellipse cx="894.12" cy="261" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M896.3075,262.7656 L892.1669,262.7656 L891.745,263.7969 L892.1669,263.7969 Q892.7763,263.7969 893.0419,264.0313 Q893.3075,264.2656 893.3075,264.6563 Q893.3075,265.0313 893.0419,265.2656 Q892.7763,265.5 892.1669,265.5 L889.87,265.5 Q889.2606,265.5 889.0106,265.2656 Q888.745,265.0313 888.745,264.6406 Q888.745,264.2656 889.0263,264.0313 Q889.2919,263.7813 889.9169,263.7969 L892.5888,257.1406 L891.4794,257.1406 Q890.87,257.1406 890.6044,256.9063 Q890.3388,256.6719 890.3388,256.2813 Q890.3388,255.9063 890.6044,255.6719 Q890.87,255.4375 891.4794,255.4375 L895.1513,255.4375 L898.5419,263.7969 Q899.1356,263.7969 899.3231,263.9375 Q899.7138,264.2031 899.7138,264.6563 Q899.7138,265.0313 899.4481,265.2656 Q899.1981,265.5 898.5888,265.5 L896.2919,265.5 Q895.6825,265.5 895.4169,265.2656 Q895.1513,265.0313 895.1513,264.6406 Q895.1513,264.2656 895.4169,264.0313 Q895.6825,263.7969 896.2919,263.7969 L896.7138,263.7969 L896.3075,262.7656 Z M895.5888,261.0625 L894.2294,257.6875 L892.8544,261.0625 L895.5888,261.0625 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="116" x="914.62" y="266.7285">DefinitionQuestion</text><line style="stroke:#181818;stroke-width:0.5;" x1="833.37" x2="1079.37" y1="277" y2="277"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="840.37" y="288.3047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="222" x="852.37" y="295.5332">statement ="¿Qué es KEYWORD?"</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="840.37" y="305.9141"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="218" x="852.37" y="313.1426">conceptElementTarget = Definition</text><line style="stroke:#181818;stroke-width:0.5;" x1="833.37" x2="1079.37" y1="320.2188" y2="320.2188"/></g><!--MD5=[5537c14b6466bc70ff6128a1aa5dd387]
+class ClassificationQuestion--><g id="elem_ClassificationQuestion"><rect codeLine="26" fill="#F1F1F1" height="83.2188" id="ClassificationQuestion" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="297" x="66.87" y="245"/><ellipse cx="141.12" cy="261" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M143.3075,262.7656 L139.1669,262.7656 L138.745,263.7969 L139.1669,263.7969 Q139.7763,263.7969 140.0419,264.0313 Q140.3075,264.2656 140.3075,264.6563 Q140.3075,265.0313 140.0419,265.2656 Q139.7763,265.5 139.1669,265.5 L136.87,265.5 Q136.2606,265.5 136.0106,265.2656 Q135.745,265.0313 135.745,264.6406 Q135.745,264.2656 136.0263,264.0313 Q136.2919,263.7813 136.9169,263.7969 L139.5888,257.1406 L138.4794,257.1406 Q137.87,257.1406 137.6044,256.9063 Q137.3388,256.6719 137.3388,256.2813 Q137.3388,255.9063 137.6044,255.6719 Q137.87,255.4375 138.4794,255.4375 L142.1513,255.4375 L145.5419,263.7969 Q146.1356,263.7969 146.3231,263.9375 Q146.7138,264.2031 146.7138,264.6563 Q146.7138,265.0313 146.4481,265.2656 Q146.1981,265.5 145.5888,265.5 L143.2919,265.5 Q142.6825,265.5 142.4169,265.2656 Q142.1513,265.0313 142.1513,264.6406 Q142.1513,264.2656 142.4169,264.0313 Q142.6825,263.7969 143.2919,263.7969 L143.7138,263.7969 L143.3075,262.7656 Z M142.5888,261.0625 L141.2294,257.6875 L139.8544,261.0625 L142.5888,261.0625 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="140" x="161.62" y="266.7285">ClassificationQuestion</text><line style="stroke:#181818;stroke-width:0.5;" x1="67.87" x2="362.87" y1="277" y2="277"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="74.87" y="288.3047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="271" x="86.87" y="295.5332">statement = "Qué tipos hay de KEYWORD"</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="74.87" y="305.9141"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="242" x="86.87" y="313.1426">conceptElementTarget = Classification</text><line style="stroke:#181818;stroke-width:0.5;" x1="67.87" x2="362.87" y1="320.2188" y2="320.2188"/></g><!--MD5=[589357b5cd90a42c237433e2518f116d]
+class CompositionQuestion--><g id="elem_CompositionQuestion"><rect codeLine="31" fill="#F1F1F1" height="83.2188" id="CompositionQuestion" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="398" x="399.37" y="245"/><ellipse cx="526.62" cy="261" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M528.8075,262.7656 L524.6669,262.7656 L524.245,263.7969 L524.6669,263.7969 Q525.2763,263.7969 525.5419,264.0313 Q525.8075,264.2656 525.8075,264.6563 Q525.8075,265.0313 525.5419,265.2656 Q525.2763,265.5 524.6669,265.5 L522.37,265.5 Q521.7606,265.5 521.5106,265.2656 Q521.245,265.0313 521.245,264.6406 Q521.245,264.2656 521.5263,264.0313 Q521.7919,263.7813 522.4169,263.7969 L525.0888,257.1406 L523.9794,257.1406 Q523.37,257.1406 523.1044,256.9063 Q522.8388,256.6719 522.8388,256.2813 Q522.8388,255.9063 523.1044,255.6719 Q523.37,255.4375 523.9794,255.4375 L527.6513,255.4375 L531.0419,263.7969 Q531.6356,263.7969 531.8231,263.9375 Q532.2138,264.2031 532.2138,264.6563 Q532.2138,265.0313 531.9481,265.2656 Q531.6981,265.5 531.0888,265.5 L528.7919,265.5 Q528.1825,265.5 527.9169,265.2656 Q527.6513,265.0313 527.6513,264.6406 Q527.6513,264.2656 527.9169,264.0313 Q528.1825,263.7969 528.7919,263.7969 L529.2138,263.7969 L528.8075,262.7656 Z M528.0888,261.0625 L526.7294,257.6875 L525.3544,261.0625 L528.0888,261.0625 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="135" x="547.12" y="266.7285">CompositionQuestion</text><line style="stroke:#181818;stroke-width:0.5;" x1="400.37" x2="796.37" y1="277" y2="277"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="407.37" y="288.3047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="372" x="419.37" y="295.5332">statement ="¿Qué conceptos destacarias del KEYWORD?"</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="407.37" y="305.9141"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="237" x="419.37" y="313.1426">conceptElementTarget = Composition</text><line style="stroke:#181818;stroke-width:0.5;" x1="400.37" x2="796.37" y1="320.2188" y2="320.2188"/></g><!--MD5=[fc7123defb831ecdd44b2d9bcef6cceb]
+class Question--><g id="elem_Question"><rect codeLine="53" fill="#F1F1F1" height="118.4375" id="Question" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="238" x="712.37" y="42"/><ellipse cx="798.62" cy="58" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M800.8075,59.7656 L796.6669,59.7656 L796.245,60.7969 L796.6669,60.7969 Q797.2763,60.7969 797.5419,61.0313 Q797.8075,61.2656 797.8075,61.6563 Q797.8075,62.0313 797.5419,62.2656 Q797.2763,62.5 796.6669,62.5 L794.37,62.5 Q793.7606,62.5 793.5106,62.2656 Q793.245,62.0313 793.245,61.6406 Q793.245,61.2656 793.5263,61.0313 Q793.7919,60.7813 794.4169,60.7969 L797.0888,54.1406 L795.9794,54.1406 Q795.37,54.1406 795.1044,53.9063 Q794.8388,53.6719 794.8388,53.2813 Q794.8388,52.9063 795.1044,52.6719 Q795.37,52.4375 795.9794,52.4375 L799.6513,52.4375 L803.0419,60.7969 Q803.6356,60.7969 803.8231,60.9375 Q804.2138,61.2031 804.2138,61.6563 Q804.2138,62.0313 803.9481,62.2656 Q803.6981,62.5 803.0888,62.5 L800.7919,62.5 Q800.1825,62.5 799.9169,62.2656 Q799.6513,62.0313 799.6513,61.6406 Q799.6513,61.2656 799.9169,61.0313 Q800.1825,60.7969 800.7919,60.7969 L801.2138,60.7969 L800.8075,59.7656 Z M800.0888,58.0625 L798.7294,54.6875 L797.3544,58.0625 L800.0888,58.0625 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="57" x="819.12" y="63.7285">Question</text><line style="stroke:#181818;stroke-width:0.5;" x1="713.37" x2="949.37" y1="74" y2="74"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="720.37" y="85.3047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="129" x="732.37" y="92.5332">answersImplementor</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="720.37" y="102.9141"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="64" x="732.37" y="110.1426">answers[ ]</text><line style="stroke:#181818;stroke-width:0.5;" x1="713.37" x2="949.37" y1="117.2188" y2="117.2188"/><polygon fill="#FFFF44" points="723.37,126.5234,727.37,130.5234,723.37,134.5234,719.37,130.5234" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="182" x="732.37" y="135.752">void setAnswerImplementor()</text><ellipse cx="723.37" cy="149.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="212" x="732.37" y="153.3613">bool isAnsweredBy(studentName)</text></g><!--MD5=[5959bc2cfe92666dc96d9feddf85e54f]
+class AnswersImplementor--><g id="elem_AnswersImplementor"><rect codeLine="60" fill="#F1F1F1" height="118.4375" id="AnswersImplementor" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="162" x="985.37" y="42"/><ellipse cx="1000.37" cy="58" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1003.1356,53.875 Q1003.2919,53.6563 1003.4794,53.5469 Q1003.6669,53.4375 1003.8856,53.4375 Q1004.2606,53.4375 1004.495,53.7031 Q1004.7294,53.9531 1004.7294,54.5625 L1004.7294,56.0156 Q1004.7294,56.625 1004.495,56.8906 Q1004.2606,57.1563 1003.8856,57.1563 Q1003.5419,57.1563 1003.3388,56.9531 Q1003.1356,56.7656 1003.0263,56.25 Q1002.9794,55.8906 1002.7919,55.7031 Q1002.4638,55.3281 1001.8544,55.1094 Q1001.245,54.8906 1000.62,54.8906 Q999.8544,54.8906 999.2138,55.2188 Q998.5888,55.5469 998.0888,56.2969 Q997.6044,57.0469 997.6044,58.0781 L997.6044,59.1719 Q997.6044,60.4063 998.495,61.2344 Q999.3856,62.0469 1000.9794,62.0469 Q1001.9169,62.0469 1002.5731,61.7969 Q1002.9638,61.6406 1003.3856,61.2031 Q1003.6513,60.9375 1003.7919,60.8594 Q1003.9481,60.7813 1004.1513,60.7813 Q1004.4794,60.7813 1004.7294,61.0469 Q1004.995,61.2969 1004.995,61.6406 Q1004.995,61.9844 1004.6513,62.3906 Q1004.1513,62.9688 1003.3544,63.2969 Q1002.2763,63.75 1000.9794,63.75 Q999.4638,63.75 998.2606,63.125 Q997.2763,62.625 996.5888,61.5625 Q995.9013,60.4844 995.9013,59.2031 L995.9013,58.0469 Q995.9013,56.7188 996.5106,55.5781 Q997.1356,54.4219 998.2294,53.8125 Q999.3231,53.1875 1000.5575,53.1875 Q1001.2919,53.1875 1001.9325,53.3594 Q1002.5888,53.5156 1003.1356,53.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="1014.37" y="63.7285">AnswersImplementor</text><line style="stroke:#181818;stroke-width:0.5;" x1="986.37" x2="1146.37" y1="74" y2="74"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="993.37" y="85.3047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="1005.37" y="92.5332">studentName</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="993.37" y="102.9141"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="28" x="1005.37" y="110.1426">isOk</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="993.37" y="120.5234"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="1005.37" y="127.752">isEvaluated</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="993.37" y="138.1328"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="1005.37" y="145.3613">evaluatedDate</text><line style="stroke:#181818;stroke-width:0.5;" x1="986.37" x2="1146.37" y1="152.4375" y2="152.4375"/></g><!--MD5=[9d451b2f92d848a8e2d1a4dab2b1c6bf]
+class Concept--><g id="elem_Concept"><rect codeLine="2" fill="#F1F1F1" height="118.4375" id="Concept" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="102" x="547.37" y="391"/><ellipse cx="570.02" cy="407" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M572.7856,402.875 Q572.9419,402.6563 573.1294,402.5469 Q573.3169,402.4375 573.5356,402.4375 Q573.9106,402.4375 574.145,402.7031 Q574.3794,402.9531 574.3794,403.5625 L574.3794,405.0156 Q574.3794,405.625 574.145,405.8906 Q573.9106,406.1563 573.5356,406.1563 Q573.1919,406.1563 572.9888,405.9531 Q572.7856,405.7656 572.6763,405.25 Q572.6294,404.8906 572.4419,404.7031 Q572.1138,404.3281 571.5044,404.1094 Q570.895,403.8906 570.27,403.8906 Q569.5044,403.8906 568.8638,404.2188 Q568.2388,404.5469 567.7388,405.2969 Q567.2544,406.0469 567.2544,407.0781 L567.2544,408.1719 Q567.2544,409.4063 568.145,410.2344 Q569.0356,411.0469 570.6294,411.0469 Q571.5669,411.0469 572.2231,410.7969 Q572.6138,410.6406 573.0356,410.2031 Q573.3013,409.9375 573.4419,409.8594 Q573.5981,409.7813 573.8013,409.7813 Q574.1294,409.7813 574.3794,410.0469 Q574.645,410.2969 574.645,410.6406 Q574.645,410.9844 574.3013,411.3906 Q573.8013,411.9688 573.0044,412.2969 Q571.9263,412.75 570.6294,412.75 Q569.1138,412.75 567.9106,412.125 Q566.9263,411.625 566.2388,410.5625 Q565.5513,409.4844 565.5513,408.2031 L565.5513,407.0469 Q565.5513,405.7188 566.1606,404.5781 Q566.7856,403.4219 567.8794,402.8125 Q568.9731,402.1875 570.2075,402.1875 Q570.9419,402.1875 571.5825,402.3594 Q572.2388,402.5156 572.7856,402.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="53" x="585.72" y="412.7285">Concept</text><line style="stroke:#181818;stroke-width:0.5;" x1="548.37" x2="648.37" y1="423" y2="423"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="555.37" y="434.3047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="52" x="567.37" y="441.5332">keyword</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="555.37" y="451.9141"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76" x="567.37" y="459.1426">definitions[ ]</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="555.37" y="469.5234"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="567.37" y="476.752">relations[ ]</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="555.37" y="487.1328"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="567.37" y="494.3613">questions[ ]</text><line style="stroke:#181818;stroke-width:0.5;" x1="548.37" x2="648.37" y1="501.4375" y2="501.4375"/></g><!--MD5=[af22135d5be6ed11ccd2d02fa51653b3]
+class Definition--><g id="elem_Definition"><rect codeLine="9" fill="#F1F1F1" height="83.2188" id="Definition" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="91" x="1004.87" y="587"/><ellipse cx="1019.87" cy="603" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1022.6356,598.875 Q1022.7919,598.6563 1022.9794,598.5469 Q1023.1669,598.4375 1023.3856,598.4375 Q1023.7606,598.4375 1023.995,598.7031 Q1024.2294,598.9531 1024.2294,599.5625 L1024.2294,601.0156 Q1024.2294,601.625 1023.995,601.8906 Q1023.7606,602.1563 1023.3856,602.1563 Q1023.0419,602.1563 1022.8388,601.9531 Q1022.6356,601.7656 1022.5263,601.25 Q1022.4794,600.8906 1022.2919,600.7031 Q1021.9638,600.3281 1021.3544,600.1094 Q1020.745,599.8906 1020.12,599.8906 Q1019.3544,599.8906 1018.7138,600.2188 Q1018.0888,600.5469 1017.5888,601.2969 Q1017.1044,602.0469 1017.1044,603.0781 L1017.1044,604.1719 Q1017.1044,605.4063 1017.995,606.2344 Q1018.8856,607.0469 1020.4794,607.0469 Q1021.4169,607.0469 1022.0731,606.7969 Q1022.4638,606.6406 1022.8856,606.2031 Q1023.1513,605.9375 1023.2919,605.8594 Q1023.4481,605.7813 1023.6513,605.7813 Q1023.9794,605.7813 1024.2294,606.0469 Q1024.495,606.2969 1024.495,606.6406 Q1024.495,606.9844 1024.1513,607.3906 Q1023.6513,607.9688 1022.8544,608.2969 Q1021.7763,608.75 1020.4794,608.75 Q1018.9638,608.75 1017.7606,608.125 Q1016.7763,607.625 1016.0888,606.5625 Q1015.4013,605.4844 1015.4013,604.2031 L1015.4013,603.0469 Q1015.4013,601.7188 1016.0106,600.5781 Q1016.6356,599.4219 1017.7294,598.8125 Q1018.8231,598.1875 1020.0575,598.1875 Q1020.7919,598.1875 1021.4325,598.3594 Q1022.0888,598.5156 1022.6356,598.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="59" x="1033.87" y="608.7285">Definition</text><line style="stroke:#181818;stroke-width:0.5;" x1="1005.87" x2="1094.87" y1="619" y2="619"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1012.87" y="630.3047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="47" x="1024.87" y="637.5332">content</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1012.87" y="647.9141"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="1024.87" y="655.1426">isFake</text><line style="stroke:#181818;stroke-width:0.5;" x1="1005.87" x2="1094.87" y1="662.2188" y2="662.2188"/></g><!--MD5=[534474e9f05b14d7c70186ae077f30e0]
+class Relation--><g id="elem_Relation"><rect codeLine="14" fill="#F1F1F1" height="48" id="Relation" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="84" x="558.37" y="604.5"/><ellipse cx="573.37" cy="620.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M576.1356,616.375 Q576.2919,616.1563 576.4794,616.0469 Q576.6669,615.9375 576.8856,615.9375 Q577.2606,615.9375 577.495,616.2031 Q577.7294,616.4531 577.7294,617.0625 L577.7294,618.5156 Q577.7294,619.125 577.495,619.3906 Q577.2606,619.6563 576.8856,619.6563 Q576.5419,619.6563 576.3388,619.4531 Q576.1356,619.2656 576.0263,618.75 Q575.9794,618.3906 575.7919,618.2031 Q575.4638,617.8281 574.8544,617.6094 Q574.245,617.3906 573.62,617.3906 Q572.8544,617.3906 572.2138,617.7188 Q571.5888,618.0469 571.0888,618.7969 Q570.6044,619.5469 570.6044,620.5781 L570.6044,621.6719 Q570.6044,622.9063 571.495,623.7344 Q572.3856,624.5469 573.9794,624.5469 Q574.9169,624.5469 575.5731,624.2969 Q575.9638,624.1406 576.3856,623.7031 Q576.6513,623.4375 576.7919,623.3594 Q576.9481,623.2813 577.1513,623.2813 Q577.4794,623.2813 577.7294,623.5469 Q577.995,623.7969 577.995,624.1406 Q577.995,624.4844 577.6513,624.8906 Q577.1513,625.4688 576.3544,625.7969 Q575.2763,626.25 573.9794,626.25 Q572.4638,626.25 571.2606,625.625 Q570.2763,625.125 569.5888,624.0625 Q568.9013,622.9844 568.9013,621.7031 L568.9013,620.5469 Q568.9013,619.2188 569.5106,618.0781 Q570.1356,616.9219 571.2294,616.3125 Q572.3231,615.6875 573.5575,615.6875 Q574.2919,615.6875 574.9325,615.8594 Q575.5888,616.0156 576.1356,616.375 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="52" x="587.37" y="626.2285">Relation</text><line style="stroke:#181818;stroke-width:0.5;" x1="559.37" x2="641.37" y1="636.5" y2="636.5"/><line style="stroke:#181818;stroke-width:0.5;" x1="559.37" x2="641.37" y1="644.5" y2="644.5"/></g><!--MD5=[9c239722e256878d27dcbb07783cc14f]
+class Classification--><g id="elem_Classification"><rect codeLine="16" fill="#F1F1F1" height="48" id="Classification" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="115" x="690.87" y="731"/><ellipse cx="705.87" cy="747" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M708.6356,742.875 Q708.7919,742.6563 708.9794,742.5469 Q709.1669,742.4375 709.3856,742.4375 Q709.7606,742.4375 709.995,742.7031 Q710.2294,742.9531 710.2294,743.5625 L710.2294,745.0156 Q710.2294,745.625 709.995,745.8906 Q709.7606,746.1563 709.3856,746.1563 Q709.0419,746.1563 708.8388,745.9531 Q708.6356,745.7656 708.5263,745.25 Q708.4794,744.8906 708.2919,744.7031 Q707.9638,744.3281 707.3544,744.1094 Q706.745,743.8906 706.12,743.8906 Q705.3544,743.8906 704.7138,744.2188 Q704.0888,744.5469 703.5888,745.2969 Q703.1044,746.0469 703.1044,747.0781 L703.1044,748.1719 Q703.1044,749.4063 703.995,750.2344 Q704.8856,751.0469 706.4794,751.0469 Q707.4169,751.0469 708.0731,750.7969 Q708.4638,750.6406 708.8856,750.2031 Q709.1513,749.9375 709.2919,749.8594 Q709.4481,749.7813 709.6513,749.7813 Q709.9794,749.7813 710.2294,750.0469 Q710.495,750.2969 710.495,750.6406 Q710.495,750.9844 710.1513,751.3906 Q709.6513,751.9688 708.8544,752.2969 Q707.7763,752.75 706.4794,752.75 Q704.9638,752.75 703.7606,752.125 Q702.7763,751.625 702.0888,750.5625 Q701.4013,749.4844 701.4013,748.2031 L701.4013,747.0469 Q701.4013,745.7188 702.0106,744.5781 Q702.6356,743.4219 703.7294,742.8125 Q704.8231,742.1875 706.0575,742.1875 Q706.7919,742.1875 707.4325,742.3594 Q708.0888,742.5156 708.6356,742.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="719.87" y="752.7285">Classification</text><line style="stroke:#181818;stroke-width:0.5;" x1="691.87" x2="804.87" y1="763" y2="763"/><line style="stroke:#181818;stroke-width:0.5;" x1="691.87" x2="804.87" y1="771" y2="771"/></g><!--MD5=[251454e98c15f29849fb35b1904d0020]
+class Composition--><g id="elem_Composition"><rect codeLine="18" fill="#F1F1F1" height="48" id="Composition" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="110" x="545.37" y="731"/><ellipse cx="560.37" cy="747" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M563.1356,742.875 Q563.2919,742.6563 563.4794,742.5469 Q563.6669,742.4375 563.8856,742.4375 Q564.2606,742.4375 564.495,742.7031 Q564.7294,742.9531 564.7294,743.5625 L564.7294,745.0156 Q564.7294,745.625 564.495,745.8906 Q564.2606,746.1563 563.8856,746.1563 Q563.5419,746.1563 563.3388,745.9531 Q563.1356,745.7656 563.0263,745.25 Q562.9794,744.8906 562.7919,744.7031 Q562.4638,744.3281 561.8544,744.1094 Q561.245,743.8906 560.62,743.8906 Q559.8544,743.8906 559.2138,744.2188 Q558.5888,744.5469 558.0888,745.2969 Q557.6044,746.0469 557.6044,747.0781 L557.6044,748.1719 Q557.6044,749.4063 558.495,750.2344 Q559.3856,751.0469 560.9794,751.0469 Q561.9169,751.0469 562.5731,750.7969 Q562.9638,750.6406 563.3856,750.2031 Q563.6513,749.9375 563.7919,749.8594 Q563.9481,749.7813 564.1513,749.7813 Q564.4794,749.7813 564.7294,750.0469 Q564.995,750.2969 564.995,750.6406 Q564.995,750.9844 564.6513,751.3906 Q564.1513,751.9688 563.3544,752.2969 Q562.2763,752.75 560.9794,752.75 Q559.4638,752.75 558.2606,752.125 Q557.2763,751.625 556.5888,750.5625 Q555.9013,749.4844 555.9013,748.2031 L555.9013,747.0469 Q555.9013,745.7188 556.5106,744.5781 Q557.1356,743.4219 558.2294,742.8125 Q559.3231,742.1875 560.5575,742.1875 Q561.2919,742.1875 561.9325,742.3594 Q562.5888,742.5156 563.1356,742.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="574.37" y="752.7285">Composition</text><line style="stroke:#181818;stroke-width:0.5;" x1="546.37" x2="654.37" y1="763" y2="763"/><line style="stroke:#181818;stroke-width:0.5;" x1="546.37" x2="654.37" y1="771" y2="771"/></g><!--MD5=[54a8e627be4ee6aab370a2a8960cc8d7]
+class OpenAnswer--><g id="elem_OpenAnswer"><rect codeLine="37" fill="#F1F1F1" height="100.8281" id="OpenAnswer" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="145" x="744.87" y="399.5"/><ellipse cx="774.27" cy="415.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M777.0356,411.375 Q777.1919,411.1563 777.3794,411.0469 Q777.5669,410.9375 777.7856,410.9375 Q778.1606,410.9375 778.395,411.2031 Q778.6294,411.4531 778.6294,412.0625 L778.6294,413.5156 Q778.6294,414.125 778.395,414.3906 Q778.1606,414.6563 777.7856,414.6563 Q777.4419,414.6563 777.2388,414.4531 Q777.0356,414.2656 776.9263,413.75 Q776.8794,413.3906 776.6919,413.2031 Q776.3638,412.8281 775.7544,412.6094 Q775.145,412.3906 774.52,412.3906 Q773.7544,412.3906 773.1138,412.7188 Q772.4888,413.0469 771.9888,413.7969 Q771.5044,414.5469 771.5044,415.5781 L771.5044,416.6719 Q771.5044,417.9063 772.395,418.7344 Q773.2856,419.5469 774.8794,419.5469 Q775.8169,419.5469 776.4731,419.2969 Q776.8638,419.1406 777.2856,418.7031 Q777.5513,418.4375 777.6919,418.3594 Q777.8481,418.2813 778.0513,418.2813 Q778.3794,418.2813 778.6294,418.5469 Q778.895,418.7969 778.895,419.1406 Q778.895,419.4844 778.5513,419.8906 Q778.0513,420.4688 777.2544,420.7969 Q776.1763,421.25 774.8794,421.25 Q773.3638,421.25 772.1606,420.625 Q771.1763,420.125 770.4888,419.0625 Q769.8013,417.9844 769.8013,416.7031 L769.8013,415.5469 Q769.8013,414.2188 770.4106,413.0781 Q771.0356,411.9219 772.1294,411.3125 Q773.2231,410.6875 774.4575,410.6875 Q775.1919,410.6875 775.8325,410.8594 Q776.4888,411.0156 777.0356,411.375 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="81" x="791.47" y="421.2285">OpenAnswer</text><line style="stroke:#181818;stroke-width:0.5;" x1="745.87" x2="888.87" y1="431.5" y2="431.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="752.87" y="442.8047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="47" x="764.87" y="450.0332">content</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="752.87" y="460.4141"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119" x="764.87" y="467.6426">isUsefulToConcept</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="752.87" y="478.0234"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="89" x="764.87" y="485.252">isEvaluatedBy</text><line style="stroke:#181818;stroke-width:0.5;" x1="745.87" x2="888.87" y1="492.3281" y2="492.3281"/></g><!--MD5=[069ce8881ec0132c801f9a320be0896f]
+class MultipleChoiceAnswer--><g id="elem_MultipleChoiceAnswer"><rect codeLine="43" fill="#F1F1F1" height="83.2188" id="MultipleChoiceAnswer" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="170" x="1186.37" y="245"/><ellipse cx="1201.37" cy="261" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1204.1356,256.875 Q1204.2919,256.6563 1204.4794,256.5469 Q1204.6669,256.4375 1204.8856,256.4375 Q1205.2606,256.4375 1205.495,256.7031 Q1205.7294,256.9531 1205.7294,257.5625 L1205.7294,259.0156 Q1205.7294,259.625 1205.495,259.8906 Q1205.2606,260.1563 1204.8856,260.1563 Q1204.5419,260.1563 1204.3388,259.9531 Q1204.1356,259.7656 1204.0263,259.25 Q1203.9794,258.8906 1203.7919,258.7031 Q1203.4638,258.3281 1202.8544,258.1094 Q1202.245,257.8906 1201.62,257.8906 Q1200.8544,257.8906 1200.2138,258.2188 Q1199.5888,258.5469 1199.0888,259.2969 Q1198.6044,260.0469 1198.6044,261.0781 L1198.6044,262.1719 Q1198.6044,263.4063 1199.495,264.2344 Q1200.3856,265.0469 1201.9794,265.0469 Q1202.9169,265.0469 1203.5731,264.7969 Q1203.9638,264.6406 1204.3856,264.2031 Q1204.6513,263.9375 1204.7919,263.8594 Q1204.9481,263.7813 1205.1513,263.7813 Q1205.4794,263.7813 1205.7294,264.0469 Q1205.995,264.2969 1205.995,264.6406 Q1205.995,264.9844 1205.6513,265.3906 Q1205.1513,265.9688 1204.3544,266.2969 Q1203.2763,266.75 1201.9794,266.75 Q1200.4638,266.75 1199.2606,266.125 Q1198.2763,265.625 1197.5888,264.5625 Q1196.9013,263.4844 1196.9013,262.2031 L1196.9013,261.0469 Q1196.9013,259.7188 1197.5106,258.5781 Q1198.1356,257.4219 1199.2294,256.8125 Q1200.3231,256.1875 1201.5575,256.1875 Q1202.2919,256.1875 1202.9325,256.3594 Q1203.5888,256.5156 1204.1356,256.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="138" x="1215.37" y="266.7285">MultipleChoiceAnswer</text><line style="stroke:#181818;stroke-width:0.5;" x1="1187.37" x2="1355.37" y1="277" y2="277"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1194.37" y="288.3047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="62" x="1206.37" y="295.5332">options [ ]</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1194.37" y="305.9141"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="95" x="1206.37" y="313.1426">selectedOption</text><line style="stroke:#181818;stroke-width:0.5;" x1="1187.37" x2="1355.37" y1="320.2188" y2="320.2188"/></g><!--MD5=[b07065dfc0d0e09965ec10bfc328bb3e]
+class Option--><g id="elem_Option"><rect codeLine="48" fill="#F1F1F1" height="65.6094" id="Option" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="74" x="1233.37" y="417"/><ellipse cx="1248.37" cy="433" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1251.1356,428.875 Q1251.2919,428.6563 1251.4794,428.5469 Q1251.6669,428.4375 1251.8856,428.4375 Q1252.2606,428.4375 1252.495,428.7031 Q1252.7294,428.9531 1252.7294,429.5625 L1252.7294,431.0156 Q1252.7294,431.625 1252.495,431.8906 Q1252.2606,432.1563 1251.8856,432.1563 Q1251.5419,432.1563 1251.3388,431.9531 Q1251.1356,431.7656 1251.0263,431.25 Q1250.9794,430.8906 1250.7919,430.7031 Q1250.4638,430.3281 1249.8544,430.1094 Q1249.245,429.8906 1248.62,429.8906 Q1247.8544,429.8906 1247.2138,430.2188 Q1246.5888,430.5469 1246.0888,431.2969 Q1245.6044,432.0469 1245.6044,433.0781 L1245.6044,434.1719 Q1245.6044,435.4063 1246.495,436.2344 Q1247.3856,437.0469 1248.9794,437.0469 Q1249.9169,437.0469 1250.5731,436.7969 Q1250.9638,436.6406 1251.3856,436.2031 Q1251.6513,435.9375 1251.7919,435.8594 Q1251.9481,435.7813 1252.1513,435.7813 Q1252.4794,435.7813 1252.7294,436.0469 Q1252.995,436.2969 1252.995,436.6406 Q1252.995,436.9844 1252.6513,437.3906 Q1252.1513,437.9688 1251.3544,438.2969 Q1250.2763,438.75 1248.9794,438.75 Q1247.4638,438.75 1246.2606,438.125 Q1245.2763,437.625 1244.5888,436.5625 Q1243.9013,435.4844 1243.9013,434.2031 L1243.9013,433.0469 Q1243.9013,431.7188 1244.5106,430.5781 Q1245.1356,429.4219 1246.2294,428.8125 Q1247.3231,428.1875 1248.5575,428.1875 Q1249.2919,428.1875 1249.9325,428.3594 Q1250.5888,428.5156 1251.1356,428.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="1262.37" y="438.7285">Option</text><line style="stroke:#181818;stroke-width:0.5;" x1="1234.37" x2="1306.37" y1="449" y2="449"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1241.37" y="460.3047"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="47" x="1253.37" y="467.5332">content</text><line style="stroke:#181818;stroke-width:0.5;" x1="1234.37" x2="1306.37" y1="474.6094" y2="474.6094"/></g><!--MD5=[72551623f8aae4441686b432d3d4d4a3]
+reverse link Question to AnswersImplementor--><g id="link_Question_AnswersImplementor"><path codeLine="68" d="M963.85,101 C970.91,101 977.98,101 985.04,101 " fill="none" id="Question-backto-AnswersImplementor" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="950.7,101,956.7,105,962.7,101,956.7,97,950.7,101" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[7750c9fa624681f6f73f4dd658be84f4]
+reverse link AnswersImplementor to OpenAnswer--><g id="link_AnswersImplementor_OpenAnswer"><path codeLine="69" d="M1101.18,178.95 C1119.57,232.2 1131.79,302.18 1096.37,352 C1049.86,417.41 955.95,439.09 889.97,446.07 " fill="none" id="AnswersImplementor-backto-OpenAnswer" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1094.6,181.34,1094.2,160.15,1107.72,176.47,1094.6,181.34" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[24793cc56b04ba7dae425abbdaae462c]
+reverse link AnswersImplementor to MultipleChoiceAnswer--><g id="link_AnswersImplementor_MultipleChoiceAnswer"><path codeLine="70" d="M1146.41,173.64 C1173.44,197.85 1202.68,224.01 1226.06,244.95 " fill="none" id="AnswersImplementor-backto-MultipleChoiceAnswer" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="1141.47,178.62,1131.23,160.06,1150.8,168.18,1141.47,178.62" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[aa444d8e462a2093424f20fcfaaacc9f]
+reverse link MultipleChoiceAnswer to Option--><g id="link_MultipleChoiceAnswer_Option"><path codeLine="73" d="M1271.04,341.32 C1270.88,366.38 1270.7,395.34 1270.57,416.91 " fill="none" id="MultipleChoiceAnswer-backto-Option" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1271.12,328.25,1267.0805,334.2235,1271.0409,340.2497,1275.0804,334.2762,1271.12,328.25" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[9f28cd73563d94ef5d2a7e151e392f28]
+link DefinitionQuestion to Concept--><g id="link_DefinitionQuestion_Concept"><path codeLine="75" d="M868.06,328.09 C850.62,336.05 832.43,344.32 815.37,352 C776.36,369.56 766.43,373.56 727.37,391 C703.4,401.7 676.96,413.58 654.28,423.78 " fill="none" id="DefinitionQuestion-to-Concept" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="649.5,425.93,659.3487,425.8729,654.0572,423.8728,656.0572,418.5813,649.5,425.93" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[b2de2b3357340de27336d9292870bda9]
+link ClassificationQuestion to Concept--><g id="link_ClassificationQuestion_Concept"><path codeLine="76" d="M311.52,328.04 C384.41,358.78 482.03,399.95 542.53,425.45 " fill="none" id="ClassificationQuestion-to-Concept" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="547.18,427.42,540.4186,420.2587,542.5667,425.4919,537.3336,427.64,547.18,427.42" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[4e99ab20507053ecfebf4d57139a550e]
+link CompositionQuestion to Concept--><g id="link_CompositionQuestion_Concept"><path codeLine="77" d="M598.37,328.25 C598.37,345.59 598.37,366.22 598.37,385.48 " fill="none" id="CompositionQuestion-to-Concept" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="598.37,390.87,602.37,381.87,598.37,385.87,594.37,381.87,598.37,390.87" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[18141af66d78099ce63b3b3d94bf7770]
+reverse link Concept to Question--><g id="link_Concept_Question"><path codeLine="79" d="M533.78,447.52 C402.43,443.02 111.45,424.84 50.37,352 C7.25,300.58 6,251.35 50.37,201 C93.38,152.2 504.33,121.23 712.19,108.56 " fill="none" id="Concept-backto-Question" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="547.11,447.95,541.2406,443.7607,535.1161,447.5674,540.9855,451.7566,547.11,447.95" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="682.2572" y="106.0257">0..n</text></g><!--MD5=[543bb2115b5a10697a67507a00f6a2f4]
+reverse link Concept to Definition--><g id="link_Concept_Definition"><path codeLine="80" d="M661.35,486.83 C704.37,509.92 763.33,538.9 818.37,557 C886.68,579.47 909.73,562.58 977.37,587 C986.5,590.3 995.85,594.64 1004.69,599.26 " fill="none" id="Concept-backto-Definition" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="649.65,480.49,653.0165,486.867,660.1978,486.2122,656.8313,479.8352,649.65,480.49" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="974.7194" y="591.5276">0..n</text></g><!--MD5=[54f9360500e0fd532969fc16f437bbea]
+reverse link Concept to Relation--><g id="link_Concept_Relation"><path codeLine="82" d="M599.18,522.44 C599.51,551.57 599.87,583.23 600.1,604.1 " fill="none" id="Concept-backto-Relation" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="599.03,509.28,595.0962,515.3236,599.1619,521.2793,603.0957,515.2357,599.03,509.28" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="575.3529" y="593.7405">0..n</text></g><!--MD5=[90ea77717cc70d7f588b001bbb985d62]
+reverse link Relation to Classification--><g id="link_Relation_Classification"><path codeLine="83" d="M643.34,665.65 C668.4,686.73 699.26,712.69 721.02,731 " fill="none" id="Relation-backto-Classification" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="638.66,670.86,627.86,652.63,647.67,660.14,638.66,670.86" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[aac130c8b5f905729b18e85e231f7b50]
+reverse link Relation to Composition--><g id="link_Relation_Composition"><path codeLine="84" d="M600.37,672.73 C600.37,692.32 600.37,714.69 600.37,731 " fill="none" id="Relation-backto-Composition" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="593.37,672.63,600.37,652.63,607.37,672.63,593.37,672.63" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[5aab0b45efd7e0420b76d5abc61341ea]
+reverse link Question to DefinitionQuestion--><g id="link_Question_DefinitionQuestion"><path codeLine="87" d="M882.25,176.69 C898.14,200.03 915.08,224.89 928.74,244.95 " fill="none" id="Question-backto-DefinitionQuestion" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="876.39,180.53,870.92,160.06,887.96,172.65,876.39,180.53" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[188d3a6f0f88872b2d2a1b320ae5c293]
+reverse link OpenAnswer to Definition--><g id="link_OpenAnswer_Definition"><path codeLine="88" d="M816.57,505.91 C819.07,524.31 825.14,543.55 838.37,557 C882.68,602.07 918.21,564.76 977.37,587 C986.46,590.42 995.79,594.82 1004.62,599.46 " fill="none" id="OpenAnswer-backto-Definition" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="815.95,500.75,813.0305,510.1562,816.535,505.7157,820.9756,509.2202,815.95,500.75" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="191" x="839.37" y="553.4951">conceptElementTarget=Definition</text></g><!--MD5=[0a458040590a793cf8c50dfb08eca74c]
+link Option to Definition--><g id="link_Option_Definition"><path codeLine="89" d="M1233.36,453.38 C1181.61,458.92 1089.28,477.41 1047.37,539 C1039.05,551.23 1037.41,566.76 1038.6,581.39 " fill="none" id="Option-to-Definition" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="1039.15,586.73,1042.176,577.3575,1038.6214,581.758,1034.2209,578.2033,1039.15,586.73" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="195" x="1048.37" y="553.4951">conceptElementTarget= Definition</text></g><!--MD5=[5be583f153fb95b5c96f3646910cb4a1]
+reverse link Question to ClassificationQuestion--><g id="link_Question_ClassificationQuestion"><path codeLine="90" d="M692.43,123.33 C602.42,139.4 483.54,164.9 382.37,201 C349.62,212.68 315.08,229.36 285.95,244.82 " fill="none" id="Question-backto-ClassificationQuestion" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="691.43,116.39,712.34,119.84,693.85,130.18,691.43,116.39" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[2b44a5dc359a4316672423684e05a04c]
+reverse link OpenAnswer to Classification--><g id="link_OpenAnswer_Classification"><path codeLine="91" d="M793.31,505.58 C783.47,530.04 772.89,559.51 766.37,587 C754.41,637.36 750.38,698.17 749.04,730.73 " fill="none" id="OpenAnswer-backto-Classification" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="795.27,500.76,788.17,507.5856,793.3835,505.3905,795.5787,510.604,795.27,500.76" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="219" x="767.37" y="633.9951">conceptElementTarget= Classification</text></g><!--MD5=[40774f4e6ce164f9e48994ec66be2c59]
+link Option to Classification--><g id="link_Option_Classification"><path codeLine="92" d="M1269.19,483.14 C1267.12,505.26 1261.78,534.58 1248.37,557 C1208.19,624.14 1183.43,635.15 1113.37,670 C1014.72,719.07 886.77,739.98 811.51,748.51 " fill="none" id="Option-to-Classification" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="806.19,749.11,815.5795,752.0828,811.1589,748.5531,814.6885,744.1325,806.19,749.11" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="219" x="1228.37" y="633.9951">conceptElementTarget= Classification</text></g><!--MD5=[616dd8b0550f609f3badfa769886b0d6]
+reverse link Question to CompositionQuestion--><g id="link_Question_CompositionQuestion"><path codeLine="94" d="M741.68,172.63 C710.6,197.11 676.82,223.72 649.86,244.95 " fill="none" id="Question-backto-CompositionQuestion" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="737.6,166.94,757.65,160.06,746.26,177.93,737.6,166.94" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[7b29b2e0c0c5827ff4e1a58b3e46901a]
+@startuml ConceptDomainDetailBridge2
+
+class Concept {
+    - keyword
+    - definitions[ ]
+    - relations[ ]
+    - questions[ ]
+}
+
+class Definition {
+    - content
+    - isFake
+}
+
+class Relation
+
+class Classification
+
+class Composition
+
+package Primary:conceptElementUsed=Keyword {
+    abstract class DefinitionQuestion {
+        - statement ="¿Qué es KEYWORD?"
+        - conceptElementTarget = Definition
+    }
+
+    abstract  class ClassificationQuestion {
+        - statement = "Qué tipos hay de KEYWORD"
+        - conceptElementTarget = Classification
+    }
+
+    abstract class CompositionQuestion {
+        - statement ="¿Qué conceptos destacarias del KEYWORD?"
+        - conceptElementTarget = Composition
+    }
+}
+
+class OpenAnswer {
+    - content
+    - isUsefulToConcept
+    - isEvaluatedBy
+}
+
+class MultipleChoiceAnswer {
+    - options [ ]
+    - selectedOption
+}
+
+class Option {
+    -content
+}
+
+package Bridge {
+    abstract class Question {
+        - answersImplementor
+        - answers[ ]
+        # void setAnswerImplementor()
+        + bool isAnsweredBy(studentName)
+    }
+
+    class AnswersImplementor {
+        - studentName
+        - isOk
+        - isEvaluated
+        - evaluatedDate
+    }
+}
+
+Question o- AnswersImplementor
+AnswersImplementor <|- - OpenAnswer
+AnswersImplementor <|- - MultipleChoiceAnswer
+
+
+MultipleChoiceAnswer *- - Option
+
+DefinitionQuestion ..> Concept
+ClassificationQuestion ..> Concept
+CompositionQuestion ..> Concept
+
+Concept o- - "0..n" Question
+Concept o- -"0..n" Definition
+
+Concept o- - "0..n" Relation
+Relation <|- - Classification
+Relation <|- - Composition
+
+
+Question <|- - DefinitionQuestion
+OpenAnswer <.. Definition:conceptElementTarget=Definition
+Option ..> Definition :conceptElementTarget= Definition
+Question <|- - ClassificationQuestion
+OpenAnswer <.. Classification :conceptElementTarget= Classification
+Option ..> Classification :conceptElementTarget= Classification
+
+Question <|- - CompositionQuestion
+'OpenAnswer <.. Composition :conceptElementTarget= Composition
+'Option ..> Composition:conceptElementTarget= Composition 
+
+@enduml
+
+@startuml ConceptDomainDetailBridge2
+
+class Concept {
+    - keyword
+    - definitions[ ]
+    - relations[ ]
+    - questions[ ]
+}
+
+class Definition {
+    - content
+    - isFake
+}
+
+class Relation
+
+class Classification
+
+class Composition
+
+package Primary:conceptElementUsed=Keyword {
+    abstract class DefinitionQuestion {
+        - statement ="¿Qué es KEYWORD?"
+        - conceptElementTarget = Definition
+    }
+
+    abstract  class ClassificationQuestion {
+        - statement = "Qué tipos hay de KEYWORD"
+        - conceptElementTarget = Classification
+    }
+
+    abstract class CompositionQuestion {
+        - statement ="¿Qué conceptos destacarias del KEYWORD?"
+        - conceptElementTarget = Composition
+    }
+}
+
+class OpenAnswer {
+    - content
+    - isUsefulToConcept
+    - isEvaluatedBy
+}
+
+class MultipleChoiceAnswer {
+    - options [ ]
+    - selectedOption
+}
+
+class Option {
+    -content
+}
+
+package Bridge {
+    abstract class Question {
+        - answersImplementor
+        - answers[ ]
+        # void setAnswerImplementor()
+        + bool isAnsweredBy(studentName)
+    }
+
+    class AnswersImplementor {
+        - studentName
+        - isOk
+        - isEvaluated
+        - evaluatedDate
+    }
+}
+
+Question o- AnswersImplementor
+AnswersImplementor <|- - OpenAnswer
+AnswersImplementor <|- - MultipleChoiceAnswer
+
+
+MultipleChoiceAnswer *- - Option
+
+DefinitionQuestion ..> Concept
+ClassificationQuestion ..> Concept
+CompositionQuestion ..> Concept
+
+Concept o- - "0..n" Question
+Concept o- -"0..n" Definition
+
+Concept o- - "0..n" Relation
+Relation <|- - Classification
+Relation <|- - Composition
+
+
+Question <|- - DefinitionQuestion
+OpenAnswer <.. Definition:conceptElementTarget=Definition
+Option ..> Definition :conceptElementTarget= Definition
+Question <|- - ClassificationQuestion
+OpenAnswer <.. Classification :conceptElementTarget= Classification
+Option ..> Classification :conceptElementTarget= Classification
+
+Question <|- - CompositionQuestion
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: es
+Country: ES
+--></g></svg>

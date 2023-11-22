@@ -39,6 +39,9 @@ Se propone, para trabajar la idea de tener los conceptos en una base de conocimi
 [domain detail: Con Bridge provisional sin Solution]
 <img src="./out/doc/dominio_detail_concept/ConceptDomainDetailBridge.svg">
 
+[domain detail: Con Otro Bridge provisional sin Solution]
+<img src="./out/doc/dominio_detail_concept/ConceptDomainDetailBridge2.svg">
+
 Algunos tipos de preguntas según el nivel de elementos usados del concepto:
 
 1. Nivel 1 - solo la palabre clave (keyword)
