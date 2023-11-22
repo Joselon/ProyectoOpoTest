@@ -33,8 +33,11 @@ Se propone, para trabajar la idea de tener los conceptos en una base de conocimi
 
 ### Detalle del dominio: Nivel y Relación entre pregunta abierta y concepto.
 
-[domain detail]
+[domain detail: Problema de Jerarquías de Herencias Paralelas]
 <img src="./out/doc/dominio_detail_concept/ConceptDomainDetail.svg">
+
+[domain detail: Con Bridge provisional sin Solution]
+<img src="./out/doc/dominio_detail_concept/ConceptDomainDetailBridge.svg">
 
 Algunos tipos de preguntas según el nivel de elementos usados del concepto:
 
