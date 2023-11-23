@@ -1,4 +1,4 @@
-class Statement {
+class StatementImplementor {
     #concept;
 
     constructor(concept) {
@@ -7,7 +7,7 @@ class Statement {
 
 }
 
-class PrimaryStatement extends Statement {
+class PrimaryStatement extends StatementImplementor {
     #keyword;
 
     constructor(concept) {
@@ -18,10 +18,42 @@ class PrimaryStatement extends Statement {
 }
 
 class DefinitionStatement extends PrimaryStatement {
+    #statement;
+    #target;
+
+    constructor(concept){
+        super();
+        this.#statement = `¿Qué es ${concept.getKeyword()}`;
+        this.#target = "Definition";
+    }
     
 }
 
-class withDefinitionStatement extends PrimaryStatement {
+class ClassificationStatement extends PrimaryStatement {
+    #statement;
+    #target;
+
+    constructor(concept){
+        super();
+        this.#statement = `¿Qué tipos hay de ${concept.getKeyword()}`;
+        this.#target = "Relation"+"Classification";
+    }
+    
+}
+
+class CompositionStatement extends PrimaryStatement {
+    #statement;
+    #target;
+
+    constructor(concept){
+        super();
+        this.#statement = `¿Qué tipos hay de ${concept.getKeyword()}`;
+        this.#target = "Relation"+"Composition";
+    }
+    
+}
+
+class withDefinitionStatement extends Statement {
     #definitions = [];
 
     constructor(concept) {
@@ -31,7 +63,7 @@ class withDefinitionStatement extends PrimaryStatement {
 
 }
 
-class withRelationStatement extends PrimaryStatement {
+class withRelationStatement extends sStatement {
     #relations = [];
 
     constructor(concept) {
