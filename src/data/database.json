@@ -126,7 +126,20 @@
         {
             "name": "Oposiciones Policia Nacional",
             "subcategories": [],
-            "concepts": []
+            "concepts": [
+                {
+                    "keyword": "Derechos de los Ciudadanos",
+                    "questions": [
+                        {
+                            "statement": "Que son los Derechos de los Ciudadanos",
+                            "statementType": "Definition",
+                            "type": "Open",
+                            "answers": []
+                        }
+                    ],
+                    "definitions": []
+                }
+            ]
         },
         {
             "name": "Test de Conducir",

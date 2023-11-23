@@ -34,7 +34,6 @@ class GenerateTestMenu extends DynamicQuitMenu {
                 this.add(new AddAnswerOption(`- Responder: ${this.#questions[i].getStatement()}... `, this.#questions[i], this.#username));
         }
     }
-
 }
 
 export { GenerateTestMenu }

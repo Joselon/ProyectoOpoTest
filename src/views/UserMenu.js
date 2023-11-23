@@ -24,10 +24,7 @@ class SelectUserAndReadNameOption extends Option {
         let userName = console.readString(`Escribe nombre de usuario: `);
         this.#userState.setCurrentUserName(userName);
     }
-
 }
-
-// ModelMenus
 
 class UserMenu extends DynamicMenu {
     #userState;
@@ -37,8 +34,6 @@ class UserMenu extends DynamicMenu {
         super("Seleccione un tipo de usuario...");
         this.#userState = userState;
         this.#array = UserType.values();
-        this.addOptions();
-
     }
 
     addOptions() {
@@ -46,7 +41,6 @@ class UserMenu extends DynamicMenu {
             this.add(new SelectUserAndReadNameOption(this.#array, i, this.#userState));
         }
     }
-
 }
 
 export { UserMenu }

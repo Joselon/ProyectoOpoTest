@@ -34,9 +34,7 @@ class SelectAndEvaluateAnswerOption extends Option {
         let statementType = question.getStatementType();
         let concept = question.getConcept();
 
-        console.writeln(statementType);
-
-        if (statementType === "Definition") {
+        if (statementType === "Definition") { //Arreglar con Visitors
             console.writeln(concept);
             concept.addDefinition(new Definition(content, isFake, new Date()));
         }
@@ -47,12 +45,10 @@ class SelectAndEvaluateAnswerOption extends Option {
             //...
         }
     }
-
 }
 
 
 class AnswersMenu extends DynamicQuitMenu {
-
     #answers;
     #evaluatedBy;
 
@@ -68,10 +64,8 @@ class AnswersMenu extends DynamicQuitMenu {
                 this.add(new SelectAndEvaluateAnswerOption(this.#answers[i], this.#evaluatedBy));
         }
     }
-
 }
 class EvaluationMenu extends DynamicQuitMenu {
-
     #questions;
     #evaluatedBy;
 
@@ -82,17 +76,14 @@ class EvaluationMenu extends DynamicQuitMenu {
     }
 
     addOptions() {
-
         for (let i = 0; i < this.#questions.length; i++) {
             if (this.#questions[i].getAnswers().length > 0)
                 this.add(new OpenMenuOption(`- Ver Respuestas de: ${this.#questions[i].getStatement()}... `, new AnswersMenu(this.#questions[i].getAnswers(), this.#evaluatedBy)));
         }
     }
-
 }
 
 class EvaluationsMenu extends DynamicQuitMenu {
-
     #userState;
     #evaluatedBy;
 
@@ -121,7 +112,6 @@ class EvaluationsMenu extends DynamicQuitMenu {
             this.#addSubcategoryOption(subcategory, category.getName())
         }
     }
-
 }
 
 export { EvaluationsMenu }

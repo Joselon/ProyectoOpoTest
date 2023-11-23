@@ -1,4 +1,4 @@
-import { DynamicQuitMenu, Option } from "../utils/view/Menu.js";
+import { DynamicMenu, Option, QuitOption } from "../utils/view/Menu.js";
 import { Concept } from '../models/Concept.js';
 import { console } from '../utils/view/console.js';
 
@@ -14,7 +14,6 @@ class AddConceptOption extends Option {
         let keyword = console.readString(`
         Escribe la palabra clave del concepto:`);
         this.#concepts.push(new Concept(keyword));
-
     }
 }
 
@@ -51,12 +50,11 @@ class ShowConceptOption extends Option {
         super.interact();
         console.writeln("\nDefiniciones:");
         for (let definition of this.#concept.getDefinitions())
-            console.writeln(`- "${definition.getContent()}" - ${definition.isFake() ? "Falsa" : ""}`);
+            console.writeln(`- "${definition.getContent()}" - ${definition.isFake() ? "Falsa" : "OK"}`);
         console.writeln("Relaciones:");
         for (let relation of this.#concept.getRelations())
             console.writeln(`- "${relation.getContent()}"`);
     }
-
 }
 
 class ModifyConceptOption extends Option {
@@ -76,11 +74,10 @@ class ModifyConceptOption extends Option {
         for (let relation of this.#concept.getRelations())
             console.writeln(`- "${relation.getContent()}"`);
     }
-
 }
 
 
-class ConceptsMenu extends DynamicQuitMenu {
+class ConceptsMenu extends DynamicMenu {
     #userState;
 
     constructor(userState) {
@@ -96,10 +93,12 @@ class ConceptsMenu extends DynamicQuitMenu {
                 this.add(new ShowConceptOption(`- Mostrar Concepto ${concepts[i].getKeyword()}...`, concepts[i]));
             }
         }
-        this.add(new AddConceptOption(`Añadir Concepto a ${this.#userState.getCurrentCategory().getName()}`, concepts));
+        this.add(new AddConceptOption(`-- Añadir Concepto a ${this.#userState.getCurrentCategory().getName()}`, concepts));
         if (this.#userState.getCurrentConcept().getKeyword() !== '---') {
             this.add(new ModifyConceptOption(`* Modificar Concepto Seleccionado: ${this.#userState.getCurrentConcept().getKeyword()}`, this.#userState.getCurrentConcept()));
         }
+
+        this.add(new QuitOption());
     }
 
 }

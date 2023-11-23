@@ -119,7 +119,7 @@ class TeacherCategoriesMenu extends DynamicMenu {
         }
         for (let i = 0; i < this.#categories.length; i++) {
             if (this.#categories[i].getTotalNumberOfSubcategories() > 0)
-                this.add(new OpenMenuOption(`--- Ver Subcategorías de ${i + 1}-${this.#categories[i].getName()} ...`, new CategoriesMenu(this.#userState, this.#categories[i].getSubcategories())));
+                this.add(new OpenMenuOption(`--- Ver Subcategorías de ${i + 1}-${this.#categories[i].getName()} ...`, new TeacherCategoriesMenu(this.#userState, this.#categories[i].getSubcategories())));
         }
         if (this.#userState.getCurrentCategory().getName() !== "---") {
             this.add(new AddCategoryOption(this.#categories));
