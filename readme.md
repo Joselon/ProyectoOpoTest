@@ -36,8 +36,8 @@ Se propone, para trabajar la idea de tener los conceptos en una base de conocimi
 [domain detail: Problema de Jerarquías de Herencias Paralelas]
 <img src="./out/doc/dominio_detail_concept/ConceptDomainDetail.svg">
 
-[domain detail: Con Bridge provisional sin Solution]
-<img src="./out/doc/dominio_detail_concept/ConceptDomainDetailBridge.svg">
+[domain detail: Con Bridge provisional]
+<img src="./out/doc/dominio_detail_bridgeStatement/ConceptDomainDetailBridge.svg">
 
 [domain detail: Con Otro Bridge provisional sin Solution]
 <img src="./out/doc/dominio_detail_concept/ConceptDomainDetailBridge2.svg">

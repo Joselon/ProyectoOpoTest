@@ -1,0 +1,126 @@
+@startuml ConceptDomainDetailBridge
+
+class Concept {
+    - keyword
+    - definitions[ ]
+    - relations[ ]
+    - questions[ ]
+}
+
+class Definition {
+    - content
+    - isFake
+}
+
+class Relation
+
+class Classification
+
+class Composition
+
+package Primary:conceptElementUsed=Keyword {
+    class DefinitionStatement {
+        - statement ="¿Qué es KEYWORD?"
+        - conceptElementTarget = Definition
+    }
+
+    class ClassificationStatement {
+        - statement = "Qué tipos hay de KEYWORD"
+        - conceptElementTarget = Classification
+    }
+
+    class CompositionStatement {
+        - statement ="¿Qué conceptos destacarias del KEYWORD?"
+        - conceptElementTarget = Composition
+    }
+}
+
+abstract class OpenQuestion {
+    -answers[openAnswer]
+}
+
+class OpenAnswer {
+    - content
+    - isUsefulToConcept
+    - isEvaluatedBy
+}
+
+class Solution {
+    - content
+    - isOk
+}
+abstract class MultipleChoiceQuestion {
+    - options
+    - answers[selectedOption]
+    + setOptions(statementImplementor)
+}
+
+class Option {
+    - content
+    - isOk
+}
+
+class SelectedOptionAnswer {
+    - option
+}
+
+class Answer {
+    - studentName
+    - createdDate
+    - isOk
+    - isEvaluated
+    - evaluatedDate
+}
+
+package Bridge {
+    abstract class Question {
+        - statementImplementor
+        - answers[ ]
+        # void setStatementImplementor()
+        + bool isAnsweredBy(studentName)
+    }
+
+    class StatementImplementor {
+        - concept
+        - conceptElementUsed
+        - conceptElementTarget
+        + setOptions(conceptElementTarget)
+    }
+
+}
+
+Question *- StatementImplementor
+Question <|-- OpenQuestion
+Question <|-- MultipleChoiceQuestion
+
+OpenQuestion o--"0..n" OpenAnswer
+MultipleChoiceQuestion o--"2..m" Option
+MultipleChoiceQuestion o--"0..n" SelectedOptionAnswer
+SelectedOptionAnswer *- Option
+Answer <|-- OpenAnswer
+Answer <|-- SelectedOptionAnswer
+
+DefinitionStatement ..> Concept
+ClassificationStatement ..> Concept
+CompositionStatement ..> Concept
+
+Concept o-- "0..i" Question
+Concept o--"0..m" Definition
+
+Concept o-- "0..m" Relation
+Relation <|-- Classification
+Relation <|-- Composition
+
+
+StatementImplementor <|-- DefinitionStatement
+OpenAnswer o--"0..m<n" Solution :answer.isEvaluated=true / answer.isUsefulToConcept=true
+Solution <.. Definition:statementImplementorTarget=Definition 
+Option ..> Definition :statementImplementorTarget= Definition
+StatementImplementor <|-- ClassificationStatement
+'OpenClassificationQuestion <.. Classification :answers
+
+StatementImplementor <|-- CompositionStatement
+'OpenCompositionQuestion <.. Composition :answers
+
+
+@enduml
