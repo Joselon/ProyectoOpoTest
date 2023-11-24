@@ -1,74 +1,93 @@
 class StatementImplementor {
+
+    addToConcept() { }
+    getTarget() { }
+    getStatement() { }
+}
+
+class DefinitionStatement extends StatementImplementor {
     #concept;
-
-    constructor(concept) {
-        this.#concept = concept;
-    }
-
-}
-
-class PrimaryStatement extends StatementImplementor {
-    #keyword;
-
-    constructor(concept) {
-        super(concept);
-        this.#keyword = concept.getKeyword();
-    }
-
-}
-
-class DefinitionStatement extends PrimaryStatement {
     #statement;
     #target;
 
-    constructor(concept){
+    constructor(concept) {
         super();
+        this.#concept = concept;
         this.#statement = `¿Qué es ${concept.getKeyword()}`;
         this.#target = "Definition";
     }
-    
+
+    addToConcept(content, isFake) {
+        this.#concept.addDefinition(content, isFake);
+    }
+    getStatement() {
+        return this.#statement;
+    }
+    getTarget() {
+        return this.#target;
+    }
+
 }
 
-class ClassificationStatement extends PrimaryStatement {
+class ClassificationStatement extends StatementImplementor {
+    #concept;
     #statement;
     #target;
 
-    constructor(concept){
+    constructor(concept) {
         super();
+        this.#concept = concept;
         this.#statement = `¿Qué tipos hay de ${concept.getKeyword()}`;
-        this.#target = "Relation"+"Classification";
+        this.#target = "Classification";
     }
-    
+
+    addToConcept(content, isFake) {
+        this.#concept.addRelation(new Relation(content, isFake));
+    }
+    getTarget() {
+        return this.#target;
+    }
+
 }
 
-class CompositionStatement extends PrimaryStatement {
+class CompositionStatement extends StatementImplementor {
+    #concept;
     #statement;
     #target;
 
-    constructor(concept){
+    constructor(concept) {
         super();
+        this.#concept = concept;
         this.#statement = `¿Qué tipos hay de ${concept.getKeyword()}`;
-        this.#target = "Relation"+"Composition";
+        this.#target = "Composition";
     }
-    
+
+    addToConcept(content, isFake) {
+        this.#concept.addRelation(new Relation(content, isFake));
+    }
+    getTarget() {
+        return this.#target;
+    }
+
 }
 
-class withDefinitionStatement extends Statement {
+class withDefinitionStatement extends StatementImplementor {
     #definitions = [];
 
     constructor(concept) {
-        super(concept);
+        super();
         this.#definitions = concept.getDefinitions();
     }
-
+    
 }
 
-class withRelationStatement extends sStatement {
+class withRelationStatement extends StatementImplementor {
     #relations = [];
 
     constructor(concept) {
-        super(concept);
+        super();
         this.#relations = concept.getRelations();
     }
-
 }
+
+export { DefinitionStatement, ClassificationStatement, CompositionStatement }

@@ -51,10 +51,10 @@
                                     "username": "Jaimito",
                                     "content": "Son las siglas de Global Internet Tecnologies",
                                     "isOK": false,
-                                    "isUsefulForConcept": false,
+                                    "isUsefulForConcept": true,
                                     "createdDate": "2023-11-15T13:35:58.467Z",
-                                    "evaluatedBy": "",
-                                    "evaluatedDate": null
+                                    "evaluatedBy": "Luis",
+                                    "evaluatedDate": "2023-11-24T19:21:16.631Z"
                                 },
                                 {
                                     "username": "Jorgito",
@@ -87,7 +87,17 @@
                             "statement": "De que se compone GIT",
                             "statementType": "Composition",
                             "type": "Open",
-                            "answers": []
+                            "answers": [
+                                {
+                                    "username": "Jorgito",
+                                    "content": "G, I, T",
+                                    "isOK": false,
+                                    "isUsefulForConcept": false,
+                                    "createdDate": "2023-11-24T19:01:13.194Z",
+                                    "evaluatedBy": "",
+                                    "evaluatedDate": null
+                                }
+                            ]
                         }
                     ],
                     "definitions": [
@@ -95,6 +105,12 @@
                             "content": "Es una herramienta de control de versiones",
                             "isFake": false,
                             "createdDate": "2023-11-16T08:50:10.864Z",
+                            "justifications": []
+                        },
+                        {
+                            "content": "Son las siglas de Global Internet Tecnologies",
+                            "isFake": true,
+                            "createdDate": "2023-11-24T19:21:16.631Z",
                             "justifications": []
                         }
                     ]

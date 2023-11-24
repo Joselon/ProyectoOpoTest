@@ -1,4 +1,5 @@
 import { OpenQuestion, MultipleChoiceQuestion } from "./Question.js";
+import { DefinitionStatement, ClassificationStatement, CompositionStatement } from "./Statement.js";
 import { Definition } from "./Definition.js";
 
 class Concept {
@@ -52,8 +53,8 @@ class Concept {
         this.#questions.push(question);
     }
 
-    addDefinition(definition) {
-        this.#definitions.push(definition);
+    addDefinition(content, isFake, date = new Date()) {
+        this.#definitions.push(new Definition(content, isFake, date));
     }
 
     addRelation(relation) {
@@ -75,13 +76,26 @@ class Concept {
     loadQuestionsFromDataObject(conceptDataObject) {
         let indexQuest = 0;
         for (let question of conceptDataObject.questions) {
+            let statementImplementor;
+            if (question.statementType === "Definition") {
+                statementImplementor = new DefinitionStatement(this);
+            }
+            else if (question.statementType === "Classification") {
+                statementImplementor = new ClassificationStatement(this);
+            }
+            else if (question.statementType === "Composition") {
+                statementImplementor = new CompositionStatement(this);
+            }
+            else {
+                //TODO
+            }
             if (question.type === "Open") {
-                this.addQuestion(new OpenQuestion(question.statement, question.statementType, this));
+                this.addQuestion(new OpenQuestion(question.statement, statementImplementor));
                 this.#questions[indexQuest].loadAnswersFromDataObject(question);
 
             }
             else if (question.type === "MultipleChoice") {
-                this.addQuestion(new MultipleChoiceQuestion(question.statement, question.statementType, this));
+                this.addQuestion(new MultipleChoiceQuestion(question.statement, statementImplementor));
                 this.#questions[indexQuest].loadAnswersFromDataObject(question);
             }
             indexQuest++;
@@ -89,7 +103,7 @@ class Concept {
     }
     loadDefinitionsFromDataObject(conceptDataObject) {
         for (let definition of conceptDataObject.definitions) {
-            this.addDefinition(new Definition(definition.content, definition.isFake, definition.createdDate));
+            this.addDefinition(definition.content, definition.isFake, definition.createdDate);
         }
     }
 
@@ -100,7 +114,7 @@ class Concept {
             conceptQuestionsObjects.push(
                 {
                     statement: question.getStatement(),
-                    statementType: question.getStatementType(),
+                    statementType: question.getStatementTarget(),
                     type: question.getType(),
                     answers: []
                 });

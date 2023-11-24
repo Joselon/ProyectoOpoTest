@@ -1,27 +1,29 @@
 import { OpenAnswer, SelectedOptionAnswer } from "./Answer.js";
 
 class Question {
-    #statementType; //Eliminar estos Type y hacer derivadas de Question por cada clase de enunciado
+    #statementImplementor;
     #statement;
-    #concept;
     answers = [];
 
-    constructor(statement, statementType, concept) {
-        this.#statementType = statementType;
+    constructor(statement, statementImplementor) {
         this.#statement = statement;
-        this.#concept = concept;
+        this.#setStatementImplementor(statementImplementor);
     }
 
-    getStatementType() {
-        return this.#statementType;
+    #setStatementImplementor(statementImplementor) {
+        this.#statementImplementor = statementImplementor;
+    }
+
+    getStatementTarget() {
+        return this.#statementImplementor.getTarget();
     }
 
     getStatement() {
         return this.#statement;
     }
 
-    getConcept() {
-        return this.#concept;
+    addToConcept(content, isFake) {
+        this.#statementImplementor.addToConcept(content, isFake);
     }
 
     getType() {

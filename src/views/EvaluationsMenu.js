@@ -1,14 +1,15 @@
 import { DynamicQuitMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
-import { Definition } from "../models/Definition.js";
 import { console } from '../utils/view/console.js';
 
 class SelectAndEvaluateAnswerOption extends Option {
+    #question;
     #answer;
     #evaluatedBy;
 
-    constructor(answer, evaluatedBy) {
+    constructor(question, index,evaluatedBy) {
         super("Evaluar ");
-        this.#answer = answer;
+        this.#question = question;
+        this.#answer = this.#question.getAnswer(index);
         this.#evaluatedBy = evaluatedBy;
     }
 
@@ -24,44 +25,27 @@ class SelectAndEvaluateAnswerOption extends Option {
         console.writeln("Evaluado por Profesor:" + this.#evaluatedBy)
         this.#answer.evaluate(isOK, new Date(), isUseful, this.#evaluatedBy);
         if (isUseful)
-            this.#addToConcept(!isOK);
-
-    }
-
-    #addToConcept(isFake) {
-        let content = this.#answer.getContent();
-        let question = this.#answer.getQuestion();
-        let statementType = question.getStatementType();
-        let concept = question.getConcept();
-
-        if (statementType === "Definition") { //Arreglar con Visitors
-            console.writeln(concept);
-            concept.addDefinition(new Definition(content, isFake, new Date()));
-        }
-        else if (statementType === "Classification" || statementType === "Composition") {
-            concept.addRelation(new Relation(content, statementType, isFake));
-        }
-        else {
-            //...
-        }
+            this.#question.addToConcept(this.#answer.getContent(),!isOK);
     }
 }
 
 
 class AnswersMenu extends DynamicQuitMenu {
+    #question;
     #answers;
     #evaluatedBy;
 
-    constructor(answers, evaluatedBy) {
+    constructor(question, evaluatedBy) {
         super(" Respuestas:");
-        this.#answers = answers;
+        this.#question = question;
+        this.#answers = question.getAnswers();
         this.#evaluatedBy = evaluatedBy;
     }
 
     addOptions() {
         for (let i = 0; i < this.#answers.length; i++) {
             if (!this.#answers[i].isEvaluated())
-                this.add(new SelectAndEvaluateAnswerOption(this.#answers[i], this.#evaluatedBy));
+                this.add(new SelectAndEvaluateAnswerOption(this.#question, i, this.#evaluatedBy));
         }
     }
 }
@@ -78,7 +62,7 @@ class EvaluationMenu extends DynamicQuitMenu {
     addOptions() {
         for (let i = 0; i < this.#questions.length; i++) {
             if (this.#questions[i].getAnswers().length > 0)
-                this.add(new OpenMenuOption(`- Ver Respuestas de: ${this.#questions[i].getStatement()}... `, new AnswersMenu(this.#questions[i].getAnswers(), this.#evaluatedBy)));
+                this.add(new OpenMenuOption(`- Ver Respuestas de: ${this.#questions[i].getStatement()}... `, new AnswersMenu(this.#questions[i], this.#evaluatedBy)));
         }
     }
 }

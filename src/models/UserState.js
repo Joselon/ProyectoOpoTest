@@ -8,7 +8,7 @@ class UserState {
     #currentCategory;
     #currentConcept;
     #selectedQuestionType;
-    #selectedStatementType;
+    #selectedStatementTarget;
 
     constructor(username = "", type = UserType.TEACHER, category = new Category("---"), concept = new Concept("---")) {
         this.#type = type;
@@ -54,12 +54,12 @@ class UserState {
         return this.#selectedQuestionType;
     }
 
-    setSelectedStatementType(type) {
-        this.#selectedStatementType = type;
+    setSelectedStatementTarget(target) {
+        this.#selectedStatementTarget = target;
     }
 
-    getSelectedStatementType() {
-        return this.#selectedStatementType;
+    getSelectedStatementTarget() {
+        return this.#selectedStatementTarget;
     }
 
     getCurrentUserName() {
