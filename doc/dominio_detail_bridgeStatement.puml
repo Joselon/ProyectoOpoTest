@@ -12,7 +12,11 @@ class Definition {
     - isFake
 }
 
-class Relation
+class Relation {
+    - isFake
+    - concept
+    - isAfferent
+}
 
 class Classification
 
@@ -21,34 +25,30 @@ class Composition
 package Primary:conceptElementUsed=Keyword {
     class DefinitionStatement {
         - statement ="¿Qué es KEYWORD?"
-        - conceptElementTarget = Definition
+        - solutions [ Definition]
     }
 
     class ClassificationStatement {
         - statement = "Qué tipos hay de KEYWORD"
-        - conceptElementTarget = Classification
+        - solutions [Classification]
     }
 
     class CompositionStatement {
         - statement ="¿Qué conceptos destacarias del KEYWORD?"
-        - conceptElementTarget = Composition
+        - solutions = [Composition]
     }
 }
 
 abstract class OpenQuestion<StatementImplementor>{
     -answers[openAnswer]
+    + addToSolutions(statementImplementor)
 }
 
 class OpenAnswer {
     - content
-    - isUsefulToConcept
     - isEvaluatedBy
 }
 
-class Solution {
-    - content
-    - isOk
-}
 abstract class MultipleChoiceQuestion<StatementImplementor>{
     - options
     - answers[selectedOption]
@@ -57,7 +57,7 @@ abstract class MultipleChoiceQuestion<StatementImplementor>{
 
 class Option {
     - content
-    - isOk
+    - isFake
 }
 
 class SelectedOptionAnswer {
@@ -81,10 +81,10 @@ package Bridge {
     }
 
     class StatementImplementor {
-        - concept
-        - conceptElementUsed
-        - conceptElementTarget
-        + setOptions(conceptElementTarget)
+        - statement
+        - solutions[target]
+        + setOptions()
+        + addToConcept()
     }
 
 }
@@ -111,16 +111,9 @@ Concept o-- "0..m" Relation
 Relation <|-- Classification
 Relation <|-- Composition
 
-
 StatementImplementor <|-- DefinitionStatement
-OpenAnswer o--"0..m<n" Solution :answer.isEvaluated=true / answer.isUsefulToConcept=true
-Solution <.. Definition:statementImplementorTarget=Definition 
-Option ..> Definition :statementImplementorTarget= Definition
 StatementImplementor <|-- ClassificationStatement
-'OpenClassificationQuestion <.. Classification :answers
-
 StatementImplementor <|-- CompositionStatement
-'OpenCompositionQuestion <.. Composition :answers
 
 
 @enduml

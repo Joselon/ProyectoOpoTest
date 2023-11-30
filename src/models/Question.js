@@ -4,6 +4,7 @@ class Question {
     #statementImplementor;
     #statement;
     answers = [];
+    solutions = [];
 
     constructor(statement, statementImplementor) {
         this.#statement = statement;
@@ -27,13 +28,13 @@ class Question {
     }
 
     getType() {
-        //return 1 / 0;
+        return 1 / 0;
     }
     loadAnswersFromDataObject(questionDataObject) {
-        //return 1 / 0;
+        return 1 / 0;
     }
     formatAnswersObjects() {
-        //return 1 / 0;
+        return 1 / 0;
     }
 
 }

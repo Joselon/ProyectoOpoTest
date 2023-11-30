@@ -47,7 +47,9 @@ class ClassificationStatement extends StatementImplementor {
     getTarget() {
         return this.#target;
     }
-
+    getStatement() {
+        return this.#statement;
+    }
 }
 
 class CompositionStatement extends StatementImplementor {
@@ -67,6 +69,9 @@ class CompositionStatement extends StatementImplementor {
     }
     getTarget() {
         return this.#target;
+    }
+    getStatement() {
+        return this.#statement;
     }
 
 }
