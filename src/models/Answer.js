@@ -1,73 +1,60 @@
 class Answer {
-    #studentName;
-    #content;
-    #isOK;
-    #question;
-    #createdDate;
-    #evaluatedDate;
+    _studentName;
+    _content;
+    _isOK;
+    _createdDate;
+    _evaluatedDate;
 
-    constructor(studentName, content, question, date = new Date()) {
-        this.#studentName = studentName;
-        this.#content = content;
-        this.#isOK = false;
-        this.#question = question;
-        this.#createdDate = date;
-        this.#evaluatedDate = null;
+    constructor(studentName, content, date) {
+        this._studentName = studentName;
+        this._content = content;
+        this._isOK = false;
+        this._createdDate = date;
+        this._evaluatedDate = null;
     }
 
     evaluate(isOK, evaluatedDate) {
-        this.#isOK = isOK;
-        this.#evaluatedDate = evaluatedDate;
+        this._isOK = isOK;
+        this._evaluatedDate = evaluatedDate;
     }
 
     getEvaluation() {
-        return this.#isOK;
+        return this._isOK;
     }
 
     getStudentName() {
-        return this.#studentName;
+        return this._studentName;
     }
 
     getContent() {
-        return this.#content;
+        return this._content;
     }
 
     getCreatedDate() {
-        return this.#createdDate;
+        return this._createdDate;
     }
 
     getEvaluatedDate() {
-        return this.#evaluatedDate;
-    }
-
-    getQuestion() {
-        return this.#question;
+        return this._evaluatedDate;
     }
 
     isEvaluated() {
-        return this.#evaluatedDate !== null;
+        return this._evaluatedDate !== null;
     }
 
 }
 
 class OpenAnswer extends Answer {
-    #isUsefulForConcept;
     #evaluatedBy;
 
-    constructor(userName, text, question, date) {
-        super(userName, text, question, date);
-        this.#isUsefulForConcept = false;
+    constructor(userName, text, date) {
+        super(userName, text, date);
         this.#evaluatedBy = "";
     }
 
-    evaluate(isOK, evaluatedDate, isUsefulForConcept, evaluatedBy) {
+    evaluate(isOK, evaluatedDate, evaluatedBy) {
         super.evaluate(isOK, evaluatedDate);
-        this.#isUsefulForConcept = isUsefulForConcept;
         this.#evaluatedBy = evaluatedBy;
-    }
-
-    isUsefulForConcept() {
-        return this.#isUsefulForConcept;
     }
 
     getEvaluatedBy() {
@@ -78,8 +65,8 @@ class OpenAnswer extends Answer {
 
 class SelectedOptionAnswer extends Answer {
 
-    constructor(userName, option, question, date) {
-        super(userName, option, question, date);
+    constructor(userName, option, date) {
+        super(userName, option, date);
     }
 
 }

@@ -1,30 +1,33 @@
 import { OpenAnswer, SelectedOptionAnswer } from "./Answer.js";
 
 class Question {
-    #statementImplementor;
-    #statement;
-    answers = [];
-    solutions = [];
+    _statementImplementor;
+    _statement;
+    _answers = [];
 
     constructor(statement, statementImplementor) {
-        this.#statement = statement;
-        this.#setStatementImplementor(statementImplementor);
-    }
-
-    #setStatementImplementor(statementImplementor) {
-        this.#statementImplementor = statementImplementor;
+        this._statement = statement;
+        this._statementImplementor = statementImplementor;
     }
 
     getStatementTarget() {
-        return this.#statementImplementor.getTarget();
+        return this._statementImplementor.getTarget();
     }
 
     getStatement() {
-        return this.#statement;
+        return this._statement;
     }
 
     addToConcept(content, isFake) {
-        this.#statementImplementor.addToConcept(content, isFake);
+        this._statementImplementor.addToConcept(content, isFake);
+    }
+
+    getAnswer(index) {
+        return this._answers[index];
+    }
+
+    getAnswers() {
+        return this._answers;
     }
 
     getType() {
@@ -41,8 +44,8 @@ class Question {
 
 class OpenQuestion extends Question {
 
-    constructor(statement, statementType, concept) {
-        super(statement, statementType, concept);
+    constructor(statement, statementType) {
+        super(statement, statementType);
     }
 
     getType() {
@@ -50,20 +53,12 @@ class OpenQuestion extends Question {
     }
 
     addAnswer(username, string, date = new Date()) {
-        this.answers.push(new OpenAnswer(username, string, this, date));
-    }
-
-    getAnswer(index) {
-        return this.answers[index];
-    }
-
-    getAnswers() {
-        return this.answers;
+        this._answers.push(new OpenAnswer(username, string, date));
     }
 
     isAnsweredBy(studentName) {
         let isAnsweredByUser = false;
-        for (let answer of this.getAnswers()) {
+        for (let answer of this._answers) {
             if (studentName === answer.getStudentName())
                 isAnsweredByUser = true;
         }
@@ -75,20 +70,19 @@ class OpenQuestion extends Question {
         for (let answer of questionDataObject.answers) {
             this.addAnswer(answer.username, answer.content, answer.createdDate);
             if (answer.evaluatedDate !== null)
-                this.answers[indexAns].evaluate(answer.isOK, answer.evaluatedDate, answer.isUsefulForConcept, answer.evaluatedBy);
+                this._answers[indexAns].evaluate(answer.isOK, answer.evaluatedDate, answer.evaluatedBy);
             indexAns++;
         }
     }
 
     formatAnswersObjects() {
         let questionAnswersObjects = [];
-        for (let answer of this.answers) {
+        for (let answer of this._answers) {
             questionAnswersObjects.push(
                 {
                     username: answer.getStudentName(),
                     content: answer.getContent(),
                     isOK: answer.getEvaluation(),
-                    isUsefulForConcept: answer.isUsefulForConcept(),
                     createdDate: answer.getCreatedDate(),
                     evaluatedBy: answer.getEvaluatedBy(),
                     evaluatedDate: answer.getEvaluatedDate()
@@ -102,9 +96,8 @@ class OpenQuestion extends Question {
 class MultipleChoiceQuestion extends Question {
     #options = [];
 
-    constructor(statement, statementType, concept) {
-        super(statement, statementType, concept);
-        this.statement = statement;
+    constructor(statement, statementType) {
+        super(statement, statementType);
         //this.#buildOptions();
     }
 
@@ -112,11 +105,7 @@ class MultipleChoiceQuestion extends Question {
         return "MultipleChoice";
     }
     addAnswer(username, optionSelected, date = new Date()) {
-        this.answers.push(new SelectedOptionAnswer(username, optionSelected, this, date));
-    }
-
-    getAnswers() {
-        return this.answers;
+        this._answers.push(new SelectedOptionAnswer(username, optionSelected, date));
     }
 
     loadAnswersFromDataObject(questionDataObject) {
@@ -131,7 +120,7 @@ class MultipleChoiceQuestion extends Question {
 
     formatAnswersObjects() {
         let questionAnswersObjects = [];
-        for (let answer of this.answers) {
+        for (let answer of this._answers) {
             questionAnswersObjects.push(
                 {
                     username: answer.getUserName(),

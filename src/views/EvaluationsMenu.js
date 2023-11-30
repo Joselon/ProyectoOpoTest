@@ -6,7 +6,7 @@ class SelectAndEvaluateAnswerOption extends Option {
     #answer;
     #evaluatedBy;
 
-    constructor(question, index,evaluatedBy) {
+    constructor(question, index, evaluatedBy) {
         super("Evaluar ");
         this.#question = question;
         this.#answer = this.#question.getAnswer(index);
@@ -21,11 +21,11 @@ class SelectAndEvaluateAnswerOption extends Option {
         let isOK = 1 === console.readNumber(`
         ¿Es correcta?(1=Sí/0=No):`);
         let isUseful = 1 === console.readNumber(`
-        ¿Desea marcar la pregunta como útil?(1=Sí/0=No):`);
+        ¿Desea marcar la respuesta como solución?(1=Sí/0=No):`);
         console.writeln("Evaluado por Profesor:" + this.#evaluatedBy)
-        this.#answer.evaluate(isOK, new Date(), isUseful, this.#evaluatedBy);
+        this.#answer.evaluate(isOK, new Date(), this.#evaluatedBy);
         if (isUseful)
-            this.#question.addToConcept(this.#answer.getContent(),!isOK);
+            this.#question.addToConcept(this.#answer.getContent(), !isOK);
     }
 }
 

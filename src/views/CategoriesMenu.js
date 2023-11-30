@@ -66,8 +66,7 @@ class SelectCategoryAndShowConceptsOption extends OpenMenuOption {
     }
 
     getTitle() {
-        return `${super.getTitle()}:  -(${this.#category.getTotalNumberOfSubcategories()}/${this.#category.getTotalNumberOfConcepts()}/${this.#category.getTotalNumberOfQuestions()})
-   ---(Seleccionar Categoría y mostrar Conceptos...)`;
+        return `Seleccionar y mostrar Conceptos de...${super.getTitle()}:  -(${this.#category.getTotalNumberOfSubcategories()}/${this.#category.getTotalNumberOfConcepts()}/${this.#category.getTotalNumberOfQuestions()})- ...`;
     }
 
     interact() {
@@ -83,7 +82,7 @@ class CategoriesMenu extends DynamicMenu {
     #userState;
 
     constructor(userState, categories) {
-        super(`Menú de Categorías - (Subcategorías / Preguntas*) (*Incluido contenido en subcategorías)`);
+        super(`Menú de Categorías -(Subcategorías / Preguntas*)- (*Incluido contenido en subcategorías)`);
         this.#categories = categories;
         this.#userState = userState;
     }
@@ -107,7 +106,7 @@ class TeacherCategoriesMenu extends DynamicMenu {
     #userState;
 
     constructor(userState, categories) {
-        super(`Menú de Categorías - (Subcategorías / Conceptos* / Preguntas*)
+        super(`Menú de Categorías -(Subcategorías / Conceptos* / Preguntas*)-
         (*Incluido contenido en subcategorías)`);
         this.#categories = categories;
         this.#userState = userState;

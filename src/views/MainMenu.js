@@ -7,75 +7,63 @@ import { GenerateTestMenu } from "./GenerateTestMenu.js"
 import { console } from "../utils/view/console.js";
 
 class MainMenu extends DynamicQuitMenu {
-    #userState;
-    #userStateTitle;
-    #categories;
+    _userState;
+    _userStateTitle;
+    _categories;
 
     constructor(userState, categories) {
-        super("ElaboraTest Menú Estudiante");
-        this.#userState = userState;
-        this.#categories = categories;
+        super("ElaboraTest Menú");
+        this._userState = userState;
+        this._categories = categories;
     }
 
     addOptions() {
         this.#addStateTitle();
-        this.add(new OpenMenuOption("Menú de Categorías...", new CategoriesMenu(this.#userState, this.#categories)));
-
-        let currentCategory = this.#userState.getCurrentCategory();
+        this.add(new OpenMenuOption("Menú de Categorías...", new CategoriesMenu(this._userState, this._categories)));
+        let currentCategory = this._userState.getCurrentCategory();
         if (currentCategory.getName() !== '---') {
-            this.add(new OpenMenuOption(`Ejecutar Tests ${currentCategory.getName()}`, new GenerateTestMenu(currentCategory.getAllQuestions(), this.#userState.getCurrentUserName())));
+            this.add(new OpenMenuOption(`Ejecutar Tests ${currentCategory.getName()}`, new GenerateTestMenu(currentCategory.getAllQuestions(), this._userState.getCurrentUserName())));
         }
-
         this.add(new Option("* Consultar Resultados"))
     }
 
     #addStateTitle() {
-        this.#userStateTitle = `Estado del usuario:
-        Usuario: ${this.#userState.getCurrentUserTypeName()} ${this.#userState.getCurrentUserName()}
-        Categoría actual: ${this.#userState.getCurrentCategory().getName()}`;
+        this._userStateTitle = `Estado del usuario:
+        Usuario: ${this._userState.getCurrentUserTypeName()} ${this._userState.getCurrentUserName()}
+        Categoría actual: ${this._userState.getCurrentCategory().getName()}`;
     }
 
     interact_() {
-        console.writeln(this.#userStateTitle);
+        console.writeln(this._userStateTitle);
         super.interact_();
     }
 }
 
-class TeacherMainMenu extends DynamicQuitMenu {
-    #userState;
-    #userStateTitle;
-    #categories;
+class TeacherMainMenu extends MainMenu {
 
     constructor(userState, categories) {
-        super("ElaboraTest Menú del Profesor");
-        this.#userState = userState;
-        this.#categories = categories;
+        super(userState, categories);
     }
 
     addOptions() {
         this.#addStateTitle();
-        this.add(new OpenMenuOption("Menú de Categorías y Conceptos...", new TeacherCategoriesMenu(this.#userState, this.#categories)));
-        let currentCategory = this.#userState.getCurrentCategory();
-        let currentConcept = this.#userState.getCurrentConcept();
+        this.add(new OpenMenuOption("Menú de Categorías y Conceptos...", new TeacherCategoriesMenu(this._userState, this._categories)));
+        let currentCategory = this._userState.getCurrentCategory();
         if (currentCategory.getName() !== '---') {
-            this.add(new OpenMenuOption(`- Menú de Conceptos de la Categoría: ${currentCategory.getName()}... `, new ConceptsMenu(this.#userState)));
-            this.add(new OpenMenuOption(`- Menú de Evaluaciones de la Categoría ${currentCategory.getName()}...`, new EvaluationsMenu(this.#userState)));
+            this.add(new OpenMenuOption(`- Menú de Conceptos de la Categoría: ${currentCategory.getName()}... `, new ConceptsMenu(this._userState)));
+            this.add(new OpenMenuOption(`- Menú de Evaluaciones de la Categoría ${currentCategory.getName()}...`, new EvaluationsMenu(this._userState)));
+            let currentConcept = this._userState.getCurrentConcept();
             if (currentConcept.getKeyword() !== '---') {
-                this.add(new OpenMenuOption(`-- Menú de Preguntas del Concepto: ${currentConcept.getKeyword()} ...`, new QuestionMenu(this.#userState)));
-            } 
+                this.add(new OpenMenuOption(`-- Menú de Preguntas del Concepto: ${currentConcept.getKeyword()} ...`, new QuestionMenu(this._userState)));
+            }
         }
     }
 
     #addStateTitle() {
-        this.#userStateTitle = `Estado del Usuario:
-        Usuario: ${this.#userState.getCurrentUserTypeName()} ${this.#userState.getCurrentUserName()}
-        Categoría actual: ${this.#userState.getCurrentCategory().getName()}
-             Concepto actual: ${this.#userState.getCurrentConcept().getKeyword()}`;
-    }
-
-    interact_() {
-        console.writeln(this.#userStateTitle);
-        super.interact_();
+        this._userStateTitle = `Estado del Usuario:
+        Usuario: ${this._userState.getCurrentUserTypeName()} ${this._userState.getCurrentUserName()}
+        Categoría actual: ${this._userState.getCurrentCategory().getName()}
+             Concepto actual: ${this._userState.getCurrentConcept().getKeyword()}`;
     }
 }
 

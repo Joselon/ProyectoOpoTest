@@ -27,6 +27,9 @@ class AddQuestionOption extends OpenMenuOption {
         else if (this.#target === "Composition") {
             statementImplementor = new CompositionStatement(this.#concept);
         }
+        else if ( this.#target === "FakeKeywords") {
+            statementImplementor = new ReverseDefinitionStatement(this.#concept);
+        }
         else {
             //TODO
         }
@@ -104,7 +107,7 @@ class StatementMenu extends DynamicMenu {
     #statementTargetTitles;
 
     #primaryTypes = ["Definition", "Classification", "Composition"];
-    #withDefinitionTypes = ["ReverseDefinition", "Justification"];
+    #withDefinitionTypes = ["ReverseDefinition", "Justification","Definition"];
     #withRelationTypes = ["ReverseRelation", "MissingRelation"];
     #withJustificationTypes = ["Explication", "ReverseJustification"];
     #statementTargets;
@@ -118,8 +121,8 @@ class StatementMenu extends DynamicMenu {
 
         this.#primaryTitles = [
             `Definición: ¿Qué es ${this.#concept.getKeyword()}?`,
-            `Jerarquía de tipos: ¿Qué tipos de ${this.#concept.getKeyword()}  hay?`,
-            `Jerarquía de composición: ¿De qué se compone  ${this.#concept.getKeyword()}?`
+            `Jerarquía de tipos: ¿Qué tipos de ${this.#concept.getKeyword()} hay?`,
+            `Jerarquía de composición: ¿De qué se compone ${this.#concept.getKeyword()}?`
         ];
         this.#statementTargets.push(this.#primaryTypes);
         this.#statementTargetTitles.push(this.#primaryTitles);
@@ -127,7 +130,8 @@ class StatementMenu extends DynamicMenu {
         if (this.#concept.getNumberOfDefinitions() !== 0) {
             this.#withDefinitionTitles = [
                 `Definición Inversa:${this.#concept.getDefinition(0).getContent()}. ¿A que corresponde esta definición?`,
-                `Justificación: ¿${this.#concept.getKeyword()} ${this.#concept.getDefinition(0).getContent()}?¿Por qué?`
+                `Justificación: ¿${this.#concept.getKeyword()} ${this.#concept.getDefinition(0).getContent()}?¿Por qué?`,
+                `Definición Automática: ¿Qué es ${this.#concept.getKeyword()}?`
             ];
             this.#statementTargets.push(this.#withDefinitionTypes);
             this.#statementTargetTitles.push(this.#withDefinitionTitles);
@@ -176,16 +180,16 @@ class QuestionMenu extends DynamicQuitMenu {
     }
 
     addQuestionsInfo() {
-        let aindex = "a".charCodeAt(0);
+        let charIndex = "a".charCodeAt(0);
         this.#questionsInfoTitle = "\nPreguntas Creadas: \n";
         this.#questionsInfoTitle += "------------------ \n";
         for (let question of this.#concept.getQuestions()) {
-            this.#questionsInfoTitle += String.fromCharCode(aindex) + ")";
+            this.#questionsInfoTitle += String.fromCharCode(charIndex) + ")";
             this.#questionsInfoTitle += "Enunciado: '¿" + question.getStatement() + "?'\n";
             this.#questionsInfoTitle += "Objetivo del Enunciado: '" + question.getStatementTarget() + "' - ";
             this.#questionsInfoTitle += "Tipo de Pregunta: '" + question.getType() + "'\n";
             this.#questionsInfoTitle += "\n";
-            aindex++;
+            charIndex++;
         }
     }
     interact_() {

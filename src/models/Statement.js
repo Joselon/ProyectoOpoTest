@@ -1,96 +1,95 @@
 class StatementImplementor {
+    _concept;
+    _solutions;
+    _statement;
+    _target;
 
-    addToConcept() { }
-    getTarget() { }
-    getStatement() { }
+    constructor(concept) {
+        this._concept = concept;
+    }
+
+    addToConcept() {
+        return 1 / 0;
+    }
+
+    setOptions() {
+        return 1 / 0;
+    }
+
+    getStatement() {
+        return this._statement;
+    }
+
+    getTarget() {
+        return this._target;
+    }
 }
 
 class DefinitionStatement extends StatementImplementor {
-    #concept;
-    #statement;
-    #target;
 
     constructor(concept) {
-        super();
-        this.#concept = concept;
-        this.#statement = `¿Qué es ${concept.getKeyword()}`;
-        this.#target = "Definition";
+        super(concept);
+        this._statement = `¿Qué es ${concept.getKeyword()}?`;
+        this._target = "Definition";
     }
 
     addToConcept(content, isFake) {
-        this.#concept.addDefinition(content, isFake);
-    }
-    getStatement() {
-        return this.#statement;
-    }
-    getTarget() {
-        return this.#target;
+        this._concept.addDefinition(content, isFake);
     }
 
+    setOptions() {
+        this._solutions = this._concept.getDefinitions();
+    }
 }
 
 class ClassificationStatement extends StatementImplementor {
-    #concept;
-    #statement;
-    #target;
 
     constructor(concept) {
-        super();
-        this.#concept = concept;
-        this.#statement = `¿Qué tipos hay de ${concept.getKeyword()}`;
-        this.#target = "Classification";
+        super(concept);
+        this._statement = `¿Qué tipos hay de ${concept.getKeyword()}?`;
+        this._target = "Classification";
     }
 
     addToConcept(content, isFake) {
-        this.#concept.addRelation(new Relation(content, isFake));
+        this._concept.addRelation(new Relation(content, isFake));
     }
-    getTarget() {
-        return this.#target;
-    }
-    getStatement() {
-        return this.#statement;
+
+    setOptions() {
+        this._solutions = this._concept.getRelations();
     }
 }
 
 class CompositionStatement extends StatementImplementor {
-    #concept;
-    #statement;
-    #target;
 
     constructor(concept) {
-        super();
-        this.#concept = concept;
-        this.#statement = `¿Qué tipos hay de ${concept.getKeyword()}`;
-        this.#target = "Composition";
+        super(concept);
+        this._statement = `¿De qué partes se compone ${concept.getKeyword()}?`;
+        this._target = "Composition";
     }
 
     addToConcept(content, isFake) {
-        this.#concept.addRelation(new Relation(content, isFake));
-    }
-    getTarget() {
-        return this.#target;
-    }
-    getStatement() {
-        return this.#statement;
+        this._concept.addRelation(new Relation(content, isFake));
     }
 
+    setOptions() {
+        this._solutions = this._concept.getRelations();
+    }
 }
 
 class withDefinitionStatement extends StatementImplementor {
     #definitions = [];
 
     constructor(concept) {
-        super();
+        super(concept);
         this.#definitions = concept.getDefinitions();
     }
-    
 }
 
 class withRelationStatement extends StatementImplementor {
     #relations = [];
 
     constructor(concept) {
-        super();
+        super(concept);
         this.#relations = concept.getRelations();
     }
 }
