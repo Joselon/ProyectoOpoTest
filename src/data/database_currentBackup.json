@@ -18,9 +18,16 @@
                                             "statementType": "Definition",
                                             "type": "Open",
                                             "answers": []
+                                        },
+                                        {
+                                            "statement": "Que tipos de Software podemos decir que hay",
+                                            "statementType": "Classification",
+                                            "type": "Open",
+                                            "answers": []
                                         }
                                     ],
-                                    "definitions": []
+                                    "definitions": [],
+                                    "fakeKeywords":[]
                                 }
                             ]
                         },
@@ -51,18 +58,16 @@
                                     "username": "Jaimito",
                                     "content": "Son las siglas de Global Internet Tecnologies",
                                     "isOK": false,
-                                    "isUsefulForConcept": false,
                                     "createdDate": "2023-11-15T13:35:58.467Z",
-                                    "evaluatedBy": "",
-                                    "evaluatedDate": null
+                                    "evaluatedBy": "Bacterio",
+                                    "evaluatedDate": "2023-11-24T19:21:16.631Z"
                                 },
                                 {
                                     "username": "Jorgito",
                                     "content": "Es una herramienta de control de versiones",
                                     "isOK": true,
-                                    "isUsefulForConcept": true,
                                     "createdDate": "2023-11-15T13:36:32.514Z",
-                                    "evaluatedBy": "LuisDefault",
+                                    "evaluatedBy": "Bacterio",
                                     "evaluatedDate": "2023-11-16T08:49:10.864Z"
                                 }
                             ]
@@ -76,7 +81,6 @@
                                     "username": "Jorgito",
                                     "content": "Publicos y privado",
                                     "isOK": false,
-                                    "isUsefulForConcept": false,
                                     "createdDate": "2023-11-17T17:51:38.068Z",
                                     "evaluatedBy": "",
                                     "evaluatedDate": null
@@ -87,7 +91,16 @@
                             "statement": "De que se compone GIT",
                             "statementType": "Composition",
                             "type": "Open",
-                            "answers": []
+                            "answers": [
+                                {
+                                    "username": "Jorgito",
+                                    "content": "G, I, T",
+                                    "isOK": false,
+                                    "createdDate": "2023-11-24T19:01:13.194Z",
+                                    "evaluatedBy": "",
+                                    "evaluatedDate": null
+                                }
+                            ]
                         }
                     ],
                     "definitions": [
@@ -96,8 +109,15 @@
                             "isFake": false,
                             "createdDate": "2023-11-16T08:50:10.864Z",
                             "justifications": []
+                        },
+                        {
+                            "content": "Son las siglas de Global Internet Tecnologies",
+                            "isFake": true,
+                            "createdDate": "2023-11-24T19:21:16.631Z",
+                            "justifications": []
                         }
-                    ]
+                    ],
+                    "fakeKeywords":[]
                 },
                 {
                     "keyword": "Bases de Datos",
@@ -111,7 +131,6 @@
                                     "username": "Jaimito",
                                     "content": "Una plataforma para alojar datos",
                                     "isOK": false,
-                                    "isUsefulForConcept": false,
                                     "createdDate": "2023-11-20T18:41:51.038Z",
                                     "evaluatedBy": "",
                                     "evaluatedDate": null
@@ -119,7 +138,8 @@
                             ]
                         }
                     ],
-                    "definitions": []
+                    "definitions": [],
+                    "fakeKeywords":[]
                 }
             ]
         },
@@ -137,7 +157,8 @@
                             "answers": []
                         }
                     ],
-                    "definitions": []
+                    "definitions": [],
+                    "fakeKeywords":[]
                 }
             ]
         },
@@ -164,7 +185,8 @@
                                     "answers": []
                                 }
                             ],
-                            "definitions": []
+                            "definitions": [],
+                            "fakeKeywords":[]
                         }
                     ]
                 }

@@ -54,6 +54,9 @@ class ShowConceptOption extends Option {
         console.writeln("Relaciones:");
         for (let relation of this.#concept.getRelations())
             console.writeln(`- "${relation.getContent()}"`);
+        console.writeln("Palabras clave falsas relacionadas:");
+        for (let fakeKeyword of this.#concept.getKeywords())
+            console.writeln(`- "${fakeKeyword}"`);
     }
 }
 

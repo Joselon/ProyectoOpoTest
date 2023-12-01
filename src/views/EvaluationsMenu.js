@@ -21,7 +21,7 @@ class SelectAndEvaluateAnswerOption extends Option {
         let isOK = 1 === console.readNumber(`
         ¿Es correcta?(1=Sí/0=No):`);
         let isUseful = 1 === console.readNumber(`
-        ¿Desea marcar la respuesta como solución?(1=Sí/0=No):`);
+        ¿Desea guardar la respuesta como posible solución?(1=Sí/0=No):`);
         console.writeln("Evaluado por Profesor:" + this.#evaluatedBy)
         this.#answer.evaluate(isOK, new Date(), this.#evaluatedBy);
         if (isUseful)

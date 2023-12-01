@@ -25,7 +25,7 @@ class Concept {
         return this.#fakeKeywords;
     }
 
-    addFakeKeyword(string){
+    addFakeKeyword(string) {
         this.#fakeKeywords.push(string);
     }
 

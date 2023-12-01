@@ -27,7 +27,7 @@
                                         }
                                     ],
                                     "definitions": [],
-                                    "fakeKeywords":[]
+                                    "fakeKeywords": []
                                 }
                             ]
                         },
@@ -117,7 +117,7 @@
                             "justifications": []
                         }
                     ],
-                    "fakeKeywords":[]
+                    "fakeKeywords": []
                 },
                 {
                     "keyword": "Bases de Datos",
@@ -139,7 +139,50 @@
                         }
                     ],
                     "definitions": [],
-                    "fakeKeywords":[]
+                    "fakeKeywords": []
+                },
+                {
+                    "keyword": "Lenguaje de Programacion",
+                    "questions": [
+                        {
+                            "statement": "Que es un lenguaje de programacion",
+                            "statementType": "Definition",
+                            "type": "Open",
+                            "answers": [
+                                {
+                                    "username": "MarcosAlumno",
+                                    "content": "Un lenguaje de programaci�n es un sistema de comunicaci�n que permite expresar instrucciones y algoritmos para que una m�quina o un software pueda ejecutarlos. (IA Bing)",
+                                    "isOK": true,
+                                    "createdDate": "2023-12-01T11:55:23.350Z",
+                                    "evaluatedBy": "MarcosProfe",
+                                    "evaluatedDate": "2023-12-01T12:00:05.181Z"
+                                },
+                                {
+                                    "username": "JoseAlumno",
+                                    "content": "Es la forma de hablar de los informaticos.",
+                                    "isOK": false,
+                                    "createdDate": "2023-12-01T11:57:55.802Z",
+                                    "evaluatedBy": "MarcosProfe",
+                                    "evaluatedDate": "2023-12-01T12:10:21.000Z"
+                                }
+                            ]
+                        }
+                    ],
+                    "definitions": [
+                        {
+                            "content": "Un lenguaje de programaci�n es un sistema de comunicaci�n que permite expresar instrucciones y algoritmos para que una m�quina o un software pueda ejecutarlos. (IA Bing)",
+                            "isFake": false,
+                            "createdDate": "2023-12-01T12:00:05.182Z",
+                            "justifications": []
+                        },
+                        {
+                            "content": "Es la forma de hablar de los informaticos.",
+                            "isFake": true,
+                            "createdDate": "2023-12-01T12:10:21.000Z",
+                            "justifications": []
+                        }
+                    ],
+                    "fakeKeywords": []
                 }
             ]
         },
@@ -158,7 +201,7 @@
                         }
                     ],
                     "definitions": [],
-                    "fakeKeywords":[]
+                    "fakeKeywords": []
                 }
             ]
         },
@@ -186,7 +229,7 @@
                                 }
                             ],
                             "definitions": [],
-                            "fakeKeywords":[]
+                            "fakeKeywords": []
                         }
                     ]
                 }
