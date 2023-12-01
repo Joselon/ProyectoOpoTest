@@ -1,9 +1,10 @@
 import { OpenQuestion, MultipleChoiceQuestion } from "./Question.js";
-import { DefinitionStatement, ClassificationStatement, CompositionStatement } from "./Statement.js";
+import { DefinitionStatement, ClassificationStatement, CompositionStatement, ReverseDefinitionStatement } from "./Statement.js";
 import { Definition } from "./Definition.js";
 
 class Concept {
     #keyword;
+    #fakeKeywords;
     #definitions;
     #relations;
     #questions;
@@ -13,10 +14,19 @@ class Concept {
         this.#questions = [];
         this.#definitions = [];
         this.#relations = [];
+        this.#fakeKeywords = [];
     }
 
     getKeyword() {
         return this.#keyword;
+    }
+
+    getFakeKeywords() {
+        return this.#fakeKeywords;
+    }
+
+    addFakeKeyword(string){
+        this.#fakeKeywords.push(string);
     }
 
     getDefinition(index) {
@@ -85,6 +95,9 @@ class Concept {
             }
             else if (question.statementType === "Composition") {
                 statementImplementor = new CompositionStatement(this);
+            }
+            else if (question.statementType === "FakeKeywords") {
+                statementImplementor = new ReverseDefinitionStatement(this);
             }
             else {
                 //TODO

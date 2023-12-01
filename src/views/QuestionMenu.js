@@ -1,46 +1,46 @@
 import { DynamicQuitMenu, DynamicMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
 import { OpenQuestion, MultipleChoiceQuestion } from "../models/Question.js";
-import { DefinitionStatement, ClassificationStatement, CompositionStatement } from "../models/Statement.js";
+import { DefinitionStatement, ClassificationStatement, CompositionStatement, ReverseDefinitionStatement } from "../models/Statement.js";
 import { console } from "../utils/view/console.js";
 
 class AddQuestionOption extends OpenMenuOption {
     #userState;
-    #concept;
-    #target;
 
     constructor(title, menu, userState) {
         super(title, menu);
         this.#userState = userState;
-        this.#concept = this.#userState.getCurrentConcept();
-        this.#target = this.#userState.getSelectedStatementTarget();
     }
 
     interact() {
         super.interact();
+        let concept = this.#userState.getCurrentConcept();
+        let target = this.#userState.getSelectedStatementTarget();
         let statementImplementor;
-        if (this.#target === "Definition") {
-            statementImplementor = new DefinitionStatement(this.#concept);
+        if (target === "Definition") {
+            statementImplementor = new DefinitionStatement(concept);
         }
-        else if (this.#target === "Classification") {
-            statementImplementor = new ClassificationStatement(this.#concept);
+        else if (target === "Classification") {
+            statementImplementor = new ClassificationStatement(concept);
         }
-        else if (this.#target === "Composition") {
-            statementImplementor = new CompositionStatement(this.#concept);
+        else if (target === "Composition") {
+            statementImplementor = new CompositionStatement(concept);
         }
-        else if ( this.#target === "FakeKeywords") {
-            statementImplementor = new ReverseDefinitionStatement(this.#concept);
+        else if (target === "FakeKeywords") {
+            let definition = concept.getDefinition(0); //TODO Menu para elegir solution como indice
+            statementImplementor = new ReverseDefinitionStatement(concept,definition);
         }
         else {
             //TODO
+            console.writeln("ERROR no existe un tipo de enunciado coincidente");
         }
         let statement = console.readString(`
-        Escribe el enunciado de la pregunta de tipo ${this.#userState.getSelectedStatementTarget()}:`);
+        Escribe el enunciado de la pregunta de tipo ${target}:`);
         if (this.#userState.getSelectedQuestionType() === "Open") {
 
-            this.#concept.addQuestion(new OpenQuestion(statement, statementImplementor));
+            concept.addQuestion(new OpenQuestion(statement, statementImplementor));
         }
         else if (this.#userState.getSelectedQuestionType() === "MultipleChoice") {
-            this.#concept.addQuestion(new MultipleChoiceQuestion(statement, statementImplementor));
+            concept.addQuestion(new MultipleChoiceQuestion(statement, statementImplementor));
         }
 
     }
@@ -58,6 +58,7 @@ class SelectStatementAndShowQuestionTypeMenuOption extends OpenMenuOption {
 
     interact() {
         super.interact();
+        //
         this.#userState.setSelectedStatementTarget(this.#statementTarget);
     }
 }
@@ -107,7 +108,7 @@ class StatementMenu extends DynamicMenu {
     #statementTargetTitles;
 
     #primaryTypes = ["Definition", "Classification", "Composition"];
-    #withDefinitionTypes = ["ReverseDefinition", "Justification","Definition"];
+    #withDefinitionTypes = ["FakeKeywords", "Justification", "Definition"];
     #withRelationTypes = ["ReverseRelation", "MissingRelation"];
     #withJustificationTypes = ["Explication", "ReverseJustification"];
     #statementTargets;

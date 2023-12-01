@@ -18,6 +18,12 @@
                                             "statementType": "Definition",
                                             "type": "Open",
                                             "answers": []
+                                        },
+                                        {
+                                            "statement": "Que tipos de Software podemos decir que hay",
+                                            "statementType": "Classification",
+                                            "type": "Open",
+                                            "answers": []
                                         }
                                     ],
                                     "definitions": []
@@ -52,7 +58,7 @@
                                     "content": "Son las siglas de Global Internet Tecnologies",
                                     "isOK": false,
                                     "createdDate": "2023-11-15T13:35:58.467Z",
-                                    "evaluatedBy": "Luis",
+                                    "evaluatedBy": "Bacterio",
                                     "evaluatedDate": "2023-11-24T19:21:16.631Z"
                                 },
                                 {

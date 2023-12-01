@@ -77,11 +77,28 @@ class CompositionStatement extends StatementImplementor {
 }
 
 class withDefinitionStatement extends StatementImplementor {
-    #definitions = [];
+    _definition;
 
-    constructor(concept) {
+    constructor(concept, definition) {
         super(concept);
-        this.#definitions = concept.getDefinitions();
+        this._definition = definition;
+    }
+}
+
+class ReverseDefinitionStatement extends withDefinitionStatement {
+
+    constructor(concept, definition) {
+        super(concept, definition);
+        this._statement = `${this._definition.getContent()}. ¿A que corresponde esta definición?`;
+        this._target = "FakeKeywords";
+    }
+
+    addToConcept(content) {
+        this._concept.addFakeKeyword(content);
+    }
+
+    setOptions() {
+        this._solutions = this._concept.getFakeKeywords();
     }
 }
 
@@ -94,4 +111,4 @@ class withRelationStatement extends StatementImplementor {
     }
 }
 
-export { DefinitionStatement, ClassificationStatement, CompositionStatement }
+export { DefinitionStatement, ClassificationStatement, CompositionStatement, ReverseDefinitionStatement }
