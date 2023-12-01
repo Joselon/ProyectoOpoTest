@@ -120,6 +120,12 @@ class Concept {
         }
     }
 
+    loadFakeKeywordsFromDataObject(conceptDataObject) {
+        for (let string of conceptDataObject.fakeKeywords) {
+            this.addFakeKeyword(string);
+        }
+    }
+
     formatQuestionsObjects() {
         let conceptQuestionsObjects = [];
         let indexQuest = 0;
@@ -152,6 +158,14 @@ class Concept {
             indexDef++;
         }
         return conceptDefinitionsObjects;
+    }
+
+    formatDefinitionsObject() {
+        let conceptFakeKeywords = [];
+        for (let string of this.#fakeKeywords) {
+            conceptFakeKeywords.push(string);
+        }
+        return conceptFakeKeywords;
     }
 
 }

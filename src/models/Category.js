@@ -95,7 +95,8 @@ class Category {
             this.addConcept(new Concept(concept.keyword));
             this.#concepts[indexCon].loadQuestionsFromDataObject(concept);
             this.#concepts[indexCon].loadDefinitionsFromDataObject(concept);
-            //Pendiente recuperar  Relations
+            this.#concepts[indexCon].loadFakeKeywordsFromDataObject(concept);
+            //Pendiente recuperar  Relations...
             indexCon++;
         }
     }
@@ -125,11 +126,13 @@ class Category {
                 {
                     keyword: concept.getKeyword(),
                     questions: [],
-                    definitions: []
+                    definitions: [],
+                    fakeKeywords: []
                 });
             categoryConceptsObjects[indexCon].questions = concept.formatQuestionsObjects();
             categoryConceptsObjects[indexCon].definitions = concept.formatDefinitionsObjects();
-            //Pendiente guardar  Relations
+            categoryConceptsObjects[indexCon].fakeKeywords = concept.formatDefinitionsObject();
+            //Pendiente guardar  Relations...
             indexCon++;
         }
         return categoryConceptsObjects;

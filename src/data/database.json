@@ -26,7 +26,8 @@
                                             "answers": []
                                         }
                                     ],
-                                    "definitions": []
+                                    "definitions": [],
+                                    "fakeKeywords":[]
                                 }
                             ]
                         },
@@ -66,7 +67,7 @@
                                     "content": "Es una herramienta de control de versiones",
                                     "isOK": true,
                                     "createdDate": "2023-11-15T13:36:32.514Z",
-                                    "evaluatedBy": "LuisDefault",
+                                    "evaluatedBy": "Bacterio",
                                     "evaluatedDate": "2023-11-16T08:49:10.864Z"
                                 }
                             ]
@@ -115,7 +116,8 @@
                             "createdDate": "2023-11-24T19:21:16.631Z",
                             "justifications": []
                         }
-                    ]
+                    ],
+                    "fakeKeywords":[]
                 },
                 {
                     "keyword": "Bases de Datos",
@@ -136,7 +138,8 @@
                             ]
                         }
                     ],
-                    "definitions": []
+                    "definitions": [],
+                    "fakeKeywords":[]
                 }
             ]
         },
@@ -154,7 +157,8 @@
                             "answers": []
                         }
                     ],
-                    "definitions": []
+                    "definitions": [],
+                    "fakeKeywords":[]
                 }
             ]
         },
@@ -181,7 +185,8 @@
                                     "answers": []
                                 }
                             ],
-                            "definitions": []
+                            "definitions": [],
+                            "fakeKeywords":[]
                         }
                     ]
                 }

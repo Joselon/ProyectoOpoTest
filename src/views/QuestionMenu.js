@@ -27,7 +27,7 @@ class AddQuestionOption extends OpenMenuOption {
         }
         else if (target === "FakeKeywords") {
             let definition = concept.getDefinition(0); //TODO Menu para elegir solution como indice
-            statementImplementor = new ReverseDefinitionStatement(concept,definition);
+            statementImplementor = new ReverseDefinitionStatement(concept, definition);
         }
         else {
             //TODO
@@ -132,7 +132,7 @@ class StatementMenu extends DynamicMenu {
             this.#withDefinitionTitles = [
                 `Definición Inversa:${this.#concept.getDefinition(0).getContent()}. ¿A que corresponde esta definición?`,
                 `Justificación: ¿${this.#concept.getKeyword()} ${this.#concept.getDefinition(0).getContent()}?¿Por qué?`,
-                `Definición Automática: ¿Qué es ${this.#concept.getKeyword()}?`
+                `Definición (Automática): ¿Qué es ${this.#concept.getKeyword()}?`
             ];
             this.#statementTargets.push(this.#withDefinitionTypes);
             this.#statementTargetTitles.push(this.#withDefinitionTitles);
@@ -157,8 +157,7 @@ class StatementMenu extends DynamicMenu {
                         isCreated = true;
                     }
                 }
-                if (!isCreated)
-                    this.add(new SelectStatementAndShowQuestionTypeMenuOption(`Seleccionar Tipo: ${this.#statementTargetTitles[i][j]}`, this.#statementTargets[i][j], new QuestionTypeMenu(this.#userState), this.#userState));
+                this.add(new SelectStatementAndShowQuestionTypeMenuOption(`Seleccionar Tipo: ${this.#statementTargetTitles[i][j]} -${isCreated ? "(YA CREADA)" : ""}`, this.#statementTargets[i][j], new QuestionTypeMenu(this.#userState), this.#userState));
             }
         }
     }
