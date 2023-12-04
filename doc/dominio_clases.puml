@@ -18,8 +18,9 @@ class Evaluation {
 }
 
 class Category {
-    -subcategories
-    -concepts
+    - subcategories
+    - concepts[ ]
+    - questions[ ]
 }
 
 class Test {
@@ -31,7 +32,7 @@ class Concept {
     - fakekeywords[ ]
     - definitions[ ]
     - relations[ ]
-    - questions[ ]
+    
 }
 
 class Definition {
@@ -55,13 +56,19 @@ class Relation {
 }
 
 class Question {
+    - statement
     - statementImplementor
     - answers[ ]
     # void setStatementImplementor()
     + bool isAnsweredBy(studentName)
 }
 
-class Statement
+class StatementImplementor {
+    - concept
+    - solutions
+    + addToConcept()
+    + getSolutions()
+}
 
 class Answer {
     - content
@@ -83,7 +90,6 @@ class Correct
 Class Incorrect
 
 class OpenAnswer {
-    - isUsefulToConcept
     - content
     - evaluatedBy
 }
@@ -91,7 +97,6 @@ class OpenAnswer {
 Class SelectedOption {
 
 }
-
 
 Community *--"2..n" User
 Community o--"0..n" Category
@@ -103,21 +108,20 @@ User <|-- Student
 
 Teacher ..> Concept
 Category o--"0..n" Concept
-'Concept --o Category
-Concept o--"0..n" Question
-'Question --o Concept
-Concept o--"0..n" Definition
-Definition o--"0..n" Justification: isFake = true
+Category o--"0..m" Question
+StatementImplementor *-- Concept
+Concept o--"0.." Definition
+Definition o--"0..m" Justification: isFake = true
 Justification o-- Explication: isFake = true
-Concept o--"0..n" Relation
+Concept o--"0..m" Relation
 
 Student -->"0..n" Evaluation
 Evaluation --> Test
 
 Teacher ..> Evaluation
-Definition ..> OpenAnswer :isUsefulToConcept
-Justification ..> OpenAnswer :isUsefulToConcept
-Relation ..> OpenAnswer :isUsefulToConcept
+'Definition ..> OpenAnswer :isUsefulToConcept
+'Justification ..> OpenAnswer :isUsefulToConcept
+'Relation ..> OpenAnswer :isUsefulToConcept
 
 Evaluation ..> OpenAnswer : manual (! isEvaluated)
 Evaluation ..> SelectedOption : automatic
@@ -125,7 +129,7 @@ Evaluation ..> SelectedOption : automatic
 Test *--"1..n" Question
 Question <|-- MultipleChoiceQuestion
 Question <|-- OpenQuestion
-Question *--   Statement
+Question *-  StatementImplementor
 MultipleChoiceQuestion *--"2..n" Option
 Option <|-- Incorrect
 Option <|-- Correct
@@ -136,8 +140,8 @@ OpenQuestion o--"0..n" OpenAnswer
 Question o--"0..n" Answer
 Answer <|-- OpenAnswer
 Answer <|-- SelectedOption
-OpenAnswer --> Solution
-
+OpenAnswer -* Solution
+StatementImplementor o--"1..m" Solution
 
 @enduml
 

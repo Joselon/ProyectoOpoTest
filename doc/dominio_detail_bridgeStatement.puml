@@ -22,7 +22,7 @@ class Classification
 
 class Composition
 
-package Primary:conceptElementUsed=Keyword {
+package Primary:withKeyword {
     class DefinitionStatement {
         - statement ="¿Qué es KEYWORD?"
         - solutions [ Definition]
@@ -89,7 +89,6 @@ package Bridge {
 
 }
 
-Question *- StatementImplementor
 Question <|-- OpenQuestion
 Question <|-- MultipleChoiceQuestion
 
@@ -100,20 +99,25 @@ SelectedOptionAnswer *- Option
 Answer <|-- OpenAnswer
 Answer <|-- SelectedOptionAnswer
 
-DefinitionStatement ..> Concept
-ClassificationStatement ..> Concept
-CompositionStatement ..> Concept
-
-Concept o-- "0..N" Question
-Concept o--"0..m" Definition
-
-Concept o-- "0..m" Relation
-Relation <|-- Classification
-Relation <|-- Composition
+Question *- StatementImplementor
+StatementImplementor *-- Concept
 
 StatementImplementor <|-- DefinitionStatement
 StatementImplementor <|-- ClassificationStatement
 StatementImplementor <|-- CompositionStatement
 
+DefinitionStatement ..> Keyword :statement
+ClassificationStatement ..> Keyword :statement
+CompositionStatement ..> Keyword: statement
+
+DefinitionStatement ..> Definition :solutions
+ClassificationStatement ..> Classification :solutions
+CompositionStatement ..-> Composition:solutions
+
+Concept *-- Keyword
+Concept o--"0..m" Definition
+Concept o-- "0..m" Relation
+Relation <|-- Classification
+Relation <|-- Composition
 
 @enduml
