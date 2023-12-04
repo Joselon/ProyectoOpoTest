@@ -24,7 +24,8 @@ class Category {
 }
 
 class Test {
-    - questions[ category.getAllQuestions() ]
+    - questions[  ]
+    + category.getAllQuestions()
 }
 
 class Concept {
@@ -55,17 +56,20 @@ class Relation {
     - createdDate
 }
 
-class Question {
-    - statement
+abstract class Question {
     - statementImplementor
+    - statement
     - answers[ ]
-    # void setStatementImplementor()
+
+    + addAnswer()
     + bool isAnsweredBy(studentName)
 }
 
-class StatementImplementor {
+abstract class StatementImplementor {
     - concept
     - solutions
+
+    
     + addToConcept()
     + getSolutions()
 }
@@ -79,9 +83,15 @@ class Answer {
     - evaluatedDate
 }
 
-class MultipleChoiceQuestion
+class MultipleChoiceQuestion {
+    + addAnswer(new SelectedOption())
+     + setOptions(<StatementImplementor>)
+}
 
-class OpenQuestion
+class OpenQuestion {
+    + addAnswer(new OpenAnswer())
+    + addToSolutions(<StatementImplementor>)
+}
 
 class Option
 
@@ -140,8 +150,9 @@ OpenQuestion o--"0..n" OpenAnswer
 Question o--"0..n" Answer
 Answer <|-- OpenAnswer
 Answer <|-- SelectedOption
-OpenAnswer -* Solution
-StatementImplementor o--"1..m" Solution
+'OpenAnswer -* "1..m<n" Solution
+'StatementImplementor o--"1..m" Solution
+'Option ..> Solution
 
 @enduml
 
