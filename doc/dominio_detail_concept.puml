@@ -4,7 +4,6 @@ class Concept {
     - keyword
     - definitions[ ]
     - relations[ ]
-    - questions[ ]
 }
 
 class Definition {
@@ -18,20 +17,20 @@ class Classification
 
 class Composition
 
-package Primary:conceptElementUsed=Keyword {
+package Primary:withKeyword {
     abstract class DefinitionQuestion {
         - statement ="¿Qué es KEYWORD?"
-        - conceptElementTarget = Definition
+        - Target = Definition
     }
 
     abstract  class ClassificationQuestion {
         - statement = "Qué tipos hay de KEYWORD"
-        - conceptElementTarget = Classification
+        - Target = Classification
     }
 
     abstract class CompositionQuestion {
         - statement ="¿Qué conceptos destacarias del KEYWORD?"
-        - conceptElementTarget = Composition
+        - Target = Composition
     }
 }
 
@@ -52,10 +51,14 @@ class Option {
 
 package Bridge {
     abstract class Question {
+        - concept
         - answersImplementor
         - answers[ ]
+        - solutions[ ]
         # void setAnswerImplementor()
         + bool isAnsweredBy(studentName)
+        + addToConcept()
+        + getSolutions()
     }
 
     class AnswersImplementor {
@@ -70,31 +73,26 @@ Question o- AnswersImplementor
 AnswersImplementor <|-- OpenAnswer
 AnswersImplementor <|-- MultipleChoiceAnswer
 
-
 MultipleChoiceAnswer *-- Option
 
-DefinitionQuestion ..> Concept
-ClassificationQuestion ..> Concept
-CompositionQuestion ..> Concept
+DefinitionQuestion ..> Keyword
+ClassificationQuestion ..> Keyword
+CompositionQuestion ..> Keyword
 
-Concept o-- "0..n" Question
-Concept o--"0..n" Definition
+Concept --* Question
+Concept *- Keyword
+Concept o-"0..n" Definition
 
-Concept o-- "0..n" Relation
+Concept o- "0..n" Relation
 Relation <|-- Classification
 Relation <|-- Composition
 
-
 Question <|-- DefinitionQuestion
-OpenAnswer <.. Definition:conceptElementTarget=Definition
-Option ..> Definition :conceptElementTarget= Definition
+DefinitionQuestion ..> Definition 
 Question <|-- ClassificationQuestion
-OpenAnswer <.. Classification :conceptElementTarget= Classification
-Option ..> Classification :conceptElementTarget= Classification
-
+ClassificationQuestion <.. Classification 
 Question <|-- CompositionQuestion
-'OpenAnswer <.. Composition :conceptElementTarget= Composition
-'Option ..> Composition:conceptElementTarget= Composition 
+CompositionQuestion ..> Composition
 
 @enduml
 
