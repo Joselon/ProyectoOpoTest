@@ -88,10 +88,8 @@ class EvaluationsMenu extends DynamicQuitMenu {
             optionTitle = `Menú de Evaluaciones de Conceptos de la Categoría:${category.getName()} `;
         else
             optionTitle = `Menú de Evaluaciones de Conceptos de la Subcategoría:(${parentName}/${category.getName()}) `
-        for (let concept of category.getConcepts()) {
-            if (concept.getOpenQuestions().length > 0)
-                this.add(new OpenMenuOption(optionTitle + `- Concepto: ${concept.getKeyword()}`, new EvaluationMenu(concept.getOpenQuestions(), this.#evaluatedBy)));
-        }
+        if (category.getOpenQuestions().length > 0)
+            this.add(new OpenMenuOption(optionTitle + `- Preguntas abiertas de : ${category.getName()}`, new EvaluationMenu(category.getOpenQuestions(), this.#evaluatedBy)));
         for (let subcategory of category.getSubcategories()) {
             this.#addSubcategoryOption(subcategory, category.getName())
         }

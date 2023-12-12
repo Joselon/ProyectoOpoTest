@@ -13,21 +13,23 @@ class AddQuestionOption extends OpenMenuOption {
 
     interact() {
         super.interact();
+        let category = this.#userState.getCurrentCategory();
         let concept = this.#userState.getCurrentConcept();
+        let conceptIndex = this.#userState.getCurrentCategory().getConcepts().indexOf(concept);
         let target = this.#userState.getSelectedStatementTarget();
         let statementImplementor;
         if (target === "Definition") {
-            statementImplementor = new DefinitionStatement(concept);
+            statementImplementor = new DefinitionStatement(concept, conceptIndex);
         }
         else if (target === "Classification") {
-            statementImplementor = new ClassificationStatement(concept);
+            statementImplementor = new ClassificationStatement(concept, conceptIndex);
         }
         else if (target === "Composition") {
-            statementImplementor = new CompositionStatement(concept);
+            statementImplementor = new CompositionStatement(concept, conceptIndex);
         }
         else if (target === "FakeKeywords") {
             let definition = concept.getDefinition(0); //TODO Menu para elegir solution como indice
-            statementImplementor = new ReverseDefinitionStatement(concept, definition);
+            statementImplementor = new ReverseDefinitionStatement(concept, conceptIndex, definition);
         }
         else {
             //TODO
@@ -37,10 +39,10 @@ class AddQuestionOption extends OpenMenuOption {
         Escribe el enunciado de la pregunta de tipo ${target}:`);
         if (this.#userState.getSelectedQuestionType() === "Open") {
 
-            concept.addQuestion(new OpenQuestion(statement, statementImplementor));
+            category.addQuestion(new OpenQuestion(statement, statementImplementor));
         }
         else if (this.#userState.getSelectedQuestionType() === "MultipleChoice") {
-            concept.addQuestion(new MultipleChoiceQuestion(statement, statementImplementor));
+            category.addQuestion(new MultipleChoiceQuestion(statement, statementImplementor));
         }
 
     }
@@ -99,6 +101,7 @@ class QuestionTypeMenu extends DynamicMenu {
 class StatementMenu extends DynamicMenu {
     //["Primary", "WithDefinition", "WithRelation", "WithDefinitionAndRelation"..]
     #concept;
+    #category;
     #userState;
 
     #primaryTitles;
@@ -117,6 +120,7 @@ class StatementMenu extends DynamicMenu {
         super(title);
         this.#userState = userState;
         this.#concept = this.#userState.getCurrentConcept();
+        this.#category = this.#userState.getCurrentCategory();
         this.#statementTargets = [];
         this.#statementTargetTitles = [];
 
@@ -152,7 +156,7 @@ class StatementMenu extends DynamicMenu {
         for (let i = 0; i < this.#statementTargetTitles.length; i++) {
             for (let j = 0; j < this.#statementTargets[i].length; j++) {
                 let isCreated = false;
-                for (let question of this.#concept.getQuestions()) {
+                for (let question of this.#category.getQuestions()) {
                     if (question.getStatementTarget() === this.#statementTargets[i][j]) {
                         isCreated = true;
                     }
@@ -165,12 +169,14 @@ class StatementMenu extends DynamicMenu {
 
 class QuestionMenu extends DynamicQuitMenu {
     #userState;
+    #category;
     #concept;
     #questionsInfoTitle;
 
     constructor(userState) {
         super("Menú de Preguntas")
         this.#userState = userState;
+        this.#category = this.#userState.getCurrentCategory();
         this.#concept = this.#userState.getCurrentConcept();
     }
 
@@ -183,8 +189,9 @@ class QuestionMenu extends DynamicQuitMenu {
         let charIndex = "a".charCodeAt(0);
         this.#questionsInfoTitle = "\nPreguntas Creadas: \n";
         this.#questionsInfoTitle += "------------------ \n";
-        for (let question of this.#concept.getQuestions()) {
+        for (let question of this.#category.getAllQuestions()) {
             this.#questionsInfoTitle += String.fromCharCode(charIndex) + ")";
+            this.#questionsInfoTitle += "Concepto Relacionado: '" + this.#category.getConcepts()[question.getConceptIndex()] + "' - ";
             this.#questionsInfoTitle += "Enunciado: '¿" + question.getStatement() + "?'\n";
             this.#questionsInfoTitle += "Objetivo del Enunciado: '" + question.getStatementTarget() + "' - ";
             this.#questionsInfoTitle += "Tipo de Pregunta: '" + question.getType() + "'\n";

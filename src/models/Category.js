@@ -1,9 +1,13 @@
 import { Concept } from "./Concept.js";
+import { OpenQuestion, MultipleChoiceQuestion } from "./Question.js";
+import { DefinitionStatement, ClassificationStatement, CompositionStatement, ReverseDefinitionStatement } from "./Statement.js";
+
 
 class Category {
     #name;
     #concepts = [];
     #subcategories = [];
+    #questions = [];
 
     constructor(name) {
         this.#name = name;
@@ -47,29 +51,45 @@ class Category {
 
     }
 
+    getQuestions() {
+        return this.#questions;
+    }
+
+    getQuestion(index) {
+        return this.#questions[index];
+    }
+
+    getOpenQuestions() {
+        let openQuestions = [];
+        for (let question of this.#questions) {
+            if (question.getType() === "Open") //DANGER!!
+                openQuestions.push(question);
+        }
+        return openQuestions;
+    }
+
+    addQuestion(question) {
+        this.#questions.push(question);
+    }
+
     getTotalNumberOfQuestions() {
-        let nquestions = 0;
-        for (let concept of this.#concepts)
-            nquestions += concept.getNumberOfQuestions();
-        for (let category of this.#subcategories) {
-            nquestions += category.getTotalNumberOfQuestions();
+        let nquestions = this.#questions.length;
+        for (let subcategory of this.#subcategories) {
+            nquestions += subcategory.getTotalNumberOfQuestions();
         }
         return nquestions;
     }
 
     getAllQuestions() {
         let allQuestions = [];
-        for (let concept of this.#concepts)
-            for (let question of concept.getQuestions())
-                allQuestions.push(question);
+        for (let question of this.#questions)
+            allQuestions.push(question);
         for (let category of this.#subcategories) {
             for (let question of category.getAllQuestions())
                 allQuestions.push(question);
         }
         return allQuestions;
     }
-
-
 
     addConcept(concept) {
         this.#concepts.push(concept);
@@ -84,7 +104,8 @@ class Category {
         for (let subcategory of categoryDataObject.subcategories) {
             this.addSubcategory(new Category(subcategory.name));
             this.#subcategories[indexSub].loadSubcategoriesFromDataObject(subcategory);
-            this.#subcategories[indexSub].loadConceptsFromDataObject(subcategory)
+            this.#subcategories[indexSub].loadConceptsFromDataObject(subcategory);
+            this.#subcategories[indexSub].loadQuestionsFromDataObject(subcategory);
             indexSub++;
         }
     }
@@ -93,11 +114,41 @@ class Category {
         let indexCon = 0;
         for (let concept of categoryDataObject.concepts) {
             this.addConcept(new Concept(concept.keyword));
-            this.#concepts[indexCon].loadQuestionsFromDataObject(concept);
             this.#concepts[indexCon].loadDefinitionsFromDataObject(concept);
             this.#concepts[indexCon].loadFakeKeywordsFromDataObject(concept);
             //Pendiente recuperar  Relations...
             indexCon++;
+        }
+    }
+    loadQuestionsFromDataObject(categoryDataObject) {
+        let indexQuest = 0;
+        for (let question of categoryDataObject.questions) {
+            let statementImplementor;
+            if (question.target === "Definition") {
+                statementImplementor = new DefinitionStatement(this.#concepts[question.conceptIndex], question.conceptIndex);
+            }
+            else if (question.target === "Classification") {
+                statementImplementor = new ClassificationStatement(this.#concepts[question.conceptIndex], question.conceptIndex);
+            }
+            else if (question.target === "Composition") {
+                statementImplementor = new CompositionStatement(this.#concepts[question.conceptIndex], question.conceptIndex);
+            }
+            else if (question.target === "FakeKeywords") {
+                statementImplementor = new ReverseDefinitionStatement(this.#concepts[question.conceptIndex], question.conceptIndex);
+            }
+            else {
+                //TODO
+            }
+            if (question.type === "Open") {
+                this.addQuestion(new OpenQuestion(question.statement, statementImplementor));
+                this.#questions[indexQuest].loadAnswersFromDataObject(question);
+
+            }
+            else if (question.type === "MultipleChoice") {
+                this.addQuestion(new MultipleChoiceQuestion(question.statement, statementImplementor));
+                this.#questions[indexQuest].loadAnswersFromDataObject(question);
+            }
+            indexQuest++;
         }
     }
 
@@ -109,10 +160,12 @@ class Category {
                 {
                     name: subcategory.getName(),
                     subcategories: [],
-                    concepts: []
+                    concepts: [],
+                    questions: []
                 });
             categorySubcategoriesObjects[indexSub].subcategories = subcategory.formatSubcategoriesObjects();
             categorySubcategoriesObjects[indexSub].concepts = subcategory.formatConceptsObjects();
+            categorySubcategoriesObjects[indexSub].questions = subcategory.formatQuestionsObjects();
             indexSub++;
         }
         return categorySubcategoriesObjects;
@@ -125,11 +178,9 @@ class Category {
             categoryConceptsObjects.push(
                 {
                     keyword: concept.getKeyword(),
-                    questions: [],
                     definitions: [],
                     fakeKeywords: []
                 });
-            categoryConceptsObjects[indexCon].questions = concept.formatQuestionsObjects();
             categoryConceptsObjects[indexCon].definitions = concept.formatDefinitionsObjects();
             categoryConceptsObjects[indexCon].fakeKeywords = concept.formatDefinitionsObject();
             //Pendiente guardar  Relations...
@@ -138,6 +189,23 @@ class Category {
         return categoryConceptsObjects;
     }
 
+    formatQuestionsObjects() {
+        let categoryQuestionObjects = [];
+        let indexQuest = 0;
+        for (let question of this.#questions) {
+            categoryQuestionObjects.push(
+                {
+                    conceptIndex: question.getConceptIndex(),
+                    statement: question.getStatement(),
+                    target: question.getStatementTarget(),
+                    type: question.getType(),
+                    answers: []
+                });
+            categoryQuestionObjects[indexQuest].answers = question.formatAnswersObjects();
+            indexQuest++;
+        }
+        return categoryQuestionObjects;
+    }
 }
 
 export { Category }

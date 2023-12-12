@@ -28,7 +28,7 @@ class SelectConceptOption extends Option {
     }
 
     getTitle() {
-        return `${super.getTitle()}: ${this.#concept.getKeyword()} -(${this.#concept.getNumberOfDefinitions()}/${this.#concept.getNumberOfRelations()}/${this.#concept.getNumberOfQuestions()})`;
+        return `${super.getTitle()}: ${this.#concept.getKeyword()} -(${this.#concept.getNumberOfDefinitions()}/${this.#concept.getNumberOfRelations()})`;
     }
 
     interact() {
@@ -55,7 +55,7 @@ class ShowConceptOption extends Option {
         for (let relation of this.#concept.getRelations())
             console.writeln(`- "${relation.getContent()}"`);
         console.writeln("Palabras clave falsas relacionadas:");
-        for (let fakeKeyword of this.#concept.getKeywords())
+        for (let fakeKeyword of this.#concept.getFakeKeywords())
             console.writeln(`- "${fakeKeyword}"`);
     }
 }
@@ -84,7 +84,7 @@ class ConceptsMenu extends DynamicMenu {
     #userState;
 
     constructor(userState) {
-        super(`Menú de Conceptos de la Categoría - (Definiciones / Relaciones / Preguntas)`);
+        super(`Menú de Conceptos de la Categoría - (Definiciones / Relaciones)`);
         this.#userState = userState;
     }
 

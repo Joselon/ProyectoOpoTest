@@ -12,97 +12,47 @@
                             "concepts": [
                                 {
                                     "keyword": "Software",
-                                    "questions": [
-                                        {
-                                            "statement": "Qué es el software",
-                                            "statementType": "Definition",
-                                            "type": "Open",
-                                            "answers": []
-                                        },
-                                        {
-                                            "statement": "Que tipos de Software podemos decir que hay",
-                                            "statementType": "Classification",
-                                            "type": "Open",
-                                            "answers": []
-                                        }
-                                    ],
                                     "definitions": [],
                                     "fakeKeywords": []
+                                }
+                            ],
+                            "questions": [
+                                {
+                                    "conceptIndex": 0,
+                                    "statement": "Qué es el software",
+                                    "target": "Definition",
+                                    "type": "Open",
+                                    "answers": []
+                                },
+                                {
+                                    "conceptIndex": 0,
+                                    "statement": "Que tipos de Software podemos decir que hay",
+                                    "target": "Classification",
+                                    "type": "Open",
+                                    "answers": []
                                 }
                             ]
                         },
                         {
                             "name": "Patrones de Diseño de Software",
                             "subcategories": [],
-                            "concepts": []
+                            "concepts": [],
+                            "questions":[]
                         }
                     ],
-                    "concepts": []
+                    "concepts": [],
+                    "questions":[]
                 },
                 {
                     "name": "Sistemas Operativos",
                     "subcategories": [],
-                    "concepts": []
+                    "concepts": [],
+                    "questions":[]
                 }
             ],
             "concepts": [
                 {
                     "keyword": "GIT",
-                    "questions": [
-                        {
-                            "statement": "Qué es el GIT",
-                            "statementType": "Definition",
-                            "type": "Open",
-                            "answers": [
-                                {
-                                    "username": "Jaimito",
-                                    "content": "Son las siglas de Global Internet Tecnologies",
-                                    "isOK": false,
-                                    "createdDate": "2023-11-15T13:35:58.467Z",
-                                    "evaluatedBy": "Bacterio",
-                                    "evaluatedDate": "2023-11-24T19:21:16.631Z"
-                                },
-                                {
-                                    "username": "Jorgito",
-                                    "content": "Es una herramienta de control de versiones",
-                                    "isOK": true,
-                                    "createdDate": "2023-11-15T13:36:32.514Z",
-                                    "evaluatedBy": "Bacterio",
-                                    "evaluatedDate": "2023-11-16T08:49:10.864Z"
-                                }
-                            ]
-                        },
-                        {
-                            "statement": "Que tipos de GIT hay",
-                            "statementType": "Classification",
-                            "type": "Open",
-                            "answers": [
-                                {
-                                    "username": "Jorgito",
-                                    "content": "Publicos y privado",
-                                    "isOK": false,
-                                    "createdDate": "2023-11-17T17:51:38.068Z",
-                                    "evaluatedBy": "",
-                                    "evaluatedDate": null
-                                }
-                            ]
-                        },
-                        {
-                            "statement": "De que se compone GIT",
-                            "statementType": "Composition",
-                            "type": "Open",
-                            "answers": [
-                                {
-                                    "username": "Jorgito",
-                                    "content": "G, I, T",
-                                    "isOK": false,
-                                    "createdDate": "2023-11-24T19:01:13.194Z",
-                                    "evaluatedBy": "",
-                                    "evaluatedDate": null
-                                }
-                            ]
-                        }
-                    ],
                     "definitions": [
                         {
                             "content": "Es una herramienta de control de versiones",
@@ -121,23 +71,6 @@
                 },
                 {
                     "keyword": "Bases de Datos",
-                    "questions": [
-                        {
-                            "statement": "Que es una base de datos",
-                            "statementType": "Definition",
-                            "type": "Open",
-                            "answers": [
-                                {
-                                    "username": "Jaimito",
-                                    "content": "Una plataforma para alojar datos",
-                                    "isOK": false,
-                                    "createdDate": "2023-11-20T18:41:51.038Z",
-                                    "evaluatedBy": "",
-                                    "evaluatedDate": null
-                                }
-                            ]
-                        }
-                    ],
                     "definitions": [],
                     "fakeKeywords": []
                 },
@@ -145,8 +78,9 @@
                     "keyword": "Lenguaje de Programacion",
                     "questions": [
                         {
+                            "conceptIndex": 0,
                             "statement": "Que es un lenguaje de programacion",
-                            "statementType": "Definition",
+                            "target": "Definition",
                             "type": "Open",
                             "answers": [
                                 {
@@ -184,6 +118,80 @@
                     ],
                     "fakeKeywords": []
                 }
+            ],
+            "questions": [
+                {
+                    "conceptIndex": 0,
+                    "statement": "Qué es el GIT",
+                    "target": "Definition",
+                    "type": "Open",
+                    "answers": [
+                        {
+                            "username": "Jaimito",
+                            "content": "Son las siglas de Global Internet Tecnologies",
+                            "isOK": false,
+                            "createdDate": "2023-11-15T13:35:58.467Z",
+                            "evaluatedBy": "Bacterio",
+                            "evaluatedDate": "2023-11-24T19:21:16.631Z"
+                        },
+                        {
+                            "username": "Jorgito",
+                            "content": "Es una herramienta de control de versiones",
+                            "isOK": true,
+                            "createdDate": "2023-11-15T13:36:32.514Z",
+                            "evaluatedBy": "Bacterio",
+                            "evaluatedDate": "2023-11-16T08:49:10.864Z"
+                        }
+                    ]
+                },
+                {
+                    "conceptIndex": 0,
+                    "statement": "Que tipos de GIT hay",
+                    "target": "Classification",
+                    "type": "Open",
+                    "answers": [
+                        {
+                            "username": "Jorgito",
+                            "content": "Publicos y privado",
+                            "isOK": false,
+                            "createdDate": "2023-11-17T17:51:38.068Z",
+                            "evaluatedBy": "",
+                            "evaluatedDate": null
+                        }
+                    ]
+                },
+                {
+                    "conceptIndex": 0,
+                    "statement": "De que se compone GIT",
+                    "target": "Composition",
+                    "type": "Open",
+                    "answers": [
+                        {
+                            "username": "Jorgito",
+                            "content": "G, I, T",
+                            "isOK": false,
+                            "createdDate": "2023-11-24T19:01:13.194Z",
+                            "evaluatedBy": "",
+                            "evaluatedDate": null
+                        }
+                    ]
+                },
+                {
+                    "conceptIndex": 1,
+                    "statement": "Que es una base de datos",
+                    "target": "Definition",
+                    "type": "Open",
+                    "answers": [
+                        {
+                            "username": "Jaimito",
+                            "content": "Una plataforma para alojar datos",
+                            "isOK": false,
+                            "createdDate": "2023-11-20T18:41:51.038Z",
+                            "evaluatedBy": "",
+                            "evaluatedDate": null
+                        }
+                    ]
+                }
             ]
         },
         {
@@ -192,16 +200,17 @@
             "concepts": [
                 {
                     "keyword": "Derechos de los Ciudadanos",
-                    "questions": [
-                        {
-                            "statement": "Que son los Derechos de los Ciudadanos",
-                            "statementType": "Definition",
-                            "type": "Open",
-                            "answers": []
-                        }
-                    ],
                     "definitions": [],
                     "fakeKeywords": []
+                }
+            ],
+            "questions": [
+                {
+                    "conceptIndex": 0,
+                    "statement": "Que son los Derechos de los Ciudadanos",
+                    "target": "Definition",
+                    "type": "Open",
+                    "answers": []
                 }
             ]
         },
@@ -214,27 +223,30 @@
                     "concepts": [
                         {
                             "keyword": "Prohibicion",
-                            "questions": [
-                                {
-                                    "statement": "¿Que indican las señales de prohibicion?",
-                                    "statementType": "Definition",
-                                    "type": "Open",
-                                    "answers": []
-                                },
-                                {
-                                    "statement": "¿Que tipos de señales de prohibicion hay?",
-                                    "statementType": "Classification",
-                                    "type": "Open",
-                                    "answers": []
-                                }
-                            ],
                             "definitions": [],
                             "fakeKeywords": []
+                        }
+                    ],
+                    "questions": [
+                        {
+                            "conceptIndex": 0,
+                            "statement": "¿Que indican las señales de prohibicion?",
+                            "target": "Definition",
+                            "type": "Open",
+                            "answers": []
+                        },
+                        {
+                            "conceptIndex": 0,
+                            "statement": "¿Que tipos de señales de prohibicion hay?",
+                            "target": "Classification",
+                            "type": "Open",
+                            "answers": []
                         }
                     ]
                 }
             ],
-            "concepts": []
+            "concepts": [],
+            "questions":[]
         }
     ]
 }

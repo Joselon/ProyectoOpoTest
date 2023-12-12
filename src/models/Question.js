@@ -18,6 +18,10 @@ class Question {
         return this._statement;
     }
 
+    getConceptIndex(){
+        return this._statementImplementor.getConceptIndex();
+    }
+
     addToConcept(content, isFake) {
         this._statementImplementor.addToConcept(content, isFake);
     }
