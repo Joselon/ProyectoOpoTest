@@ -54,6 +54,7 @@ class ElaboraTest {
                 this.#categories.push(new Category(category.name));
                 this.#categories[index].loadSubcategoriesFromDataObject(category);
                 this.#categories[index].loadConceptsFromDataObject(category);
+                this.#categories[index].loadQuestionsFromDataObject(category);
                 index++;
             }
         } catch (error) {
@@ -69,10 +70,12 @@ class ElaboraTest {
                 dataObject.categories.push({
                     name: category.getName(),
                     subcategories: [],
-                    concepts: []
+                    concepts: [],
+                    questions: []
                 });
                 dataObject.categories[index].subcategories = category.formatSubcategoriesObjects();
                 dataObject.categories[index].concepts = category.formatConceptsObjects();
+                dataObject.categories[index].concepts = category.formatQuestionsObjects();
                 index++;
             }
             const data = JSON.stringify(dataObject);

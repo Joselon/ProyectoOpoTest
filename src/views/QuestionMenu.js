@@ -191,7 +191,7 @@ class QuestionMenu extends DynamicQuitMenu {
         this.#questionsInfoTitle += "------------------ \n";
         for (let question of this.#category.getAllQuestions()) {
             this.#questionsInfoTitle += String.fromCharCode(charIndex) + ")";
-            this.#questionsInfoTitle += "Concepto Relacionado: '" + this.#category.getConcepts()[question.getConceptIndex()] + "' - ";
+            this.#questionsInfoTitle += "Concepto Relacionado: '" + this.#category.getConcepts()[question.getConceptIndex()].getKeyword() + "' - ";
             this.#questionsInfoTitle += "Enunciado: '¿" + question.getStatement() + "?'\n";
             this.#questionsInfoTitle += "Objetivo del Enunciado: '" + question.getStatementTarget() + "' - ";
             this.#questionsInfoTitle += "Tipo de Pregunta: '" + question.getType() + "'\n";
