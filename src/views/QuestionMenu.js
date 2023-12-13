@@ -1,6 +1,5 @@
 import { DynamicQuitMenu, DynamicMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
-import { OpenQuestion, MultipleChoiceQuestion } from "../models/Question.js";
-import { DefinitionStatement, ClassificationStatement, CompositionStatement, ReverseDefinitionStatement } from "../models/Statement.js";
+import { QuestionBuilder } from "../models/QuestionBuilder.js";
 import { console } from "../utils/view/console.js";
 
 class AddQuestionOption extends OpenMenuOption {
@@ -13,38 +12,18 @@ class AddQuestionOption extends OpenMenuOption {
 
     interact() {
         super.interact();
-        let category = this.#userState.getCurrentCategory();
-        let concept = this.#userState.getCurrentConcept();
-        let conceptIndex = this.#userState.getCurrentCategory().getConcepts().indexOf(concept);
+        let type = this.#userState.getSelectedQuestionType();
         let target = this.#userState.getSelectedStatementTarget();
-        let statementImplementor;
-        if (target === "Definition") {
-            statementImplementor = new DefinitionStatement(concept, conceptIndex);
-        }
-        else if (target === "Classification") {
-            statementImplementor = new ClassificationStatement(concept, conceptIndex);
-        }
-        else if (target === "Composition") {
-            statementImplementor = new CompositionStatement(concept, conceptIndex);
-        }
-        else if (target === "FakeKeywords") {
-            let definition = concept.getDefinition(0); //TODO Menu para elegir solution como indice
-            statementImplementor = new ReverseDefinitionStatement(concept, conceptIndex, definition);
-        }
-        else {
-            //TODO
-            console.writeln("ERROR no existe un tipo de enunciado coincidente");
-        }
+
+        let category = this.#userState.getCurrentCategory();
+        let conceptIndex = category.getConcepts().indexOf(this.#userState.getCurrentConcept());
+        
         let statement = console.readString(`
         Escribe el enunciado de la pregunta de tipo ${target}:`);
-        if (this.#userState.getSelectedQuestionType() === "Open") {
-
-            category.addQuestion(new OpenQuestion(statement, statementImplementor));
-        }
-        else if (this.#userState.getSelectedQuestionType() === "MultipleChoice") {
-            category.addQuestion(new MultipleChoiceQuestion(statement, statementImplementor));
-        }
-
+    
+        let questionBuilder = new QuestionBuilder(conceptIndex, category);
+        
+        category.addQuestion(questionBuilder.create(type, statement, target));
     }
 }
 
@@ -185,7 +164,7 @@ class QuestionMenu extends DynamicQuitMenu {
         this.add(new AddQuestionOption(`Crear de Preguntas de ${this.#concept.getKeyword()} ...`, new StatementMenu(`Tipos de Enunciado disponibles para ${this.#concept.getKeyword()}`, this.#userState), this.#userState))
     }
 
-    addQuestionsInfo() {
+    addQuestionsInfo() { //Replantear con preguntas de conceptos
         let charIndex = "a".charCodeAt(0);
         this.#questionsInfoTitle = "\nPreguntas Creadas: \n";
         this.#questionsInfoTitle += "------------------ \n";

@@ -1,6 +1,5 @@
 import { Concept } from "./Concept.js";
-import { OpenQuestion, MultipleChoiceQuestion } from "./Question.js";
-import { DefinitionStatement, ClassificationStatement, CompositionStatement, ReverseDefinitionStatement } from "./Statement.js";
+import { QuestionBuilder } from "./QuestionBuilder.js";
 
 
 class Category {
@@ -123,31 +122,9 @@ class Category {
     loadQuestionsFromDataObject(categoryDataObject) {
         let indexQuest = 0;
         for (let question of categoryDataObject.questions) {
-            let statementImplementor;
-            if (question.target === "Definition") {
-                statementImplementor = new DefinitionStatement(this.#concepts[question.conceptIndex], question.conceptIndex);
-            }
-            else if (question.target === "Classification") {
-                statementImplementor = new ClassificationStatement(this.#concepts[question.conceptIndex], question.conceptIndex);
-            }
-            else if (question.target === "Composition") {
-                statementImplementor = new CompositionStatement(this.#concepts[question.conceptIndex], question.conceptIndex);
-            }
-            else if (question.target === "FakeKeywords") {
-                statementImplementor = new ReverseDefinitionStatement(this.#concepts[question.conceptIndex], question.conceptIndex);
-            }
-            else {
-                //TODO
-            }
-            if (question.type === "Open") {
-                this.addQuestion(new OpenQuestion(question.statement, statementImplementor));
-                this.#questions[indexQuest].loadAnswersFromDataObject(question);
-
-            }
-            else if (question.type === "MultipleChoice") {
-                this.addQuestion(new MultipleChoiceQuestion(question.statement, statementImplementor));
-                this.#questions[indexQuest].loadAnswersFromDataObject(question);
-            }
+            let questionBuilder = new QuestionBuilder(question.conceptIndex, this);
+            this.addQuestion(questionBuilder.create(question.type, question.statement, question.target));
+            this.#questions[indexQuest].loadAnswersFromDataObject(question);
             indexQuest++;
         }
     }
