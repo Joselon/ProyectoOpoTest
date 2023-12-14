@@ -12,6 +12,39 @@ class QuestionBuilder {
         this.#concept = this.#category.getConcepts()[conceptIndex];
     }
 
+    setStatementsAvailablesInConcept(statementTargets, statementTargetTitles) {
+        let primaryTitles = [
+            `Definición: ¿Qué es ${this.#concept.getKeyword()}?`,
+            `Jerarquía de tipos: ¿Qué tipos de ${this.#concept.getKeyword()} hay?`,
+            `Jerarquía de composición: ¿De qué se compone ${this.#concept.getKeyword()}?`
+        ];
+        let primaryTypes = ["Definition", "Classification", "Composition"];
+        statementTargets.push(primaryTypes);
+        statementTargetTitles.push(primaryTitles);
+
+        if (this.#concept.getNumberOfDefinitions() !== 0) {
+            let withDefinitionTypes = ["FakeKeywords", "Justification", "Definition"];
+            let withDefinitionTitles = [
+                `Definición Inversa:${this.#concept.getDefinition(0).getContent()}. ¿A que corresponde esta definición?`,
+                `Justificación: ¿${this.#concept.getKeyword()} ${this.#concept.getDefinition(0).getContent()}?¿Por qué?`,
+                `Definición (Automática): ¿Qué es ${this.#concept.getKeyword()}?`
+            ];
+            statementTargets.push(withDefinitionTypes);
+            statementTargetTitles.push(withDefinitionTitles);
+            // if(this.#concept.getDefinitions()[i].getJustifications().length)
+            //withJustificationTypes = ["Explication", "ReverseJustification"];
+        }
+        if (this.#concept.getNumberOfRelations() !== 0) {
+            let withRelationTypes = ["ReverseRelation", "MissingRelation"];
+            let withRelationTitles = [
+                `Relación Inversa: ¿A qué corresponden estos tipos: `,//${this.#concept.getRelation(0).getType()}
+                `Relación Faltante: Si X es un tipo de ${this.#concept.getKeyword()} ¿Que tipo falta?`// X=${this.#concept.getRelation(0).getConcept(0)?
+            ];
+            statementTargets.push(withRelationTypes);
+            statementTargetTitles.push(withRelationTitles);
+        }
+    }
+
     #setStatementImplementor(target) {
         let statementImplementor;
         if (target === "Definition") {

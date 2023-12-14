@@ -33,6 +33,10 @@ class UserState {
         return this.#currentConcept;
     }
 
+    getCurrentConceptIndex() {
+        return this.#currentCategory.getConcepts().indexOf(this.#currentConcept)
+    }
+
     setCurrentCategory(category) {
         this.#currentCategory = category;
     }
@@ -40,7 +44,6 @@ class UserState {
     setCurrentUserType(type) {
         this.#type = type;
     }
-
 
     setCurrentConcept(concept) {
         this.#currentConcept = concept;

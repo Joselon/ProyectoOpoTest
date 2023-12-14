@@ -78,7 +78,7 @@
                     "keyword": "Lenguaje de Programacion",
                     "definitions": [
                         {
-                            "content": "Un lenguaje de programaci�n es un sistema de comunicaci�n que permite expresar instrucciones y algoritmos para que una m�quina o un software pueda ejecutarlos. (IA Bing)",
+                            "content": "Es un sistema de comunicacion que permite expresar instrucciones y algoritmos para que una maquina o un software pueda ejecutarlos. (IA Bing)",
                             "isFake": false,
                             "createdDate": "2023-12-01T12:00:05.182Z",
                             "justifications": []
@@ -189,6 +189,13 @@
                             "evaluatedDate": "2023-12-01T12:10:21.000Z"
                         }
                     ]
+                },
+                {
+                    "conceptIndex": 2,
+                    "statement": "Que tipos de Lenguaje de Programacion hay",
+                    "target": "Classification",
+                    "type": "Open",
+                    "answers": []
                 }
             ]
         },

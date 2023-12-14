@@ -16,7 +16,7 @@ class AddQuestionOption extends OpenMenuOption {
         let target = this.#userState.getSelectedStatementTarget();
 
         let category = this.#userState.getCurrentCategory();
-        let conceptIndex = category.getConcepts().indexOf(this.#userState.getCurrentConcept());
+        let conceptIndex = this.#userState.getCurrentConceptIndex();
 
         let statement = console.readString(`
         Escribe el enunciado de la pregunta de tipo ${target}:`);
@@ -78,66 +78,26 @@ class QuestionTypeMenu extends DynamicMenu {
 }
 
 class StatementMenu extends DynamicMenu {
-    //["Primary", "WithDefinition", "WithRelation", "WithDefinitionAndRelation"..]
-    #concept;
-    #category;
     #userState;
-
-    #primaryTitles;
-    #withDefinitionTitles;
-    #withRelationTitles;
-    #withJustificationTypesTitles;
-    #statementTargetTitles;
-
-    #primaryTypes = ["Definition", "Classification", "Composition"];
-    #withDefinitionTypes = ["FakeKeywords", "Justification", "Definition"];
-    #withRelationTypes = ["ReverseRelation", "MissingRelation"];
-    #withJustificationTypes = ["Explication", "ReverseJustification"];
-    #statementTargets;
+    #statementTargetTitles = [];
+    #statementTargets = [];
 
     constructor(title, userState) {
         super(title);
         this.#userState = userState;
-        this.#concept = this.#userState.getCurrentConcept();
-        this.#category = this.#userState.getCurrentCategory();
-        this.#statementTargets = [];
-        this.#statementTargetTitles = [];
-
-        this.#primaryTitles = [
-            `Definición: ¿Qué es ${this.#concept.getKeyword()}?`,
-            `Jerarquía de tipos: ¿Qué tipos de ${this.#concept.getKeyword()} hay?`,
-            `Jerarquía de composición: ¿De qué se compone ${this.#concept.getKeyword()}?`
-        ];
-        this.#statementTargets.push(this.#primaryTypes);
-        this.#statementTargetTitles.push(this.#primaryTitles);
-
-        if (this.#concept.getNumberOfDefinitions() !== 0) {
-            this.#withDefinitionTitles = [
-                `Definición Inversa:${this.#concept.getDefinition(0).getContent()}. ¿A que corresponde esta definición?`,
-                `Justificación: ¿${this.#concept.getKeyword()} ${this.#concept.getDefinition(0).getContent()}?¿Por qué?`,
-                `Definición (Automática): ¿Qué es ${this.#concept.getKeyword()}?`
-            ];
-            this.#statementTargets.push(this.#withDefinitionTypes);
-            this.#statementTargetTitles.push(this.#withDefinitionTitles);
-        }
-        if (this.#concept.getNumberOfRelations() !== 0) {
-            this.#withRelationTitles = [
-                `Relación Inversa: ¿A qué corresponden estos tipos: `,//${this.#concept.getRelation(0).getType()}
-                `Relación Faltante: Si X es un tipo de ${this.#concept.getKeyword()} ¿Que tipo falta?`// X=${this.#concept.getRelation(0).getConcept(0)?
-            ];
-            this.#statementTargets.push(this.#withRelationTypes);
-            this.#statementTargetTitles.push(this.#withRelationTitles);
-        }
-        // if(this.#concept.getDefinitions()[i].getJustifications().length)
+        new QuestionBuilder(this.#userState.getCurrentConceptIndex(), this.#userState.getCurrentCategory()).setStatementsAvailablesInConcept(this.#statementTargets, this.#statementTargetTitles);
     }
 
     addOptions() {
         for (let i = 0; i < this.#statementTargetTitles.length; i++) {
             for (let j = 0; j < this.#statementTargets[i].length; j++) {
-                let isCreated = false;
-                for (let question of this.#category.getQuestions()) {
+                let isCreated;
+                for (let question of this.#userState.getCurrentCategory().getQuestions()) {
                     if (question.getStatementTarget() === this.#statementTargets[i][j]) {
                         isCreated = true;
+                    }
+                    else {
+                        isCreated = false;
                     }
                 }
                 this.add(new SelectStatementAndShowQuestionTypeMenuOption(`Seleccionar Tipo: ${this.#statementTargetTitles[i][j]} -${isCreated ? "(YA CREADA)" : ""}`, this.#statementTargets[i][j], new QuestionTypeMenu(this.#userState), this.#userState));
@@ -164,18 +124,20 @@ class QuestionMenu extends DynamicQuitMenu {
         this.add(new AddQuestionOption(`Crear de Preguntas de ${this.#concept.getKeyword()} ...`, new StatementMenu(`Tipos de Enunciado disponibles para ${this.#concept.getKeyword()}`, this.#userState), this.#userState))
     }
 
-    addQuestionsInfo() { //Replantear con preguntas de conceptos
+    addQuestionsInfo() {
         let charIndex = "a".charCodeAt(0);
         this.#questionsInfoTitle = "\nPreguntas Creadas: \n";
         this.#questionsInfoTitle += "------------------ \n";
         for (let question of this.#category.getQuestions()) {
-            this.#questionsInfoTitle += String.fromCharCode(charIndex) + ")";
-            this.#questionsInfoTitle += "Concepto Relacionado: '" + this.#category.getConcepts()[question.getConceptIndex()].getKeyword() + "' - ";
-            this.#questionsInfoTitle += "Enunciado: '¿" + question.getStatement() + "?'\n";
-            this.#questionsInfoTitle += "Objetivo del Enunciado: '" + question.getStatementTarget() + "' - ";
-            this.#questionsInfoTitle += "Tipo de Pregunta: '" + question.getType() + "'\n";
-            this.#questionsInfoTitle += "\n";
-            charIndex++;
+            if (question.getConceptIndex() === this.#userState.getCurrentConceptIndex()) {
+                this.#questionsInfoTitle += String.fromCharCode(charIndex) + ")";
+                this.#questionsInfoTitle += "Concepto Relacionado: '" + this.#category.getConcepts()[question.getConceptIndex()].getKeyword() + "' - ";
+                this.#questionsInfoTitle += "Enunciado: '¿" + question.getStatement() + "?'\n";
+                this.#questionsInfoTitle += "Objetivo del Enunciado: '" + question.getStatementTarget() + "' - ";
+                this.#questionsInfoTitle += "Tipo de Pregunta: '" + question.getType() + "'\n";
+                this.#questionsInfoTitle += "\n";
+                charIndex++;
+            }
         }
     }
     interact_() {
