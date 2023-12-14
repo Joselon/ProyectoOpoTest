@@ -54,20 +54,37 @@ class Concept {
         return this.#relations.length;
     }
 
+    loadConceptFromDataObject(conceptDataObject) {
+        this.#loadDefinitionsFromDataObject(conceptDataObject);
+        this.#loadFakeKeywordsFromDataObject(conceptDataObject);
+    }
 
-    loadDefinitionsFromDataObject(conceptDataObject) {
+    #loadDefinitionsFromDataObject(conceptDataObject) {
         for (let definition of conceptDataObject.definitions) {
             this.addDefinition(definition.content, definition.isFake, definition.createdDate);
         }
     }
 
-    loadFakeKeywordsFromDataObject(conceptDataObject) {
+    #loadFakeKeywordsFromDataObject(conceptDataObject) {
         for (let string of conceptDataObject.fakeKeywords) {
             this.addFakeKeyword(string);
         }
     }
 
-    formatDefinitionsObjects() {
+    formatConceptObject() {
+        let conceptObject = {
+            keyword: this.getKeyword(),
+            definitions: [],
+            fakeKeywords: []
+        };
+        conceptObject.definitions = this.#formatDefinitionsObjects();
+        conceptObject.fakeKeywords = this.#formatFakeKeywordsObject();
+        //Pendiente guardar  Relations...
+
+        return conceptObject;
+    }
+
+    #formatDefinitionsObjects() {
         let conceptDefinitionsObjects = [];
         let indexDef = 0;
         for (let definition of this.#definitions) {
@@ -84,7 +101,7 @@ class Concept {
         return conceptDefinitionsObjects;
     }
 
-    formatDefinitionsObject() {
+    #formatFakeKeywordsObject() {
         let conceptFakeKeywords = [];
         for (let string of this.#fakeKeywords) {
             conceptFakeKeywords.push(string);

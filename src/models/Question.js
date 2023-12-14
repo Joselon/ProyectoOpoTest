@@ -18,7 +18,7 @@ class Question {
         return this._statement;
     }
 
-    getConceptIndex(){
+    getConceptIndex() {
         return this._statementImplementor.getConceptIndex();
     }
 
@@ -40,7 +40,19 @@ class Question {
     loadAnswersFromDataObject(questionDataObject) {
         return 1 / 0;
     }
-    formatAnswersObjects() {
+
+    formatQuestionObject() {
+        let questionObject = {
+            conceptIndex: this.getConceptIndex(),
+            statement: this.getStatement(),
+            target: this.getStatementTarget(),
+            type: this.getType(),
+            answers: []
+        };
+        questionObject.answers = this._formatAnswersObjects();
+        return questionObject;
+    }
+    _formatAnswersObjects() {
         return 1 / 0;
     }
 
@@ -79,7 +91,7 @@ class OpenQuestion extends Question {
         }
     }
 
-    formatAnswersObjects() {
+    _formatAnswersObjects() {
         let questionAnswersObjects = [];
         for (let answer of this._answers) {
             questionAnswersObjects.push(

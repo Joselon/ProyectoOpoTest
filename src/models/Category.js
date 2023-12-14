@@ -1,7 +1,6 @@
 import { Concept } from "./Concept.js";
 import { QuestionBuilder } from "./QuestionBuilder.js";
 
-
 class Category {
     #name;
     #concepts = [];
@@ -24,38 +23,34 @@ class Category {
         return this.#concepts;
     }
 
-    getSubcategory(index) {
-        return this.#subcategories[index];
-    }
-
     getSubcategories() {
         return this.#subcategories;
-    }
-
-    getTotalNumberOfConcepts() {
-        let subconcepts = 0;
-        for (let category of this.#subcategories) {
-            subconcepts += category.getTotalNumberOfConcepts();
-        }
-        return this.#concepts.length + subconcepts;
-    }
-
-    getTotalNumberOfSubcategories() {
-        let subsubcategories = 0;
-        if (this.#subcategories.length > 1)
-            for (let category of this.#subcategories) {
-                subsubcategories += category.getTotalNumberOfSubcategories();
-            }
-        return this.#subcategories.length + subsubcategories;
-
     }
 
     getQuestions() {
         return this.#questions;
     }
 
-    getQuestion(index) {
-        return this.#questions[index];
+    getTotalNumberOfConcepts() {
+        let subconcepts = 0;
+        for (let category of this.#subcategories)
+            subconcepts += category.getTotalNumberOfConcepts();
+        return this.#concepts.length + subconcepts;
+    }
+
+    getTotalNumberOfSubcategories() {
+        let subsubcategories = 0;
+        if (this.#subcategories.length > 1)
+            for (let category of this.#subcategories)
+                subsubcategories += category.getTotalNumberOfSubcategories();
+        return this.#subcategories.length + subsubcategories;
+    }
+
+    getTotalNumberOfQuestions() {
+        let nquestions = this.#questions.length;
+        for (let subcategory of this.#subcategories)
+            nquestions += subcategory.getTotalNumberOfQuestions();
+        return nquestions;
     }
 
     getOpenQuestions() {
@@ -65,18 +60,6 @@ class Category {
                 openQuestions.push(question);
         }
         return openQuestions;
-    }
-
-    addQuestion(question) {
-        this.#questions.push(question);
-    }
-
-    getTotalNumberOfQuestions() {
-        let nquestions = this.#questions.length;
-        for (let subcategory of this.#subcategories) {
-            nquestions += subcategory.getTotalNumberOfQuestions();
-        }
-        return nquestions;
     }
 
     getAllQuestions() {
@@ -90,6 +73,10 @@ class Category {
         return allQuestions;
     }
 
+    addQuestion(question) {
+        this.#questions.push(question);
+    }
+
     addConcept(concept) {
         this.#concepts.push(concept);
     }
@@ -98,28 +85,28 @@ class Category {
         this.#subcategories.push(category);
     }
 
-    loadSubcategoriesFromDataObject(categoryDataObject) {
+    loadCategoryFromDataObject(categoryDataObject) {
+        this.#loadSubcategoriesFromDataObject(categoryDataObject);
+        this.#loadConceptsFromDataObject(categoryDataObject);
+        this.#loadQuestionsFromDataObject(categoryDataObject);
+    }
+    #loadSubcategoriesFromDataObject(categoryDataObject) {
         let indexSub = 0;
         for (let subcategory of categoryDataObject.subcategories) {
             this.addSubcategory(new Category(subcategory.name));
-            this.#subcategories[indexSub].loadSubcategoriesFromDataObject(subcategory);
-            this.#subcategories[indexSub].loadConceptsFromDataObject(subcategory);
-            this.#subcategories[indexSub].loadQuestionsFromDataObject(subcategory);
+            this.#subcategories[indexSub].loadCategoryFromDataObject(subcategory);
             indexSub++;
         }
     }
-
-    loadConceptsFromDataObject(categoryDataObject) {
+    #loadConceptsFromDataObject(categoryDataObject) {
         let indexCon = 0;
-        for (let concept of categoryDataObject.concepts) {
-            this.addConcept(new Concept(concept.keyword));
-            this.#concepts[indexCon].loadDefinitionsFromDataObject(concept);
-            this.#concepts[indexCon].loadFakeKeywordsFromDataObject(concept);
-            //Pendiente recuperar  Relations...
+        for (let conceptDataObject of categoryDataObject.concepts) {
+            this.addConcept(new Concept(conceptDataObject.keyword));
+            this.#concepts[indexCon].loadConceptFromDataObject(conceptDataObject);
             indexCon++;
         }
     }
-    loadQuestionsFromDataObject(categoryDataObject) {
+    #loadQuestionsFromDataObject(categoryDataObject) {
         let indexQuest = 0;
         for (let question of categoryDataObject.questions) {
             let questionBuilder = new QuestionBuilder(question.conceptIndex, this);
@@ -129,59 +116,39 @@ class Category {
         }
     }
 
-    formatSubcategoriesObjects() {
-        let categorySubcategoriesObjects = [];
-        let indexSub = 0;
+    formatCategoryObject() {
+        let categoryDataObject = {
+            name: this.getName(),
+            subcategories: [],
+            concepts: [],
+            questions: []
+        };
+        categoryDataObject.subcategories = this.#formatSubcategoriesObjects();
+        categoryDataObject.concepts = this.#formatConceptsObjects();
+        categoryDataObject.questions = this.#formatQuestionsObjects();
+
+        return categoryDataObject;
+    }
+    #formatSubcategoriesObjects() {
+        let subcategoriesObjects = [];
         for (let subcategory of this.#subcategories) {
-            categorySubcategoriesObjects.push(
-                {
-                    name: subcategory.getName(),
-                    subcategories: [],
-                    concepts: [],
-                    questions: []
-                });
-            categorySubcategoriesObjects[indexSub].subcategories = subcategory.formatSubcategoriesObjects();
-            categorySubcategoriesObjects[indexSub].concepts = subcategory.formatConceptsObjects();
-            categorySubcategoriesObjects[indexSub].questions = subcategory.formatQuestionsObjects();
-            indexSub++;
+            subcategoriesObjects.push(subcategory.formatCategoryObject());
         }
-        return categorySubcategoriesObjects;
+        return subcategoriesObjects;
     }
-
-    formatConceptsObjects() {
-        let categoryConceptsObjects = [];
-        let indexCon = 0;
+    #formatConceptsObjects() {
+        let conceptsObjects = [];
         for (let concept of this.#concepts) {
-            categoryConceptsObjects.push(
-                {
-                    keyword: concept.getKeyword(),
-                    definitions: [],
-                    fakeKeywords: []
-                });
-            categoryConceptsObjects[indexCon].definitions = concept.formatDefinitionsObjects();
-            categoryConceptsObjects[indexCon].fakeKeywords = concept.formatDefinitionsObject();
-            //Pendiente guardar  Relations...
-            indexCon++;
+            conceptsObjects.push(concept.formatConceptObject());
         }
-        return categoryConceptsObjects;
+        return conceptsObjects;
     }
-
-    formatQuestionsObjects() {
-        let categoryQuestionObjects = [];
-        let indexQuest = 0;
+    #formatQuestionsObjects() {
+        let questionsObjects = [];
         for (let question of this.#questions) {
-            categoryQuestionObjects.push(
-                {
-                    conceptIndex: question.getConceptIndex(),
-                    statement: question.getStatement(),
-                    target: question.getStatementTarget(),
-                    type: question.getType(),
-                    answers: []
-                });
-            categoryQuestionObjects[indexQuest].answers = question.formatAnswersObjects();
-            indexQuest++;
+            questionsObjects.push(question.formatQuestionObject());
         }
-        return categoryQuestionObjects;
+        return questionsObjects;
     }
 }
 

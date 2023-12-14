@@ -50,11 +50,9 @@ class ElaboraTest {
             const dataobject = JSON.parse(data);
 
             let index = 0;
-            for (let category of dataobject.categories) {
-                this.#categories.push(new Category(category.name));
-                this.#categories[index].loadSubcategoriesFromDataObject(category);
-                this.#categories[index].loadConceptsFromDataObject(category);
-                this.#categories[index].loadQuestionsFromDataObject(category);
+            for (let categoryObject of dataobject.categories) {
+                this.#categories.push(new Category(categoryObject.name));
+                this.#categories[index].loadCategoryFromDataObject(categoryObject);
                 index++;
             }
         } catch (error) {
@@ -65,18 +63,8 @@ class ElaboraTest {
     async writeJSONfile() {
         try {
             let dataObject = { categories: [] };
-            let index = 0;
             for (let category of this.#categories) {
-                dataObject.categories.push({
-                    name: category.getName(),
-                    subcategories: [],
-                    concepts: [],
-                    questions: []
-                });
-                dataObject.categories[index].subcategories = category.formatSubcategoriesObjects();
-                dataObject.categories[index].concepts = category.formatConceptsObjects();
-                dataObject.categories[index].questions = category.formatQuestionsObjects();
-                index++;
+                dataObject.categories.push(category.formatCategoryObject());
             }
             const data = JSON.stringify(dataObject);
             writeFileSync('data/database.json', data);

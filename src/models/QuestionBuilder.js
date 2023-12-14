@@ -9,16 +9,16 @@ class QuestionBuilder {
     constructor(conceptIndex, category) {
         this.#conceptIndex = conceptIndex;
         this.#category = category;
-        this.#concept = this.#category.getConcepts()[conceptIndex];
+        this.#concept = this.#category.getConcept(conceptIndex);
     }
 
     setStatementsAvailablesInConcept(statementTargets, statementTargetTitles) {
+        let primaryTypes = ["Definition", "Classification", "Composition"];
         let primaryTitles = [
             `Definición: ¿Qué es ${this.#concept.getKeyword()}?`,
             `Jerarquía de tipos: ¿Qué tipos de ${this.#concept.getKeyword()} hay?`,
             `Jerarquía de composición: ¿De qué se compone ${this.#concept.getKeyword()}?`
         ];
-        let primaryTypes = ["Definition", "Classification", "Composition"];
         statementTargets.push(primaryTypes);
         statementTargetTitles.push(primaryTitles);
 
