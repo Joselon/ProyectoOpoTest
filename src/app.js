@@ -75,7 +75,7 @@ class ElaboraTest {
                 });
                 dataObject.categories[index].subcategories = category.formatSubcategoriesObjects();
                 dataObject.categories[index].concepts = category.formatConceptsObjects();
-                dataObject.categories[index].concepts = category.formatQuestionsObjects();
+                dataObject.categories[index].questions = category.formatQuestionsObjects();
                 index++;
             }
             const data = JSON.stringify(dataObject);

@@ -29,6 +29,7 @@ class QuestionBuilder {
         else {
             //TODO
         }
+        return statementImplementor;
     }
 
     create(type, statement, target) {
