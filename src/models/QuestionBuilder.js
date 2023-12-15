@@ -37,7 +37,7 @@ class QuestionBuilder {
             question = new OpenQuestion(statement, this.#statementImplementor);
         }
         else if (type === "MultipleChoice") {
-            question = new MultipleChoiceQuestion(statement, statementImplementor);
+            question = new MultipleChoiceQuestion(statement, this.#statementImplementor);
         }
         return question;
     }
