@@ -12,6 +12,38 @@ class QuestionBuilder {
         this.#concept = this.#category.getConcept(conceptIndex);
     }
 
+    #setStatementImplementor(target) {
+        let statementImplementor;
+        if (target === "Definition") {
+            statementImplementor = new DefinitionStatement(this.#concept, this.#conceptIndex);
+        }
+        else if (target === "Classification") {
+            statementImplementor = new ClassificationStatement(this.#concept, this.#conceptIndex);
+        }
+        else if (target === "Composition") {
+            statementImplementor = new CompositionStatement(this.#concept, this.#conceptIndex);
+        }
+        else if (target === "FakeKeywords") {
+            statementImplementor = new ReverseDefinitionStatement(this.#concept, this.#conceptIndex);
+        }
+        else {
+            //TODO
+        }
+        return statementImplementor;
+    }
+
+    create(type, statement, target) {
+        let statementImplementor = this.#setStatementImplementor(target);
+        let question;
+        if (type === "Open") {
+            question = new OpenQuestion(statement, statementImplementor);
+        }
+        else if (type === "MultipleChoice") {
+            question = new MultipleChoiceQuestion(statement, statementImplementor);
+        }
+        return question;
+    }
+
     setStatementsAvailablesInConcept(statementTargets, statementTargetTitles) {
         let primaryTypes = ["Definition", "Classification", "Composition"];
         let primaryTitles = [
@@ -54,36 +86,46 @@ class QuestionBuilder {
         }
     }
 
-    #setStatementImplementor(target) {
-        let statementImplementor;
-        if (target === "Definition") {
-            statementImplementor = new DefinitionStatement(this.#concept, this.#conceptIndex);
+      setTypesAvailablesInConcept(targets, targetsTitles, type, typeTitles) {
+        let primaryTargets = [];
+        let primaryTargetTitles = [];
+        let questions = this.#category.getConceptQuestions(this.#conceptIndex);
+        let targetsAndTypesCreated = [];
+        for (let question of questions){
+            targetsAndTypesCreated.push(question.getStatementTarget()+"-"+question.getType());
         }
-        else if (target === "Classification") {
-            statementImplementor = new ClassificationStatement(this.#concept, this.#conceptIndex);
-        }
-        else if (target === "Composition") {
-            statementImplementor = new CompositionStatement(this.#concept, this.#conceptIndex);
-        }
-        else if (target === "FakeKeywords") {
-            statementImplementor = new ReverseDefinitionStatement(this.#concept, this.#conceptIndex);
-        }
-        else {
-            //TODO
-        }
-        return statementImplementor;
-    }
+        primaryTargets = ["Definition", "Classification", "Composition"];
+        primaryTargetTitles = [
+            `Definición: ¿Qué es ${this.#concept.getKeyword()}?`,
+            `Jerarquía de tipos: ¿Qué tipos de ${this.#concept.getKeyword()} hay?`,
+            `Jerarquía de composición: ¿De qué se compone ${this.#concept.getKeyword()}?`
+        ];
+        targets.push(primaryTargets);
+        targetsTitles.push(primaryTargetTitles);
+        type.push("Open");
+        typeTitles.push("Abierta");
 
-    create(type, statement, target) {
-        let statementImplementor = this.#setStatementImplementor(target);
-        let question;
-        if (type === "Open") {
-            question = new OpenQuestion(statement, statementImplementor);
+        if (this.#concept.getNumberOfDefinitions() !== 0) {
+            let withDefinitionTypes = ["FakeKeywords", "Justification", "Definition"];
+            let withDefinitionTitles = [
+                `Sinonimos:${this.#concept.getDefinition(0).getContent()}. ¿A que corresponde esta definición?`,
+                `Justificación: ¿${this.#concept.getKeyword()} ${this.#concept.getDefinition(0).getContent()}?¿Por qué?`,
+                `Definición (Automática): ¿Qué es ${this.#concept.getKeyword()}?`
+            ];
+            targets.push(withDefinitionTypes);
+            targetsTitles.push(withDefinitionTitles);
+            // if(this.#concept.getDefinitions()[i].getJustifications().length)
+            //withJustificationTypes = ["Explication", "ReverseJustification"];
         }
-        else if (type === "MultipleChoice") {
-            question = new MultipleChoiceQuestion(statement, statementImplementor);
+        if (this.#concept.getNumberOfRelations() !== 0) {
+            let withRelationTypes = ["ReverseRelation", "MissingRelation"];
+            let withRelationTitles = [
+                `Relación Inversa: ¿A qué corresponden estos tipos: `,//${this.#concept.getRelation(0).getType()}
+                `Relación Faltante: Si X es un tipo de ${this.#concept.getKeyword()} ¿Que tipo falta?`// X=${this.#concept.getRelation(0).getConcept(0)?
+            ];
+            targets.push(withRelationTypes);
+            targetsTitles.push(withRelationTitles);
         }
-        return question;
     }
 }
 

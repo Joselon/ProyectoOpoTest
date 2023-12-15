@@ -62,6 +62,15 @@ class Category {
         return openQuestions;
     }
 
+    getConceptQuestions(conceptIndex) {
+        let conceptQuestions = [];
+        for (let question of this.#questions) {
+            if (question.getConceptIndex() === conceptIndex)
+                conceptQuestions.push(question);
+        }
+        return conceptQuestions;
+    }
+
     getAllQuestions() {
         let allQuestions = [];
         for (let question of this.#questions)

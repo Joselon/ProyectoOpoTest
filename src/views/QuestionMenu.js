@@ -17,12 +17,10 @@ class AddQuestionOption extends OpenMenuOption {
 
         let category = this.#userState.getCurrentCategory();
         let conceptIndex = this.#userState.getCurrentConceptIndex();
+        let questionBuilder = new QuestionBuilder(conceptIndex, category);
 
         let statement = console.readString(`
         Escribe el enunciado de la pregunta de tipo ${target}:`);
-
-        let questionBuilder = new QuestionBuilder(conceptIndex, category);
-
         category.addQuestion(questionBuilder.create(type, statement, target));
     }
 }
@@ -79,8 +77,6 @@ class QuestionTypeMenu extends DynamicMenu {
 
 class StatementMenu extends DynamicMenu {
     #userState;
-    #statementTargetTitles = [];
-    #statementTargets = [];
 
     constructor(title, userState) {
         super(title);
@@ -88,19 +84,24 @@ class StatementMenu extends DynamicMenu {
     }
 
     addOptions() {
-        new QuestionBuilder(this.#userState.getCurrentConceptIndex(), this.#userState.getCurrentCategory()).setStatementsAvailablesInConcept(this.#statementTargets, this.#statementTargetTitles);
-        for (let i = 0; i < this.#statementTargetTitles.length; i++) {
-            for (let j = 0; j < this.#statementTargets[i].length; j++) {
+        const statementTargetTitles = [];
+        const statementTargets = [];
+        let questionBuilder = new QuestionBuilder(this.#userState.getCurrentConceptIndex(), this.#userState.getCurrentCategory())
+        questionBuilder.setStatementsAvailablesInConcept(statementTargets, statementTargetTitles);
+
+        for (let i = 0; i < statementTargets.length; i++) {
+            for (let j = 0; j < statementTargets[i].length; j++) {
                 let isCreated;
-                for (let question of this.#userState.getCurrentCategory().getQuestions()) {
-                    if (question.getStatementTarget() === this.#statementTargets[i][j]) {
+                for (let question of this.#userState.getCurrentCategory().getConceptQuestions(this.#userState.getCurrentConceptIndex())) {
+                    console.writeln(question.getStatementTarget());
+                    if (question.getStatementTarget() === statementTargets[i][j]) {
                         isCreated = true;
                     }
                     else {
                         isCreated = false;
                     }
                 }
-                this.add(new SelectStatementAndShowQuestionTypeMenuOption(`Seleccionar Tipo: ${this.#statementTargetTitles[i][j]} -${isCreated ? "(YA CREADA)" : ""}`, this.#statementTargets[i][j], new QuestionTypeMenu(this.#userState), this.#userState));
+                this.add(new SelectStatementAndShowQuestionTypeMenuOption(`Seleccionar Tipo: ${statementTargetTitles[i][j]} -${isCreated ? "(YA CREADA)" : ""}`, statementTargets[i][j], new QuestionTypeMenu(this.#userState), this.#userState));
             }
         }
     }
