@@ -4,16 +4,19 @@ import { console } from '../utils/view/console.js';
 
 class AddConceptOption extends Option {
     #concepts;
+    #userState;
 
-    constructor(title, concepts) {
+    constructor(title, concepts, userState) {
         super(title);
         this.#concepts = concepts;
+        this.#userState = userState;
     }
 
     interact() {
         let keyword = console.readString(`
         Escribe la palabra clave del concepto:`);
         this.#concepts.push(new Concept(keyword));
+        this.#userState.setCurrentConcept(this.#concepts[this.#concepts.length - 1]);
     }
 }
 
@@ -96,7 +99,7 @@ class ConceptsMenu extends DynamicMenu {
                 this.add(new ShowConceptOption(`- Mostrar Concepto ${concepts[i].getKeyword()}...`, concepts[i]));
             }
         }
-        this.add(new AddConceptOption(`-- Añadir Concepto a ${this.#userState.getCurrentCategory().getName()}`, concepts));
+        this.add(new AddConceptOption(`-- Añadir Concepto a ${this.#userState.getCurrentCategory().getName()}`, concepts, this.#userState));
         if (this.#userState.getCurrentConcept().getKeyword() !== '---') {
             this.add(new ModifyConceptOption(`* Modificar Concepto Seleccionado: ${this.#userState.getCurrentConcept().getKeyword()}`, this.#userState.getCurrentConcept()));
         }

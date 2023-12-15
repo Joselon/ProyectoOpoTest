@@ -39,7 +39,6 @@ class SelectStatementAndShowQuestionTypeMenuOption extends OpenMenuOption {
 
     interact() {
         super.interact();
-        //
         this.#userState.setSelectedStatementTarget(this.#statementTarget);
     }
 }
@@ -61,19 +60,20 @@ class SelectQuestionTypeOption extends Option {
 }
 
 class QuestionTypeMenu extends DynamicMenu {
-    #concept;
     #userState;
+    #typesTitles = [];
+    #types = [];
 
     constructor(userState) {
         super("Seleccione el tipo de pregunta")
         this.#userState = userState;
-        this.#concept = this.#userState.getCurrentConcept();
     }
 
     addOptions() {
-        this.add(new SelectQuestionTypeOption("Abierta", "Open", this.#userState));
-        if (this.#concept.getNumberOfDefinitions() > 1 || this.#concept.getNumberOfRelations() > 1)
-            this.add(new SelectQuestionTypeOption("Opción Multiple", "MultipleChoice", this.#userState));
+        new QuestionBuilder(this.#userState.getCurrentConceptIndex(), this.#userState.getCurrentCategory()).setQuestionTypesAvailable(this.#types , this.#typesTitles);
+        for (let i = 0; i < this.#types.length; i++){
+            this.add(new SelectQuestionTypeOption(this.#typesTitles[i], this.#types[i], this.#userState));
+        }
     }
 }
 
@@ -85,10 +85,10 @@ class StatementMenu extends DynamicMenu {
     constructor(title, userState) {
         super(title);
         this.#userState = userState;
-        new QuestionBuilder(this.#userState.getCurrentConceptIndex(), this.#userState.getCurrentCategory()).setStatementsAvailablesInConcept(this.#statementTargets, this.#statementTargetTitles);
     }
 
     addOptions() {
+        new QuestionBuilder(this.#userState.getCurrentConceptIndex(), this.#userState.getCurrentCategory()).setStatementsAvailablesInConcept(this.#statementTargets, this.#statementTargetTitles);
         for (let i = 0; i < this.#statementTargetTitles.length; i++) {
             for (let j = 0; j < this.#statementTargets[i].length; j++) {
                 let isCreated;

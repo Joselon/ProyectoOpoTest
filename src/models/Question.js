@@ -42,7 +42,7 @@ class Question {
     }
 
     formatQuestionObject() {
-        let questionObject = {
+        const questionObject = {
             conceptIndex: this.getConceptIndex(),
             statement: this.getStatement(),
             target: this.getStatementTarget(),
@@ -53,7 +53,11 @@ class Question {
         return questionObject;
     }
     _formatAnswersObjects() {
-        return 1 / 0;
+        const questionAnswersObjects = [];
+        for (let answer of this._answers) {
+            questionAnswersObjects.push(answer.formatAnswerObject());
+        }
+        return questionAnswersObjects;
     }
 
 }
@@ -83,30 +87,13 @@ class OpenQuestion extends Question {
 
     loadAnswersFromDataObject(questionDataObject) {
         let indexAns = 0;
-        for (let answer of questionDataObject.answers) {
-            this.addAnswer(answer.username, answer.content, answer.createdDate);
-            if (answer.evaluatedDate !== null)
-                this._answers[indexAns].evaluate(answer.isOK, answer.evaluatedDate, answer.evaluatedBy);
+        for (const answerObject of questionDataObject.answers) {
+            this.addAnswer(answerObject.username, answerObject.content, answerObject.createdDate);
+            if (answerObject.evaluatedDate !== null)
+                this._answers[indexAns].evaluate(answerObject.isOK, answerObject.evaluatedDate, answerObject.evaluatedBy);
             indexAns++;
         }
     }
-
-    _formatAnswersObjects() {
-        let questionAnswersObjects = [];
-        for (let answer of this._answers) {
-            questionAnswersObjects.push(
-                {
-                    username: answer.getStudentName(),
-                    content: answer.getContent(),
-                    isOK: answer.getEvaluation(),
-                    createdDate: answer.getCreatedDate(),
-                    evaluatedBy: answer.getEvaluatedBy(),
-                    evaluatedDate: answer.getEvaluatedDate()
-                });
-        }
-        return questionAnswersObjects;
-    }
-
 }
 
 class MultipleChoiceQuestion extends Question {
@@ -126,28 +113,14 @@ class MultipleChoiceQuestion extends Question {
 
     loadAnswersFromDataObject(questionDataObject) {
         let indexAns = 0;
-        for (let answer of questionDataObject.answers) {
-            this.addAnswer(answer.username, answer.content, answer.createdDate);
-            if (answer.evaluatedDate !== null)
-                this.answers[indexAns].evaluate(answer.isOK, answer.evaluatedDate);
+        for (const answerObject of questionDataObject.answers) {
+            this.addAnswer(answerObject.username, answerObject.content, answerObject.createdDate);
+            if (answerObject.evaluatedDate !== null)
+                this.answers[indexAns].evaluate(answerObject.isOK, answerObject.evaluatedDate);
             indexAns++;
         }
     }
 
-    formatAnswersObjects() {
-        let questionAnswersObjects = [];
-        for (let answer of this._answers) {
-            questionAnswersObjects.push(
-                {
-                    username: answer.getUserName(),
-                    content: answer.getContent(),
-                    isOK: answer.getEvaluation(),
-                    createdDate: answer.getCreatedDate(),
-                    evaluatedDate: answer.getEvaluatedDate()
-                });
-        }
-        return questionAnswersObjects;
-    }
 }
 
 export { OpenQuestion, MultipleChoiceQuestion }

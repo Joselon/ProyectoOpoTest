@@ -2,7 +2,7 @@ class Definition {
     #content;
     #isFake;
     #createdDate;
-    #justifications = [];
+    //#justifications = [];
 
     constructor(content, isFake, date = new Date()) {
         this.#content = content;
@@ -22,8 +22,19 @@ class Definition {
         return this.#createdDate;
     }
 
-    getJustifications() {
+    /*getJustifications() {
         return this.#justifications;
+    }*/
+
+    formatDefinitionObject() {
+        const definitionOject = {
+            content: this.getContent(),
+            isFake: this.isFake(),
+            createdDate: this.getCreatedDate(),
+            justifications: []
+        }
+        //definitionObjects.justificactions = this.formatJustificactions();
+        return definitionOject;
     }
 }
 

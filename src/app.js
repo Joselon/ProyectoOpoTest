@@ -50,7 +50,7 @@ class ElaboraTest {
             const dataobject = JSON.parse(data);
 
             let index = 0;
-            for (let categoryObject of dataobject.categories) {
+            for (const categoryObject of dataobject.categories) {
                 this.#categories.push(new Category(categoryObject.name));
                 this.#categories[index].loadCategoryFromDataObject(categoryObject);
                 index++;

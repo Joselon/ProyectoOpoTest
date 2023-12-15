@@ -92,15 +92,15 @@ class Category {
     }
     #loadSubcategoriesFromDataObject(categoryDataObject) {
         let indexSub = 0;
-        for (let subcategory of categoryDataObject.subcategories) {
-            this.addSubcategory(new Category(subcategory.name));
-            this.#subcategories[indexSub].loadCategoryFromDataObject(subcategory);
+        for (const subcategoryObject of categoryDataObject.subcategories) {
+            this.addSubcategory(new Category(subcategoryObject.name));
+            this.#subcategories[indexSub].loadCategoryFromDataObject(subcategoryObject);
             indexSub++;
         }
     }
     #loadConceptsFromDataObject(categoryDataObject) {
         let indexCon = 0;
-        for (let conceptDataObject of categoryDataObject.concepts) {
+        for (const conceptDataObject of categoryDataObject.concepts) {
             this.addConcept(new Concept(conceptDataObject.keyword));
             this.#concepts[indexCon].loadConceptFromDataObject(conceptDataObject);
             indexCon++;
@@ -108,16 +108,16 @@ class Category {
     }
     #loadQuestionsFromDataObject(categoryDataObject) {
         let indexQuest = 0;
-        for (let question of categoryDataObject.questions) {
-            let questionBuilder = new QuestionBuilder(question.conceptIndex, this);
-            this.addQuestion(questionBuilder.create(question.type, question.statement, question.target));
-            this.#questions[indexQuest].loadAnswersFromDataObject(question);
+        for (let questionObject of categoryDataObject.questions) {
+            let questionBuilder = new QuestionBuilder(questionObject.conceptIndex, this);
+            this.addQuestion(questionBuilder.create(questionObject.type, questionObject.statement, questionObject.target));
+            this.#questions[indexQuest].loadAnswersFromDataObject(questionObject);
             indexQuest++;
         }
     }
 
     formatCategoryObject() {
-        let categoryDataObject = {
+        const categoryDataObject = {
             name: this.getName(),
             subcategories: [],
             concepts: [],
@@ -130,21 +130,21 @@ class Category {
         return categoryDataObject;
     }
     #formatSubcategoriesObjects() {
-        let subcategoriesObjects = [];
+        const subcategoriesObjects = [];
         for (let subcategory of this.#subcategories) {
             subcategoriesObjects.push(subcategory.formatCategoryObject());
         }
         return subcategoriesObjects;
     }
     #formatConceptsObjects() {
-        let conceptsObjects = [];
+        const conceptsObjects = [];
         for (let concept of this.#concepts) {
             conceptsObjects.push(concept.formatConceptObject());
         }
         return conceptsObjects;
     }
     #formatQuestionsObjects() {
-        let questionsObjects = [];
+        const questionsObjects = [];
         for (let question of this.#questions) {
             questionsObjects.push(question.formatQuestionObject());
         }

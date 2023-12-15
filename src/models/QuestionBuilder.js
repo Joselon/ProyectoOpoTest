@@ -25,7 +25,7 @@ class QuestionBuilder {
         if (this.#concept.getNumberOfDefinitions() !== 0) {
             let withDefinitionTypes = ["FakeKeywords", "Justification", "Definition"];
             let withDefinitionTitles = [
-                `Definición Inversa:${this.#concept.getDefinition(0).getContent()}. ¿A que corresponde esta definición?`,
+                `Sinonimos:${this.#concept.getDefinition(0).getContent()}. ¿A que corresponde esta definición?`,
                 `Justificación: ¿${this.#concept.getKeyword()} ${this.#concept.getDefinition(0).getContent()}?¿Por qué?`,
                 `Definición (Automática): ¿Qué es ${this.#concept.getKeyword()}?`
             ];
@@ -42,6 +42,15 @@ class QuestionBuilder {
             ];
             statementTargets.push(withRelationTypes);
             statementTargetTitles.push(withRelationTitles);
+        }
+    }
+
+    setQuestionTypesAvailable(types, typesTitles) {
+        types.push("Open");
+        typesTitles.push("Abierta");
+        if (this.#concept.getNumberOfDefinitions() > 1 || this.#concept.getNumberOfRelations() > 1) {
+            types.push("MultipleChoice");
+            typesTitles.push("Opción Multiple");
         }
     }
 

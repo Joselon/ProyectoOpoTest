@@ -42,6 +42,10 @@ class Answer {
         return this._evaluatedDate !== null;
     }
 
+    formatAnswerObject(){
+        return 1/0;
+    }
+
 }
 
 class OpenAnswer extends Answer {
@@ -60,6 +64,17 @@ class OpenAnswer extends Answer {
     getEvaluatedBy() {
         return this.#evaluatedBy;
     }
+    formatAnswerObject(){
+        const answerObject = {
+            username: this.getStudentName(),
+            content: this.getContent(),
+            isOK: this.getEvaluation(),
+            createdDate: this.getCreatedDate(),
+            evaluatedBy: this.getEvaluatedBy(),
+            evaluatedDate: this.getEvaluatedDate()
+        }
+        return answerObject;
+    }
 
 }
 
@@ -67,6 +82,17 @@ class SelectedOptionAnswer extends Answer {
 
     constructor(userName, option, date) {
         super(userName, option, date);
+    }
+
+    formatAnswerObject() {
+        const answerObject = {
+            username: this.getUserName(),
+            content: this.getContent(),
+            isOK: this.getEvaluation(),
+            createdDate: this.getCreatedDate(),
+            evaluatedDate: this.getEvaluatedDate()
+        }
+        return answerObject;
     }
 
 }

@@ -2,7 +2,7 @@ import { Definition } from "./Definition.js";
 
 class Concept {
     #keyword;
-    #fakeKeywords;
+    #fakeKeywords; //synonyms
     #definitions;
     #relations;
 
@@ -60,19 +60,19 @@ class Concept {
     }
 
     #loadDefinitionsFromDataObject(conceptDataObject) {
-        for (let definition of conceptDataObject.definitions) {
-            this.addDefinition(definition.content, definition.isFake, definition.createdDate);
+        for (const definitionObject of conceptDataObject.definitions) {
+            this.addDefinition(definitionObject.content, definitionObject.isFake, definitionObject.createdDate);
         }
     }
 
     #loadFakeKeywordsFromDataObject(conceptDataObject) {
-        for (let string of conceptDataObject.fakeKeywords) {
+        for (const string of conceptDataObject.fakeKeywords) {
             this.addFakeKeyword(string);
         }
     }
 
     formatConceptObject() {
-        let conceptObject = {
+        const conceptObject = {
             keyword: this.getKeyword(),
             definitions: [],
             fakeKeywords: []
@@ -85,24 +85,15 @@ class Concept {
     }
 
     #formatDefinitionsObjects() {
-        let conceptDefinitionsObjects = [];
-        let indexDef = 0;
+        const conceptDefinitionsObjects = [];
         for (let definition of this.#definitions) {
-            conceptDefinitionsObjects.push(
-                {
-                    content: definition.getContent(),
-                    isFake: definition.isFake(),
-                    createdDate: definition.getCreatedDate(),
-                    justifications: []
-                });
-            //conceptDefinitionsObjects[indexDef].justificactions = definition.formatJustificactions();
-            indexDef++;
+            conceptDefinitionsObjects.push(definition.formatDefinitionObject());
         }
         return conceptDefinitionsObjects;
     }
 
     #formatFakeKeywordsObject() {
-        let conceptFakeKeywords = [];
+        const conceptFakeKeywords = [];
         for (let string of this.#fakeKeywords) {
             conceptFakeKeywords.push(string);
         }
