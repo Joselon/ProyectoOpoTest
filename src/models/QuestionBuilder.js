@@ -5,6 +5,7 @@ class QuestionBuilder {
     #conceptIndex;
     #concept;
     #category;
+    #statementImplementor;
 
     constructor(conceptIndex, category) {
         this.#conceptIndex = conceptIndex;
@@ -12,31 +13,28 @@ class QuestionBuilder {
         this.#concept = this.#category.getConcept(conceptIndex);
     }
 
-    #setStatementImplementor(target) {
-        let statementImplementor;
+    setStatementImplementor(target) {
         if (target === "Definition") {
-            statementImplementor = new DefinitionStatement(this.#concept, this.#conceptIndex);
+            this.#statementImplementor = new DefinitionStatement(this.#concept, this.#conceptIndex);
         }
         else if (target === "Classification") {
-            statementImplementor = new ClassificationStatement(this.#concept, this.#conceptIndex);
+            this.#statementImplementor = new ClassificationStatement(this.#concept, this.#conceptIndex);
         }
         else if (target === "Composition") {
-            statementImplementor = new CompositionStatement(this.#concept, this.#conceptIndex);
+            this.#statementImplementor = new CompositionStatement(this.#concept, this.#conceptIndex);
         }
         else if (target === "FakeKeywords") {
-            statementImplementor = new ReverseDefinitionStatement(this.#concept, this.#conceptIndex);
+            this.#statementImplementor = new ReverseDefinitionStatement(this.#concept, this.#conceptIndex);
         }
         else {
             //TODO
         }
-        return statementImplementor;
     }
 
-    create(type, statement, target) {
-        let statementImplementor = this.#setStatementImplementor(target);
+    create(type, statement) {
         let question;
         if (type === "Open") {
-            question = new OpenQuestion(statement, statementImplementor);
+            question = new OpenQuestion(statement, this.#statementImplementor);
         }
         else if (type === "MultipleChoice") {
             question = new MultipleChoiceQuestion(statement, statementImplementor);

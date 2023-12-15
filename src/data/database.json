@@ -29,7 +29,16 @@
                                     "statement": "Que tipos de Software podemos decir que hay",
                                     "target": "Classification",
                                     "type": "Open",
-                                    "answers": []
+                                    "answers": [
+                                        {
+                                            "username": "Jorgito",
+                                            "content": "De sistemas y de gestion",
+                                            "isOK": false,
+                                            "createdDate": "2023-12-15T18:22:52.349Z",
+                                            "evaluatedBy": "",
+                                            "evaluatedDate": null
+                                        }
+                                    ]
                                 }
                             ]
                         },

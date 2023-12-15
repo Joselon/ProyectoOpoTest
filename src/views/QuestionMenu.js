@@ -4,10 +4,12 @@ import { console } from "../utils/view/console.js";
 
 class AddQuestionOption extends OpenMenuOption {
     #userState;
+    #questionBuilder;
 
-    constructor(title, menu, userState) {
+    constructor(title, menu, userState, questionBuilder) {
         super(title, menu);
         this.#userState = userState;
+        this.#questionBuilder = questionBuilder;
     }
 
     interact() {
@@ -17,27 +19,28 @@ class AddQuestionOption extends OpenMenuOption {
 
         let category = this.#userState.getCurrentCategory();
         let conceptIndex = this.#userState.getCurrentConceptIndex();
-        let questionBuilder = new QuestionBuilder(conceptIndex, category);
-
         let statement = console.readString(`
         Escribe el enunciado de la pregunta de tipo ${target}:`);
-        category.addQuestion(questionBuilder.create(type, statement, target));
+        category.addQuestion(this.#questionBuilder.create(type, statement));
     }
 }
 
 class SelectStatementAndShowQuestionTypeMenuOption extends OpenMenuOption {
     #statementTarget;
     #userState;
+    #questionBuilder;
 
-    constructor(statementTargetTitle, statementTarget, menu, userState) {
+    constructor(statementTargetTitle, statementTarget, menu, userState, questionBuilder) {
         super(statementTargetTitle, menu);
         this.#statementTarget = statementTarget;
         this.#userState = userState;
+        this.#questionBuilder = questionBuilder;
     }
 
     interact() {
         super.interact();
         this.#userState.setSelectedStatementTarget(this.#statementTarget);
+        this.#questionBuilder.setStatementImplementor(this.#statementTarget);
     }
 }
 
@@ -59,16 +62,18 @@ class SelectQuestionTypeOption extends Option {
 
 class QuestionTypeMenu extends DynamicMenu {
     #userState;
+    #questionBuilder;
     #typesTitles = [];
     #types = [];
 
-    constructor(userState) {
+    constructor(userState, questionBuilder) {
         super("Seleccione el tipo de pregunta")
         this.#userState = userState;
+        this.#questionBuilder = questionBuilder;
     }
 
     addOptions() {
-        new QuestionBuilder(this.#userState.getCurrentConceptIndex(), this.#userState.getCurrentCategory()).setQuestionTypesAvailable(this.#types , this.#typesTitles);
+        this.#questionBuilder.setQuestionTypesAvailable(this.#types , this.#typesTitles);
         for (let i = 0; i < this.#types.length; i++){
             this.add(new SelectQuestionTypeOption(this.#typesTitles[i], this.#types[i], this.#userState));
         }
@@ -77,31 +82,28 @@ class QuestionTypeMenu extends DynamicMenu {
 
 class StatementMenu extends DynamicMenu {
     #userState;
+    #questionBuilder;
 
-    constructor(title, userState) {
+    constructor(title, userState, questionBuilder) {
         super(title);
         this.#userState = userState;
+        this.#questionBuilder = questionBuilder;
     }
 
     addOptions() {
         const statementTargetTitles = [];
         const statementTargets = [];
-        let questionBuilder = new QuestionBuilder(this.#userState.getCurrentConceptIndex(), this.#userState.getCurrentCategory())
-        questionBuilder.setStatementsAvailablesInConcept(statementTargets, statementTargetTitles);
+        this.#questionBuilder.setStatementsAvailablesInConcept(statementTargets, statementTargetTitles);
 
         for (let i = 0; i < statementTargets.length; i++) {
             for (let j = 0; j < statementTargets[i].length; j++) {
-                let isCreated;
+                let isCreated =false;
                 for (let question of this.#userState.getCurrentCategory().getConceptQuestions(this.#userState.getCurrentConceptIndex())) {
-                    console.writeln(question.getStatementTarget());
                     if (question.getStatementTarget() === statementTargets[i][j]) {
                         isCreated = true;
                     }
-                    else {
-                        isCreated = false;
-                    }
                 }
-                this.add(new SelectStatementAndShowQuestionTypeMenuOption(`Seleccionar Tipo: ${statementTargetTitles[i][j]} -${isCreated ? "(YA CREADA)" : ""}`, statementTargets[i][j], new QuestionTypeMenu(this.#userState), this.#userState));
+                this.add(new SelectStatementAndShowQuestionTypeMenuOption(`Seleccionar Tipo: ${statementTargetTitles[i][j]} -${isCreated ? "(YA CREADA)" : ""}`, statementTargets[i][j], new QuestionTypeMenu(this.#userState, this.#questionBuilder), this.#userState, this.#questionBuilder));
             }
         }
     }
@@ -122,7 +124,8 @@ class QuestionMenu extends DynamicQuitMenu {
 
     addOptions() {
         this.addQuestionsInfo();
-        this.add(new AddQuestionOption(`Crear de Preguntas de ${this.#concept.getKeyword()} ...`, new StatementMenu(`Tipos de Enunciado disponibles para ${this.#concept.getKeyword()}`, this.#userState), this.#userState))
+        let questionBuilder = new QuestionBuilder(this.#userState.getCurrentConceptIndex(), this.#category);
+        this.add(new AddQuestionOption(`Crear de Preguntas de ${this.#concept.getKeyword()} ...`, new StatementMenu(`Tipos de Enunciado disponibles para ${this.#concept.getKeyword()}`, this.#userState , questionBuilder), this.#userState, questionBuilder))
     }
 
     addQuestionsInfo() {

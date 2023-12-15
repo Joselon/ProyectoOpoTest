@@ -119,7 +119,8 @@ class Category {
         let indexQuest = 0;
         for (let questionObject of categoryDataObject.questions) {
             let questionBuilder = new QuestionBuilder(questionObject.conceptIndex, this);
-            this.addQuestion(questionBuilder.create(questionObject.type, questionObject.statement, questionObject.target));
+            questionBuilder.setStatementImplementor(questionObject.target);
+            this.addQuestion(questionBuilder.create(questionObject.type, questionObject.statement));
             this.#questions[indexQuest].loadAnswersFromDataObject(questionObject);
             indexQuest++;
         }
