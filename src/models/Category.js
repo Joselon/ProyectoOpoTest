@@ -53,15 +53,6 @@ class Category {
         return nquestions;
     }
 
-    getOpenQuestions() {
-        let openQuestions = [];
-        for (let question of this.#questions) {
-            if (question.getType() === "Open") //DANGER!!
-                openQuestions.push(question);
-        }
-        return openQuestions;
-    }
-
     getConceptQuestions(conceptIndex) {
         let conceptQuestions = [];
         for (let question of this.#questions) {
@@ -118,9 +109,9 @@ class Category {
     #loadQuestionsFromDataObject(categoryDataObject) {
         let indexQuest = 0;
         for (let questionObject of categoryDataObject.questions) {
-            let questionBuilder = new QuestionBuilder(questionObject.conceptIndex, this);
+            let questionBuilder = new QuestionBuilder(this.#concepts[questionObject.conceptIndex]);
             questionBuilder.setStatementImplementor(questionObject.target);
-            this.addQuestion(questionBuilder.create(questionObject.type, questionObject.statement));
+            this.addQuestion(questionBuilder.create(questionObject.type, questionObject.conceptIndex, questionObject.statement));
             this.#questions[indexQuest].loadAnswersFromDataObject(questionObject);
             indexQuest++;
         }

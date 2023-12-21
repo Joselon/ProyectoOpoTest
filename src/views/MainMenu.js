@@ -2,7 +2,7 @@ import { DynamicQuitMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
 import { CategoriesMenu, TeacherCategoriesMenu } from "./CategoriesMenu.js";
 import { QuestionMenu } from "./QuestionMenu.js";
 import { ConceptsMenu } from "./ConceptsMenu.js";
-import { EvaluationsMenu } from "./EvaluationsMenu.js";
+import { EvaluationMenu } from "./EvaluationMenu.js";
 import { GenerateTestMenu } from "./GenerateTestMenu.js"
 import { console } from "../utils/view/console.js";
 
@@ -51,7 +51,7 @@ class TeacherMainMenu extends MainMenu {
         let currentCategory = this._userState.getCurrentCategory();
         if (currentCategory.getName() !== '---') {
             this.add(new OpenMenuOption(`- Menú de Conceptos de la Categoría: ${currentCategory.getName()}... `, new ConceptsMenu(this._userState)));
-            this.add(new OpenMenuOption(`- Menú de Evaluaciones de la Categoría ${currentCategory.getName()}...`, new EvaluationsMenu(this._userState)));
+            this.add(new OpenMenuOption(`- Menú de Evaluaciones de la Categoría ${currentCategory.getName()}...`, new EvaluationMenu(this._userState)));
             let currentConcept = this._userState.getCurrentConcept();
             if (currentConcept.getKeyword() !== '---') {
                 this.add(new OpenMenuOption(`-- Menú de Preguntas del Concepto: ${currentConcept.getKeyword()} ...`, new QuestionMenu(this._userState)));

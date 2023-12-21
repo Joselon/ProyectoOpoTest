@@ -16,9 +16,6 @@ class AddQuestionOption extends OpenMenuOption {
         super.interact();
         let type = this.#userState.getSelectedQuestionType();
         let target = this.#userState.getSelectedStatementTarget();
-
-        let category = this.#userState.getCurrentCategory();
-        let conceptIndex = this.#userState.getCurrentConceptIndex();
         let statement = console.readString(`
         Escribe el enunciado de la pregunta de tipo ${target}:`);
         category.addQuestion(this.#questionBuilder.create(type, statement));
