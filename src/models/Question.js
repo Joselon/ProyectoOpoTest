@@ -39,6 +39,14 @@ class Question {
     getType() {
         return 1 / 0;
     }
+    isAnsweredBy(studentName) {
+        let isAnsweredByUser = false;
+        for (let answer of this._answers) {
+            if (studentName === answer.getStudentName())
+                isAnsweredByUser = true;
+        }
+        return isAnsweredByUser;
+    }
     loadAnswersFromDataObject(questionDataObject) {
         return 1 / 0;
     }
@@ -75,15 +83,6 @@ class OpenQuestion extends Question {
 
     addAnswer(username, string, date = new Date()) {
         this._answers.push(new OpenAnswer(username, string, date));
-    }
-
-    isAnsweredBy(studentName) {
-        let isAnsweredByUser = false;
-        for (let answer of this._answers) {
-            if (studentName === answer.getStudentName())
-                isAnsweredByUser = true;
-        }
-        return isAnsweredByUser;
     }
 
     loadAnswersFromDataObject(questionDataObject) {
