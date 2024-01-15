@@ -165,5 +165,7 @@ https://www.evolmind.com/blog/como-crear-examen-tipo-test-las-6-herramientas-que
 10.Aporta un toque de humor si ves que encaja con tu perfil de alumnos.
 
 
-
+--JWT.io Encriptar
+-- https://jestjs.io/
+--https://github.com/jumpering/DesignPatterns/blob/main/src/main/java/builderInternalClass/Persona.java Ejemplo Builder
 

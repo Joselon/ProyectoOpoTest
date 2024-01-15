@@ -12,7 +12,7 @@ class Question {
         this._statementImplementor = statementImplementor;
     }
 
-    getStatementTarget() {
+    getTarget() {
         return this._statementImplementor.getTarget();
     }
 
@@ -47,7 +47,7 @@ class Question {
         const questionObject = {
             conceptIndex: this.getConceptIndex(),
             statement: this.getStatement(),
-            target: this.getStatementTarget(),
+            target: this.getTarget(),
             type: this.getType(),
             answers: []
         };

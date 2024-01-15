@@ -1,13 +1,11 @@
 class StatementImplementor {
     _concept;
-    _conceptIndex;
     _solutions;
     _statement;
     _target;
 
-    constructor(concept, conceptIndex) {
+    constructor(concept) {
         this._concept = concept;
-        this._conceptIndex = conceptIndex
     }
 
     addToConcept() {
@@ -25,16 +23,12 @@ class StatementImplementor {
     getTarget() {
         return this._target;
     }
-
-    getConceptIndex() {
-        return this._conceptIndex;
-    }
 }
 
 class DefinitionStatement extends StatementImplementor {
 
-    constructor(concept, conceptIndex) {
-        super(concept, conceptIndex);
+    constructor(concept) {
+        super(concept);
         this._statement = `¿Qué es ${concept.getKeyword()}?`;
         this._target = "Definition";
     }
@@ -50,8 +44,8 @@ class DefinitionStatement extends StatementImplementor {
 
 class ClassificationStatement extends StatementImplementor {
 
-    constructor(concept, conceptIndex) {
-        super(concept, conceptIndex);
+    constructor(concept) {
+        super(concept);
         this._statement = `¿Qué tipos hay de ${concept.getKeyword()}?`;
         this._target = "Classification";
     }
@@ -67,8 +61,8 @@ class ClassificationStatement extends StatementImplementor {
 
 class CompositionStatement extends StatementImplementor {
 
-    constructor(concept, conceptIndex) {
-        super(concept, conceptIndex);
+    constructor(concept) {
+        super(concept);
         this._statement = `¿De qué partes se compone ${concept.getKeyword()}?`;
         this._target = "Composition";
     }
@@ -85,17 +79,17 @@ class CompositionStatement extends StatementImplementor {
 class withDefinitionStatement extends StatementImplementor {
     _definition;
 
-    constructor(concept, conceptIndex, definition) {
-        super(concept, conceptIndex);
+    constructor(concept, definition) {
+        super(concept);
         this._definition = definition;
     }
 }
 
-class ReverseDefinitionStatement extends withDefinitionStatement {
+class FakeKeywordStatement extends withDefinitionStatement {
 
-    constructor(concept, conceptIndex, definition) {
-        super(concept, conceptIndex, definition);
-        this._statement = `${this._definition.getContent()}. ¿A que corresponde esta definición?`;
+    constructor(concept, definition) {
+        super(concept, definition);
+        this._statement = `Sinonimos:${this._definition.getContent()}. ¿A que corresponde esta definición?`;
         this._target = "FakeKeywords";
     }
 
@@ -108,13 +102,29 @@ class ReverseDefinitionStatement extends withDefinitionStatement {
     }
 }
 
+class JustificationStatement extends withDefinitionStatement {
+    constructor(concept, definition) {
+        super(concept, definition);
+        this._statement = `Justificación: ¿${concept.getKeyword()} ${definition.getContent()}?¿Por qué?`;
+        this._target = "Justification";
+    }
+
+    addToConcept(content) {
+        //this._concept.addJustification(content);
+    }
+
+    setOptions() {
+       // this._solutions = this._concept.getJustifications();
+    }
+}
+
 class withRelationStatement extends StatementImplementor {
     #relations = [];
 
-    constructor(concept, conceptIndex) {
-        super(concept, conceptIndex);
+    constructor(concept) {
+        super(concept);
         this.#relations = concept.getRelations();
     }
 }
 
-export { DefinitionStatement, ClassificationStatement, CompositionStatement, ReverseDefinitionStatement }
+export { DefinitionStatement, ClassificationStatement, CompositionStatement, FakeKeywordStatement, JustificationStatement }

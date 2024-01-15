@@ -55,7 +55,13 @@
                 {
                     "name": "Sistemas Operativos",
                     "subcategories": [],
-                    "concepts": [],
+                    "concepts": [
+                        {
+                            "keyword": "Linux",
+                            "definitions": [],
+                            "fakeKeywords": []
+                        }
+                    ],
                     "questions": []
                 }
             ],
@@ -204,6 +210,13 @@
                     "statement": "Que tipos de Lenguaje de Programacion hay",
                     "target": "Classification",
                     "type": "Open",
+                    "answers": []
+                },
+                {
+                    "conceptIndex": 0,
+                    "statement": "Que definicion es mejor para GIT",
+                    "target": "Definition",
+                    "type": "MultipleChoice",
                     "answers": []
                 }
             ]

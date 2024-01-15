@@ -1,6 +1,8 @@
 import { UserType } from './UserTypes.js'
 import { Category } from './Category.js';
 import { Concept } from './Concept.js';
+import { QuestionBuilder } from "./QuestionBuilder.js";
+
 
 class UserState {
     #userName;
@@ -9,6 +11,7 @@ class UserState {
     #currentConcept;
     #selectedQuestionType;
     #selectedStatementTarget;
+    #questionBuilder;
 
     constructor(username = "", type = UserType.TEACHER, category = new Category("---"), concept = new Concept("---")) {
         this.#type = type;
@@ -59,6 +62,7 @@ class UserState {
 
     setSelectedStatementTarget(target) {
         this.#selectedStatementTarget = target;
+        this.#questionBuilder.setStatementImplementor(target);
     }
 
     getSelectedStatementTarget() {
@@ -71,6 +75,14 @@ class UserState {
 
     setCurrentUserName(userName) {
         this.#userName = userName;
+    }
+
+    setQuestionBuilder() {
+        this.#questionBuilder = new QuestionBuilder(this.#currentConcept, this.#currentCategory.getConceptQuestions(this.getCurrentConceptIndex()))
+    }
+    
+    getQuestionBuilder() {
+        return this.#questionBuilder;
     }
 
 }
