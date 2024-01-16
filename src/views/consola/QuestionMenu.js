@@ -1,5 +1,5 @@
-import { DynamicQuitMenu, DynamicMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
-import { console } from "../utils/view/console.js";
+import { DynamicQuitMenu, DynamicMenu, OpenMenuOption, Option } from "../../utils/view/consola/Menu.js";
+import { console } from "../../utils/view/consola/console.js";
 
 class AddQuestionOption extends OpenMenuOption {
     #userState;

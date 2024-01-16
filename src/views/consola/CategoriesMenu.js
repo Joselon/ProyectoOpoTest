@@ -1,8 +1,8 @@
-import { DynamicMenu, OpenMenuOption, Option, QuitOption } from "../utils/view/Menu.js";
+import { DynamicMenu, OpenMenuOption, Option, QuitOption } from "../../utils/view/consola/Menu.js";
 import { ConceptsMenu } from "./ConceptsMenu.js";
-import { Category } from "../models/Category.js";
-import { Concept } from "../models/Concept.js"
-import { console } from "../utils/view/console.js";
+import { Category } from "../../models/Category.js";
+import { Concept } from "../../models/Concept.js"
+import { console } from "../../utils/view/consola/console.js";
 
 class AddCategoryOption extends Option {
     #categories;

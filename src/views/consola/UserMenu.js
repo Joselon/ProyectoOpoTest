@@ -1,6 +1,6 @@
-import { DynamicMenu, Option } from "../utils/view/Menu.js";
-import { UserType } from "../models/UserTypes.js";
-import { console } from "../utils/view/console.js";
+import { DynamicMenu, Option } from "../../utils/view/consola/Menu.js";
+import { UserType } from "../../models/UserTypes.js";
+import { console } from "../../utils/view/consola/console.js";
 
 class SelectUserAndReadNameOption extends Option {
     #array;

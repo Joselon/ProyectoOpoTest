@@ -1,10 +1,10 @@
-import { DynamicQuitMenu, OpenMenuOption, Option } from "../utils/view/Menu.js";
+import { DynamicQuitMenu, OpenMenuOption, Option } from "../../utils/view/consola/Menu.js";
 import { CategoriesMenu, TeacherCategoriesMenu } from "./CategoriesMenu.js";
 import { QuestionMenu } from "./QuestionMenu.js";
 import { ConceptsMenu } from "./ConceptsMenu.js";
 import { EvaluationMenu } from "./EvaluationMenu.js";
 import { GenerateTestMenu } from "./GenerateTestMenu.js"
-import { console } from "../utils/view/console.js";
+import { console } from "../../utils/view/consola/console.js";
 
 class MainMenu extends DynamicQuitMenu {
     _userState;

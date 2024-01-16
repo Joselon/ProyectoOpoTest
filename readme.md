@@ -114,8 +114,17 @@ Conforme se complete un concepto se abre la posibilidad de generar preguntas de 
 
 Fase de pruebas de modelos:
 
-Usando NODE.js instalamos las dependencias ("console-mpds" por ahora) con npm install y ejecutamos >node ./app.js
+Usando NODE.js instalamos las dependencias ("console-mpds" por ahora) con npm install y ejecutamos >node ./appConsole.js
 Usaremos los Menús que se vieron en las clases del Máster.
+
+Incorporando vistas HTML con Lit + Vite:
+
+Para ejecutar version consola:
+>npm run console
+
+Para ejecutar version HTML:
+>npm run html
+
 
 ## Referencias
 

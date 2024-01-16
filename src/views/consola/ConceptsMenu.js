@@ -1,6 +1,6 @@
-import { DynamicMenu, Option, QuitOption } from "../utils/view/Menu.js";
-import { Concept } from '../models/Concept.js';
-import { console } from '../utils/view/console.js';
+import { DynamicMenu, Option, QuitOption } from "../../utils/view/consola/Menu.js";
+import { Concept } from '../../models/Concept.js';
+import { console } from '../../utils/view/consola/console.js';
 
 class AddConceptOption extends Option {
     #concepts;

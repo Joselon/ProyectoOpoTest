@@ -1,10 +1,10 @@
 import { Category } from './models/Category.js';
 import { UserState } from './models/UserState.js';
-import { UserType } from './models/UserTypes.js';
-//import { readFileSync, writeFileSync } from 'node:fs';
-
-import '@dile/dile-nav/dile-nav.js';
-import { EitOverlay } from './utils/view/html/eit-overlay.js';
+import { UserType } from './models/UserTypes.js'
+import { UserMenu } from './views/consola/UserMenu.js'
+import { MainMenu, TeacherMainMenu } from './views/consola/MainMenu.js';
+import { YesNoDialog } from './utils/view/consola/Dialog.js';
+import { readFileSync, writeFileSync } from 'node:fs';
 
 class ElaboraTest {
     #userState;
@@ -13,14 +13,11 @@ class ElaboraTest {
 
     constructor() {
         this.#categories = [];
-       // this.#setUp();
+        this.#setUp();
     }
 
     start() {
-        let menu = document.createElement('eit-overlay');
-        menu.innerHTML = '<span name="trigger">Menu</span><div name="overlay">Texto</div>';
-        document.getElementById('app').appendChild(menu);
-     /*   do {
+        do {
             new UserMenu(this.#userState).interact();
 
             if (this.#userState.getCurrentUserType() === UserType.TEACHER) {
@@ -29,17 +26,17 @@ class ElaboraTest {
             else {
                 new MainMenu(this.#userState, this.#categories).interact();
             }
-        } while (this.#isResumed());*/
+        } while (this.#isResumed());
     }
 
     #isResumed() {
-      /*  let yesNoDialog = new YesNoDialog();
+        let yesNoDialog = new YesNoDialog();
         yesNoDialog.read(`¿Desea salvar antes de salir`);
         if (yesNoDialog.isAffirmative()) {
             this.writeJSONfile();
             return yesNoDialog.isNegative();
         }
-        return yesNoDialog.isAffirmative();*/
+        return yesNoDialog.isAffirmative();
     }
 
     #setUp() {
@@ -47,7 +44,7 @@ class ElaboraTest {
         this.readJSONfile();
     }
 
-   /* async readJSONfile() {
+    async readJSONfile() {
         try {
             const data = readFileSync('data/database.json', 'utf-8');
             const dataobject = JSON.parse(data);
@@ -74,7 +71,7 @@ class ElaboraTest {
         } catch (error) {
             console.error('Error al escribir en el archivo de base de datos:', error);
         }
-    }*/
+    }
 }
 
 new ElaboraTest().start();

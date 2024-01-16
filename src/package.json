@@ -5,6 +5,10 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
+    "console": "node ./appConsole.js",
+    "html": "vite --host",
+    "build html": "vite build",
+    "preview": "vite preview",
     "test": "test"
   },
   "repository": {
@@ -16,13 +20,18 @@
     "learning",
     "tests"
   ],
-  "author": "EscuelaITMasters",
+  "author": "Joselon",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Joselon/ProyectoOpoTest/issues"
   },
   "homepage": "https://github.com/Joselon/ProyectoOpoTest#readme",
   "dependencies": {
-    "console-mpds": "^1.0.4"
+    "@dile/dile-nav": "^1.0.4",
+    "console-mpds": "^1.0.4",
+    "lit": "^3.1.1"
+  },
+  "devDependencies": {
+    "vite": "^5.0.11"
   }
 }

@@ -1,5 +1,5 @@
-import { DynamicQuitMenu, Option } from "../utils/view/Menu.js";
-import { console } from "../utils/view/console.js";
+import { DynamicQuitMenu, Option } from "../../utils/view/consola/Menu.js";
+import { console } from "../../utils/view/consola/console.js";
 
 class AddAnswerOption extends Option {
     #question;

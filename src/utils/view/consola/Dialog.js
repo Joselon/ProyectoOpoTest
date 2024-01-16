@@ -1,4 +1,4 @@
-import ClosedInterval from '../model/ClosedInterval.js'
+import ClosedInterval from '../../model/ClosedInterval.js'
 import { console } from './console.js';
 
 
