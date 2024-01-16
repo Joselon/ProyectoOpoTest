@@ -16,8 +16,8 @@ export class EitOverlay extends LitElement {
                 padding: 1rem;
                 border: 1px solid #ddd;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-                width: 75%;
-
+                width: 100%;
+                height:100%;
             }
 
             .opened {
@@ -25,12 +25,12 @@ export class EitOverlay extends LitElement {
             }
 
             ::slotted(div) {
-                background-color: white;
+                font-weight:bolder;
             }
 
             ::slotted(span) {
                 font-weight: bolder;
-                background-color: grey;
+                background-color: white;
             }
         `
     ];
