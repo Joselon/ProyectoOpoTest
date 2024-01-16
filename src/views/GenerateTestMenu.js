@@ -28,7 +28,7 @@ class GenerateTestMenu extends DynamicQuitMenu {
     }
 
     addOptions() {
-        for (let i = 0; i < this.#questions.length-1; i++) {
+        for (let i = 0; i < this.#questions.length; i++) {
             console.writeln(this.#questions[i]);
             if (!this.#questions[i].isAnsweredBy(this.#username))
                 this.add(new AddAnswerOption(`- Responder: ${this.#questions[i].getStatement()}... `, this.#questions[i], this.#username));

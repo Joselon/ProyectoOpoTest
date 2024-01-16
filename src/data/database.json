@@ -43,8 +43,38 @@
                             ]
                         },
                         {
-                            "name": "Patrones de Diseño de Software",
-                            "subcategories": [],
+                            "name": "Diseño de Software",
+                            "subcategories": [
+                                {
+                                    "name": "Patrones de Diseño de Software",
+                                    "subcategories": [],
+                                    "concepts": [
+                                        {
+                                            "keyword": "Patron de diseño",
+                                            "definitions": [],
+                                            "fakeKeywords": []
+                                        }
+                                    ],
+                                    "questions": [
+                                        {
+                                            "conceptIndex": 0,
+                                            "statement": "Que es un Patron de diseño",
+                                            "target": "Definition",
+                                            "type": "Open",
+                                            "answers": [
+                                                {
+                                                    "username": "Alexander",
+                                                    "content": "Describe un problema el cual ocurre una y otra vez en nuestro entorno y describe el núcleo de una solución para el problema, de tal forma que se puede usar esta solución un millón de veces sin hacerlo de la misma forma dos veces",
+                                                    "isOK": false,
+                                                    "createdDate": "2024-01-16T11:01:25.681Z",
+                                                    "evaluatedBy": "",
+                                                    "evaluatedDate": null
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
                             "concepts": [],
                             "questions": []
                         }
@@ -63,6 +93,35 @@
                         }
                     ],
                     "questions": []
+                },
+                {
+                    "name": "Lit",
+                    "subcategories": [],
+                    "concepts": [
+                        {
+                            "keyword": "Lit",
+                            "definitions": [],
+                            "fakeKeywords": []
+                        }
+                    ],
+                    "questions": [
+                        {
+                            "conceptIndex": 0,
+                            "statement": "Que es Lit",
+                            "target": "Definition",
+                            "type": "Open",
+                            "answers": [
+                                {
+                                    "username": "Miguel Angel",
+                                    "content": "Es una clase (de programaci�n orientada a objetos) base para la creacion de Custom Elements",
+                                    "isOK": false,
+                                    "createdDate": "2024-01-16T11:18:21.237Z",
+                                    "evaluatedBy": "",
+                                    "evaluatedDate": null
+                                }
+                            ]
+                        }
+                    ]
                 }
             ],
             "concepts": [
@@ -93,7 +152,7 @@
                     "keyword": "Lenguaje de Programacion",
                     "definitions": [
                         {
-                            "content": "Es un sistema de comunicacion que permite expresar instrucciones y algoritmos para que una maquina o un software pueda ejecutarlos. (IA Bing)",
+                            "content": "Es un sistema de comunicacion que permite expresar instrucciones y algoritmos para que una maquina o un software pueda ejecutarlos.",
                             "isFake": false,
                             "createdDate": "2023-12-01T12:00:05.182Z",
                             "justifications": []
@@ -188,7 +247,7 @@
                     "type": "Open",
                     "answers": [
                         {
-                            "username": "MarcosAlumno",
+                            "username": "IA Bing",
                             "content": "Es un sistema de comunicacion que permite expresar instrucciones y algoritmos para que una maquina o un software pueda ejecutarlos. (IA Bing)",
                             "isOK": true,
                             "createdDate": "2023-12-01T11:55:23.350Z",

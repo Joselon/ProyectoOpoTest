@@ -90,9 +90,6 @@ class CategoriesMenu extends DynamicMenu {
     addOptions() {
         for (let i = 0; i < this.#categories.length; i++) {
             this.add(new SelectCategoryOption(this.#categories[i], this.#userState));
-        }
-
-        for (let i = 0; i < this.#categories.length; i++) {
             if (this.#categories[i].getTotalNumberOfSubcategories() > 0)
                 this.add(new OpenMenuOption(`--- Ver Subcategorías de ${i + 1}-${this.#categories[i].getName()} ...`, new CategoriesMenu(this.#userState, this.#categories[i].getSubcategories())));
         }
@@ -115,14 +112,11 @@ class TeacherCategoriesMenu extends DynamicMenu {
     addOptions() {
         for (let i = 0; i < this.#categories.length; i++) {
             this.add(new SelectCategoryAndShowConceptsOption(new ConceptsMenu(this.#userState), this.#categories[i], this.#userState));
-        }
-        for (let i = 0; i < this.#categories.length; i++) {
             if (this.#categories[i].getTotalNumberOfSubcategories() > 0)
                 this.add(new OpenMenuOption(`--- Ver Subcategorías de ${i + 1}-${this.#categories[i].getName()} ...`, new TeacherCategoriesMenu(this.#userState, this.#categories[i].getSubcategories())));
+
         }
-        if (this.#userState.getCurrentCategory().getName() !== "---") {
-            this.add(new AddCategoryOption(this.#categories));
-        }
+        this.add(new AddCategoryOption(this.#categories));
         this.add(new QuitOption());
     }
 }
