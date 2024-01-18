@@ -7,7 +7,7 @@
   "scripts": {
     "console": "node ./appConsole.js",
     "html": "vite --host",
-    "build html": "vite build",
+    "build-html": "vite build",
     "preview": "vite preview",
     "test": "test"
   },

@@ -17,7 +17,7 @@ export class EitOverlay extends LitElement {
                 border: 1px solid #ddd;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
                 width: 100%;
-                height:100%;
+                height:auto;
             }
 
             .opened {
