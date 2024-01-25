@@ -1,5 +1,7 @@
 import '@dile/dile-nav/dile-nav.js';
-import { EitOverlay } from './utils/view/html/eit-overlay.js';
+import { EitOverlay } from './utils/view/html/components/eit-overlay.js';
+import { InputDialog } from './utils/view/html/Dialog.js';
+import { UserMenu } from './views/html/UserMenu.js';
 import './views/html/styles.css';
 
 import { Category } from './models/Category.js';
@@ -7,8 +9,6 @@ import { UserState } from './models/UserState.js';
 import { UserType } from './models/UserTypes.js';
 //import { readFileSync, writeFileSync } from 'node:fs';
 import { json } from './data/database_var.js';
-
-
 
 class ElaboraTest {
     #userState;
@@ -20,8 +20,24 @@ class ElaboraTest {
     }
 
     start() {
-        this.addMenu();
-        console.log(this.#categories)
+        document.addEventListener('DOMContentLoaded', function () {
+            new UserMenu((userTypeIndex) =>{
+                this.#userState.setCurrentUserType(UserType.values()[userTypeIndex]);
+                new InputDialog("app", `Escribe nombre de usuario: `, () => {
+                    if (this.#userState.getCurrentUserType() === UserType.TEACHER) {
+                        this.addMenu(UserType.TEACHER);
+                       // new TeacherMainMenu(this.#userState, this.#categories).interact();
+                    }
+                    else {
+                        this.addMenu(UserType.STUDENT);
+                        //new MainMenu(this.#userState, this.#categories).interact();
+                    }
+                })
+                
+            } )
+            console.log(this.#categories);
+          }.bind(this));
+        
         /*   do {
                new UserMenu(this.#userState).interact();
    
@@ -49,9 +65,9 @@ class ElaboraTest {
         this.readJSONfile();
     }
 
-    addMenu() {
+    addMenu(title) {
         let menu = document.createElement('eit-overlay');
-        menu.innerHTML = `<span slot="trigger">Categorias</span>`;
+        menu.innerHTML = `<span slot="trigger">${title}</span>`;
         let content = '<div slot="overlay">';
         for (let category of this.#categories) {
             content += `<p>${category.getName()}</p>`;

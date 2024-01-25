@@ -2,3 +2,10 @@ body {
     margin: 0;
     background-color: grey;
 }
+
+#buttonsId {
+    display: flex;
+    margin: 1% 25%;
+    justify-content: space-around;
+    
+}
