@@ -56,7 +56,7 @@ class OneButtonDialog extends ButtonsDialog {
     constructor(htmlElementId, title,  callback) {
         super(htmlElementId)
         this.addTitle(title)
-        this.addButton(title, callback)
+        this.addButton('OK', callback)
     }
     addButton(text, callback) {
         const button = document.createElement('dile-button-icon');
@@ -84,4 +84,4 @@ class InputDialog extends OneButtonDialog {
     }
 }
 
-export { MenuDialog, InputDialog };
+export { ButtonsDialog, OneButtonDialog, MenuDialog, InputDialog };

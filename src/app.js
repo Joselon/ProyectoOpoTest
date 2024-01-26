@@ -2,6 +2,7 @@ import '@dile/dile-nav/dile-nav.js';
 import { EitOverlay } from './utils/view/html/components/eit-overlay.js';
 import { InputDialog } from './utils/view/html/Dialog.js';
 import { UserMenu } from './views/html/UserMenu.js';
+import { CategoriesMenu, TeacherCategoriesMenu } from './views/html/CategoriesMenu.js';
 import './views/html/styles.css';
 
 import { Category } from './models/Category.js';
@@ -21,23 +22,29 @@ class ElaboraTest {
 
     start() {
         document.addEventListener('DOMContentLoaded', function () {
-            new UserMenu((userTypeIndex) =>{
+            new UserMenu((userTypeIndex) => {
                 this.#userState.setCurrentUserType(UserType.values()[userTypeIndex]);
-                new InputDialog("app", `Escribe nombre de usuario: `, () => {
+                new InputDialog("app", `Escribe nombre de usuario:`, () => {
                     if (this.#userState.getCurrentUserType() === UserType.TEACHER) {
-                        this.addMenu(UserType.TEACHER);
-                       // new TeacherMainMenu(this.#userState, this.#categories).interact();
+                        new TeacherCategoriesMenu(this.#userState, this.#categories, (categoryIndex) => {
+                                new TeacherCategoriesMenu(this.#userState, this.#categories[categoryIndex].getSubcategories(), (subcategoryIndex) => {
+                                    new TeacherCategoriesMenu(this.#userState, this.#categories[categoryIndex].getSubcategories()[subcategoryIndex].getSubcategories(), () => {
+                                        this.addMenu(UserType.TEACHER);
+                                    });
+                                });
+                        });
                     }
                     else {
-                        this.addMenu(UserType.STUDENT);
-                        //new MainMenu(this.#userState, this.#categories).interact();
+                        new CategoriesMenu(this.#userState, this.#categories, () => {
+                            this.addMenu(UserType.STUDENT);
+                        });
                     }
                 })
-                
-            } )
+
+            })
             console.log(this.#categories);
-          }.bind(this));
-        
+        }.bind(this));
+
         /*   do {
                new UserMenu(this.#userState).interact();
    
