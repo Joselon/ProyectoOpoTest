@@ -48,7 +48,6 @@ class MenuDialog extends ButtonsDialog {
             this.addButton(texts[i], indexcallback, i);
         }
     }
-
 }
 
 class OneButtonDialog extends ButtonsDialog {
