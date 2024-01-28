@@ -2,6 +2,7 @@ import '@dile/dile-nav/dile-nav.js';
 import { EitOverlay } from './utils/view/html/components/eit-overlay.js';
 import { InputDialog } from './utils/view/html/Dialog.js';
 import { UserMenu } from './views/html/UserMenu.js';
+import { MainMenu } from './views/html/MainMenu.js';
 import { CategoriesMenu, TeacherCategoriesMenu } from './views/html/CategoriesMenu.js';
 import './views/html/styles.css';
 
@@ -36,7 +37,7 @@ class ElaboraTest {
                     }
                     else {
                         new CategoriesMenu(this.#userState, this.#categories, () => {
-                            this.addMenu(UserType.STUDENT);
+                            new MainMenu(this.#userState, this.#categories).interact();
                         });
                     }
                 })
