@@ -1,9 +1,12 @@
 import '@dile/dile-pages/dile-pages.js';
 import '@dile/dile-tabs/dile-tabs.js';
 import './components/jno-categories-list.js';
+import './components/jno-questions-list.js';
+import './components/jno-user-state.js';
 
-export class MainMenu {
+class MainMenu {
     _menuElement;
+    _stateElement;
     _options;
     _userState;
     _categories;
@@ -11,8 +14,13 @@ export class MainMenu {
     constructor(userState, categories) {
         this._userState = userState;
         this._categories = categories;
-        this._options = [["jno-categories-list", "Temas"], ["questions", "Preguntas"], ["concepts", "Conceptos"]];
+        this._setOptions();
         this.createMenu();
+        this._createState();
+    }
+
+    _setOptions() {
+        this._options = [["jno-categories-list", "Temas"], ["jno-questions-list", "Preguntas"]];
     }
 
     createMenu() {
@@ -26,7 +34,7 @@ export class MainMenu {
         let optionsHtml = '';
         for (let option of this._options) {
             optionsHtml += `<dile-tab name=${option[0]}>${option[1]}</dile-tab>`;
-            contentHtml += `<div id=${option[0]} name=${option[0]}><p>${option[1]}</p></div>`;
+            contentHtml += `<div id=${option[0]} name=${option[0]}></div>`;
         }
         tabsHtml += optionsHtml+'</dile-tabs>';
         tabContainer.innerHTML = tabsHtml;
@@ -37,8 +45,22 @@ export class MainMenu {
 
     getOptionHTML(elementName) {
         let elementList = document.createElement(elementName);
-        elementList.categories = this._categories;
+        if(elementName ==='jno-categories-list') {
+            elementList.elements = this._categories;
+        }
+        else if(elementName ==='jno-questions-list'){
+            elementList.elements = this._categories[0].getAllQuestions();//this._userState.getCurrentCategory().getAllQuestions();
+        }
+        else {
+            elementList.elements = ["Nada que mostrar"];
+        }
+        elementList.userState = this._userState;
         return elementList;
+    }
+
+    _createState() {
+        this._stateElement = document.createElement('jno-user-state');
+        this._stateElement.userState = this._userState;
     }
 
     interact() {
@@ -46,5 +68,24 @@ export class MainMenu {
         for (let option of this._options) {
             document.getElementById(option[0]).append(this.getOptionHTML(option[0]));
         }
+        document.getElementById('state').append(this._stateElement);
+    }
+
+
+}
+
+class TeacherMainMenu extends MainMenu {
+
+    _setOptions() {
+        this._options = [["jno-categories-list", "Temas"], ["jno-questions-list", "Preguntas"], ["concepts", "Conceptos"]];
+    }
+
+    _createState() {
+        super._createState();
+        const stateConceptSelected = document.createElement ('p');
+        stateConceptSelected.innerHTML = 'Concepto:'+this._userState.getCurrentConcept().getKeyword();
+        this._stateElement.append(stateConceptSelected);
     }
 }
+
+export { MainMenu, TeacherMainMenu}

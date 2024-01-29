@@ -1,7 +1,7 @@
 import '@dile/dile-nav/dile-nav.js';
 import { InputDialog } from './utils/view/html/Dialog.js';
 import { UserMenu } from './views/html/UserMenu.js';
-import { MainMenu } from './views/html/MainMenu.js';
+import { MainMenu, TeacherMainMenu } from './views/html/MainMenu.js';
 import './views/html/styles.css';
 
 import { Category } from './models/Category.js';
@@ -25,8 +25,9 @@ class ElaboraTest {
             new UserMenu((userTypeIndex) => {
                 this.#userState.setCurrentUserType(UserType.values()[userTypeIndex]);
                 new InputDialog("app", `Escribe nombre de usuario:`, () => {
+                    this.#userState.setCurrentUserName("Default");
                     if (this.#userState.getCurrentUserType() === UserType.TEACHER) {
-                        new MainMenu(this.#userState, this.#categories).interact();
+                        new TeacherMainMenu(this.#userState, this.#categories).interact();
                     }
                     else {
                         new MainMenu(this.#userState, this.#categories).interact();
@@ -36,7 +37,6 @@ class ElaboraTest {
             })
             console.log(this.#categories);
         }.bind(this));
-
     }
 
     #setUp() {

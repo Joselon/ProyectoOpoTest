@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import '@dile/dile-button-icon/dile-button-icon.js';
 
 export class JnoEventMenu extends LitElement {
     static styles = [
@@ -6,24 +7,6 @@ export class JnoEventMenu extends LitElement {
              :host {
                 display: block;
                 margin-bottom: 1rem;
-            }
-            ul {
-                display: flex;
-                margin: 0;
-                padding: 0;
-            }
-            li {
-                padding: 0.5em;
-                border: 1px solid #ccc;
-                background-color: #eee;
-                list-style-type: none;
-                margin-right: 0.5em;
-                min-width: 1em;
-                text-align: center;
-            }               
-            li.selected {
-                background-color: #6033dd;
-                color: #fff;
             }
         `
     ];
@@ -48,14 +31,11 @@ export class JnoEventMenu extends LitElement {
     render() {
         return html`
         <h3> ${this.title} </h3>
-        <ul>
                 ${this.options.map(option => html`
-                    <li 
+                    <dile-button-icon
                         @click=${() => this.setOption(option)}
-                        class="${this.selectedOption == option ? 'selected' : ''}"
-                    >${option}</li>
+                    >${option}</dile-button-icon>
                 `)}
-            </ul>
         `;
     }
     setOption(option) {

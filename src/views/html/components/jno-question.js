@@ -1,8 +1,6 @@
 import { LitElement, html, css } from 'lit';
 
-import '../../../utils/view/html/components/jno-event-menu.js';
-
-export class JnoCategory extends LitElement {
+export class JnoQuestion extends LitElement {
     static styles = [
         css`
             :host {
@@ -32,7 +30,7 @@ export class JnoCategory extends LitElement {
 
     static get properties() {
         return {
-            category: { type: Object },
+            question: { type: Object },
             userState: { type: Object},
             actionOptions: { type: Array },
             selectedOption: { type: String},
@@ -41,42 +39,28 @@ export class JnoCategory extends LitElement {
 
     constructor(){
         super();
-        this.actionOptions = ["Seleccionar","Mostrar Subcategorias"];
+        this.actionOptions = ["Responder","Mostrar Respuestas"];
         this.selectedAction = "";
     }
+
 
     render() {
         return html`
         <section>
             <jno-event-menu
-                title=${this.category.getName()}
+                title='¿${this.question.getStatement()}?'
                 .options=${this.actionOptions} 
                 selectedOption=${this.selectedOption}
                 @jno-event-menu-changed=${this.changeSelectedOption}
                 ></jno-event-menu>
             <ul>
-                <li><b>Número de Subcategorias</b>: ${this.category.getSubcategories().length}</a></li>
-                <li><b>Número de Conceptos</b>: ${this.category.getConcepts().length}</li>
-                <li><b>Número de Preguntas</b>: ${this.category.getQuestions().length}</li>
+                <li><b>Número de Respuestas</b>: ${this.question.getAnswers().length}</a></li>
+                <li><b>Objetivo</b>: ${this.question.getTarget()}</li>
+                <li><b>Tipo de Pregunta</b>: ${this.question.getType()}
+                <li><b>Indice del Concepto en la Categoría</b>: ${this.question.getConceptIndex()+1}</li>
             </ul>
         </section>
         `;
     }
-
-    changeSelectedOption(e) {
-        this.selectedAction = e.detail.selectedOption;
-        this.doAction(this.selectedAction);
-    }
-
-    doAction(action) {
-        console.log('Ejecutar '+action);
-        if(action==="Seleccionar"){
-            this.userState.setCurrentCategory(this.category);
-            console.log('set '+this.category.getName());
-        }
-        else {
-            console.log("mostrar subcategorias"+this.category.getSubcategories());
-        }
-    }
 }
-customElements.define('jno-category', JnoCategory);
+customElements.define('jno-question', JnoQuestion);

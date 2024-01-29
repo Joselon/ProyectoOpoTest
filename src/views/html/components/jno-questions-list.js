@@ -1,8 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
-import './jno-category.js';
+import './jno-question.js';
 
-export class JnoCategoriesList extends LitElement {
+export class JnoQuestionsList extends LitElement {
     static styles = [
         css`
             :host {
@@ -32,10 +32,9 @@ export class JnoCategoriesList extends LitElement {
     get template() {
         return html`
             ${repeat(this.elements, (element) => html`
-                    <jno-category .category="${element}" .userState="${this.userState}"></jno-category>
+                    <jno-question .question="${element}" .userState="${this.userState}"></jno-question>
             `)}
         `;
     }
 }
-customElements.define('jno-categories-list', JnoCategoriesList);
-
+customElements.define('jno-questions-list', JnoQuestionsList);
