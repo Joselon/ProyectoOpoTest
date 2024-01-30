@@ -15,16 +15,9 @@ export class JnoUserState extends LitElement {
         };
     }
 
-    firstUpdated() {
-        this.interval = setInterval(() => {
-            this.requestUpdate();
-            //console.log("timer actualizado")
-        }, 100);
-    }
-
-    disconnectedCallback() {
-        super.disconnectedCallback();
-        clearInterval(this.interval);
+    constructor(){
+        super();
+        document.addEventListener('success-feedback', this.stateUpdate.bind(this));
     }
 
     render() {
@@ -34,5 +27,9 @@ export class JnoUserState extends LitElement {
             <p>Concepto: ${this.userState.getCurrentConcept().getKeyword()}</p>
         `;
     }
+    stateUpdate(e) {
+        this.requestUpdate();
+    }
+
 }
 customElements.define('jno-user-state', JnoUserState);

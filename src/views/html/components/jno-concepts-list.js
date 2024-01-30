@@ -24,14 +24,9 @@ export class JnoConceptsList extends LitElement {
         this.elements = [];
         this.userState = {};
         this.category = {};
+        document.addEventListener('success-feedback', this.stateUpdate.bind(this));
     }
 
-    firstUpdated() {
-        this.interval = setInterval(() => {
-            this.requestUpdate();
-            //console.log("timer concepts actualizado")
-        }, 500);
-    }
 
     render() {
         return html`
@@ -50,6 +45,9 @@ export class JnoConceptsList extends LitElement {
                     <jno-concept .concept="${element}" .userState="${this.userState}"></jno-concept>
             `)}
         `;
+    }
+    stateUpdate(e) {
+        this.requestUpdate();
     }
 }
 customElements.define('jno-concepts-list', JnoConceptsList);

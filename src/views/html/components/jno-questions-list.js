@@ -24,14 +24,10 @@ export class JnoQuestionsList extends LitElement {
         this.elements = [];
         this.userState = {};
         this.category = {};
+        document.addEventListener('success-feedback', this.stateUpdate.bind(this));
     }
 
-    firstUpdated() {
-        this.interval = setInterval(() => {
-            this.requestUpdate();
-           // console.log("timer questions actualizado")
-        }, 150);
-    }
+    
 
     render() {
         return html`
@@ -50,6 +46,10 @@ export class JnoQuestionsList extends LitElement {
                     <jno-question .question="${element}" .userState="${this.userState}"></jno-question>
             `)}
         `;
+    }
+
+    stateUpdate(e) {
+        this.requestUpdate();
     }
 }
 customElements.define('jno-questions-list', JnoQuestionsList);
