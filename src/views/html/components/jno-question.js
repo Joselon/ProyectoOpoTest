@@ -64,5 +64,26 @@ export class JnoQuestion extends LitElement {
         </section>
         `;
     }
+    changeSelectedOption(e) {
+        this.selectedAction = e.detail.selectedOption;
+        this.doAction(this.selectedAction);
+    }
+
+    doAction(action) {
+        if(action==="x"){
+            //this.question...
+        }
+        else {
+            this.showFeedbackError("Botón deshabilitado");
+        }
+    }
+
+    showFeedbackError(msg) {
+        this.dispatchEvent(new CustomEvent('error-feedback', {
+            bubbles: true,
+            composed: true,
+            detail: msg
+        }));
+    }
 }
 customElements.define('jno-question', JnoQuestion);

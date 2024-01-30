@@ -29,8 +29,8 @@ export class JnoQuestionsList extends LitElement {
     firstUpdated() {
         this.interval = setInterval(() => {
             this.requestUpdate();
-            console.log("timer questions actualizado")
-        }, 1000);
+           // console.log("timer questions actualizado")
+        }, 150);
     }
 
     render() {
@@ -43,7 +43,7 @@ export class JnoQuestionsList extends LitElement {
         if (this.userState.getCurrentCategory().getName() === '---') {
             return html`<p>Debe seleccionar una categoría</p>`;
         }
-        this.elements = this.userState.getCurrentCategory().getQuestions();
+        this.elements = this.userState.getCurrentCategory().getAllQuestions();
         return html`
             <p>Contenidas en ${this.userState.getCurrentCategory().getName()} y sus subcategorías</p>
             ${repeat(this.elements, (element) => html`

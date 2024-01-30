@@ -2,6 +2,7 @@ import '@dile/dile-nav/dile-nav.js';
 import { InputDialog } from './utils/view/html/Dialog.js';
 import { UserMenu } from './views/html/UserMenu.js';
 import { MainMenu, TeacherMainMenu } from './views/html/MainMenu.js';
+import './views/html/components/jno-feedback'
 import './views/html/styles.css';
 
 import { Category } from './models/Category.js';
@@ -35,7 +36,6 @@ class ElaboraTest {
                 })
 
             })
-            console.log(this.#categories);
         }.bind(this));
     }
 

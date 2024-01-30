@@ -69,14 +69,29 @@ export class JnoConcept extends LitElement {
     }
 
     doAction(action) {
-        console.log('Ejecutar ' + action);
         if (action === "Seleccionar") {
             this.userState.setCurrentConcept(this.concept);
-            console.log('set ' + this.concept.getKeyword());
+            this.showFeedbackSuccess("Concepto Seleccionado");
         }
         else {
-            console.log("mostrar definiciones" + this.concept.getDefinitions());
+            this.showFeedbackError("Botón deshabilitado");
+           // console.log("mostrar definiciones" + this.concept.getDefinitions());
         }
     }
+    showFeedbackError(msg) {
+        this.dispatchEvent(new CustomEvent('error-feedback', {
+            bubbles: true,
+            composed: true,
+            detail: msg
+        }));
+    }
+    showFeedbackSuccess(data) {
+        this.dispatchEvent(new CustomEvent('success-feedback', {
+            bubbles: true,
+            composed: true,
+            detail: data
+        }));
+    }
+
 }
 customElements.define('jno-concept', JnoConcept);

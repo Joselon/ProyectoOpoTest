@@ -29,8 +29,8 @@ export class JnoConceptsList extends LitElement {
     firstUpdated() {
         this.interval = setInterval(() => {
             this.requestUpdate();
-            console.log("timer concepts actualizado")
-        }, 1000);
+            //console.log("timer concepts actualizado")
+        }, 500);
     }
 
     render() {

@@ -69,15 +69,30 @@ export class JnoCategory extends LitElement {
     }
 
     doAction(action) {
-        console.log('Ejecutar '+action);
         if(action==="Seleccionar"){
             this.userState.setCurrentCategory(this.category);
             this.userState.setCurrentConcept(new Concept("---"));
-            console.log('set '+this.category.getName());
+            this.showFeedbackSuccess("Categoría Seleccionada");
         }
         else {
-            console.log("mostrar subcategorias"+this.category.getSubcategories());
+            this.showFeedbackError("Botón deshabilitado");
+            //console.log("mostrar subcategorias"+this.category.getSubcategories());
         }
+    }
+
+    showFeedbackError(msg) {
+        this.dispatchEvent(new CustomEvent('error-feedback', {
+            bubbles: true,
+            composed: true,
+            detail: msg
+        }));
+    }
+    showFeedbackSuccess(data) {
+        this.dispatchEvent(new CustomEvent('success-feedback', {
+            bubbles: true,
+            composed: true,
+            detail: data
+        }));
     }
 }
 customElements.define('jno-category', JnoCategory);

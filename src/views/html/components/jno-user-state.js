@@ -18,8 +18,8 @@ export class JnoUserState extends LitElement {
     firstUpdated() {
         this.interval = setInterval(() => {
             this.requestUpdate();
-            console.log("timer actualizado")
-        }, 1000);
+            //console.log("timer actualizado")
+        }, 100);
     }
 
     disconnectedCallback() {
