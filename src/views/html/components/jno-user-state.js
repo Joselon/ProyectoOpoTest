@@ -19,18 +19,19 @@ export class JnoUserState extends LitElement {
         this.interval = setInterval(() => {
             this.requestUpdate();
             console.log("timer actualizado")
-            }, 1000);
+        }, 1000);
     }
 
     disconnectedCallback() {
         super.disconnectedCallback();
         clearInterval(this.interval);
-    } 
+    }
 
     render() {
         return html`
             <p>Usuario: ${this.userState.getCurrentUserName()} ${this.userState.getCurrentUserTypeName()}</p>
             <p>Categoría: ${this.userState.getCurrentCategory().getName()}</p>
+            <p>Concepto: ${this.userState.getCurrentConcept().getKeyword()}</p>
         `;
     }
 }

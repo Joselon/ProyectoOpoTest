@@ -73,6 +73,17 @@ class Category {
         return allQuestions;
     }
 
+    getAllConcepts() {
+        let allConcepts = [];
+        for (let concept of this.#concepts)
+            allConcepts.push(concept);
+        for (let category of this.#subcategories) {
+            for (let concept of category.getAllConcepts())
+                allConcepts.push(concept);
+        }
+        return allConcepts;
+    }
+
     addQuestion(question) {
         this.#questions.push(question);
     }

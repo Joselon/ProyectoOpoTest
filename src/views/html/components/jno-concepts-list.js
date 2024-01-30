@@ -1,8 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
-import './jno-question.js';
+import './jno-concept.js';
 
-export class JnoQuestionsList extends LitElement {
+export class JnoConceptsList extends LitElement {
     static styles = [
         css`
             :host {
@@ -29,7 +29,7 @@ export class JnoQuestionsList extends LitElement {
     firstUpdated() {
         this.interval = setInterval(() => {
             this.requestUpdate();
-            console.log("timer questions actualizado")
+            console.log("timer concepts actualizado")
         }, 1000);
     }
 
@@ -43,13 +43,13 @@ export class JnoQuestionsList extends LitElement {
         if (this.userState.getCurrentCategory().getName() === '---') {
             return html`<p>Debe seleccionar una categoría</p>`;
         }
-        this.elements = this.userState.getCurrentCategory().getQuestions();
+        this.elements = this.userState.getCurrentCategory().getAllConcepts();
         return html`
-            <p>Contenidas en ${this.userState.getCurrentCategory().getName()} y sus subcategorías</p>
+            <p>Contenidos en ${this.userState.getCurrentCategory().getName()} y sus subcategorías:</p>
             ${repeat(this.elements, (element) => html`
-                    <jno-question .question="${element}" .userState="${this.userState}"></jno-question>
+                    <jno-concept .concept="${element}" .userState="${this.userState}"></jno-concept>
             `)}
         `;
     }
 }
-customElements.define('jno-questions-list', JnoQuestionsList);
+customElements.define('jno-concepts-list', JnoConceptsList);

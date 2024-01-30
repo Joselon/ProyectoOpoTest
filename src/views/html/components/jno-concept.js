@@ -1,8 +1,6 @@
 import { LitElement, html, css } from 'lit';
-import { Concept } from '../../../models/Concept.js'
-import '../../../utils/view/html/components/jno-event-menu.js';
 
-export class JnoCategory extends LitElement {
+export class JnoConcept extends LitElement {
     static styles = [
         css`
             :host {
@@ -32,32 +30,34 @@ export class JnoCategory extends LitElement {
 
     static get properties() {
         return {
-            category: { type: Object },
-            userState: { type: Object},
+            concept: { type: Object },
+            userState: { type: Object },
             actionOptions: { type: Array },
-            selectedOption: { type: String},
+            selectedOption: { type: String },
         };
     }
 
-    constructor(){
+    constructor() {
         super();
-        this.actionOptions = ["Seleccionar","Mostrar Subcategorias"];
+        this.actionOptions = ["Seleccionar", "Editar*"];
         this.selectedAction = "";
+        this.userState = {};
+        this.concept = {};
     }
+
 
     render() {
         return html`
         <section>
             <jno-event-menu
-                title=${this.category.getName()}
+                title='${this.concept.getKeyword()}'
                 .options=${this.actionOptions} 
                 selectedOption=${this.selectedOption}
                 @jno-event-menu-changed=${this.changeSelectedOption}
                 ></jno-event-menu>
             <ul>
-                <li><b>Número de Subcategorias</b>: ${this.category.getSubcategories().length}</a></li>
-                <li><b>Número de Conceptos</b>: ${this.category.getConcepts().length}</li>
-                <li><b>Número de Preguntas</b>: ${this.category.getQuestions().length}</li>
+                <li><b>Número de Definiciones</b>: ${this.concept.getDefinitions().length}</a></li>
+                <li><b>Número de Relaciones</b>: ${this.concept.getRelations().length}</a></li>
             </ul>
         </section>
         `;
@@ -69,15 +69,14 @@ export class JnoCategory extends LitElement {
     }
 
     doAction(action) {
-        console.log('Ejecutar '+action);
-        if(action==="Seleccionar"){
-            this.userState.setCurrentCategory(this.category);
-            this.userState.setCurrentConcept(new Concept("---"));
-            console.log('set '+this.category.getName());
+        console.log('Ejecutar ' + action);
+        if (action === "Seleccionar") {
+            this.userState.setCurrentConcept(this.concept);
+            console.log('set ' + this.concept.getKeyword());
         }
         else {
-            console.log("mostrar subcategorias"+this.category.getSubcategories());
+            console.log("mostrar definiciones" + this.concept.getDefinitions());
         }
     }
 }
-customElements.define('jno-category', JnoCategory);
+customElements.define('jno-concept', JnoConcept);

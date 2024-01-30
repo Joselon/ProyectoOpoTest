@@ -31,16 +31,18 @@ export class JnoQuestion extends LitElement {
     static get properties() {
         return {
             question: { type: Object },
-            userState: { type: Object},
+            userState: { type: Object },
             actionOptions: { type: Array },
-            selectedOption: { type: String},
+            selectedOption: { type: String },
         };
     }
 
-    constructor(){
+    constructor() {
         super();
-        this.actionOptions = ["Responder","Mostrar Respuestas"];
+        this.actionOptions = ["Responder", "Mostrar Respuestas"];
         this.selectedAction = "";
+        this.userState = {};
+        this.question = {};
     }
 
 
@@ -56,8 +58,8 @@ export class JnoQuestion extends LitElement {
             <ul>
                 <li><b>Número de Respuestas</b>: ${this.question.getAnswers().length}</a></li>
                 <li><b>Objetivo</b>: ${this.question.getTarget()}</li>
-                <li><b>Tipo de Pregunta</b>: ${this.question.getType()}
-                <li><b>Indice del Concepto en la Categoría</b>: ${this.question.getConceptIndex()+1}</li>
+                <li><b>Tipo de Pregunta</b>: ${this.question.getType()}</li>
+                <li><b>Indice del Concepto en la Categoría</b>: ${this.question.getConceptIndex() + 1}</li>
             </ul>
         </section>
         `;
