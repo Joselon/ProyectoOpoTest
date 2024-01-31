@@ -1,6 +1,6 @@
 import '@dile/dile-nav/dile-nav.js';
 import { InputDialog } from './utils/view/html/Dialog.js';
-import { UserMenu } from './views/html/UserMenu.js';
+import { UserDialog } from './views/html/UserDialog.js';
 import { MainMenu, TeacherMainMenu } from './views/html/MainMenu.js';
 import './views/html/components/jno-feedback'
 import './views/html/styles.css';
@@ -22,22 +22,21 @@ class ElaboraTest {
     }
 
     start() {
-        document.addEventListener('DOMContentLoaded', function () {
-            new UserMenu((userTypeIndex) => {
-                this.#userState.setCurrentUserType(UserType.values()[userTypeIndex]);
-                new InputDialog("app", `Escribe nombre de usuario:`, (username) => {
-                    //Validate
-                    this.#userState.setCurrentUserName(username);
-                    if (this.#userState.getCurrentUserType() === UserType.TEACHER) {
-                        new TeacherMainMenu(this.#userState, this.#categories).interact();
-                    }
-                    else {
-                        new MainMenu(this.#userState, this.#categories).interact();
-                    }
-                })
 
+        new UserDialog((userTypeIndex) => {
+            this.#userState.setCurrentUserType(UserType.values()[userTypeIndex]);
+            new InputDialog('app', `Escribe nombre de usuario:`, (username) => {
+                //Validate
+                this.#userState.setCurrentUserName(username);
+                if (this.#userState.getCurrentUserType() === UserType.TEACHER) {
+                    new TeacherMainMenu(this.#userState, this.#categories).interact();
+                }
+                else {
+                    new MainMenu(this.#userState, this.#categories).interact();
+                }
             })
-        }.bind(this));
+
+        })
     }
 
     #setUp() {

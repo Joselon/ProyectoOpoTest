@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: grey;
+    --dile-nav-padding-x: 3rem;
     --dile-tab-text-color: #c6c6a3;
     --dile-toast-success-color: #349454;
     --dile-toast-error-color: #4e1629;
@@ -10,13 +11,32 @@ body {
     --dile-toast-border-radius: 1rem;
 }
 
-header {
+header div {
     margin-bottom: 1rem;
+    border-radius: 10px;
+
+}
+
+header dile-nav {
+    border-radius: 10px;
+}
+
+header dile-nav span button {
+    padding: 0.5rem 1.5rem;
+    border-radius: 10px;
+    color: #ccc;
+    background-color: #4e1629;
+}
+
+header div {
+    display: none;
+    position: fixed;
+    top: 2.5rem;
+    right: 1rem;
     padding: 1rem;
     background-color: #607060;
     border: 3px solid #023302b0;
-    border-radius: 10px;
-    box-shadow: 5px 5px black;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.526);
 }
 
 #buttonsId {
@@ -27,6 +47,12 @@ header {
 }
 
 footer {
-    width: 300%;
     text-align: center;
+}
+
+@media (max-width: 500px){
+
+    header {
+        margin-bottom: 5rem;
+    }
 }

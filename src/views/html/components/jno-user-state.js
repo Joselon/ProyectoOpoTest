@@ -4,12 +4,25 @@ export class JnoUserState extends LitElement {
     static styles = [
         css`
             :host {
-                display: block;
+                display:flex; 
+                flex-direction: column;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+
+            p {
+                margin:0.5rem;
             }
             span {
                 background-color: white;
-                border-radius: 5px;
-                padding:5px;
+                border-radius: 0.5rem;
+                padding:0.5rem;
+            }
+            @media (max-width: 500px){
+               :host { 
+                font-size: xx-small;
+                flex-direction: row;
+               }
             }
         `
     ];

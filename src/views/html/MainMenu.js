@@ -53,12 +53,8 @@ class MainMenu {
             elementList.elements = this._categories;
             elementList.userState = this._userState;
         }
-        else if (elementName === 'jno-concepts-list') {
-            elementList.elements = this._categories;
-            elementList.userState = this._userState;
-        }
         else {
-            elementList.elements = ["Nada que mostrar"];
+            //Error no existe tipo de elemento creado
         }
         elementList.userState = this._userState;
         return elementList;
@@ -74,6 +70,7 @@ class MainMenu {
         for (let option of this._options) {
             document.getElementById(option[0]).append(this.getOptionHTML(option[0]));
         }
+        document.getElementById('state').style.display = "block"
         document.getElementById('state').append(this._stateElement);
     }
 
@@ -86,11 +83,24 @@ class TeacherMainMenu extends MainMenu {
         this._options = [["jno-categories-list", "Temas"], ["jno-questions-list", "Preguntas"], ["jno-concepts-list", "Conceptos"]];
     }
 
-    _createState() {
-        super._createState();
-        const stateConceptSelected = document.createElement('p');
-        stateConceptSelected.innerHTML = 'Concepto:' + this._userState.getCurrentConcept().getKeyword();
-        this._stateElement.append(stateConceptSelected);
+    getOptionHTML(elementName) {
+        let elementList = document.createElement(elementName);
+        if (elementName === 'jno-categories-list') {
+            elementList.elements = this._categories;
+        }
+        else if (elementName === 'jno-questions-list') {
+            elementList.elements = this._categories;
+            elementList.userState = this._userState;
+        }
+        else if (elementName === 'jno-concepts-list') {
+            elementList.elements = this._categories;
+            elementList.userState = this._userState;
+        }
+        else {
+            //Error no existe tipo de elemento creado
+        }
+        elementList.userState = this._userState;
+        return elementList;
     }
 }
 
