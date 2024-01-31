@@ -8,7 +8,7 @@ export class JnoQuestion extends LitElement {
                 margin-bottom: 1rem;
             }
             section {
-                background-color: #f5f5f5;
+                background-color: #f5f5f573;
                 padding: 1rem;
                 border: 2px solid #ccc;
             }
@@ -74,7 +74,7 @@ export class JnoQuestion extends LitElement {
             //this.question...
         }
         else {
-            this.showFeedbackError("Botón deshabilitado");
+            this.showFeedbackError("PENDIENTE HABILITAR FUNCIONALIDAD");
         }
     }
 

@@ -1,10 +1,15 @@
 import { LitElement, html, css } from 'lit';
-
+import { UserType } from '../../../models/UserTypes';
 export class JnoUserState extends LitElement {
     static styles = [
         css`
             :host {
                 display: block;
+            }
+            span {
+                background-color: white;
+                border-radius: 5px;
+                padding:5px;
             }
         `
     ];
@@ -15,18 +20,26 @@ export class JnoUserState extends LitElement {
         };
     }
 
-    constructor(){
+    constructor() {
         super();
         document.addEventListener('success-feedback', this.stateUpdate.bind(this));
     }
 
     render() {
         return html`
-            <p>Usuario: ${this.userState.getCurrentUserName()} ${this.userState.getCurrentUserTypeName()}</p>
-            <p>Categoría: ${this.userState.getCurrentCategory().getName()}</p>
-            <p>Concepto: ${this.userState.getCurrentConcept().getKeyword()}</p>
+            <p>Usuario: <span><i>${this.userState.getCurrentUserTypeName()}</i> <b>${this.userState.getCurrentUserName()}</b></span></p>
+            <p>Categoría: <span>${this.userState.getCurrentCategory().getName()}</span></p>
+            ${this.teacherTemplate}
         `;
     }
+
+    get teacherTemplate() {
+        if (this.userState.getCurrentUserType() === UserType.TEACHER) {
+            return html`<p>Concepto: <span>${this.userState.getCurrentConcept().getKeyword()}</span></p>`
+        }
+        return html``;
+    }
+
     stateUpdate(e) {
         this.requestUpdate();
     }

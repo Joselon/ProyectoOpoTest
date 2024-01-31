@@ -52,7 +52,7 @@ class MenuDialog extends ButtonsDialog {
 
 class OneButtonDialog extends ButtonsDialog {
 
-    constructor(htmlElementId, title,  callback) {
+    constructor(htmlElementId, title, callback) {
         super(htmlElementId)
         this.addTitle(title)
         this.addButton('OK', callback)
@@ -73,13 +73,19 @@ class InputDialog extends OneButtonDialog {
 
     constructor(htmlElementId, title, inputcallback) {
         super(htmlElementId, title, inputcallback);
-        this.addInput(title);
     }
 
-    addInput(title) {
+    addButton(text, callback) {
         const input = document.createElement('dile-input');
-        input.placeholder = title;
+        input.placeholder = '';
         document.getElementById("buttonsId").append(input);
+        const button = document.createElement('dile-button-icon');
+        button.innerHTML = text;
+        button.addEventListener('click', () => {
+            this.delete();
+            callback(input.value);
+        });
+        document.getElementById("buttonsId").append(button);
     }
 }
 

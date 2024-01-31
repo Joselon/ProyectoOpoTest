@@ -8,7 +8,7 @@ export class JnoConcept extends LitElement {
                 margin-bottom: 1rem;
             }
             section {
-                background-color: #f5f5f5;
+                background-color: #f5f5f573;
                 padding: 1rem;
                 border: 2px solid #ccc;
             }
@@ -71,10 +71,10 @@ export class JnoConcept extends LitElement {
     doAction(action) {
         if (action === "Seleccionar") {
             this.userState.setCurrentConcept(this.concept);
-            this.showFeedbackSuccess("Concepto Seleccionado");
+            this.showFeedbackSuccess(`CONCEPTO SELECCIONADO: ${this.concept.getKeyword()} `);
         }
         else {
-            this.showFeedbackError("Botón deshabilitado");
+            this.showFeedbackError("ERROR: Aún no disponible...");
            // console.log("mostrar definiciones" + this.concept.getDefinitions());
         }
     }

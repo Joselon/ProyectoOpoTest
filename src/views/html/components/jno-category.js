@@ -10,7 +10,7 @@ export class JnoCategory extends LitElement {
                 margin-bottom: 1rem;
             }
             section {
-                background-color: #f5f5f5;
+                background-color: #f5f5f573;
                 padding: 1rem;
                 border: 2px solid #ccc;
             }
@@ -72,10 +72,10 @@ export class JnoCategory extends LitElement {
         if(action==="Seleccionar"){
             this.userState.setCurrentCategory(this.category);
             this.userState.setCurrentConcept(new Concept("---"));
-            this.showFeedbackSuccess("Categoría Seleccionada");
+            this.showFeedbackSuccess(`CATEGORÍA SELECCIONADA: ${this.category.getName()}`);
         }
         else {
-            this.showFeedbackError("Botón deshabilitado");
+            this.showFeedbackError(`ERROR: Aún no disponible...`);
             //console.log("mostrar subcategorias"+this.category.getSubcategories());
         }
     }

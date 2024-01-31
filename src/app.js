@@ -25,8 +25,9 @@ class ElaboraTest {
         document.addEventListener('DOMContentLoaded', function () {
             new UserMenu((userTypeIndex) => {
                 this.#userState.setCurrentUserType(UserType.values()[userTypeIndex]);
-                new InputDialog("app", `Escribe nombre de usuario:`, () => {
-                    this.#userState.setCurrentUserName("Default");
+                new InputDialog("app", `Escribe nombre de usuario:`, (username) => {
+                    //Validate
+                    this.#userState.setCurrentUserName(username);
                     if (this.#userState.getCurrentUserType() === UserType.TEACHER) {
                         new TeacherMainMenu(this.#userState, this.#categories).interact();
                     }
