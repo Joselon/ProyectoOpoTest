@@ -33,6 +33,7 @@ class ElaboraTest {
                 else {
                     new MainMenu(this.#userState, this.#categories).interact();
                 }
+                document.addEventListener('model-changed', this.writeJSONfile.bind(this));
             })
 
         })
@@ -44,8 +45,13 @@ class ElaboraTest {
     }
 
     readJSONfile() {
-        const dataobject = json;
-
+        let dataobject;
+        if (window.localStorage.getItem('categories') !== null) {
+            dataobject = JSON.parse(window.localStorage.getItem('categories'));
+        }
+        else {
+            dataobject = json;
+        }
         let index = 0;
         for (const categoryObject of dataobject.categories) {
             this.#categories.push(new Category(categoryObject.name));
@@ -54,7 +60,15 @@ class ElaboraTest {
         }
     }
 
-    /* GUARDAR EN LOCALSTORAGE Y OFRECER EXPORTAR JSON
+    writeJSONfile(e) {
+        let dataObject = { categories: [] };
+        for (let category of this.#categories) {
+            dataObject.categories.push(category.formatCategoryObject());
+        }
+        const data = JSON.stringify(dataObject);
+        window.localStorage.setItem('categories', data);
+    }
+    /*  OFRECER EXPORTAR JSON
     async writeJSONfile() {
          try {
              let dataObject = { categories: [] };
