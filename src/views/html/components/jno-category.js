@@ -1,6 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { Concept } from '../../../models/Concept.js'
 import '../../../utils/view/html/components/jno-event-menu.js';
+import './jno-categories-list.js'
+import { listIcon } from '@dile/icons';
 
 export class JnoCategory extends LitElement {
     static styles = [
@@ -11,7 +13,7 @@ export class JnoCategory extends LitElement {
             }
             section {
                 background-color: #f5f5f573;
-                padding: 1rem;
+                padding: 0 1rem;
                 border: 2px solid #ccc;
             }
             ul {
@@ -27,22 +29,30 @@ export class JnoCategory extends LitElement {
                 background-color: #def;
                 padding: 0 1rem;
             }
+
+            #subcategories {
+                display: none;
+            }
         `
     ];
 
     static get properties() {
         return {
             category: { type: Object },
-            userState: { type: Object},
+            userState: { type: Object },
             actionOptions: { type: Array },
-            selectedOption: { type: String},
+            selectedOption: { type: String },
         };
     }
 
-    constructor(){
+    constructor() {
         super();
-        this.actionOptions = ["Seleccionar","Mostrar Subcategorias"];
+        this.actionOptions = ["Seleccionar", "Añadir", "Editar", "Eliminar"];
         this.selectedAction = "";
+    }
+
+    firstUpdated() {
+        this.subcategoriesDiv = this.shadowRoot.getElementById("subcategories");
     }
 
     render() {
@@ -53,31 +63,52 @@ export class JnoCategory extends LitElement {
                 .options=${this.actionOptions} 
                 selectedOption=${this.selectedOption}
                 @jno-event-menu-changed=${this.changeSelectedOption}
-                ></jno-event-menu>
-            <ul>
-                <li><b>Número de Subcategorias</b>: ${this.category.getSubcategories().length}</a></li>
-                <li><b>Número de Conceptos</b>: ${this.category.getConcepts().length}</li>
-                <li><b>Número de Preguntas</b>: ${this.category.getQuestions().length}</li>
-            </ul>
+                >
+                <span slot="subtitle">
+                    <b>Conceptos</b>: ${this.category.getConcepts().length}
+                 / <b>Preguntas</b>: ${this.category.getQuestions().length}</span>
+                <dile-button-icon 
+                    slot="extraAction"
+                    .icon=${listIcon}
+                    @click=${this.toggleSubcategoriesDiv}
+                    ?disabled=${this.category.getSubcategories().length === 0}
+                    >
+                    Subcategorias: ${this.category.getSubcategories().length}
+                </dile-button-icon>
+            </jno-event-menu>
+            <div id="subcategories">
+                ${this.subcategoriesTemplate}
+            </div>
         </section>
         `;
     }
-
+    get subcategoriesTemplate() {
+        return html`
+            <jno-categories-list .elements=${this.category.getSubcategories()} .userState=${this.userState}></jno-categories-list>
+        `
+    }
     changeSelectedOption(e) {
         this.selectedAction = e.detail.selectedOption;
         this.doAction(this.selectedAction);
     }
 
     doAction(action) {
-        if(action==="Seleccionar"){
+        if (action === "Seleccionar") {
             this.userState.setCurrentCategory(this.category);
             this.userState.setCurrentConcept(new Concept("---"));
+            this.dispatchModelChangedEvent();
             this.showFeedbackSuccess(`CATEGORÍA SELECCIONADA: ${this.category.getName()}`);
         }
         else {
             this.showFeedbackError(`ERROR: Aún no disponible...`);
-            //console.log("mostrar subcategorias"+this.category.getSubcategories());
         }
+    }
+
+    toggleSubcategoriesDiv() {
+        if (this.subcategoriesDiv.style.display === 'block')
+            this.subcategoriesDiv.style.display = 'none';
+        else
+            this.subcategoriesDiv.style.display = 'block';
     }
 
     showFeedbackError(msg) {
@@ -92,6 +123,14 @@ export class JnoCategory extends LitElement {
             bubbles: true,
             composed: true,
             detail: data
+        }));
+    }
+
+    dispatchModelChangedEvent() {
+        this.dispatchEvent(new CustomEvent('model-changed', {
+            bubbles: true,
+            composed: true,
+            detail: 'model-changed'
         }));
     }
 }

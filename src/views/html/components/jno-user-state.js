@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit';
+import { UpdateAtModelChangedMixin } from '../mixins/UpdateAtModelChangedMixin.js';
 import { UserType } from '../../../models/UserTypes';
-export class JnoUserState extends LitElement {
+export class JnoUserState extends UpdateAtModelChangedMixin(LitElement) {
     static styles = [
         css`
             :host {
@@ -36,6 +37,11 @@ export class JnoUserState extends LitElement {
     constructor() {
         super();
         document.addEventListener('success-feedback', this.stateUpdate.bind(this));
+    }
+
+    disconnectedCallback() {
+        super.disconnectedCallback();
+        document.removeEventListener('success-feedback', this.stateUpdate.bind(this));
     }
 
     render() {

@@ -70,8 +70,9 @@ export class JnoQuestion extends LitElement {
     }
 
     doAction(action) {
-        if(action==="x"){
+        if (action === "x") {
             //this.question...
+            this.dispatchModelChangedEvent();
         }
         else {
             this.showFeedbackError("PENDIENTE HABILITAR FUNCIONALIDAD");
@@ -83,6 +84,14 @@ export class JnoQuestion extends LitElement {
             bubbles: true,
             composed: true,
             detail: msg
+        }));
+    }
+
+    dispatchModelChangedEvent() {
+        this.dispatchEvent(new CustomEvent('model-changed', {
+            bubbles: true,
+            composed: true,
+            detail: 'model-changed'
         }));
     }
 }

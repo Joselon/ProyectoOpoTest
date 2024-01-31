@@ -71,11 +71,12 @@ export class JnoConcept extends LitElement {
     doAction(action) {
         if (action === "Seleccionar") {
             this.userState.setCurrentConcept(this.concept);
+            this.dispatchModelChangedEvent();
             this.showFeedbackSuccess(`CONCEPTO SELECCIONADO: ${this.concept.getKeyword()} `);
         }
         else {
             this.showFeedbackError("ERROR: Aún no disponible...");
-           // console.log("mostrar definiciones" + this.concept.getDefinitions());
+            // console.log("mostrar definiciones" + this.concept.getDefinitions());
         }
     }
     showFeedbackError(msg) {
@@ -92,6 +93,12 @@ export class JnoConcept extends LitElement {
             detail: data
         }));
     }
-
+    dispatchModelChangedEvent() {
+        this.dispatchEvent(new CustomEvent('model-changed', {
+            bubbles: true,
+            composed: true,
+            detail: 'model-changed'
+        }));
+    }
 }
 customElements.define('jno-concept', JnoConcept);

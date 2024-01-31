@@ -9,6 +9,7 @@ body {
     --dile-toast-font-weight: bold;
     --dile-toast-font-size: 1.2rem;
     --dile-toast-border-radius: 1rem;
+    --dile-button-font-size: 0.75rem;
 }
 
 header div {
@@ -50,7 +51,7 @@ footer {
     text-align: center;
 }
 
-@media (max-width: 500px){
+@media (max-width: 500px) {
 
     header {
         margin-bottom: 5rem;

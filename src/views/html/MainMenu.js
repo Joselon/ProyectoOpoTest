@@ -16,15 +16,15 @@ class MainMenu {
         this._userState = userState;
         this._categories = categories;
         this._setOptions();
-        this.createMenu();
+        this.#createMenu();
         this._createState();
     }
 
     _setOptions() {
-        this._options = [["jno-categories-list", "Temas"], ["jno-questions-list", "Preguntas"]];
+        this._options = [["jno-categories-list", "Categorías"], ["jno-questions-list", "Preguntas"]];
     }
 
-    createMenu() {
+    #createMenu() {
         this._menuElement = document.createElement('div');
         let tabContainer = document.createElement('section');
         let contentContainer = document.createElement('section');
@@ -44,7 +44,7 @@ class MainMenu {
         this._menuElement.append(tabContainer, contentContainer);
     }
 
-    getOptionHTML(elementName) {
+    _getOptionHTML(elementName) {
         let elementList = document.createElement(elementName);
         if (elementName === 'jno-categories-list') {
             elementList.elements = this._categories;
@@ -68,7 +68,7 @@ class MainMenu {
     interact() {
         document.getElementById('app').append(this._menuElement);
         for (let option of this._options) {
-            document.getElementById(option[0]).append(this.getOptionHTML(option[0]));
+            document.getElementById(option[0]).append(this._getOptionHTML(option[0]));
         }
         document.getElementById('state').style.display = "block"
         document.getElementById('state').append(this._stateElement);
@@ -80,10 +80,10 @@ class MainMenu {
 class TeacherMainMenu extends MainMenu {
 
     _setOptions() {
-        this._options = [["jno-categories-list", "Temas"], ["jno-questions-list", "Preguntas"], ["jno-concepts-list", "Conceptos"]];
+        this._options = [["jno-categories-list", "Categorías"], ["jno-concepts-list", "Conceptos"], ["jno-questions-list", "Preguntas"]];
     }
 
-    getOptionHTML(elementName) {
+    _getOptionHTML(elementName) {
         let elementList = document.createElement(elementName);
         if (elementName === 'jno-categories-list') {
             elementList.elements = this._categories;

@@ -1,8 +1,9 @@
 import { LitElement, html, css } from 'lit';
+import { UpdateAtModelChangedMixin } from '../mixins/UpdateAtModelChangedMixin.js';
 import { repeat } from 'lit/directives/repeat.js';
 import './jno-question.js';
 
-export class JnoQuestionsList extends LitElement {
+export class JnoQuestionsList extends UpdateAtModelChangedMixin(LitElement) {
     static styles = [
         css`
             :host {
@@ -15,7 +16,6 @@ export class JnoQuestionsList extends LitElement {
         return {
             elements: { type: Array },
             userState: { type: Object },
-            category: { type: Object }
         };
     }
 
@@ -23,11 +23,7 @@ export class JnoQuestionsList extends LitElement {
         super();
         this.elements = [];
         this.userState = {};
-        this.category = {};
-        document.addEventListener('success-feedback', this.stateUpdate.bind(this));
     }
-
-    
 
     render() {
         return html`
@@ -46,10 +42,6 @@ export class JnoQuestionsList extends LitElement {
                     <jno-question .question="${element}" .userState="${this.userState}"></jno-question>
             `)}
         `;
-    }
-
-    stateUpdate(e) {
-        this.requestUpdate();
     }
 }
 customElements.define('jno-questions-list', JnoQuestionsList);

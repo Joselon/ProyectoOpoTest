@@ -22,7 +22,6 @@ class ElaboraTest {
     }
 
     start() {
-
         new UserDialog((userTypeIndex) => {
             this.#userState.setCurrentUserType(UserType.values()[userTypeIndex]);
             new InputDialog('app', `Escribe nombre de usuario:`, (username) => {

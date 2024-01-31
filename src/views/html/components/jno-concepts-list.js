@@ -1,8 +1,9 @@
 import { LitElement, html, css } from 'lit';
+import { UpdateAtModelChangedMixin } from '../mixins/UpdateAtModelChangedMixin.js';
 import { repeat } from 'lit/directives/repeat.js';
 import './jno-concept.js';
 
-export class JnoConceptsList extends LitElement {
+export class JnoConceptsList extends UpdateAtModelChangedMixin(LitElement) {
     static styles = [
         css`
             :host {
@@ -15,7 +16,6 @@ export class JnoConceptsList extends LitElement {
         return {
             elements: { type: Array },
             userState: { type: Object },
-            category: { type: Object }
         };
     }
 
@@ -23,11 +23,7 @@ export class JnoConceptsList extends LitElement {
         super();
         this.elements = [];
         this.userState = {};
-        this.category = {};
-        document.addEventListener('success-feedback', this.stateUpdate.bind(this));
     }
-
-
     render() {
         return html`
             ${this.template}
@@ -45,9 +41,6 @@ export class JnoConceptsList extends LitElement {
                     <jno-concept .concept="${element}" .userState="${this.userState}"></jno-concept>
             `)}
         `;
-    }
-    stateUpdate(e) {
-        this.requestUpdate();
     }
 }
 customElements.define('jno-concepts-list', JnoConceptsList);
