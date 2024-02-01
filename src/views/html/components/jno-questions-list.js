@@ -37,7 +37,7 @@ export class JnoQuestionsList extends UpdateAtModelChangedMixin(LitElement) {
         }
         this.elements = this.userState.getCurrentCategory().getAllQuestions();
         return html`
-            <p>Contenidas en ${this.userState.getCurrentCategory().getName()} y sus subcategorías</p>
+            <p>Contenidas en <b>${this.userState.getCurrentCategory().getName()}</b> y sus subcategorías</p>
             ${repeat(this.elements, (element) => html`
                     <jno-question .question="${element}" .userState="${this.userState}"></jno-question>
             `)}

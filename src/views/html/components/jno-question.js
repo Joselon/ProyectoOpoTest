@@ -56,7 +56,7 @@ export class JnoQuestion extends LitElement {
                 @jno-event-menu-changed=${this.changeSelectedOption}
                 ></jno-event-menu>
             <ul>
-                <li><b>Número de Respuestas</b>: ${this.question.getAnswers().length}</a></li>
+                <li><b>Número de Respuestas</b>: ${this.question.getAnswers().length}</li>
                 <li><b>Objetivo</b>: ${this.question.getTarget()}</li>
                 <li><b>Tipo de Pregunta</b>: ${this.question.getType()}</li>
                 <li><b>Indice del Concepto en la Categoría</b>: ${this.question.getConceptIndex() + 1}</li>
