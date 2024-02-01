@@ -1,8 +1,7 @@
 import { LitElement, html, css } from 'lit';
-import { Concept } from '../../../models/Concept.js';
-import './jno-concept-form.js';
+import './jno-category-form.js';
 
-export class JnoConceptAdd extends LitElement {
+export class JnoAnswerInsert extends LitElement {
     static styles = [
         css`
             :host {
@@ -19,38 +18,38 @@ export class JnoConceptAdd extends LitElement {
     ];
 
     static get properties() {
-        return {
-            category: { type: Object }
-        };
+      return {
+        question: { type: Object },
+        username: { type: String }
+      };
     }
 
     firstUpdated() {
         this.elmodal = this.shadowRoot.getElementById('elmodal');
-        this.elform = this.shadowRoot.getElementById('elform');
+        this.elinput = this.shadowRoot.getElementById('elinput');
     }
 
     render() {
         return html`
             <dile-modal id="elmodal" showCloseIcon blocking>
-                <h2>Nuevo Concepto</h2>
-                <jno-concept-form id="elform"></jno-concept-form>
-                <button type="button" @click=${this.insertConcept}>Añadir</button>
+                <h2>Respuesta:</h2>
+                <dile-input id="elinput"></dile-input>
+                <button type="button" @click=${this.insertAnswer}>Guardar</button>
             </dile-modal>
         `;
     }
 
-    add(category) {
-        this.category = category;
+    insert(question, username) {
+        this.question = question;
+        this.username = username;
         this.elmodal.open();
     }
 
-    insertConcept() {
-        let data = this.elform.getData();
-        //Redefinir para concepto con definiciones, relaciones y sinonimos
-        this.category.addConcept(new Concept(data.keyword));
-        
+    insertAnswer() {
+        console.log('Respuesta: ',this.elinput.value);
+        this.question.addAnswer(this.username, this.elinput.value);
         this.dispatchModelChangedEvent();
-        this.elform.clearData();
+        this.elinput.value='';
         this.elmodal.close();
     }
 
@@ -63,4 +62,4 @@ export class JnoConceptAdd extends LitElement {
     }
 
 }
-customElements.define('jno-concept-add', JnoConceptAdd);
+customElements.define('jno-answer-insert', JnoAnswerInsert);

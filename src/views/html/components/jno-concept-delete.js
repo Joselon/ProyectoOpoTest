@@ -55,6 +55,7 @@ export class JnoConceptDelete extends LitElement {
     deleteConcept() {
         this.concepts.splice(this.concepts.indexOf(this.concept), 1);
         this.dispatchModelChangedEvent();
+        //TODO: Evento para borrar preguntas relacionadas y actualizar indice del resto
         this.elmodal.close();
     }
 

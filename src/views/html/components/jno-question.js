@@ -1,4 +1,7 @@
 import { LitElement, html, css } from 'lit';
+import { UserType } from '../../../models/UserTypes.js';
+import { listIcon } from '@dile/icons';
+import './jno-answers-list.js'
 
 export class JnoQuestion extends LitElement {
     static styles = [
@@ -25,6 +28,9 @@ export class JnoQuestion extends LitElement {
                 background-color: #def;
                 padding: 0 1rem;
             }
+            #answers {
+                display: none;
+            }
         `
     ];
 
@@ -39,12 +45,14 @@ export class JnoQuestion extends LitElement {
 
     constructor() {
         super();
-        this.actionOptions = ["Responder", "Mostrar Respuestas"];
+        this.actionOptions = [];
         this.selectedAction = "";
         this.userState = {};
         this.question = {};
     }
-
+    firstUpdated() {
+        this.answersDiv = this.shadowRoot.getElementById("answers");
+    }
 
     render() {
         return html`
@@ -54,15 +62,57 @@ export class JnoQuestion extends LitElement {
                 .options=${this.actionOptions} 
                 selectedOption=${this.selectedOption}
                 @jno-event-menu-changed=${this.changeSelectedOption}
-                ></jno-event-menu>
-            <ul>
-                <li><b>Número de Respuestas</b>: ${this.question.getAnswers().length}</li>
-                <li><b>Objetivo</b>: ${this.question.getTarget()}</li>
-                <li><b>Tipo de Pregunta</b>: ${this.question.getType()}</li>
-                <li><b>Indice del Concepto en la Categoría</b>: ${this.question.getConceptIndex() + 1}</li>
-            </ul>
+                >
+                ${this.infoTemplate}
+
+            </jno-event-menu>
         </section>
+        ${this.answerTemplate}
         `;
+    }
+    get infoTemplate() {
+        let infoHTML = html``;
+        if (this.userState.getCurrentUserType() === UserType.TEACHER) {
+            infoHTML = html`
+            <span slot="subtitle">
+                        <b>Respuestas</b>: ${this.question.getAnswers().length}
+                    </span>
+                    <span slot="subtitle">
+                        <b>Objetivo</b>: ${this.question.getTarget()}
+                        /<b> Tipo de Pregunta</b>: ${this.question.getType()}
+                        /<b> Concepto</b>: ${this.userState.getCurrentCategory().getConcept(this.question.getConceptIndex()).getKeyword()}
+                    </span>
+                    <dile-button-icon 
+                    slot="extraAction"
+                    .icon=${listIcon}
+                    @click=${this.toggleAnswersDiv}
+                    ?disabled=${this.question.getAnswers().length === 0}
+                    >
+                    Respuestas: ${this.question.getAnswers().length}
+                </dile-button-icon>
+                    `;
+        }
+        return infoHTML;
+    }
+    get answerTemplate() {
+        if (this.userState.getCurrentUserType() !== UserType.TEACHER) {
+            return html``;
+        }
+        return html`
+        <div id="answers">
+            <jno-answers-list
+             .elements=${this.question.getAnswers()}
+             .userState=${this.userState}
+             ></jno-answers-list>
+        </div>
+        `
+    }
+
+    toggleAnswersDiv() {
+        if (this.answersDiv.style.display === 'block')
+            this.answersDiv.style.display = 'none';
+        else
+            this.answersDiv.style.display = 'block';
     }
     changeSelectedOption(e) {
         this.selectedAction = e.detail.selectedOption;
@@ -70,13 +120,18 @@ export class JnoQuestion extends LitElement {
     }
 
     doAction(action) {
-        if (action === "x") {
-            //this.question...
-            this.dispatchModelChangedEvent();
+        if (action === "Responder") {
+            this.insert();
         }
         else {
             this.showFeedbackError("PENDIENTE HABILITAR FUNCIONALIDAD");
         }
+    }
+
+    insert() {
+        this.dispatchEvent(new CustomEvent('insert-answer', {
+            detail: this.question
+        }));
     }
 
     showFeedbackError(msg) {
