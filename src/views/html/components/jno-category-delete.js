@@ -1,7 +1,5 @@
 import { LitElement, html, css } from 'lit';
 import '@dile/dile-confirm/dile-confirm';
-import './jno-category-form.js';
-import { Category } from '../../../models/Category.js';
 
 export class JnoCategoryDelete extends LitElement {
     static styles = [
@@ -22,6 +20,13 @@ export class JnoCategoryDelete extends LitElement {
         };
     }
 
+    constructor(){
+        super();
+        this.category = {};
+        this.categories = {};
+        this.name = '';
+    }
+
     firstUpdated() {
         this.elmodal = this.shadowRoot.getElementById('elmodal');
     }
@@ -35,7 +40,7 @@ export class JnoCategoryDelete extends LitElement {
                 @dile-confirm-accepted=${this.deleteCategory}
             >
                 <p>
-                    ¿De verdad deseas borrar esta Categoría?
+                    ¿De verdad deseas borrar esta Categoría: <b>${this.name}</b>?
                 </p>
             </dile-confirm> 
         `;
@@ -44,6 +49,7 @@ export class JnoCategoryDelete extends LitElement {
     delete(category, categories) {
         this.category = category;
         this.categories = categories;
+        this.name = this.category.getName();
         this.elmodal.open();
     }
 

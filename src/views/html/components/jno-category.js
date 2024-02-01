@@ -47,7 +47,7 @@ export class JnoCategory extends LitElement {
 
     constructor() {
         super();
-        this.actionOptions = ["Seleccionar", "Añadir", "Editar", "Eliminar"];
+        this.actionOptions = [];
         this.selectedAction = "";
     }
 
@@ -66,7 +66,8 @@ export class JnoCategory extends LitElement {
                 >
                 <span slot="subtitle">
                     <b>Conceptos</b>: ${this.category.getConcepts().length}
-                 / <b>Preguntas</b>: ${this.category.getQuestions().length}</span>
+                 / <b> Preguntas</b>: ${this.category.getQuestions().length}</span>
+                 
                 <dile-button-icon 
                     slot="extraAction"
                     .icon=${listIcon}
@@ -76,15 +77,18 @@ export class JnoCategory extends LitElement {
                     Subcategorias: ${this.category.getSubcategories().length}
                 </dile-button-icon>
             </jno-event-menu>
-            <div id="subcategories">
-                ${this.subcategoriesTemplate}
-            </div>
+            ${this.subcategoriesTemplate}
         </section>
         `;
     }
     get subcategoriesTemplate() {
         return html`
-            <jno-categories-list .elements=${this.category.getSubcategories()} .userState=${this.userState}></jno-categories-list>
+        <div id="subcategories">
+            <jno-categories-list
+             .elements=${this.category.getSubcategories()}
+             .userState=${this.userState}
+             ></jno-categories-list>
+        </div>
         `
     }
     changeSelectedOption(e) {
@@ -102,15 +106,13 @@ export class JnoCategory extends LitElement {
                 break;
             case "Añadir":
                 this.insert();
-                this.showFeedbackSuccess(`Añadir Categoría a: ${this.category.getName()}`);
                 break;
             case "Editar":
                 this.edit();
-                this.showFeedbackSuccess(`Edicion de: ${this.category.getName()}`);
                 break;
             case "Eliminar":
                 this.delete();
-                this.showFeedbackSuccess(`Eliminar: ${this.category.getName()}`);
+                this.showFeedbackError(`Eliminar: ${this.category.getName()}`);
                 break;
             default:
                 this.showFeedbackError(`ERROR: Aún no disponible...`);

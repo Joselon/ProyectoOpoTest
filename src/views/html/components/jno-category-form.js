@@ -1,5 +1,4 @@
 import { LitElement, html, css } from 'lit';
-import '@dile/dile-input/dile-input';
 import { DileFormMixin } from '@dile/dile-form-mixin';
 
 export class JnoCategoryForm extends DileFormMixin(LitElement) {

@@ -1,7 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { UpdateAtModelChangedMixin } from '../mixins/UpdateAtModelChangedMixin.js';
 import { repeat } from 'lit/directives/repeat.js';
-import '@dile/dile-button-icon/dile-button-icon.js';
 import './jno-category.js';
 import './jno-category-add.js';
 import './jno-category-insert.js';
@@ -39,24 +38,37 @@ export class JnoCategoriesList extends UpdateAtModelChangedMixin(LitElement) {
 
     get template() {
         if (this.userState.getCurrentUserType() === UserType.TEACHER) {
-
+            let buttonHTML = html``;
+            if (this.elements.length !== 0) {
+                buttonHTML = html`
+                 <dile-button-icon 
+                   @click=${this.addCategory}
+                 >
+                 Añadir
+                 </dile-button-icon>`;
+            }
             return html`
-            <dile-button-icon 
-                    @click=${this.addCategory}
-                    >
-                    Añadir
-                </dile-button-icon>
-            ${repeat(this.elements, (element) => html`
+            ${buttonHTML}
+            ${repeat(this.elements, (element) => {
+                let actionOptions;
+                if (element.getSubcategories().length === 0) {
+                    actionOptions = ["Seleccionar", "Añadir", "Editar", "Eliminar"];
+                }
+                else {
+                    actionOptions = ["Seleccionar", "Editar", "Eliminar"];
+                }
+                return html`
                     <jno-category
                      .category="${element}"
                      .userState="${this.userState}"
-                     .actionOptions="${["Seleccionar", "Editar", "Eliminar"]}"
+                     .actionOptions="${actionOptions}"
                      @insert-category=${this.insertCategory}
                      @edit-category=${this.editCategory}
                      @delete-category=${this.deleteCategory}
                      >
                     </jno-category>
-            `)}
+            `;
+            })}
             <jno-category-add></jno-category-add>
             <jno-category-insert></jno-category-insert>
             <jno-category-edit></jno-category-edit>
@@ -83,7 +95,7 @@ export class JnoCategoriesList extends UpdateAtModelChangedMixin(LitElement) {
     deleteCategory(e) {
         this.shadowRoot.querySelector('jno-category-delete').delete(e.detail, this.elements);
     }
-    addCategory(e) {
+    addCategory() {
         this.shadowRoot.querySelector('jno-category-add').add(this.elements);
     }
 
