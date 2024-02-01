@@ -1,6 +1,9 @@
 import { LitElement, html, css } from 'lit';
+import { UpdateAtModelChangedMixin } from '../mixins/UpdateAtModelChangedMixin.js';
+import { listIcon } from '@dile/icons';
+import './jno-contents-list';
 
-export class JnoConcept extends LitElement {
+export class JnoConcept extends UpdateAtModelChangedMixin(LitElement) {
     static styles = [
         css`
             :host {
@@ -25,6 +28,12 @@ export class JnoConcept extends LitElement {
                 background-color: #def;
                 padding: 0 1rem;
             }
+            #definitions {
+                display: none;
+            }
+            #relations {
+                display: none;
+            }
         `
     ];
 
@@ -39,45 +48,110 @@ export class JnoConcept extends LitElement {
 
     constructor() {
         super();
-        this.actionOptions = ["Seleccionar", "Editar*"];
+        this.actionOptions = ["Seleccionar", "Editar","Eliminar"];
         this.selectedAction = "";
         this.userState = {};
         this.concept = {};
     }
 
-
+    firstUpdated() {
+        this.definitionsDiv = this.shadowRoot.getElementById("definitions");
+        this.relationsDiv = this.shadowRoot.getElementById("relations");
+    }
     render() {
         return html`
         <section>
             <jno-event-menu
-                title='${this.concept.getKeyword()}'
+                title=${this.concept.getKeyword()}
                 .options=${this.actionOptions} 
                 selectedOption=${this.selectedOption}
                 @jno-event-menu-changed=${this.changeSelectedOption}
-                ></jno-event-menu>
-            <ul>
-                <li><b>Número de Definiciones</b>: ${this.concept.getDefinitions().length}</a></li>
-                <li><b>Número de Relaciones</b>: ${this.concept.getRelations().length}</a></li>
-            </ul>
+                >
+                <span slot="subtitle">
+                    <b>Definiciones</b>: ${this.concept.getDefinitions().length}
+                 / <b> Relaciones</b>: ${this.concept.getRelations().length}</span>
+                 <dile-button-icon 
+                    slot="extraAction"
+                    .icon=${listIcon}
+                    @click=${() => this.toggleDiv(this.definitionsDiv)}
+                    ?disabled=${this.concept.getDefinitions().length === 0}
+                    >
+                    Definiciones: ${this.concept.getDefinitions().length}
+                </dile-button-icon>
+                <dile-button-icon 
+                    slot="extraAction"
+                    .icon=${listIcon}
+                    @click=${() => this.toggleDiv(this.relationsDiv)}
+                    ?disabled=${this.concept.getRelations().length === 0}
+                    >
+                    Relaciones: ${this.concept.getRelations().length}
+                </dile-button-icon>
+            </jno-event-menu>
+            <div id="definitions">
+                ${this.definitionsTemplate}
+            </div>
+            <div id="relations">
+                ${this.relationsTemplate}
+            </div>
         </section>
         `;
     }
 
+    get definitionsTemplate() {
+        return html`
+            <jno-contents-list 
+             .elements=${this.concept.getDefinitions()}
+             .userState=${this.userState}
+             ></jno-contents-list>
+        `
+    }
+
+    get relationsTemplate() {
+        return html`
+        <jno-contents-list 
+             .elements=${this.concept.getRelations()}
+             .userState=${this.userState}
+             ></jno-contents-list>
+        `
+    }
+    toggleDiv(div) {
+        if (div.style.display === 'block')
+            div.style.display = 'none';
+        else
+            div.style.display = 'block';
+    }
     changeSelectedOption(e) {
         this.selectedAction = e.detail.selectedOption;
         this.doAction(this.selectedAction);
     }
 
     doAction(action) {
-        if (action === "Seleccionar") {
-            this.userState.setCurrentConcept(this.concept);
-            this.dispatchModelChangedEvent();
-            this.showFeedbackSuccess(`CONCEPTO SELECCIONADO: ${this.concept.getKeyword()} `);
+        switch (action) {
+            case "Seleccionar":
+                this.userState.setCurrentConcept(this.concept);
+                this.dispatchModelChangedEvent();
+                this.showFeedbackSuccess(`CONCEPTO SELECCIONADO: ${this.concept.getKeyword()} `);
+                break;
+            case "Editar":
+                this.edit();
+                break;
+            case "Eliminar":
+                this.delete();
+                this.showFeedbackError(`Eliminar: ${this.concept.getKeyword()}`);
+                break;
+            default:
+                this.showFeedbackError(`ERROR: Aún no disponible...`);
         }
-        else {
-            this.showFeedbackError("ERROR: Aún no disponible...");
-            // console.log("mostrar definiciones" + this.concept.getDefinitions());
-        }
+    }
+    edit() {
+        this.dispatchEvent(new CustomEvent('edit-concept', {
+            detail: this.concept
+        }));
+    }
+    delete() {
+        this.dispatchEvent(new CustomEvent('delete-concept', {
+            detail: this.concept
+        }));
     }
     showFeedbackError(msg) {
         this.dispatchEvent(new CustomEvent('error-feedback', {

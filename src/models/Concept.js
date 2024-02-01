@@ -17,7 +17,9 @@ class Concept {
     getKeyword() {
         return this.#keyword;
     }
-
+    setKeyword(keyword) {
+        this.#keyword = keyword;
+    }
     getFakeKeywords() {
         return this.#fakeKeywords;
     }
