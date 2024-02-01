@@ -99,18 +99,22 @@ export class JnoCategory extends LitElement {
                 this.userState.setCurrentConcept(new Concept("---"));
                 this.dispatchModelChangedEvent();
                 this.showFeedbackSuccess(`CATEGORÍA SELECCIONADA: ${this.category.getName()}`);
-              break;
+                break;
             case "Añadir":
                 this.insert();
                 this.showFeedbackSuccess(`Añadir Categoría a: ${this.category.getName()}`);
-              break;
+                break;
             case "Editar":
                 this.edit();
                 this.showFeedbackSuccess(`Edicion de: ${this.category.getName()}`);
-              break;
+                break;
+            case "Eliminar":
+                this.delete();
+                this.showFeedbackSuccess(`Eliminar: ${this.category.getName()}`);
+                break;
             default:
-              this.showFeedbackError(`ERROR: Aún no disponible...`);
-          }
+                this.showFeedbackError(`ERROR: Aún no disponible...`);
+        }
     }
 
     insert() {
@@ -121,6 +125,12 @@ export class JnoCategory extends LitElement {
 
     edit() {
         this.dispatchEvent(new CustomEvent('edit-category', {
+            detail: this.category
+        }));
+    }
+
+    delete() {
+        this.dispatchEvent(new CustomEvent('delete-category', {
             detail: this.category
         }));
     }

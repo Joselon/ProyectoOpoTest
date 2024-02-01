@@ -91,11 +91,9 @@ class TeacherMainMenu extends MainMenu {
         }
         else if (elementName === 'jno-questions-list') {
             elementList.elements = this._categories;
-            elementList.userState = this._userState;
         }
         else if (elementName === 'jno-concepts-list') {
             elementList.elements = this._categories;
-            elementList.userState = this._userState;
         }
         else {
             //Error no existe tipo de elemento creado
