@@ -40,6 +40,7 @@ export class JnoEventMenu extends LitElement {
 
             dile-button-icon {
                 --dile-button-border-radius: 15px;
+                margin-left: 1px;
             }
         `
     ];
