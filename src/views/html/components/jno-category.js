@@ -93,15 +93,36 @@ export class JnoCategory extends LitElement {
     }
 
     doAction(action) {
-        if (action === "Seleccionar") {
-            this.userState.setCurrentCategory(this.category);
-            this.userState.setCurrentConcept(new Concept("---"));
-            this.dispatchModelChangedEvent();
-            this.showFeedbackSuccess(`CATEGORÍA SELECCIONADA: ${this.category.getName()}`);
-        }
-        else {
-            this.showFeedbackError(`ERROR: Aún no disponible...`);
-        }
+        switch (action) {
+            case "Seleccionar":
+                this.userState.setCurrentCategory(this.category);
+                this.userState.setCurrentConcept(new Concept("---"));
+                this.dispatchModelChangedEvent();
+                this.showFeedbackSuccess(`CATEGORÍA SELECCIONADA: ${this.category.getName()}`);
+              break;
+            case "Añadir":
+                this.insert();
+                this.showFeedbackSuccess(`Añadir Categoría a: ${this.category.getName()}`);
+              break;
+            case "Editar":
+                this.edit();
+                this.showFeedbackSuccess(`Edicion de: ${this.category.getName()}`);
+              break;
+            default:
+              this.showFeedbackError(`ERROR: Aún no disponible...`);
+          }
+    }
+
+    insert() {
+        this.dispatchEvent(new CustomEvent('insert-category', {
+            detail: this.category
+        }));
+    }
+
+    edit() {
+        this.dispatchEvent(new CustomEvent('edit-category', {
+            detail: this.category
+        }));
     }
 
     toggleSubcategoriesDiv() {

@@ -96,6 +96,10 @@ class Category {
         this.#subcategories.push(category);
     }
 
+    setName(name) {
+        this.#name = name;
+    }
+
     loadCategoryFromDataObject(categoryDataObject) {
         this.#loadSubcategoriesFromDataObject(categoryDataObject);
         this.#loadConceptsFromDataObject(categoryDataObject);

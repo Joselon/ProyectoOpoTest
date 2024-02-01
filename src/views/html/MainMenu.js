@@ -1,5 +1,6 @@
 import '@dile/dile-pages/dile-pages.js';
 import '@dile/dile-tabs/dile-tabs.js';
+import '@dile/dile-modal/dile-modal';
 import './components/jno-categories-list.js';
 import './components/jno-questions-list.js';
 import './components/jno-concepts-list.js';

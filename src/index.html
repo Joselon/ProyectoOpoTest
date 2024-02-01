@@ -13,13 +13,16 @@
     <header>
         <dile-nav>
             <span slot="title">ELABORA TEST</span>
-            <span slot="actions"><button onclick="location.reload()">RESET</button></span>
+            <span slot="actions">
+                <button onclick="location.reload()">RESTART</button>
+                <button onclick="window.localStorage.clear();location.reload()">RESET</button>
+            </span>
         </dile-nav>
         <div id="state"></div>
     </header>
     <section id="app"></section>
     <footer>
-<jno-feedback></jno-feedback>
+        <jno-feedback></jno-feedback>
     </footer>
 
 </body>
