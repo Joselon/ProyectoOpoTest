@@ -34,7 +34,19 @@ class Answer {
         return this._createdDate;
     }
 
+    getCreatedDateString() {
+        if (this._createdDate !== null)
+            return new Date(this._createdDate).toUTCString();
+        return this._createdDate;
+    }
+
     getEvaluatedDate() {
+        return this._evaluatedDate;
+    }
+
+    getEvaluatedDateString() {
+        if (this._evaluatedDate !== null)
+            return new Date(this._evaluatedDate).toUTCString();
         return this._evaluatedDate;
     }
 
@@ -42,8 +54,8 @@ class Answer {
         return this._evaluatedDate !== null;
     }
 
-    formatAnswerObject(){
-        return 1/0;
+    formatAnswerObject() {
+        return 1 / 0;
     }
 
 }
@@ -64,7 +76,7 @@ class OpenAnswer extends Answer {
     getEvaluatedBy() {
         return this.#evaluatedBy;
     }
-    formatAnswerObject(){
+    formatAnswerObject() {
         const answerObject = {
             username: this.getStudentName(),
             content: this.getContent(),

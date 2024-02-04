@@ -43,7 +43,15 @@ export class JnoAnswer extends LitElement {
                 ${this.answer.getContent()}
             </main>
             <aside>
-                <b>${this.answer.isEvaluated()?(this.answer.getEvaluation()?'OK':'MAL'):'Pendiente Evaluar'}</b>
+                ${this.answer.isEvaluated()?
+                    html`${(this.answer.getEvaluation()?
+                        html`<b>OK</b>`
+                        :html`<b>MAL</b>`
+                    )}<small> (Corregido en: ${this.answer.getEvaluatedDateString()})</small>`
+                    :html`<b>PENDIENTE EVALUAR</b> <small>(Respondido en: ${this.answer.getCreatedDateString()})</small>`}
+                
+                   <small> / Estudiante: ${this.answer.getStudentName()} </small>
+                
             </aside>
         </section>
         `;
