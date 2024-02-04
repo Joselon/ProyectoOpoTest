@@ -20,7 +20,8 @@ export class JnoCategoriesList extends UpdateAtModelChangedMixin(LitElement) {
     static get properties() {
         return {
             elements: { type: Array },
-            userState: { type: Object }
+            userState: { type: Object },
+            hasAncestor: { type: Boolean}
         };
     }
 
@@ -28,6 +29,7 @@ export class JnoCategoriesList extends UpdateAtModelChangedMixin(LitElement) {
         super();
         this.elements = [];
         this.userState = {};
+        this.hasAncestor = false;
     }
 
     render() {
@@ -39,7 +41,7 @@ export class JnoCategoriesList extends UpdateAtModelChangedMixin(LitElement) {
     get template() {
         if (this.userState.getCurrentUserType() === UserType.TEACHER) {
             let buttonHTML = html``;
-            if (this.elements.length !== 0) {
+            if (this.elements.length !== 0 || !this.hasAncestor) {
                 buttonHTML = html`
                  <dile-button-icon 
                    @click=${this.addCategory}

@@ -87,6 +87,7 @@ export class JnoCategory extends LitElement {
             <jno-categories-list
              .elements=${this.category.getSubcategories()}
              .userState=${this.userState}
+             hasAncestor
              ></jno-categories-list>
         </div>
         `
