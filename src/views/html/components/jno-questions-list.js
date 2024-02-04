@@ -60,7 +60,7 @@ export class JnoQuestionsList extends UpdateAtModelChangedMixin(LitElement) {
         `;
     }
     insertAnswer(e) {
-        this.shadowRoot.querySelector('jno-answer-insert').insert(e.detail);
+        this.shadowRoot.querySelector('jno-answer-insert').insert(e.detail, this.userState.getCurrentUserName());
     }
 }
 customElements.define('jno-questions-list', JnoQuestionsList);
