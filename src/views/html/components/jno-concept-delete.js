@@ -20,7 +20,7 @@ export class JnoConceptDelete extends LitElement {
         };
     }
 
-    constructor(){
+    constructor() {
         super();
         this.concept = {};
         this.keyword = '';
@@ -63,7 +63,10 @@ export class JnoConceptDelete extends LitElement {
         this.dispatchEvent(new CustomEvent('model-changed', {
             bubbles: true,
             composed: true,
-            detail: 'model-changed'
+            detail: {
+                msg: 'model-changed-concept-delete',
+                concept: this.concept
+            }
         }));
     }
 

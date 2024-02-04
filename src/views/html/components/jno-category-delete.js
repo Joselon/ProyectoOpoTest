@@ -63,7 +63,9 @@ export class JnoCategoryDelete extends LitElement {
         this.dispatchEvent(new CustomEvent('model-changed', {
             bubbles: true,
             composed: true,
-            detail: 'model-changed'
+            detail: {msg:'model-changed-category-delete',
+                    category:this.category
+                    }
         }));
     }
 

@@ -60,6 +60,16 @@ export class JnoUserState extends UpdateAtModelChangedMixin(LitElement) {
     }
 
     stateUpdate(e) {
+        if(e.detail.msg==='model-changed-category-delete'){
+            if(this.userState.getCurrentCategory()===e.detail.category){
+                this.userState.resetSelection();
+            }
+        }
+        else if(e.detail.msg==='model-changed-concept-delete'){
+            if(this.userState.getCurrentConcept()===e.detail.concept){
+                this.userState.resetConceptSelected();
+            }
+        }
         this.requestUpdate();
     }
 

@@ -85,6 +85,15 @@ class UserState {
         return this.#questionBuilder;
     }
 
+    resetSelection() {
+        this.#currentCategory = new Category("---");
+        this.#currentConcept = new Concept("---"); 
+    }
+
+    resetConceptSelected() {
+        this.#currentConcept = new Concept("---");
+    }
+
 }
 
 export { UserState }

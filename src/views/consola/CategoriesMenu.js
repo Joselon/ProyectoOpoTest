@@ -51,7 +51,7 @@ class SelectCategoryOption extends Option {
     interact() {
         super.interact();
         this.#userState.setCurrentCategory(this.#category);
-        this.#userState.setCurrentConcept(new Concept("---"));
+        this.#userState.resetConceptSelected();
     }
 }
 
@@ -71,7 +71,7 @@ class SelectCategoryAndShowConceptsOption extends OpenMenuOption {
 
     interact() {
         this.#userState.setCurrentCategory(this.#category);
-        this.#userState.setCurrentConcept(new Concept("---"));
+        this.#userState.resetConceptSelected();
         super.interact();
     }
 }

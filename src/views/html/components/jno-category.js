@@ -1,5 +1,4 @@
 import { LitElement, html, css } from 'lit';
-import { Concept } from '../../../models/Concept.js'
 import '../../../utils/view/html/components/jno-event-menu.js';
 import './jno-categories-list.js'
 import { listIcon } from '@dile/icons';
@@ -101,7 +100,7 @@ export class JnoCategory extends LitElement {
         switch (action) {
             case "Seleccionar":
                 this.userState.setCurrentCategory(this.category);
-                this.userState.setCurrentConcept(new Concept("---"));
+                this.userState.resetConceptSelected();
                 this.dispatchModelChangedEvent();
                 this.showFeedbackSuccess(`CATEGORÍA SELECCIONADA: ${this.category.getName()}`);
                 break;
