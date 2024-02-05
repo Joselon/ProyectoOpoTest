@@ -20,7 +20,7 @@ export class JnoCategoryDelete extends LitElement {
         };
     }
 
-    constructor(){
+    constructor() {
         super();
         this.category = {};
         this.categories = {};
@@ -63,11 +63,11 @@ export class JnoCategoryDelete extends LitElement {
         this.dispatchEvent(new CustomEvent('model-changed', {
             bubbles: true,
             composed: true,
-            detail: {msg:'model-changed-category-delete',
-                    category:this.category
-                    }
+            detail: {
+                msg: 'model-changed-category-delete',
+                category: this.category
+            }
         }));
     }
-
 }
 customElements.define('jno-category-delete', JnoCategoryDelete);

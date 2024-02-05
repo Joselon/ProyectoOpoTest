@@ -102,7 +102,7 @@ export class JnoCategory extends LitElement {
                 this.userState.setCurrentCategory(this.category);
                 this.userState.resetConceptSelected();
                 this.dispatchModelChangedEvent();
-                this.showFeedbackSuccess(`CATEGORÍA SELECCIONADA: ${this.category.getName()}`);
+                this.showFeedbackSuccess(`Cargados CONCEPTOS y PREGUNTAS de la CATEGORÍA: ${this.category.getName()}`);
                 break;
             case "Añadir":
                 this.insert();
@@ -112,7 +112,6 @@ export class JnoCategory extends LitElement {
                 break;
             case "Eliminar":
                 this.delete();
-                this.showFeedbackError(`Eliminar: ${this.category.getName()}`);
                 break;
             default:
                 this.showFeedbackError(`ERROR: Aún no disponible...`);

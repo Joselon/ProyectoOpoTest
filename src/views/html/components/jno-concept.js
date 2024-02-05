@@ -48,7 +48,7 @@ export class JnoConcept extends UpdateAtModelChangedMixin(LitElement) {
 
     constructor() {
         super();
-        this.actionOptions = ["Seleccionar", "Editar","Eliminar"];
+        this.actionOptions = ["Seleccionar", "Editar", "Eliminar"];
         this.selectedAction = "";
         this.userState = {};
         this.concept = {};
@@ -130,14 +130,13 @@ export class JnoConcept extends UpdateAtModelChangedMixin(LitElement) {
             case "Seleccionar":
                 this.userState.setCurrentConcept(this.concept);
                 this.dispatchModelChangedEvent();
-                this.showFeedbackSuccess(`CONCEPTO SELECCIONADO: ${this.concept.getKeyword()} `);
+                this.showFeedbackSuccess(`Cargadas PREGUNTAS del CONCEPTO: ${this.concept.getKeyword()} `);
                 break;
             case "Editar":
                 this.edit();
                 break;
             case "Eliminar":
                 this.delete();
-                this.showFeedbackError(`Eliminar: ${this.concept.getKeyword()}`);
                 break;
             default:
                 this.showFeedbackError(`ERROR: Aún no disponible...`);

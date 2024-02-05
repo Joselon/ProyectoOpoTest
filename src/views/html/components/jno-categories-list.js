@@ -21,7 +21,7 @@ export class JnoCategoriesList extends UpdateAtModelChangedMixin(LitElement) {
         return {
             elements: { type: Array },
             userState: { type: Object },
-            hasAncestor: { type: Boolean}
+            hasAncestor: { type: Boolean }
         };
     }
 
@@ -82,7 +82,7 @@ export class JnoCategoriesList extends UpdateAtModelChangedMixin(LitElement) {
             <jno-category
                      .category="${element}"
                      .userState="${this.userState}"
-                     .actionOptions="${["Seleccionar"]}"
+                     .actionOptions="${['Seleccionar']}"
                      >
                     </jno-category>
             `)}
