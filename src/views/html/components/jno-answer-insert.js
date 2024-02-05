@@ -46,7 +46,6 @@ export class JnoAnswerInsert extends LitElement {
     }
 
     insertAnswer() {
-        console.log('Respuesta: ',this.elinput.value);
         this.question.addAnswer(this.username, this.elinput.value);
         this.dispatchModelChangedEvent();
         this.elinput.value='';

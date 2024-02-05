@@ -15,7 +15,7 @@ class AddQuestionOption extends OpenMenuOption {
         let target = this.#userState.getSelectedStatementTarget();
         let statement = console.readString(`
         Escribe el enunciado de la pregunta de tipo ${target}:`);
-        this.#userState.getCurrentCategory().addQuestion(this.#userState.getQuestionBuilder().create(type, this.#userState.getCurrentConceptIndex(), statement));
+        this.#userState.getCurrentCategory().addQuestion(this.#userState.getQuestionBuilder().create(type, this.#userState.getCurrentConceptKey(), statement));
     }
 }
 
@@ -114,7 +114,7 @@ class QuestionMenu extends DynamicQuitMenu {
         this.#questionsInfoTitle = "\nPreguntas Creadas: \n";
         this.#questionsInfoTitle += "------------------ \n";
         for (let question of this.#category.getQuestions()) {
-            if (question.getConceptIndex() === this.#userState.getCurrentConceptIndex()) {
+            if (question.getConceptKey() === this.#userState.getCurrentConceptKey()) {
                 this.#questionsInfoTitle += String.fromCharCode(charIndex) + ")";
                 this.#questionsInfoTitle += "Concepto Relacionado: '" + this.#concept.getKeyword() + "' - ";
                 this.#questionsInfoTitle += "Enunciado: '¿" + question.getStatement() + "?'\n";

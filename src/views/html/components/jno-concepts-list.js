@@ -24,7 +24,7 @@ export class JnoConceptsList extends UpdateAtModelChangedMixin(LitElement) {
 
     constructor() {
         super();
-        this.elements = [];
+        this.elements = new Map();
         this.userState = {};
     }
     render() {
@@ -37,7 +37,8 @@ export class JnoConceptsList extends UpdateAtModelChangedMixin(LitElement) {
         if (this.userState.getCurrentCategory().getName() === '---') {
             return html`<p>Debe seleccionar una categoría</p>`;
         }
-        this.elements = this.userState.getCurrentCategory().getConcepts();
+        this.elements = this.userState.getCurrentCategory().getConceptsArray();
+        console.log(this.elements);
         return html`
             <p>Contenidos en la categoría <b>${this.userState.getCurrentCategory().getName()}</b> (sin subcategorías):</p>
             <dile-button-icon 
@@ -63,7 +64,7 @@ export class JnoConceptsList extends UpdateAtModelChangedMixin(LitElement) {
         this.shadowRoot.querySelector('jno-concept-edit').edit(e.detail);
     }
     deleteConcept(e) {
-        this.shadowRoot.querySelector('jno-concept-delete').delete(e.detail,this.elements);
+        this.shadowRoot.querySelector('jno-concept-delete').delete(e.detail,this.userState.getCurrentCategory());
     }
     addConcept() {
         this.shadowRoot.querySelector('jno-concept-add').add(this.userState.getCurrentCategory());

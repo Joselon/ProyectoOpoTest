@@ -1,13 +1,13 @@
 import { OpenAnswer, SelectedOptionAnswer } from "./Answer.js";
 
 class Question {
-    _conceptIndex;
+    _conceptKey;
     _statementImplementor;
     _statement;
     _answers = [];
 
-    constructor(conceptIndex, statement, statementImplementor) {
-        this._conceptIndex = conceptIndex;
+    constructor(conceptKey, statement, statementImplementor) {
+        this._conceptKey = conceptKey;
         this._statement = statement;
         this._statementImplementor = statementImplementor;
     }
@@ -20,8 +20,8 @@ class Question {
         return this._statement;
     }
 
-    getConceptIndex() {
-        return this._conceptIndex;
+    getConceptKey() {
+        return this._conceptKey;
     }
 
     addToConcept(content, isFake) {
@@ -53,7 +53,7 @@ class Question {
 
     formatQuestionObject() {
         const questionObject = {
-            conceptIndex: this.getConceptIndex(),
+            conceptKey: this.getConceptKey(),
             statement: this.getStatement(),
             target: this.getTarget(),
             type: this.getType(),
@@ -73,8 +73,8 @@ class Question {
 
 class OpenQuestion extends Question {
 
-    constructor(conceptIndex, statement, statementType) {
-        super(conceptIndex, statement, statementType);
+    constructor(conceptKey, statement, statementType) {
+        super(conceptKey, statement, statementType);
     }
 
     getType() {
@@ -99,8 +99,8 @@ class OpenQuestion extends Question {
 class MultipleChoiceQuestion extends Question {
     #options = [];
 
-    constructor(conceptIndex, statement, statementType) {
-        super(conceptIndex, statement, statementType);
+    constructor(conceptKey, statement, statementType) {
+        super(conceptKey, statement, statementType);
         //this.#buildOptions();
     }
 

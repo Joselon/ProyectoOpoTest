@@ -18,14 +18,14 @@
                             ],
                             "questions": [
                                 {
-                                    "conceptIndex": 0,
+                                    "conceptKey": "Software",
                                     "statement": "Qué es el software",
                                     "target": "Definition",
                                     "type": "Open",
                                     "answers": []
                                 },
                                 {
-                                    "conceptIndex": 0,
+                                    "conceptKey": "Software",
                                     "statement": "Que tipos de Software podemos decir que hay",
                                     "target": "Classification",
                                     "type": "Open",
@@ -57,7 +57,7 @@
                                     ],
                                     "questions": [
                                         {
-                                            "conceptIndex": 0,
+                                            "conceptKey": "Patron de diseño",
                                             "statement": "Que es un Patron de diseño",
                                             "target": "Definition",
                                             "type": "Open",
@@ -106,7 +106,7 @@
                     ],
                     "questions": [
                         {
-                            "conceptIndex": 0,
+                            "conceptKey": "Lit",
                             "statement": "Que es Lit",
                             "target": "Definition",
                             "type": "Open",
@@ -169,7 +169,7 @@
             ],
             "questions": [
                 {
-                    "conceptIndex": 0,
+                    "conceptKey": "GIT",
                     "statement": "Qué es el GIT",
                     "target": "Definition",
                     "type": "Open",
@@ -193,7 +193,7 @@
                     ]
                 },
                 {
-                    "conceptIndex": 0,
+                    "conceptKey": "GIT",
                     "statement": "Que tipos de GIT hay",
                     "target": "Classification",
                     "type": "Open",
@@ -209,7 +209,7 @@
                     ]
                 },
                 {
-                    "conceptIndex": 0,
+                    "conceptKey": "GIT",
                     "statement": "De que se compone GIT",
                     "target": "Composition",
                     "type": "Open",
@@ -225,7 +225,7 @@
                     ]
                 },
                 {
-                    "conceptIndex": 1,
+                    "conceptKey": "Bases de Datos",
                     "statement": "Que es una base de datos",
                     "target": "Definition",
                     "type": "Open",
@@ -241,7 +241,7 @@
                     ]
                 },
                 {
-                    "conceptIndex": 2,
+                    "conceptKey": "Lenguaje de Programacion",
                     "statement": "Que es un lenguaje de programacion",
                     "target": "Definition",
                     "type": "Open",
@@ -265,14 +265,14 @@
                     ]
                 },
                 {
-                    "conceptIndex": 2,
+                    "conceptKey": "Lenguaje de Programacion",
                     "statement": "Que tipos de Lenguaje de Programacion hay",
                     "target": "Classification",
                     "type": "Open",
                     "answers": []
                 },
                 {
-                    "conceptIndex": 0,
+                    "conceptKey": "GIT",
                     "statement": "Que definicion es mejor para GIT",
                     "target": "Definition",
                     "type": "MultipleChoice",
@@ -292,7 +292,7 @@
             ],
             "questions": [
                 {
-                    "conceptIndex": 0,
+                    "conceptKey": "Derechos de los Ciudadanos",
                     "statement": "Que son los Derechos de los Ciudadanos",
                     "target": "Definition",
                     "type": "Open",
@@ -315,14 +315,14 @@
                     ],
                     "questions": [
                         {
-                            "conceptIndex": 0,
+                            "conceptKey": "Prohibicion",
                             "statement": "¿Que indican las señales de prohibicion?",
                             "target": "Definition",
                             "type": "Open",
                             "answers": []
                         },
                         {
-                            "conceptIndex": 0,
+                            "conceptKey": "Prohibicion",
                             "statement": "¿Que tipos de señales de prohibicion hay?",
                             "target": "Classification",
                             "type": "Open",

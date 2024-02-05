@@ -3,7 +3,7 @@ import { QuestionBuilder } from "./QuestionBuilder.js";
 
 class Category {
     #name;
-    #concepts = [];
+    #concepts = new Map();
     #subcategories = [];
     #questions = [];
 
@@ -15,12 +15,19 @@ class Category {
         return this.#name;
     }
 
-    getConcept(index) {
-        return this.#concepts[index];
+    getConcept(key) {
+        return this.#concepts.get(key);
     }
 
     getConcepts() {
         return this.#concepts;
+    }
+    getConceptsArray() {
+        let concepts = [];
+        for (let concept of this.#concepts.values()){
+            concepts.push(concept);
+        }
+        return concepts;
     }
 
     getSubcategories() {
@@ -35,7 +42,7 @@ class Category {
         let subconcepts = 0;
         for (let category of this.#subcategories)
             subconcepts += category.getTotalNumberOfConcepts();
-        return this.#concepts.length + subconcepts;
+        return this.#concepts.size + subconcepts;
     }
 
     getTotalNumberOfSubcategories() {
@@ -53,10 +60,10 @@ class Category {
         return nquestions;
     }
 
-    getConceptQuestions(conceptIndex) {
+    getConceptQuestions(conceptKey) {
         let conceptQuestions = [];
         for (let question of this.#questions) {
-            if (question.getConceptIndex() === conceptIndex)
+            if (question.getConceptKey() === conceptKey)
                 conceptQuestions.push(question);
         }
         return conceptQuestions;
@@ -75,7 +82,7 @@ class Category {
 
     getAllConcepts() {
         let allConcepts = [];
-        for (let concept of this.#concepts)
+        for (let concept of this.#concepts.values())
             allConcepts.push(concept);
         for (let category of this.#subcategories) {
             for (let concept of category.getAllConcepts())
@@ -89,7 +96,7 @@ class Category {
     }
 
     addConcept(concept) {
-        this.#concepts.push(concept);
+        this.#concepts.set(concept.getKeyword(),concept);
     }
 
     addSubcategory(category) {
@@ -98,6 +105,15 @@ class Category {
 
     setName(name) {
         this.#name = name;
+    }
+
+    deleteConceptKeyQuestions(conceptKey){
+        let questions = [...this.#questions];
+        for (let question of questions){
+            if (question.getConceptKey() === conceptKey){
+                this.#questions.splice(this.#questions.indexOf(question), 1);
+            }
+        }
     }
 
     loadCategoryFromDataObject(categoryDataObject) {
@@ -114,19 +130,17 @@ class Category {
         }
     }
     #loadConceptsFromDataObject(categoryDataObject) {
-        let indexCon = 0;
         for (const conceptDataObject of categoryDataObject.concepts) {
             this.addConcept(new Concept(conceptDataObject.keyword));
-            this.#concepts[indexCon].loadConceptFromDataObject(conceptDataObject);
-            indexCon++;
+            this.getConcept(conceptDataObject.keyword).loadConceptFromDataObject(conceptDataObject);
         }
     }
     #loadQuestionsFromDataObject(categoryDataObject) {
         let indexQuest = 0;
         for (let questionObject of categoryDataObject.questions) {
-            let questionBuilder = new QuestionBuilder(this.#concepts[questionObject.conceptIndex]);
+            let questionBuilder = new QuestionBuilder(this.getConcept(questionObject.conceptKey));
             questionBuilder.setStatementImplementor(questionObject.target);
-            this.addQuestion(questionBuilder.create(questionObject.type, questionObject.conceptIndex, questionObject.statement));
+            this.addQuestion(questionBuilder.create(questionObject.type, questionObject.conceptKey, questionObject.statement));
             this.#questions[indexQuest].loadAnswersFromDataObject(questionObject);
             indexQuest++;
         }
@@ -154,7 +168,7 @@ class Category {
     }
     #formatConceptsObjects() {
         const conceptsObjects = [];
-        for (let concept of this.#concepts) {
+        for (let concept of this.#concepts.values()) {
             conceptsObjects.push(concept.formatConceptObject());
         }
         return conceptsObjects;

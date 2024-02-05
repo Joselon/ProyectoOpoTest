@@ -35,13 +35,13 @@ class QuestionBuilder {
         }
     }
 
-    create(type, conceptIndex, statement) {
+    create(type, conceptKey, statement) {
         let question;
         if (type === "Open") {
-            question = new OpenQuestion(conceptIndex, statement, this.#statementImplementor);
+            question = new OpenQuestion(conceptKey, statement, this.#statementImplementor);
         }
         else if (type === "MultipleChoice") {
-            question = new MultipleChoiceQuestion(conceptIndex, statement, this.#statementImplementor);
+            question = new MultipleChoiceQuestion(conceptKey, statement, this.#statementImplementor);
         }
         return question;
     }

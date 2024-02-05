@@ -74,13 +74,10 @@ export class JnoQuestion extends LitElement {
         let infoHTML = html``;
         if (this.userState.getCurrentUserType() === UserType.TEACHER) {
             infoHTML = html`
-            <span slot="subtitle">
-                        <b>Respuestas</b>: ${this.question.getAnswers().length}
-                    </span>
                     <span slot="subtitle">
                         <b>Objetivo</b>: ${this.question.getTarget()}
                         /<b> Tipo de Pregunta</b>: ${this.question.getType()}
-                        /<b> Concepto</b>: ${this.userState.getCurrentCategory().getConcept(this.question.getConceptIndex()).getKeyword()}
+                        /<b> Concepto</b>: ${this.userState.getCurrentCategory().getConcept(this.question.getConceptKey()).getKeyword()}
                     </span>
                     <dile-button-icon 
                     slot="extraAction"

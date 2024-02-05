@@ -64,7 +64,7 @@ export class JnoCategory extends LitElement {
                 @jno-event-menu-changed=${this.changeSelectedOption}
                 >
                 <span slot="subtitle">
-                    <b>Conceptos</b>: ${this.category.getConcepts().length}
+                    <b>Conceptos</b>: ${this.category.getConceptsArray().length}
                  / <b> Preguntas</b>: ${this.category.getQuestions().length}</span>
                  
                 <dile-button-icon 

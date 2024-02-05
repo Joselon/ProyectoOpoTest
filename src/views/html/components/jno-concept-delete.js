@@ -45,17 +45,18 @@ export class JnoConceptDelete extends LitElement {
         `;
     }
 
-    delete(concept, concepts) {
+    delete(concept, category) {
         this.concept = concept;
-        this.concepts = concepts;
+        this.category = category;
+        this.concepts = this.category.getConcepts();
         this.keyword = concept.getKeyword();
         this.elmodal.open();
     }
 
     deleteConcept() {
-        this.concepts.splice(this.concepts.indexOf(this.concept), 1);
+        this.category.deleteConceptKeyQuestions(this.keyword);
+        this.concepts.delete(this.keyword);
         this.dispatchModelChangedEvent();
-        //TODO: Evento para borrar preguntas relacionadas y actualizar indice del resto
         this.elmodal.close();
     }
 

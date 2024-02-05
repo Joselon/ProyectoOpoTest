@@ -92,7 +92,7 @@ class ConceptsMenu extends DynamicMenu {
     }
 
     addOptions() {
-        let concepts = this.#userState.getCurrentCategory().getConcepts();
+        let concepts = this.#userState.getCurrentCategory().getConceptsArray();
         for (let i = 0; i < concepts.length; i++) {
             this.add(new SelectConceptOption(concepts[i], this.#userState));
             if (concepts[i].getNumberOfDefinitions() > 0 || concepts[i].getNumberOfRelations() > 0) {

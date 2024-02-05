@@ -40,7 +40,6 @@ export class JnoConceptEdit extends LitElement {
 
     edit(concept) {
         this.elform.setData(concept.formatConceptObject());
-        console.log(concept.formatConceptObject());
         this.concept = concept;
         this.elmodal.open();
     }
