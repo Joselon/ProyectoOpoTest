@@ -41,6 +41,7 @@ export class JnoConceptDelete extends LitElement {
                 <p>
                     ¿De verdad deseas borrar este Concepto: <b>${this.keyword}</b>?
                 </p>
+                <small>(Se borraran todas las preguntas asociadas)</small>
             </dile-confirm> 
         `;
     }

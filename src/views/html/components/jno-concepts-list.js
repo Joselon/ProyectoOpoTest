@@ -38,7 +38,6 @@ export class JnoConceptsList extends UpdateAtModelChangedMixin(LitElement) {
             return html`<p>Debe seleccionar una categoría</p>`;
         }
         this.elements = this.userState.getCurrentCategory().getConceptsArray();
-        console.log(this.elements);
         return html`
             <p>Contenidos en la categoría <b>${this.userState.getCurrentCategory().getName()}</b> (sin subcategorías):</p>
             <dile-button-icon 
