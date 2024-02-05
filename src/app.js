@@ -11,6 +11,7 @@ import { UserType } from './models/UserTypes.js';
 
 import { json } from './data/database_var.js';
 //import { readFileSync, writeFileSync } from 'node:fs';
+import '@dile/dile-confirm/dile-confirm';
 
 class ElaboraTest {
     #userState;
@@ -83,4 +84,5 @@ class ElaboraTest {
      }*/
 }
 
-new ElaboraTest().start();
+let app= new ElaboraTest();
+app.start();
