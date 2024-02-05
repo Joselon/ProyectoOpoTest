@@ -16,7 +16,6 @@ export class JnoConceptDelete extends LitElement {
     static get properties() {
         return {
             concept: { type: Object },
-            concepts: { type: Object }
         };
     }
 
@@ -49,14 +48,12 @@ export class JnoConceptDelete extends LitElement {
     delete(concept, category) {
         this.concept = concept;
         this.category = category;
-        this.concepts = this.category.getConcepts();
-        this.keyword = concept.getKeyword();
+        this.keyword = this.concept.getKeyword();
         this.elmodal.open();
     }
 
     deleteConcept() {
-        this.category.deleteConceptKeyQuestions(this.keyword);
-        this.concepts.delete(this.keyword);
+        this.category.deleteConcept(this.concept);
         this.dispatchModelChangedEvent();
         this.elmodal.close();
     }

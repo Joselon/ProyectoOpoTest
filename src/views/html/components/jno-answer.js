@@ -35,7 +35,7 @@ export class JnoAnswer extends LitElement {
         super();
         this.answer = {};
     }
-
+//Dar formato y poner botones corregir
     render() {
         return html`
         <section>

@@ -107,7 +107,12 @@ class Category {
         this.#name = name;
     }
 
-    deleteConceptKeyQuestions(conceptKey){
+    deleteConcept(concept) {
+        this.#deleteConceptKeyQuestions(concept.getKeyword());
+        this.concepts.delete(concept.getKeyword());
+    }
+
+    #deleteConceptKeyQuestions(conceptKey){
         let questions = [...this.#questions];
         for (let question of questions){
             if (question.getConceptKey() === conceptKey){
