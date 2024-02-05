@@ -14,7 +14,7 @@ export class JnoConceptForm extends DileFormMixin(LitElement) {
     render() {
         return html`
             <dile-input label="Palabra Clave" name="keyword" id="keyword"></dile-input>
-           <!-- <dile-input label="Definiciones" name="definitions" id="definitions"></dile-input>-->
+           <dile-input label="Definiciones" name="definitions" id="definitions" disabled></dile-input>
         `;
     }
 

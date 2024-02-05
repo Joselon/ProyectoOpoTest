@@ -32,7 +32,7 @@ export class JnoCategoryInsert extends LitElement {
     render() {
         return html`
             <dile-modal id="elmodal" showCloseIcon blocking>
-                <h2>Nueva Categoría</h2>
+                <h2>Nueva Subcategoría</h2>
                 <jno-category-form id="elform"></jno-category-form>
                 <button type="button" @click=${this.insertCategory}>Añadir</button>
             </dile-modal>
