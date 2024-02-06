@@ -37,7 +37,7 @@ class UserState {
     }
 
     getCurrentConceptKey() {
-        return this.#currentConcept.getKeyword();
+        return this.#currentCategory.getConceptKey(this.#currentConcept);
     }
 
     setCurrentCategory(category) {
@@ -78,7 +78,7 @@ class UserState {
     }
 
     setQuestionBuilder() {
-        this.#questionBuilder = new QuestionBuilder(this.#currentConcept, this.#currentCategory.getConceptQuestions(this.getCurrentConceptKey()))
+        this.#questionBuilder = new QuestionBuilder(this.#currentCategory, this.#currentCategory.getCurrentConceptKey(), this.#currentCategory.getConceptQuestions(this.getCurrentConceptKey()))
     }
     
     getQuestionBuilder() {

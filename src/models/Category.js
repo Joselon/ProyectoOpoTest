@@ -107,9 +107,16 @@ class Category {
         this.#name = name;
     }
 
+    getConceptKey(concept) {
+        for (let [key, value] of this.#concepts.entries()) {
+              if (value === concept)
+                return key;
+            }
+    }
+
     deleteConcept(concept) {
-        this.#deleteConceptKeyQuestions(concept.getKeyword());
-        this.concepts.delete(concept.getKeyword());
+        this.#deleteConceptKeyQuestions(this.getConceptKey(concept));
+        this.#concepts.delete(this.getConceptKey(concept));
     }
 
     #deleteConceptKeyQuestions(conceptKey){
@@ -117,6 +124,20 @@ class Category {
         for (let question of questions){
             if (question.getConceptKey() === conceptKey){
                 this.#questions.splice(this.#questions.indexOf(question), 1);
+            }
+        }
+    }
+
+    updateConcept(concept, newkeyword) {
+        let conceptKey = this.getConceptKey(concept);
+        this.#updateConceptQuestions(conceptKey,newkeyword);
+        this.getConcept(conceptKey).setKeyword(newkeyword);
+    }
+
+    #updateConceptQuestions(conceptKey, newkeyword) {
+        for (let question of this.#questions){
+            if (question.getConceptKey() === conceptKey){
+                question.setConceptKey(newkeyword);
             }
         }
     }
@@ -143,7 +164,7 @@ class Category {
     #loadQuestionsFromDataObject(categoryDataObject) {
         let indexQuest = 0;
         for (let questionObject of categoryDataObject.questions) {
-            let questionBuilder = new QuestionBuilder(this.getConcept(questionObject.conceptKey));
+            let questionBuilder = new QuestionBuilder(this, questionObject.conceptKey);
             questionBuilder.setStatementImplementor(questionObject.target);
             this.addQuestion(questionBuilder.create(questionObject.type, questionObject.conceptKey, questionObject.statement));
             this.#questions[indexQuest].loadAnswersFromDataObject(questionObject);

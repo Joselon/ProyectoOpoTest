@@ -24,6 +24,10 @@ class Question {
         return this._conceptKey;
     }
 
+    setConceptKey(conceptKey) {
+        this._conceptKey = conceptKey;
+    }
+
     addToConcept(content, isFake) {
         this._statementImplementor.addToConcept(content, isFake);
     }

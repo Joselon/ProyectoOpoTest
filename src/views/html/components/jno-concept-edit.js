@@ -34,22 +34,25 @@ export class JnoConceptEdit extends LitElement {
                 <h2>Editar</h2>
                 <jno-concept-form id="elform"></jno-concept-form>
                 <button type="button" @click=${this.updateConcept}>Actualizar</button>
+                <small> Este cambio requiere Salir de la aplicación </small>
             </dile-modal>
         `;
     }
 
-    edit(concept) {
+    edit(concept, category) {
         this.elform.setData(concept.formatConceptObject());
         this.concept = concept;
+        this.category = category;
         this.elmodal.open();
     }
 
     updateConcept() {
         let data = this.elform.getData();
-        this.concept.setKeyword(data.keyword);
+        this.category.updateConcept(this.concept,data.keyword);
         this.dispatchModelChangedEvent();
         this.elform.clearData();
         this.elmodal.close();
+        location.reload();
     }
 
     dispatchModelChangedEvent() {

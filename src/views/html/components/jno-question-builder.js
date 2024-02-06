@@ -69,7 +69,7 @@ export class JnoQuestionBuilder extends LitElement {
     newQuestion(category, concept) {
         this.category = category;
         this.concept = concept;
-        this.questionBuilder = new QuestionBuilder(this.concept, this.category.getConceptQuestions(this.concept.getKeyword()));
+        this.questionBuilder = new QuestionBuilder(this.category, this.category.getConceptKey(this.concept), this.category.getConceptQuestions(this.category.getConceptKey(this.concept)));
         this.statementTargets = [];
         this.statementTargetsTitles = [];
         this.questionBuilder.getStatementsAvailablesInConcept(this.statementTargets, this.statementTargetsTitles);
@@ -94,7 +94,7 @@ export class JnoQuestionBuilder extends LitElement {
         this.category.addQuestion(
             this.questionBuilder.create(
                 this.shadowRoot.getElementById('type').value,
-                this.concept.getKeyword(),
+                this.category.getConceptKey(this.concept),
                 this.shadowRoot.getElementById('statement').value)
         );
         this.dispatchModelChangedEvent();

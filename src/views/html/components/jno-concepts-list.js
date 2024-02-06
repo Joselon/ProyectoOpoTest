@@ -60,7 +60,7 @@ export class JnoConceptsList extends UpdateAtModelChangedMixin(LitElement) {
         `;
     }
     editConcept(e) {
-        this.shadowRoot.querySelector('jno-concept-edit').edit(e.detail);
+        this.shadowRoot.querySelector('jno-concept-edit').edit(e.detail, this.userState.getCurrentCategory());
     }
     deleteConcept(e) {
         this.shadowRoot.querySelector('jno-concept-delete').delete(e.detail,this.userState.getCurrentCategory());

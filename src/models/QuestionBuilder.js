@@ -7,8 +7,8 @@ class QuestionBuilder {
     #statementImplementor;
     #statementPrototypes;
 
-    constructor(concept, questions = []) {
-        this.#concept = concept;
+    constructor(category, conceptKey, questions = []) {
+        this.#concept = category.getConcept(conceptKey);
         this.#questions = questions;
         this.#statementPrototypes = [
             new DefinitionStatement(this.#concept),
