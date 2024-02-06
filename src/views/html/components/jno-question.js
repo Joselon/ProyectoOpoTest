@@ -1,7 +1,9 @@
 import { LitElement, html, css } from 'lit';
 import { UserType } from '../../../models/UserTypes.js';
 import { listIcon } from '@dile/icons';
-import './jno-answers-list.js'
+import './jno-answers-list.js';
+import './jno-answer-insert.js';
+import './jno-answer-evaluate.js';
 
 export class JnoQuestion extends LitElement {
     static styles = [
@@ -96,12 +98,13 @@ export class JnoQuestion extends LitElement {
             return html``;
         }
         return html`
-        <div id="answers">
+        <div id='answers' @evaluate-answer='${this.evaluate}'>
             <jno-answers-list
              .elements=${this.question.getAnswers()}
              .userState=${this.userState}
              ></jno-answers-list>
         </div>
+        <jno-answer-evaluate></jno-answer-evaluate>
         `
     }
 
@@ -129,6 +132,10 @@ export class JnoQuestion extends LitElement {
         this.dispatchEvent(new CustomEvent('insert-answer', {
             detail: this.question
         }));
+    }
+
+    evaluate(e) {
+        this.shadowRoot.querySelector('jno-answer-evaluate').initEvaluation(e.detail, this.question, this.userState.getCurrentUserName());
     }
 
     showFeedbackError(msg) {

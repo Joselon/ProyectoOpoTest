@@ -1,8 +1,9 @@
 import { LitElement, html, css } from 'lit';
+import { UpdateAtModelChangedMixin } from '../mixins/UpdateAtModelChangedMixin.js';
 import { repeat } from 'lit/directives/repeat.js';
 
 
-export class JnoContentsList extends LitElement {
+export class JnoContentsList extends UpdateAtModelChangedMixin(LitElement) {
     static styles = [
         css`
             :host {

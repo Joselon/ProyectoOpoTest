@@ -9,8 +9,14 @@ export class JnoQuestionBuilder extends LitElement {
         css`
             :host {
                 display: block;
+                --dile-modal-width: 90%;
+                --dile-modal-close-icon-size: 32px;
+                --dile-modal-close-icon-top: 20px;
+                --dile-modal-close-icon-color: red;
             }
-
+            h2 {
+                margin-top: 0;
+            }
             dile-radio {
                 border: 1px solid red;
                 border-radius:5px;

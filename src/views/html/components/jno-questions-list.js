@@ -3,7 +3,6 @@ import { UpdateAtModelChangedMixin } from '../mixins/UpdateAtModelChangedMixin.j
 import { repeat } from 'lit/directives/repeat.js';
 import './jno-question.js';
 import './jno-question-builder.js';
-import './jno-answer-insert.js';
 import { UserType } from '../../../models/UserTypes.js';
 
 export class JnoQuestionsList extends UpdateAtModelChangedMixin(LitElement) {
@@ -72,7 +71,7 @@ export class JnoQuestionsList extends UpdateAtModelChangedMixin(LitElement) {
         let extraActionHtml = html`<jno-answer-insert></jno-answer-insert>`;
         if (this.userState.getCurrentUserType() === UserType.TEACHER) {
             actionOptions = ["Desactivar"];
-            extraActionHtml = html`<jno-question-builder></jno-question-builder>`
+            extraActionHtml = html`<jno-question-builder></jno-question-builder>`;
         }
         return html`
             ${repeat(this.elements, (element) => html`
