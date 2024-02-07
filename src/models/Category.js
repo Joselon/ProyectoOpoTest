@@ -132,6 +132,8 @@ class Category {
         let conceptKey = this.getConceptKey(concept);
         this.#updateConceptQuestions(conceptKey,newkeyword);
         this.getConcept(conceptKey).setKeyword(newkeyword);
+        this.#concepts.delete(conceptKey);
+        this.addConcept(concept);
     }
 
     #updateConceptQuestions(conceptKey, newkeyword) {

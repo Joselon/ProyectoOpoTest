@@ -34,7 +34,6 @@ export class JnoConceptEdit extends LitElement {
                 <h2>Editar</h2>
                 <jno-concept-form id="elform"></jno-concept-form>
                 <button type="button" @click=${this.updateConcept}>Actualizar</button>
-                <small> Este cambio requiere Salir de la aplicación </small>
             </dile-modal>
         `;
     }
@@ -52,7 +51,6 @@ export class JnoConceptEdit extends LitElement {
         this.dispatchModelChangedEvent();
         this.elform.clearData();
         this.elmodal.close();
-        location.reload();
     }
 
     dispatchModelChangedEvent() {
