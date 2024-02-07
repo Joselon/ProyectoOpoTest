@@ -1,38 +1,38 @@
 export const json ={
     "categories": [
         {
-            "name": "Categoría A",
+            "name": "Informatica",
             "subcategories": [
                 {
-                    "name": "Subcategoría A1",
+                    "name": "MPDS",
                     "subcategories": [
                         {
-                            "name": "Subcategoría A1.1",
+                            "name": "Fundamentos del Software",
                             "subcategories": [],
                             "concepts": [
                                 {
-                                    "keyword": "Concept1",
+                                    "keyword": "Software",
                                     "definitions": [],
                                     "fakeKeywords": []
                                 }
                             ],
                             "questions": [
                                 {
-                                    "conceptKey": "Concept1",
-                                    "statement": "Qué es el Concept1",
+                                    "conceptKey": "Software",
+                                    "statement": "Qué es el software",
                                     "target": "Definition",
                                     "type": "Open",
                                     "answers": []
                                 },
                                 {
-                                    "conceptKey": "Concept1",
-                                    "statement": "Que tipos de Concept1 podemos decir que hay",
+                                    "conceptKey": "Software",
+                                    "statement": "Que tipos de Software podemos decir que hay",
                                     "target": "Classification",
                                     "type": "Open",
                                     "answers": [
                                         {
-                                            "username": "Estudiante1",
-                                            "content": "ConceptA y ConceptB",
+                                            "username": "Jorgito",
+                                            "content": "De sistemas y de gestion",
                                             "isOK": false,
                                             "createdDate": "2023-12-15T18:22:52.349Z",
                                             "evaluatedBy": "",
@@ -43,28 +43,28 @@ export const json ={
                             ]
                         },
                         {
-                            "name": "Subcategoría A1.2",
+                            "name": "Diseño de Software",
                             "subcategories": [
                                 {
-                                    "name": "Subcategoría A1.2.1",
+                                    "name": "Patrones de Diseño de Software",
                                     "subcategories": [],
                                     "concepts": [
                                         {
-                                            "keyword": "Concept2",
+                                            "keyword": "Patron de diseño",
                                             "definitions": [],
                                             "fakeKeywords": []
                                         }
                                     ],
                                     "questions": [
                                         {
-                                            "conceptKey": "Concept2",
-                                            "statement": "Que es un Concept2",
+                                            "conceptKey": "Patron de diseño",
+                                            "statement": "Que es un Patron de diseño",
                                             "target": "Definition",
                                             "type": "Open",
                                             "answers": [
                                                 {
-                                                    "username": "Estudiante2",
-                                                    "content": "RespuestaDefinicion",
+                                                    "username": "Alexander",
+                                                    "content": "Describe un problema el cual ocurre una y otra vez en nuestro entorno y describe el núcleo de una solución para el problema, de tal forma que se puede usar esta solución un millón de veces sin hacerlo de la misma forma dos veces",
                                                     "isOK": false,
                                                     "createdDate": "2024-01-16T11:01:25.681Z",
                                                     "evaluatedBy": "",
@@ -83,11 +83,11 @@ export const json ={
                     "questions": []
                 },
                 {
-                    "name": "Subcategoría A2",
+                    "name": "Sistemas Operativos",
                     "subcategories": [],
                     "concepts": [
                         {
-                            "keyword": "Concept3",
+                            "keyword": "Linux",
                             "definitions": [],
                             "fakeKeywords": []
                         }
@@ -95,25 +95,25 @@ export const json ={
                     "questions": []
                 },
                 {
-                    "name": "Subcategoría A3",
+                    "name": "Lit",
                     "subcategories": [],
                     "concepts": [
                         {
-                            "keyword": "Concept4",
+                            "keyword": "Lit",
                             "definitions": [],
                             "fakeKeywords": []
                         }
                     ],
                     "questions": [
                         {
-                            "conceptKey": "Concept4",
-                            "statement": "Que es Concept4",
+                            "conceptKey": "Lit",
+                            "statement": "Que es Lit",
                             "target": "Definition",
                             "type": "Open",
                             "answers": [
                                 {
-                                    "username": "Estudiante3",
-                                    "content": "RespuestaDefinicion",
+                                    "username": "Miguel Angel",
+                                    "content": "Es una clase (de programaci�n orientada a objetos) base para la creacion de Custom Elements",
                                     "isOK": false,
                                     "createdDate": "2024-01-16T11:18:21.237Z",
                                     "evaluatedBy": "",
@@ -126,16 +126,16 @@ export const json ={
             ],
             "concepts": [
                 {
-                    "keyword": "Concept5",
+                    "keyword": "GIT",
                     "definitions": [
                         {
-                            "content": "Definicion1",
+                            "content": "Es una herramienta de control de versiones",
                             "isFake": false,
                             "createdDate": "2023-11-16T08:50:10.864Z",
                             "justifications": []
                         },
                         {
-                            "content": "Definicion2",
+                            "content": "Son las siglas de Global Internet Tecnologies",
                             "isFake": true,
                             "createdDate": "2023-11-24T19:21:16.631Z",
                             "justifications": []
@@ -144,21 +144,21 @@ export const json ={
                     "fakeKeywords": []
                 },
                 {
-                    "keyword": "Concept6",
+                    "keyword": "Bases de Datos",
                     "definitions": [],
                     "fakeKeywords": []
                 },
                 {
-                    "keyword": "Concept7",
+                    "keyword": "Lenguaje de Programacion",
                     "definitions": [
                         {
-                            "content": "Definicion3",
+                            "content": "Es un sistema de comunicacion que permite expresar instrucciones y algoritmos para que una maquina o un software pueda ejecutarlos.",
                             "isFake": false,
                             "createdDate": "2023-12-01T12:00:05.182Z",
                             "justifications": []
                         },
                         {
-                            "content": "Definicion4",
+                            "content": "Es la forma de hablar de los informaticos.",
                             "isFake": true,
                             "createdDate": "2023-12-01T12:10:21.000Z",
                             "justifications": []
@@ -169,38 +169,38 @@ export const json ={
             ],
             "questions": [
                 {
-                    "conceptKey": "Concept5",
-                    "statement": "Qué es el Concept5",
+                    "conceptKey": "GIT",
+                    "statement": "Qué es el GIT",
                     "target": "Definition",
                     "type": "Open",
                     "answers": [
                         {
-                            "username": "Estudiante1",
-                            "content": "Definicion2",
+                            "username": "Jaimito",
+                            "content": "Son las siglas de Global Internet Tecnologies",
                             "isOK": false,
                             "createdDate": "2023-11-15T13:35:58.467Z",
-                            "evaluatedBy": "Docente1",
+                            "evaluatedBy": "Bacterio",
                             "evaluatedDate": "2023-11-24T19:21:16.631Z"
                         },
                         {
-                            "username": "Estudiante2",
-                            "content": "Definicion1",
+                            "username": "Jorgito",
+                            "content": "Es una herramienta de control de versiones",
                             "isOK": true,
                             "createdDate": "2023-11-15T13:36:32.514Z",
-                            "evaluatedBy": "Docente1",
+                            "evaluatedBy": "Bacterio",
                             "evaluatedDate": "2023-11-16T08:49:10.864Z"
                         }
                     ]
                 },
                 {
-                    "conceptKey": "Concept5",
-                    "statement": "Que tipos de Concept5 hay",
+                    "conceptKey": "GIT",
+                    "statement": "Que tipos de GIT hay",
                     "target": "Classification",
                     "type": "Open",
                     "answers": [
                         {
-                            "username": "Estudiante2",
-                            "content": "ConceptD y ConceptE",
+                            "username": "Jorgito",
+                            "content": "Publicos y privado",
                             "isOK": false,
                             "createdDate": "2023-11-17T17:51:38.068Z",
                             "evaluatedBy": "",
@@ -209,14 +209,14 @@ export const json ={
                     ]
                 },
                 {
-                    "conceptKey": "Concept5",
-                    "statement": "De que se compone Concept5",
+                    "conceptKey": "GIT",
+                    "statement": "De que se compone GIT",
                     "target": "Composition",
                     "type": "Open",
                     "answers": [
                         {
-                            "username": "Estudiante2",
-                            "content": "ConceptF, ConceptG, ConceptH",
+                            "username": "Jorgito",
+                            "content": "G, I, T",
                             "isOK": false,
                             "createdDate": "2023-11-24T19:01:13.194Z",
                             "evaluatedBy": "",
@@ -225,14 +225,14 @@ export const json ={
                     ]
                 },
                 {
-                    "conceptKey": "Concept6",
-                    "statement": "Que es una Concept6",
+                    "conceptKey": "Bases de Datos",
+                    "statement": "Que es una base de datos",
                     "target": "Definition",
                     "type": "Open",
                     "answers": [
                         {
-                            "username": "Estudiante1",
-                            "content": "Definicion6",
+                            "username": "Jaimito",
+                            "content": "Una plataforma para alojar datos",
                             "isOK": false,
                             "createdDate": "2023-11-20T18:41:51.038Z",
                             "evaluatedBy": "",
@@ -241,52 +241,59 @@ export const json ={
                     ]
                 },
                 {
-                    "conceptKey": "Concept7",
-                    "statement": "Que es un Concept7",
+                    "conceptKey": "Lenguaje de Programacion",
+                    "statement": "Que es un lenguaje de programacion",
                     "target": "Definition",
                     "type": "Open",
                     "answers": [
                         {
-                            "username": "Estudiante3",
-                            "content": "RespuestaDefinicion7",
+                            "username": "IA Bing",
+                            "content": "Es un sistema de comunicacion que permite expresar instrucciones y algoritmos para que una maquina o un software pueda ejecutarlos. (IA Bing)",
                             "isOK": true,
                             "createdDate": "2023-12-01T11:55:23.350Z",
-                            "evaluatedBy": "Docente2",
+                            "evaluatedBy": "MarcosProfe",
                             "evaluatedDate": "2023-12-01T12:00:05.181Z"
                         },
                         {
-                            "username": "Estudiante1",
-                            "content": "RespuestaDefinicion8",
+                            "username": "JoseAlumno",
+                            "content": "Es la forma de hablar de los informaticos.",
                             "isOK": false,
                             "createdDate": "2023-12-01T11:57:55.802Z",
-                            "evaluatedBy": "Docente2",
+                            "evaluatedBy": "MarcosProfe",
                             "evaluatedDate": "2023-12-01T12:10:21.000Z"
                         }
                     ]
                 },
                 {
-                    "conceptKey": "Concept7",
-                    "statement": "Que tipos de Concept7 hay",
+                    "conceptKey": "Lenguaje de Programacion",
+                    "statement": "Que tipos de Lenguaje de Programacion hay",
                     "target": "Classification",
                     "type": "Open",
+                    "answers": []
+                },
+                {
+                    "conceptKey": "GIT",
+                    "statement": "Que definicion es mejor para GIT",
+                    "target": "Definition",
+                    "type": "MultipleChoice",
                     "answers": []
                 }
             ]
         },
         {
-            "name": "Categoría B",
+            "name": "Oposiciones Policia Nacional",
             "subcategories": [],
             "concepts": [
                 {
-                    "keyword": "Concept8",
+                    "keyword": "Derechos de los Ciudadanos",
                     "definitions": [],
                     "fakeKeywords": []
                 }
             ],
             "questions": [
                 {
-                    "conceptKey": "Concept8",
-                    "statement": "Que son los Concept8",
+                    "conceptKey": "Derechos de los Ciudadanos",
+                    "statement": "Que son los Derechos de los Ciudadanos",
                     "target": "Definition",
                     "type": "Open",
                     "answers": []
@@ -294,29 +301,29 @@ export const json ={
             ]
         },
         {
-            "name": "Categoría C",
+            "name": "Test de Conducir",
             "subcategories": [
                 {
-                    "name": "Subcategoría C1",
+                    "name": "Señales",
                     "subcategories": [],
                     "concepts": [
                         {
-                            "keyword": "Concept9",
+                            "keyword": "Prohibicion",
                             "definitions": [],
                             "fakeKeywords": []
                         }
                     ],
                     "questions": [
                         {
-                            "conceptKey": "Concept9",
-                            "statement": "¿Que indican las Concept9?",
+                            "conceptKey": "Prohibicion",
+                            "statement": "¿Que indican las señales de prohibicion?",
                             "target": "Definition",
                             "type": "Open",
                             "answers": []
                         },
                         {
-                            "conceptKey": "Concept9",
-                            "statement": "¿Que tipos de Concept9 hay?",
+                            "conceptKey": "Prohibicion",
+                            "statement": "¿Que tipos de señales de prohibicion hay?",
                             "target": "Classification",
                             "type": "Open",
                             "answers": []
