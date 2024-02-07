@@ -78,7 +78,7 @@ class UserState {
     }
 
     setQuestionBuilder() {
-        this.#questionBuilder = new QuestionBuilder(this.#currentCategory, this.#currentCategory.getCurrentConceptKey(), this.#currentCategory.getConceptQuestions(this.getCurrentConceptKey()))
+        this.#questionBuilder = new QuestionBuilder(this.#currentCategory, this.getCurrentConceptKey(), this.#currentCategory.getConceptQuestions(this.getCurrentConceptKey()))
     }
     
     getQuestionBuilder() {

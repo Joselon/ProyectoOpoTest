@@ -46,7 +46,9 @@ class QuestionBuilder {
         return question;
     }
 
-    getStatementsAvailablesInConcept(statementTargets, statementTargetTitles) {
+    getStatementsAvailablesInConcept() {
+        let statementTargets = [];
+        let statementTargetTitles = [];
         const primaryTypes = [];
         const primaryTitles = [];
         for (let statement of this.#statementPrototypes) {
@@ -81,9 +83,12 @@ class QuestionBuilder {
             statementTargets.push(withRelationTypes);
             statementTargetTitles.push(withRelationTitles);
         }
+        return [statementTargets,statementTargetTitles ];
     }
 
-    getQuestionTypesAvailable(types, typesTitles) {
+    getQuestionTypesAvailable() {
+        let types = [];
+        let typesTitles = [];
         let openIsJustCreated = false;
         for (let question of this.#questions) {
             if (question.getTarget() === this.#statementImplementor.getTarget()) {
@@ -99,6 +104,7 @@ class QuestionBuilder {
             types.push("MultipleChoice");
             typesTitles.push("Tipo Test");
         }
+        return [types,typesTitles];
     }
 
     getStatementImplementor() {

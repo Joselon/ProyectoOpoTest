@@ -62,7 +62,7 @@ class QuestionTypeMenu extends DynamicMenu {
     }
 
     addOptions() {
-        this.#userState.getQuestionBuilder().getQuestionTypesAvailable(this.#types, this.#typesTitles);
+        [this.#types, this.#typesTitles] = this.#userState.getQuestionBuilder().getQuestionTypesAvailable();
         for (let i = 0; i < this.#types.length; i++) {
             this.add(new SelectQuestionTypeOption(this.#typesTitles[i], this.#types[i], this.#userState));
         }
@@ -80,7 +80,7 @@ class StatementMenu extends DynamicMenu {
     addOptions() {
         const statementTargetTitles = [];
         const statementTargets = [];
-        this.#userState.getQuestionBuilder().getStatementsAvailablesInConcept(statementTargets, statementTargetTitles);
+        [statementTargets, statementTargetTitles] = this.#userState.getQuestionBuilder().getStatementsAvailablesInConcept();
 
         for (let i = 0; i < statementTargets.length; i++) {
             for (let j = 0; j < statementTargets[i].length; j++) {

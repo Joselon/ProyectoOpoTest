@@ -91,7 +91,7 @@ export class JnoQuestionsList extends UpdateAtModelChangedMixin(LitElement) {
     }
 
     newQuestion() {
-        this.shadowRoot.querySelector('jno-question-builder').newQuestion(this.userState.getCurrentCategory(), this.userState.getCurrentConcept());
+        this.shadowRoot.querySelector('jno-question-builder').newQuestion(this.userState);
     }
 }
 customElements.define('jno-questions-list', JnoQuestionsList);
