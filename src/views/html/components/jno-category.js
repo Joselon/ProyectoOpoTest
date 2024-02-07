@@ -102,7 +102,7 @@ export class JnoCategory extends LitElement {
                 this.userState.setCurrentCategory(this.category);
                 this.userState.resetConceptSelected();
                 this.dispatchModelChangedEvent();
-                this.showFeedbackSuccess(`Cargados CONCEPTOS y PREGUNTAS de la CATEGORÍA: ${this.category.getName()}`);
+                this.showFeedbackSuccess(`Cargados CONCEPTOS y PREGUNTAS`);
                 break;
             case "Añadir":
                 this.insert();

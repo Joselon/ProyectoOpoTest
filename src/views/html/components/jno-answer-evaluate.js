@@ -18,11 +18,18 @@ export class JnoAnswerEvaluate extends LitElement {
         `
     ];
 
+    static get properties() {
+        return {
+            answerContent: { type: String },
+        };
+    }
+
     constructor() {
         super();
         this.answer = {};
         this.question = {};
         this.username = 'username';
+        this.answerContent = '';
     }
 
     firstUpdated() {
@@ -38,6 +45,8 @@ export class JnoAnswerEvaluate extends LitElement {
         return html`
         <dile-modal id="elmodal" showCloseIcon blocking>
                 <h2>Evaluar</h2>
+                <p>Pregunta: <u>¿${this.statement}?</u></p>
+                <p>Respuesta: <b>${this.answerContent}</b></p>
                 <form id="elform">
                 <dile-radio-group id="evaluation" name="evaluation" label="¿Es correcta?">
                     <dile-radio label="Sí" value="true"></dile-radio>
@@ -47,7 +56,7 @@ export class JnoAnswerEvaluate extends LitElement {
                     <dile-radio label="Sí" value="true"></dile-radio>
                     <dile-radio label="No" value="false"></dile-radio>
                 </dile-radio-group>
-                <dile-input label="Respuesta" name="answer" id="elinput"></dile-input>
+                <dile-input label="Contenido" name="answer" id="elinput"></dile-input>
                 </form>
                 <button type="button" @click=${this.evaluate}>Aceptar</button>
             </dile-modal>
@@ -57,7 +66,9 @@ export class JnoAnswerEvaluate extends LitElement {
         this.answer = answer;
         this.question = question;
         this.username = username;
-        this.elinput.value = answer.getContent();
+        this.answerContent = this.answer.getContent();
+        this.elinput.value = this.answerContent;
+        this.statement = this.question.getStatement();
         this.elmodal.open();
     }
     evaluate() {

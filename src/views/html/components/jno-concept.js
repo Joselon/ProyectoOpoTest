@@ -130,7 +130,7 @@ export class JnoConcept extends UpdateAtModelChangedMixin(LitElement) {
             case "Seleccionar":
                 this.userState.setCurrentConcept(this.concept);
                 this.dispatchModelChangedEvent();
-                this.showFeedbackSuccess(`Cargadas PREGUNTAS de: ${this.concept.getKeyword()} `);
+                this.showFeedbackSuccess(`Cargadas PREGUNTAS`);
                 break;
             case "Editar":
                 this.edit();

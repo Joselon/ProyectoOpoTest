@@ -11,7 +11,7 @@ export class JnoAnswerInsert extends LitElement {
                 --dile-modal-close-icon-top: 20px;
                 --dile-modal-close-icon-color: red;
             }
-            h2 {
+            h1,h2 {
                 margin-top: 0;
             }
         `
@@ -20,7 +20,8 @@ export class JnoAnswerInsert extends LitElement {
     static get properties() {
       return {
         question: { type: Object },
-        username: { type: String }
+        username: { type: String },
+        statement: { type: String}
       };
     }
 
@@ -32,6 +33,7 @@ export class JnoAnswerInsert extends LitElement {
     render() {
         return html`
             <dile-modal id="elmodal" showCloseIcon blocking>
+                <h1>¿${this.statement}?</h1>
                 <h2>Respuesta:</h2>
                 <dile-input id="elinput"></dile-input>
                 <button type="button" @click=${this.insertAnswer}>Guardar</button>
@@ -42,6 +44,7 @@ export class JnoAnswerInsert extends LitElement {
     insert(question, username) {
         this.question = question;
         this.username = username;
+        this.statement = this.question.getStatement();
         this.elmodal.open();
     }
 
