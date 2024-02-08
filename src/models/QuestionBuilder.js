@@ -60,13 +60,13 @@ class QuestionBuilder {
 
         if (this.#concept.getNumberOfDefinitions() !== 0) {
             const secundaryStatements = [];
-            for (let definition of this.#concept.getDefinitions()){
+            for (let definition of this.#concept.getDefinitions()) {
                 secundaryStatements.push(new FakeKeywordStatement(this.#concept, definition));
                 secundaryStatements.push(new JustificationStatement(this.#concept, definition));
             }
             const withDefinitionTypes = [];
             const withDefinitionTitles = [];
-            for (let statement of secundaryStatements){
+            for (let statement of secundaryStatements) {
                 withDefinitionTypes.push(statement.getTarget());
                 withDefinitionTitles.push(statement.getStatement());
             }
@@ -84,7 +84,7 @@ class QuestionBuilder {
             statementTargets.push(withRelationTypes);
             statementTargetTitles.push(withRelationTitles);
         }
-        return [statementTargets,statementTargetTitles ];
+        return [statementTargets, statementTargetTitles];
     }
 
     getQuestionTypesAvailable() {
@@ -105,7 +105,7 @@ class QuestionBuilder {
             types.push("MultipleChoice");
             typesTitles.push("Tipo Test");
         }
-        return [types,typesTitles];
+        return [types, typesTitles];
     }
 
     getStatementImplementor() {

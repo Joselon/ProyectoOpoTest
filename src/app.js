@@ -85,5 +85,5 @@ class ElaboraTest {
      }*/
 }
 
-let app= new ElaboraTest();
-app.start();
+new ElaboraTest().start();
+
