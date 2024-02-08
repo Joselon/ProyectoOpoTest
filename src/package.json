@@ -39,6 +39,7 @@
     "@dile/dile-toast": "^2.0.5",
     "@dile/icons": "^1.5.0",
     "console-mpds": "^1.0.4",
+    "eit-info-overlay": "^0.0.2",
     "lit": "^3.1.1"
   },
   "devDependencies": {

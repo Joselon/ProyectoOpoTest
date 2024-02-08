@@ -59,10 +59,11 @@ class QuestionBuilder {
         statementTargetTitles.push(primaryTitles);
 
         if (this.#concept.getNumberOfDefinitions() !== 0) {
-            const secundaryStatements = [
-                new FakeKeywordStatement(this.#concept, this.#concept.getDefinition(0)),
-                new JustificationStatement(this.#concept, this.#concept.getDefinition(0))
-            ];
+            const secundaryStatements = [];
+            for (let definition of this.#concept.getDefinitions()){
+                secundaryStatements.push(new FakeKeywordStatement(this.#concept, definition));
+                secundaryStatements.push(new JustificationStatement(this.#concept, definition));
+            }
             const withDefinitionTypes = [];
             const withDefinitionTitles = [];
             for (let statement of secundaryStatements){

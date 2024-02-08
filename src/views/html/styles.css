@@ -12,6 +12,10 @@ body {
     --dile-button-font-size: 0.75rem;
 }
 
+eit-info-overlay {
+    --eit-info-overlay-icon-color: #481a29;
+}
+
 header div {
     margin-bottom: 1rem;
     border-radius: 10px;
@@ -48,8 +52,14 @@ header div {
 }
 
 footer {
+    position:fixed;
+    bottom:0;
+    width:100%;
     text-align: center;
+    background-color: #60706099;
+    color:#ccc;
 }
+
 
 @media (max-width: 500px) {
 

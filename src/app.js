@@ -1,4 +1,5 @@
 import '@dile/dile-nav/dile-nav.js';
+import 'eit-info-overlay/eit-info-overlay.js';
 import { InputDialog } from './utils/view/html/Dialog.js';
 import { UserDialog } from './views/html/UserDialog.js';
 import { MainMenu, TeacherMainMenu } from './views/html/MainMenu.js';

@@ -102,17 +102,24 @@ export class JnoQuestionBuilder extends LitElement {
         this.statementTargets = [];
         this.statementTargetsTitles = [];
         [this.statementTargets, this.statementTargetsTitles] = this.questionBuilder.getStatementsAvailablesInConcept();
-       // this.statementTargets = [...this.statementTargets];
+        // this.statementTargets = [...this.statementTargets];
         this.elmodal.open();
     }
 
     updateTypes(e) {
         this.questionTypes = [];
         this.questionTypeTitles = [];
-        this.questionBuilder.setStatementImplementor(e.detail.value);
-        this.elstatement.value = e.detail.label;
-        [this.questionTypes,this.questionTypeTitles] = this.questionBuilder.getQuestionTypesAvailable();
-        this.questionTypes = [...this.questionTypes];
+        if (this.statementTargets[0].indexOf(e.detail.value) !== -1) {
+            this.questionBuilder.setStatementImplementor(e.detail.value);
+            this.elstatement.value = e.detail.label;
+            [this.questionTypes, this.questionTypeTitles] = this.questionBuilder.getQuestionTypesAvailable();
+            this.questionTypes = [...this.questionTypes];
+        }
+        else {
+            //Capturar error por dos preguntas del mismo tipo
+            this.elmodal.close();
+            this.showFeedbackError("ERROR: Aún no disponible");
+        }
     }
 
     enabledAdd(e) {
@@ -138,6 +145,12 @@ export class JnoQuestionBuilder extends LitElement {
             detail: 'model-changed'
         }));
     }
-
+    showFeedbackError(msg) {
+        this.dispatchEvent(new CustomEvent('error-feedback', {
+            bubbles: true,
+            composed: true,
+            detail: msg
+        }));
+    }
 }
 customElements.define('jno-question-builder', JnoQuestionBuilder);
