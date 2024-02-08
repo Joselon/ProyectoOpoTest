@@ -72,9 +72,9 @@ export class JnoAnswerEvaluate extends LitElement {
         this.elmodal.open();
     }
     evaluate() {
-        this.answer.evaluate(this.elevalutaion.value==='true', new Date(), this.username);
-        if (this.eladdToConcept.value==='true')
-            this.question.addToConcept(this.answer.getContent(), !(this.elevalutaion.value==='true'));
+        this.answer.evaluate(this.elevalutaion.value === 'true', new Date(), this.username);
+        if (this.eladdToConcept.value === 'true')
+            this.question.addToConcept(this.answer.getContent(), !(this.elevalutaion.value === 'true'));
         this.dispatchModelChangedEvent();
         this.elinput.value = '';
         this.elevalutaion.value = '';
