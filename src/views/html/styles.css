@@ -14,6 +14,8 @@ body {
 
 eit-info-overlay {
     --eit-info-overlay-icon-color: #481a29;
+    --eit-info-overlay-background-color: #ccccccdc;
+    --eit-info-overlay-width: fit-content;
 }
 
 header div {
@@ -52,12 +54,12 @@ header div {
 }
 
 footer {
-    position:fixed;
-    bottom:0;
-    width:100%;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     text-align: center;
     background-color: #60706099;
-    color:#ccc;
+    color: #ccc;
 }
 
 
