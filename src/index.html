@@ -23,29 +23,34 @@
             Ver la <a href="https://github.com/Joselon/ProyectoOpoTest#readme" target="_blank">Documentación</a> del
             Proyecto
         </eit-info-overlay>
+        <dile-confirm id="resetConfirm" cancelLabel="Cancelar" acceptLabel="Reset"
+            @dile-confirm-accepted="resetStorage()">
+            <p>
+                Se borrarán todos los cambios realizados y se cargan los datos inciales.
+            </p>
+        </dile-confirm>
+        <script>
+            const resetConfirmElement = document.getElementById('resetConfirm');
+            resetConfirmElement.addEventListener('dile-confirm-accepted', resetStorage);
+            function resetStorage() {
+                resetConfirmElement.close();
+                window.localStorage.clear();
+                location.reload();
+            }
+        </script>
     </header>
 
     <section id="app"></section>
 
     <footer>
         <jno-feedback></jno-feedback>
+        <small>Importar JSON</small>
+        <input type="file" id="categoriesJSONfile" accept=".json, .JSON" />
+        <button id="exportJSONfile">Exportar JSON</button>
         <p>Versión DEMO: Cambios en local</p>
     </footer>
 
-    <dile-confirm id="resetConfirm" cancelLabel="Cancelar" acceptLabel="Reset" @dile-confirm-accepted="resetStorage()">
-        <p>
-            Se borrarán todos los cambios realizados y se cargan los datos inciales.
-        </p>
-    </dile-confirm>
-    <script>
-        const resetConfirmElement = document.getElementById('resetConfirm')
-        resetConfirmElement.addEventListener('dile-confirm-accepted', resetStorage);
-        function resetStorage() {
-            resetConfirmElement.close();
-            window.localStorage.clear();
-            location.reload();
-        }
-    </script>
+
 </body>
 
 </html>

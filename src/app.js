@@ -15,6 +15,7 @@ import { json } from './data/database_var.js';
 import '@dile/dile-confirm/dile-confirm';
 
 class ElaboraTest {
+    #dataObject;
     #userState;
     #categories;
 
@@ -24,6 +25,8 @@ class ElaboraTest {
     }
 
     start() {
+        document.querySelector('#categoriesJSONfile').addEventListener('change', this.readJSONfile.bind(this), false);
+        document.querySelector('#exportJSONfile').onclick = this.exportJSONfile.bind(this);
         new UserDialog((userTypeIndex) => {
             this.#userState.setCurrentUserType(UserType.values()[userTypeIndex]);
             new InputDialog('app', `Escribe nombre de usuario:`, (username) => {
@@ -35,7 +38,7 @@ class ElaboraTest {
                 else {
                     new MainMenu(this.#userState, this.#categories).interact();
                 }
-                document.addEventListener('model-changed', this.writeJSONfile.bind(this));
+                document.addEventListener('model-changed', this.writeJSONdata.bind(this));
             })
 
         })
@@ -43,46 +46,69 @@ class ElaboraTest {
 
     #setUp() {
         this.#userState = new UserState();
-        this.readJSONfile();
+        this.setData();
+        this.readJSONdata();
     }
 
-    readJSONfile() {
-        let dataobject;
+    setData() {
         if (window.localStorage.getItem('categories') !== null) {
-            dataobject = JSON.parse(window.localStorage.getItem('categories'));
+            this.#dataObject = JSON.parse(window.localStorage.getItem('categories'));
         }
         else {
-            dataobject = json;
+            this.#dataObject = json;
         }
+    }
+
+    readJSONdata() {
+        this.#categories = [];
         let index = 0;
-        for (const categoryObject of dataobject.categories) {
+        for (const categoryObject of this.#dataObject.categories) {
             this.#categories.push(new Category(categoryObject.name));
             this.#categories[index].loadCategoryFromDataObject(categoryObject);
             index++;
         }
     }
 
-    writeJSONfile(e) {
-        let dataObject = { categories: [] };
-        for (let category of this.#categories) {
-            dataObject.categories.push(category.formatCategoryObject());
+    readJSONfile(e) {
+        const file = e.target.files[0];
+        if (!file) {
+            return;
         }
-        const data = JSON.stringify(dataObject);
+        const reader = new FileReader();
+        reader.onload = ((e) => {
+            this.#dataObject = JSON.parse(e.target.result);
+            this.readJSONdata();
+            this.writeJSONdata();
+            location.reload();
+        }).bind(this);
+        reader.readAsText(file);
+    }
+
+    formatJSONdata() {
+        this.#dataObject = { categories: [] };
+        for (let category of this.#categories) {
+            this.#dataObject.categories.push(category.formatCategoryObject());
+        }
+        const data = JSON.stringify(this.#dataObject);
+        return data;
+    }
+
+    writeJSONdata(e) {
+        const data = this.formatJSONdata();
         window.localStorage.setItem('categories', data);
     }
-    /*  OFRECER EXPORTAR JSON
-    async writeJSONfile() {
-         try {
-             let dataObject = { categories: [] };
-             for (let category of this.#categories) {
-                 dataObject.categories.push(category.formatCategoryObject());
-             }
-             const data = JSON.stringify(dataObject);
-             writeFileSync('data/database.json', data);
-         } catch (error) {
-             console.error('Error al escribir en el archivo de base de datos:', error);
-         }
-     }*/
+    exportJSONfile() {
+        const data = this.formatJSONdata();
+        const a = document.createElement("a");
+        const content = data,
+            blob = new Blob([content], { type: "octet/stream" }),
+            url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = "database.json";
+        a.click();
+        window.URL.revokeObjectURL(url);
+
+    };
 }
 
 new ElaboraTest().start();
