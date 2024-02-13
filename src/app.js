@@ -11,7 +11,6 @@ import { UserState } from './models/UserState.js';
 import { UserType } from './models/UserTypes.js';
 
 import { json } from './data/database_var.js';
-//import { readFileSync, writeFileSync } from 'node:fs';
 import '@dile/dile-confirm/dile-confirm';
 
 class ElaboraTest {
@@ -25,18 +24,19 @@ class ElaboraTest {
     }
 
     start() {
-        document.querySelector('#categoriesJSONfile').addEventListener('change', this.readJSONfile.bind(this), false);
+        document.querySelector('#categoriesJSONfile').onchange = this.readJSONfile.bind(this);
         document.querySelector('#exportJSONfile').onclick = this.exportJSONfile.bind(this);
+
         new UserDialog((userTypeIndex) => {
             this.#userState.setCurrentUserType(UserType.values()[userTypeIndex]);
-            new InputDialog('app', `Escribe nombre de usuario:`, (username) => {
-                //Validate
+            new InputDialog('app', 'Escribe nombre de usuario:', (username) => {
+
                 this.#userState.setCurrentUserName(username);
                 if (this.#userState.getCurrentUserType() === UserType.TEACHER) {
-                    new TeacherMainMenu(this.#userState, this.#categories).interact();
+                    new TeacherMainMenu(this.#userState, this.#categories).show();
                 }
                 else {
-                    new MainMenu(this.#userState, this.#categories).interact();
+                    new MainMenu(this.#userState, this.#categories).show();
                 }
                 document.addEventListener('model-changed', this.writeJSONdata.bind(this));
             })

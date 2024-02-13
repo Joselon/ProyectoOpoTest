@@ -1,19 +1,12 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 import { UpdateAtModelChangedMixin } from '../mixins/UpdateAtModelChangedMixin.js';
 import { repeat } from 'lit/directives/repeat.js';
 import './jno-concept.js';
+import './jno-concept-add.js';
 import './jno-concept-edit.js';
 import './jno-concept-delete.js';
-import './jno-concept-add.js';
 
 export class JnoConceptsList extends UpdateAtModelChangedMixin(LitElement) {
-    static styles = [
-        css`
-            :host {
-                display: block;
-            }
-        `
-    ];
 
     static get properties() {
         return {
@@ -24,32 +17,39 @@ export class JnoConceptsList extends UpdateAtModelChangedMixin(LitElement) {
 
     constructor() {
         super();
-        this.elements = new Map();
+        this.elements = [];
         this.userState = {};
     }
+
     render() {
         return html`
-            ${this.template}
+            ${this.headerTemplate}
+            ${this.mainTemplate}
         `;
     }
 
-    get template() {
+    get headerTemplate() {
         if (this.userState.getCurrentCategory().getName() === '---') {
             return html`<p>Debe seleccionar una categoría</p>`;
         }
-        this.elements = this.userState.getCurrentCategory().getConceptsArray();
         return html`
             <p>Contenidos en la categoría <b>${this.userState.getCurrentCategory().getName()}</b> (sin subcategorías):</p>
             <dile-button-icon 
                    @click=${this.addConcept}
                  >
                  Añadir
-                 </dile-button-icon>
+            </dile-button-icon>
+        `;
+    }
+
+    get mainTemplate() {
+        return html`
             ${repeat(this.elements, (element) => {
-                return html`
+            return html`
                     <jno-concept 
-                        .concept="${element}"
+                        .element="${element}"
                         .userState="${this.userState}"
+                        .actionOptions="${this.getActionOptions()}"
                         @edit-concept=${this.editConcept}
                         @delete-concept=${this.deleteConcept}
                     ></jno-concept>
@@ -59,14 +59,21 @@ export class JnoConceptsList extends UpdateAtModelChangedMixin(LitElement) {
             <jno-concept-add></jno-concept-add>
         `;
     }
+    getActionOptions() {
+        return ["Seleccionar", "Editar", "Eliminar"];
+    }
+    addConcept() {
+        this.shadowRoot.querySelector('jno-concept-add').add(this.userState.getCurrentCategory());
+    }
     editConcept(e) {
         this.shadowRoot.querySelector('jno-concept-edit').edit(e.detail, this.userState.getCurrentCategory());
     }
     deleteConcept(e) {
-        this.shadowRoot.querySelector('jno-concept-delete').delete(e.detail,this.userState.getCurrentCategory());
+        this.shadowRoot.querySelector('jno-concept-delete').delete(e.detail, this.userState.getCurrentCategory());
     }
-    addConcept() {
-        this.shadowRoot.querySelector('jno-concept-add').add(this.userState.getCurrentCategory());
+    stateUpdate(e) {
+        this.elements = this.userState.getCurrentCategory().getConceptsArray();
+        //super.stateUpdate(e);
     }
 }
 customElements.define('jno-concepts-list', JnoConceptsList);

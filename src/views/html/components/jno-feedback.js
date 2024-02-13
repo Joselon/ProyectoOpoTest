@@ -22,7 +22,7 @@ export class JnoFeedback extends LitElement {
 
     render() {
         return html`
-            <dile-toast id="notificacion" duration="3000"></dile-toast>
+            <dile-toast id="notificacion" duration="1500"></dile-toast>
         `;
     }
 
