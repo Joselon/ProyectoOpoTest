@@ -1,7 +1,8 @@
 import { html, css } from 'lit';
 import { JnoModelElement } from './jno-model-element.js';
 import { listIcon } from '@dile/icons';
-import './jno-contents-list';
+import './jno-definitions-list.js';
+import './jno-relations-list.js';
 
 export class JnoConcept extends JnoModelElement {
     static styles = [
@@ -79,19 +80,17 @@ export class JnoConcept extends JnoModelElement {
 
     get definitionsTemplate() {
         return html`
-            <jno-contents-list 
+            <jno-definitions-list 
              .elements=${this.element.getDefinitions()}
-             .userState=${this.userState}
-             ></jno-contents-list>
+             ></jno-definitions-list>
         `
     }
 
     get relationsTemplate() {
         return html`
-        <jno-contents-list 
+        <jno-relations-list 
              .elements=${this.element.getRelations()}
-             .userState=${this.userState}
-             ></jno-contents-list>
+             ></jno-relations-list>
         `
     }
 

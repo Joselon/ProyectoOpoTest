@@ -3,7 +3,7 @@ import { UpdateAtModelChangedMixin } from '../mixins/UpdateAtModelChangedMixin.j
 import { repeat } from 'lit/directives/repeat.js';
 
 
-export class JnoContentsList extends UpdateAtModelChangedMixin(LitElement) {
+export class JnoRelationsList extends UpdateAtModelChangedMixin(LitElement) {
     static styles = [
         css`
             :host {
@@ -15,14 +15,12 @@ export class JnoContentsList extends UpdateAtModelChangedMixin(LitElement) {
     static get properties() {
         return {
             elements: { type: Array },
-            userState: { type: Object },
         };
     }
 
     constructor() {
         super();
         this.elements = [];
-        this.userState = {};
     }
     render() {
         return html`
@@ -33,10 +31,10 @@ export class JnoContentsList extends UpdateAtModelChangedMixin(LitElement) {
         return html`
         <ul></ul>
             ${repeat(this.elements, (element) => html`
-                    <li>${element.getContent()} <b style="color:red;">${!element.isFake()?'':'Fake'}</b></li>
+                    <li>${element.getType()} - ${element.getContent()} <b style="color:red;">${!element.isFake()?'':'Fake'}</b></li>
             `)}
         </ul>
         `;
     }
 }
-customElements.define('jno-contents-list', JnoContentsList);
+customElements.define('jno-relations-list', JnoRelationsList);
