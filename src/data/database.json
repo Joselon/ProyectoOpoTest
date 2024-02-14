@@ -13,6 +13,7 @@
                                 {
                                     "keyword": "Software",
                                     "definitions": [],
+                                    "relations": [],
                                     "fakeKeywords": []
                                 }
                             ],
@@ -52,6 +53,7 @@
                                         {
                                             "keyword": "Patron de diseño",
                                             "definitions": [],
+                                            "relations": [],
                                             "fakeKeywords": []
                                         }
                                     ],
@@ -89,6 +91,7 @@
                         {
                             "keyword": "Linux",
                             "definitions": [],
+                            "relations": [],
                             "fakeKeywords": []
                         }
                     ],
@@ -101,6 +104,7 @@
                         {
                             "keyword": "Lit",
                             "definitions": [],
+                            "relations": [],
                             "fakeKeywords": []
                         }
                     ],
@@ -141,11 +145,13 @@
                             "justifications": []
                         }
                     ],
+                    "relations": [],
                     "fakeKeywords": []
                 },
                 {
                     "keyword": "Bases de Datos",
                     "definitions": [],
+                    "relations": [],
                     "fakeKeywords": []
                 },
                 {
@@ -164,6 +170,7 @@
                             "justifications": []
                         }
                     ],
+                    "relations": [],
                     "fakeKeywords": []
                 }
             ],
@@ -287,6 +294,7 @@
                 {
                     "keyword": "Derechos de los Ciudadanos",
                     "definitions": [],
+                    "relations": [],
                     "fakeKeywords": []
                 }
             ],
@@ -310,6 +318,7 @@
                         {
                             "keyword": "Prohibicion",
                             "definitions": [],
+                            "relations": [],
                             "fakeKeywords": []
                         }
                     ],

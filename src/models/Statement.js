@@ -51,7 +51,7 @@ class ClassificationStatement extends StatementImplementor {
     }
 
     addToConcept(content, isFake) {
-        this._concept.addRelation(new Relation(content, isFake));
+        this._concept.addRelation(this._target, content, isFake );
     }
 
     setOptions() {
@@ -68,7 +68,7 @@ class CompositionStatement extends StatementImplementor {
     }
 
     addToConcept(content, isFake) {
-        this._concept.addRelation(new Relation(content, isFake));
+        this._concept.addRelation(this._target, content, isFake);
     }
 
     setOptions() {

@@ -1,4 +1,5 @@
 import { Definition } from "./Definition.js";
+import { Relation } from "./Relation.js";
 
 class Concept {
     #keyword;
@@ -44,8 +45,8 @@ class Concept {
         this.#definitions.push(new Definition(content, isFake, date));
     }
 
-    addRelation(relation) {
-        this.#relations.push(relation);
+    addRelation(type, content, isFake, date = new Date()) {
+        this.#relations.push(new Relation(type,content,isFake,date));
     }
 
     getNumberOfDefinitions() {
@@ -58,12 +59,19 @@ class Concept {
 
     loadConceptFromDataObject(conceptDataObject) {
         this.#loadDefinitionsFromDataObject(conceptDataObject);
+        this.#loadRelationsFromDataObject(conceptDataObject);
         this.#loadFakeKeywordsFromDataObject(conceptDataObject);
     }
 
     #loadDefinitionsFromDataObject(conceptDataObject) {
         for (const definitionObject of conceptDataObject.definitions) {
             this.addDefinition(definitionObject.content, definitionObject.isFake, definitionObject.createdDate);
+        }
+    }
+
+    #loadRelationsFromDataObject(conceptDataObject) {
+        for (const relationObject of conceptDataObject.relations) {
+            this.addRelation(relationObject.type, relationObject.content, relationObject.isFake, relationObject.createdDate);
         }
     }
 
@@ -77,11 +85,12 @@ class Concept {
         const conceptObject = {
             keyword: this.getKeyword(),
             definitions: [],
+            relations: [],
             fakeKeywords: []
         };
         conceptObject.definitions = this.#formatDefinitionsObjects();
+        conceptObject.relations = this.#formatRelationsObjects();
         conceptObject.fakeKeywords = this.#formatFakeKeywordsObject();
-        //Pendiente guardar  Relations...
 
         return conceptObject;
     }
@@ -92,6 +101,14 @@ class Concept {
             conceptDefinitionsObjects.push(definition.formatDefinitionObject());
         }
         return conceptDefinitionsObjects;
+    }
+
+    #formatRelationsObjects() {
+        const conceptRelationsObjects = [];
+        for (let relation of this.#relations) {
+            conceptRelationsObjects.push(relation.formatRelationObject());
+        }
+        return conceptRelationsObjects;
     }
 
     #formatFakeKeywordsObject() {

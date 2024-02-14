@@ -66,9 +66,11 @@ export class JnoConcept extends JnoModelElement {
     get _subElementsTemplate() {
         return html`
             <div id="definitions">
+                <small>Definiciones</small>
                 ${this.definitionsTemplate}
             </div>
             <div id="relations">
+            <small>Relaciones</small>
                 ${this.relationsTemplate}
             </div>
         </section>
@@ -91,6 +93,14 @@ export class JnoConcept extends JnoModelElement {
              .userState=${this.userState}
              ></jno-contents-list>
         `
+    }
+
+    toggleDiv(div){
+        if(div === this.relationsDiv)
+            this.definitionsDiv.style.display = 'none';
+        else 
+        this.relationsDiv.style.display = 'none';
+        super.toggleDiv(div);
     }
 
     _doAction(action) {

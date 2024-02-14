@@ -13,6 +13,7 @@ export const json ={
                                 {
                                     "keyword": "Concept1",
                                     "definitions": [],
+                                    "relations": [],
                                     "fakeKeywords": []
                                 }
                             ],
@@ -52,6 +53,7 @@ export const json ={
                                         {
                                             "keyword": "Concept2",
                                             "definitions": [],
+                                            "relations": [],
                                             "fakeKeywords": []
                                         }
                                     ],
@@ -89,6 +91,7 @@ export const json ={
                         {
                             "keyword": "Concept3",
                             "definitions": [],
+                            "relations": [],
                             "fakeKeywords": []
                         }
                     ],
@@ -101,6 +104,7 @@ export const json ={
                         {
                             "keyword": "Concept4",
                             "definitions": [],
+                            "relations": [],
                             "fakeKeywords": []
                         }
                     ],
@@ -141,11 +145,13 @@ export const json ={
                             "justifications": []
                         }
                     ],
+                    "relations": [],
                     "fakeKeywords": []
                 },
                 {
                     "keyword": "Concept6",
                     "definitions": [],
+                    "relations": [],
                     "fakeKeywords": []
                 },
                 {
@@ -164,6 +170,7 @@ export const json ={
                             "justifications": []
                         }
                     ],
+                    "relations": [],
                     "fakeKeywords": []
                 }
             ],
@@ -280,6 +287,7 @@ export const json ={
                 {
                     "keyword": "Concept8",
                     "definitions": [],
+                    "relations": [],
                     "fakeKeywords": []
                 }
             ],
@@ -303,6 +311,7 @@ export const json ={
                         {
                             "keyword": "Concept9",
                             "definitions": [],
+                            "relations": [],
                             "fakeKeywords": []
                         }
                     ],
