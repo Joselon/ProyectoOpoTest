@@ -31,9 +31,20 @@ export class JnoAnswersList extends LitElement {
     get template() {
         return html`
             ${repeat(this.elements, (element) => html`
-                    <jno-answer .answer=${element}></jno-answer>
+                    <jno-answer
+                     .element=${element}
+                     .actionOptions="${this.getActionOptions(element.isEvaluated())}"
+                     ></jno-answer>
             `)}
         `;
     }
+    getActionOptions(isEvaluated) {
+        if (!isEvaluated) {
+            return ["Evaluar"];
+        }
+        return [];
+
+    }
+
 }
 customElements.define('jno-answers-list', JnoAnswersList);

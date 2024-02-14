@@ -1,4 +1,5 @@
-import { LitElement, html, css } from 'lit';
+import {  html, css, LitElement } from 'lit';
+import '../../../utils/view/html/components/jno-event-menu.js';
 import { UpdateAtModelChangedMixin } from '../mixins/UpdateAtModelChangedMixin.js';
 import { doneIcon, clearIcon, priorityHighIcon } from '@dile/icons';
 
@@ -15,57 +16,89 @@ export class JnoAnswer extends UpdateAtModelChangedMixin(LitElement) {
                 border: 2px solid #ccc;
             }
             .pending {
-                background-color: #b0ed09;
+                --dile-icon-color: #b0ed09;
             }
             .ok {
-                background-color: #1aed3aaa;
+                --dile-icon-color: #1aed3aaa;
             }
             .ko {
-                background-color: #9a1b1b91;
-            }
-            
-        `
+                --dile-icon-color: #9a1b1b91;
+            } 
+        `,
     ];
 
     static get properties() {
         return {
-            answer: { type: Object },
+            element: { type: Object },
+            actionOptions: { type: Array },
+            selectedOption: { type: String },
         };
     }
 
     constructor() {
         super();
-        this.answer = {};
+        this.element = {};
+        this.actionOptions = [];
+        this.selectedAction = "";
     }
-    //Dar formato y poner botones corregir
+
     render() {
         return html`
         <section>
-            <main class=${this.answer.isEvaluated() ? (this.answer.getEvaluation() ? 'ok' : 'ko') : 'pending'}>
-                ${this.answer.getContent()}
-            </main>
-            <aside>
-                ${this.answer.isEvaluated() ?
-                html`${(this.answer.getEvaluation() ?
-                    html`${doneIcon}`
-                    : html`${clearIcon}`
-                )}<small> (Corregido en: ${this.answer.getEvaluatedDateString()})</small>`
-                : html`
-                    ${priorityHighIcon}<button @click=${this.evaluate}>EVALUAR</button>
-                     <small>(Respondido en: ${this.answer.getCreatedDateString()})</small>`}
-                
-                   <small> / Estudiante: ${this.answer.getStudentName()} </small>
-                
-            </aside>
+            <jno-event-menu
+                title="${this.getTitle()}"
+                .options=${this.actionOptions} 
+                selectedOption=${this.selectedOption}
+                @jno-event-menu-changed=${this.changeSelectedOption}
+                >
+                 ${this._infoTemplate}
+            </jno-event-menu>
         </section>
         `;
+    }
+
+    getTitle() {
+        return this.element.getContent();
+    }
+
+    get _infoTemplate() {
+        return html`
+        <span slot="subtitle">
+        ${this.element.isEvaluated() ?
+                html`${(this.element.getEvaluation() ?
+                    html`<dile-icon class='ok' .icon=${doneIcon}></dile-icon>`
+                    : html`<dile-icon class='ko' .icon=${clearIcon}></dile-icon>`
+                )}<b> (Corregido en:</b> ${this.element.getEvaluatedDateString()})`
+                : html`
+                    <dile-icon class='pending' .icon=${priorityHighIcon}></dile-icon>
+                     <b>(Respondido en: ${this.element.getCreatedDateString()})</b>`}
+                
+                   <b> / Estudiante: ${this.element.getStudentName()} </b>
+            
+        </span>
+        `;
+    }
+
+    changeSelectedOption(e) {
+        this.selectedAction = e.detail.selectedOption;
+        this._doAction(this.selectedAction);
+    }
+
+    _doAction(action) {
+        switch (action) {
+            case "Evaluar":
+                this.evaluate();
+                break;
+            default:
+                this.showFeedbackError(`ERROR: Aún no disponible...`);
+        }
     }
 
     evaluate() {
         this.dispatchEvent(new CustomEvent('evaluate-answer', {
             bubbles: true,
             composed: true,
-            detail: this.answer
+            detail: this.element
         }));
     }
 }
