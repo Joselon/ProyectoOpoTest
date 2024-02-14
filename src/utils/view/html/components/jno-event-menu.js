@@ -49,9 +49,7 @@ export class JnoEventMenu extends LitElement {
         return {
             title: { type: String },
             options: { type: Array },
-            selectedOption: {
-                type: String,
-            },
+            selectedOption: { type: String },
         };
     }
 
