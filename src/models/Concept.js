@@ -41,12 +41,25 @@ class Concept {
         return this.#relations;
     }
 
+    getTypeRelations(type) {
+        let typeRelations =[];
+        for (let relation of this.#relations){
+            if (relation.getType()===type){
+                typeRelations.push(relation);
+            }
+        }
+        return typeRelations;
+    }
+
     addDefinition(content, isFake, date = new Date()) {
         this.#definitions.push(new Definition(content, isFake, date));
     }
 
     addRelation(type, content, isFake, date = new Date()) {
-        this.#relations.push(new Relation(type,content,isFake,date));
+        let contents = content.split(',');
+        for (let keyword of contents) {
+            this.#relations.push(new Relation(type, keyword, isFake, date));
+        }
     }
 
     getNumberOfDefinitions() {

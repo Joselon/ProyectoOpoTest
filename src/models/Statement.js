@@ -23,6 +23,10 @@ class StatementImplementor {
     getTarget() {
         return this._target;
     }
+
+    getOptions() {
+        return this._solutions;
+    }
 }
 
 class DefinitionStatement extends StatementImplementor {
@@ -31,15 +35,13 @@ class DefinitionStatement extends StatementImplementor {
         super(concept);
         this._statement = `¿Qué es ${concept.getKeyword()}?`;
         this._target = "Definition";
+        this._solutions = this._concept.getDefinitions();
     }
 
     addToConcept(content, isFake) {
         this._concept.addDefinition(content, isFake);
     }
 
-    setOptions() {
-        this._solutions = this._concept.getDefinitions();
-    }
 }
 
 class ClassificationStatement extends StatementImplementor {
@@ -48,15 +50,13 @@ class ClassificationStatement extends StatementImplementor {
         super(concept);
         this._statement = `¿Qué tipos hay de ${concept.getKeyword()}?`;
         this._target = "Classification";
+        this._solutions = this._concept.getTypeRelations(this._target);
     }
 
     addToConcept(content, isFake) {
         this._concept.addRelation(this._target, content, isFake );
     }
 
-    setOptions() {
-        this._solutions = this._concept.getRelations();
-    }
 }
 
 class CompositionStatement extends StatementImplementor {
@@ -65,14 +65,11 @@ class CompositionStatement extends StatementImplementor {
         super(concept);
         this._statement = `¿De qué partes se compone ${concept.getKeyword()}?`;
         this._target = "Composition";
+        this._solutions = this._concept.getTypeRelations(this._target);
     }
 
     addToConcept(content, isFake) {
         this._concept.addRelation(this._target, content, isFake);
-    }
-
-    setOptions() {
-        this._solutions = this._concept.getRelations();
     }
 }
 
@@ -107,15 +104,13 @@ class JustificationStatement extends withDefinitionStatement {
         super(concept, definition);
         this._statement = `Justificación: ¿${concept.getKeyword()} ${definition.getContent()}?¿Por qué?`;
         this._target = "Justification";
+        // this._solutions = this._concept.getJustifications();
     }
 
     addToConcept(content) {
         //this._concept.addJustification(content);
     }
 
-    setOptions() {
-       // this._solutions = this._concept.getJustifications();
-    }
 }
 
 class withRelationStatement extends StatementImplementor {

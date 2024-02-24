@@ -105,7 +105,7 @@ class MultipleChoiceQuestion extends Question {
 
     constructor(conceptKey, statement, statementType) {
         super(conceptKey, statement, statementType);
-        //this.#buildOptions();
+        this.#options = statementType.getOptions();
     }
 
     getType() {
@@ -113,6 +113,10 @@ class MultipleChoiceQuestion extends Question {
     }
     addAnswer(username, optionSelected, date = new Date()) {
         this._answers.push(new SelectedOptionAnswer(username, optionSelected, date));
+    }
+
+    getOptions(){
+        return this.#options;
     }
 
     loadAnswersFromDataObject(questionDataObject) {
