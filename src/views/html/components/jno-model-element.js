@@ -27,6 +27,7 @@ export class JnoModelElement extends LitElement {
         return {
             element: { type: Object },
             actionOptions: { type: Array },
+            icons: { type: Array },
             selectedOption: { type: String },
         };
     }
@@ -35,6 +36,7 @@ export class JnoModelElement extends LitElement {
         super();
         this.element = {};
         this.actionOptions = [];
+        this.icons = [];
         this.selectedAction = "";
     }
 
@@ -48,6 +50,7 @@ export class JnoModelElement extends LitElement {
             <jno-event-menu
                 title="${this.getTitle()}"
                 .options=${this.actionOptions} 
+                .icons=${this.icons}
                 selectedOption=${this.selectedOption}
                 @jno-event-menu-changed=${this.changeSelectedOption}
                 >

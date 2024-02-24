@@ -31,6 +31,7 @@ export class JnoAnswer extends UpdateAtModelChangedMixin(LitElement) {
         return {
             element: { type: Object },
             actionOptions: { type: Array },
+            icons: { type: Array },
             selectedOption: { type: String },
         };
     }
@@ -39,6 +40,7 @@ export class JnoAnswer extends UpdateAtModelChangedMixin(LitElement) {
         super();
         this.element = {};
         this.actionOptions = [];
+        this.icons = [];
         this.selectedAction = "";
     }
 
@@ -47,7 +49,8 @@ export class JnoAnswer extends UpdateAtModelChangedMixin(LitElement) {
         <section>
             <jno-event-menu
                 title="${this.getTitle()}"
-                .options=${this.actionOptions} 
+                .options=${this.actionOptions}
+                .icons=${this.icons}
                 selectedOption=${this.selectedOption}
                 @jno-event-menu-changed=${this.changeSelectedOption}
                 >

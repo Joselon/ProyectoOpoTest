@@ -49,6 +49,7 @@ export class JnoEventMenu extends LitElement {
         return {
             title: { type: String },
             options: { type: Array },
+            icons: { type: Array },
             selectedOption: { type: String },
         };
     }
@@ -57,6 +58,7 @@ export class JnoEventMenu extends LitElement {
         super();
         this.title = '';
         this.options = [];
+        this.icons = [];
         this.selectedOption = 0;
     }
 
@@ -67,11 +69,16 @@ export class JnoEventMenu extends LitElement {
             <slot name="subtitle"></slot>
         </div>
         <div id="buttons">
-                ${this.options.map(option => html`
+                ${this.options.map((option,index) =>{
+                    if(!this.icons[index]){
+                        this.icons[index] = "";
+                    }
+                    return html`
                     <dile-button-icon
+                        .icon=${this.icons[index]}
                         @click=${() => this.setOption(option)}
                     >${option}</dile-button-icon>
-                `)}
+                `})}
         </div>
         <slot name="extraAction"></slot>
         `;

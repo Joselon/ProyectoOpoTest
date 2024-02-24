@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { UpdateAtModelChangedMixin } from '../mixins/UpdateAtModelChangedMixin.js';
 import { repeat } from 'lit/directives/repeat.js';
+import { radioCheckedIcon, addIcon, editIcon, deleteIcon } from '@dile/icons';
 import './jno-category-teacher.js';
 import './jno-category-add.js';
 import './jno-category-insert.js';
@@ -36,6 +37,7 @@ export class JnoCategoriesTeacherList extends UpdateAtModelChangedMixin(LitEleme
         if (this.elements.length !== 0 || !this.hasAncestor) {
             buttonHTML = html`
              <dile-button-icon 
+              .icon = "${addIcon}"
                @click=${this.addCategory}
              >
              Añadir
@@ -52,6 +54,7 @@ export class JnoCategoriesTeacherList extends UpdateAtModelChangedMixin(LitEleme
                  .element="${element}"
                  .userState="${this.userState}"
                  .actionOptions="${this.getActionOptions(element.getSubcategories().length)}"
+                 .icons="${this.getActionIcons(element.getSubcategories().length)}"
                  @insert-category=${this.insertCategory}
                  @edit-category=${this.editCategory}
                  @delete-category=${this.deleteCategory}
@@ -75,6 +78,16 @@ export class JnoCategoriesTeacherList extends UpdateAtModelChangedMixin(LitEleme
             actionOptions = ["Seleccionar", "Editar", "Eliminar"];
         }
         return actionOptions;
+    }
+    getActionIcons(numberOfSubElements) {
+        let actionIcons = [];
+        if (numberOfSubElements === 0) {
+            actionIcons = [radioCheckedIcon, addIcon, editIcon, deleteIcon];;
+        }
+        else {
+            actionIcons = [radioCheckedIcon, editIcon, deleteIcon];;
+        }
+        return actionIcons;
     }
 
     insertCategory(e) {

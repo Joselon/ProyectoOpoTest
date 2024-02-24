@@ -1,5 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
+import { autoAwesomeIcon } from '@dile/icons';
+
 import './jno-answer.js';
 
 export class JnoAnswersList extends LitElement {
@@ -21,6 +23,7 @@ export class JnoAnswersList extends LitElement {
     constructor() {
         super();
         this.elements = [];
+        this.icons = [];
         this.userState = {};
     }
     render() {
@@ -34,12 +37,14 @@ export class JnoAnswersList extends LitElement {
                     <jno-answer
                      .element=${element}
                      .actionOptions="${this.getActionOptions(element.isEvaluated())}"
+                     .icons="${this.icons}"
                      ></jno-answer>
             `)}
         `;
     }
     getActionOptions(isEvaluated) {
         if (!isEvaluated) {
+            this.icons = [autoAwesomeIcon];
             return ["Evaluar"];
         }
         return [];

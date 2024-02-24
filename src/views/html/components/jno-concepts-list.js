@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit';
 import { UpdateAtModelChangedMixin } from '../mixins/UpdateAtModelChangedMixin.js';
 import { repeat } from 'lit/directives/repeat.js';
+import { radioCheckedIcon, addIcon, editIcon, deleteIcon } from '@dile/icons';
 import './jno-concept.js';
 import './jno-concept-add.js';
 import './jno-concept-edit.js';
@@ -35,6 +36,7 @@ export class JnoConceptsList extends UpdateAtModelChangedMixin(LitElement) {
         return html`
             <p>Contenidos en la categoría <b>${this.userState.getCurrentCategory().getName()}</b> (sin subcategorías):</p>
             <dile-button-icon 
+                    .icon = "${addIcon}"
                    @click=${this.addConcept}
                  >
                  Añadir
@@ -50,6 +52,7 @@ export class JnoConceptsList extends UpdateAtModelChangedMixin(LitElement) {
                         .element="${element}"
                         .userState="${this.userState}"
                         .actionOptions="${this.getActionOptions()}"
+                        .icons = "${this.getActionIcons()}"
                         @edit-concept=${this.editConcept}
                         @delete-concept=${this.deleteConcept}
                     ></jno-concept>
@@ -61,6 +64,9 @@ export class JnoConceptsList extends UpdateAtModelChangedMixin(LitElement) {
     }
     getActionOptions() {
         return ["Seleccionar", "Editar", "Eliminar"];
+    }
+    getActionIcons() {
+        return [radioCheckedIcon, editIcon, deleteIcon];
     }
     addConcept() {
         this.shadowRoot.querySelector('jno-concept-add').add(this.userState.getCurrentCategory());
