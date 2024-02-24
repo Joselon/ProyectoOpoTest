@@ -98,7 +98,7 @@ class SelectedOptionAnswer extends Answer {
 
     formatAnswerObject() {
         const answerObject = {
-            username: this.getUserName(),
+            username: this.getStudentName(),
             content: this.getContent(),
             isOK: this.getEvaluation(),
             createdDate: this.getCreatedDate(),
