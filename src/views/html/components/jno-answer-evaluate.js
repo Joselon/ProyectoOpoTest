@@ -56,7 +56,7 @@ export class JnoAnswerEvaluate extends LitElement {
                     <dile-radio label="Sí" value="true"></dile-radio>
                     <dile-radio label="No" value="false"></dile-radio>
                 </dile-radio-group>
-                <dile-input label="Contenido" name="answer" id="elinput"></dile-input>
+                <dile-input label="Contenido (separado por comas si son varios)" name="answer" id="elinput"></dile-input>
                 </form>
                 <button type="button" @click=${this.evaluate}>Aceptar</button>
             </dile-modal>
@@ -74,7 +74,7 @@ export class JnoAnswerEvaluate extends LitElement {
     evaluate() {
         this.answer.evaluate(this.elevalutaion.value === 'true', new Date(), this.username);
         if (this.eladdToConcept.value === 'true')
-            this.question.addToConcept(this.answer.getContent(), !(this.elevalutaion.value === 'true'));
+            this.question.addToConcept(this.elinput.value, !(this.elevalutaion.value === 'true'));
         this.dispatchModelChangedEvent();
         this.elinput.value = '';
         this.elevalutaion.value = '';

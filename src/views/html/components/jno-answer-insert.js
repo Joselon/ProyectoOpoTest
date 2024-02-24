@@ -1,4 +1,6 @@
 import { LitElement, html, css } from 'lit';
+import '@dile/dile-radio-group/dile-radio-group.js';
+import '@dile/dile-radio-group/dile-radio.js';
 import './jno-category-form.js';
 
 export class JnoAnswerInsert extends LitElement {
@@ -18,11 +20,11 @@ export class JnoAnswerInsert extends LitElement {
     ];
 
     static get properties() {
-      return {
-        question: { type: Object },
-        username: { type: String },
-        statement: { type: String}
-      };
+        return {
+            question: { type: Object },
+            username: { type: String },
+            statement: { type: String }
+        };
     }
 
     firstUpdated() {
@@ -34,11 +36,25 @@ export class JnoAnswerInsert extends LitElement {
         return html`
             <dile-modal id="elmodal" showCloseIcon blocking>
                 <h1>¿${this.statement}?</h1>
+                ${this.optionsTemplate}
                 <h2>Respuesta:</h2>
                 <dile-input id="elinput"></dile-input>
                 <button type="button" @click=${this.insertAnswer}>Guardar</button>
             </dile-modal>
         `;
+    }
+
+    get optionsTemplate() {
+        if (this.question && this.question.getType() === "MultipleChoice") {
+            return html`
+            <dile-radio-group name="options" label="Opciones:" @dile-radio-selected="${this.setInput}">
+            ${this.question.getOptions().map((option,index) =>html`<dile-radio label="${option.getContent()}" value="${option.getContent()}"></dile-radio>`)}
+          </dile-radio-group>`;
+        }
+    }
+
+    setInput(e) {
+        this.elinput.value = e.detail.value;
     }
 
     insert(question, username) {
@@ -51,7 +67,7 @@ export class JnoAnswerInsert extends LitElement {
     insertAnswer() {
         this.question.addAnswer(this.username, this.elinput.value);
         this.dispatchModelChangedEvent();
-        this.elinput.value='';
+        this.elinput.value = '';
         this.elmodal.close();
     }
 
