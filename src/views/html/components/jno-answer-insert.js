@@ -14,7 +14,7 @@ export class JnoAnswerInsert extends LitElement {
                 --dile-modal-close-icon-color: red;
             }
             h1,h2 {
-                margin-top: 0;
+                margin-top: 1rem;
             }
         `
     ];
@@ -61,6 +61,7 @@ export class JnoAnswerInsert extends LitElement {
         this.question = question;
         this.username = username;
         this.statement = this.question.getStatement();
+        this.elinput.value = '';
         this.elmodal.open();
     }
 
