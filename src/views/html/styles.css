@@ -38,7 +38,8 @@ header dile-nav span button {
 header div {
     display: none;
     position: fixed;
-    top: 2.5rem;
+    top: 4.5rem;
+    z-index: 1;
     right: 1rem;
     padding: 1rem;
     background-color: #607060;
@@ -53,6 +54,11 @@ header div {
 
 }
 
+#app {
+    position:relative;
+    top:8rem;
+    
+}
 footer {
     position: fixed;
     bottom: 0;
@@ -67,5 +73,9 @@ footer {
 
     header {
         margin-bottom: 5rem;
+    }
+
+    #app{
+        top:1rem;
     }
 }
