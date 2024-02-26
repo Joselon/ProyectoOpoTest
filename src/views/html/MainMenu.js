@@ -48,8 +48,8 @@ class MainMenu {
         let tabContainer = document.createElement('section');
         let contentContainer = document.createElement('section');
 
-        let tabsHtml = `<dile-tabs attrForSelected="name" selected="${this._options[0].element}" selectorId="tabs">`;
-        let contentHtml = `<dile-pages attrForSelected="name" selected="${this._options[0].element}" selectorId="tabs">`;
+        let tabsHtml = `<dile-tabs attrForSelected="name" selected="${this._options[this._options.length-1].element}" selectorId="tabs">`;
+        let contentHtml = `<dile-pages attrForSelected="name" selected="${this._options[this._options.length-1].element}" selectorId="tabs">`;
 
         let optionsHtml = '';
         for (let option of this._options) {
