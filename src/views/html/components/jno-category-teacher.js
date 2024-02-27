@@ -14,7 +14,7 @@ export class JnoCategoryTeacher extends JnoCategory {
     }
     get _subElementsTemplate() {
         return html`
-        <div id="subcategories">
+        <div slot="subCards" id="subcategories">
             <jno-categories-teacher-list
              .elements=${this.element.getSubcategories()}
              .userState=${this.userState}

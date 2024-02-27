@@ -1,5 +1,5 @@
 import {  html, css, LitElement } from 'lit';
-import '../../../utils/view/html/components/jno-event-menu.js';
+import '../../../utils/view/html/components/dile-action-card.js';
 import { UpdateAtModelChangedMixin } from '../mixins/UpdateAtModelChangedMixin.js';
 import { doneIcon, clearIcon, priorityHighIcon } from '@dile/icons';
 
@@ -10,11 +10,7 @@ export class JnoAnswer extends UpdateAtModelChangedMixin(LitElement) {
                 display: block;
                 margin-bottom: 1rem;
             }
-            section {
-                background-color: #f5f5f573;
-                padding: 0 1rem;
-                border: 2px solid #ccc;
-            }
+
             .pending {
                 --dile-icon-color: #b0ed09;
             }
@@ -41,22 +37,20 @@ export class JnoAnswer extends UpdateAtModelChangedMixin(LitElement) {
         this.element = {};
         this.actionOptions = [];
         this.icons = [];
-        this.selectedAction = "";
+        this.selectedOption = '';
     }
 
     render() {
         return html`
-        <section>
-            <jno-event-menu
+            <dile-action-card
                 title="${this.getTitle()}"
                 .options=${this.actionOptions}
                 .icons=${this.icons}
                 selectedOption=${this.selectedOption}
-                @jno-event-menu-changed=${this.changeSelectedOption}
+                @dile-action-card-option-selected=${this.changeSelectedOption}
                 >
-                 ${this._infoTemplate}
-            </jno-event-menu>
-        </section>
+                 ${this.infoTemplate}
+            </dile-action-card>
         `;
     }
 
@@ -64,7 +58,7 @@ export class JnoAnswer extends UpdateAtModelChangedMixin(LitElement) {
         return this.element.getContent();
     }
 
-    get _infoTemplate() {
+    get infoTemplate() {
         return html`
         <span slot="subtitle">
         ${this.element.isEvaluated() ?
@@ -83,11 +77,11 @@ export class JnoAnswer extends UpdateAtModelChangedMixin(LitElement) {
     }
 
     changeSelectedOption(e) {
-        this.selectedAction = e.detail.selectedOption;
-        this._doAction(this.selectedAction);
+        this.selectedOption = e.detail.selectedOption;
+        this.doAction(this.selectedOption);
     }
 
-    _doAction(action) {
+    doAction(action) {
         switch (action) {
             case "Evaluar":
                 this.evaluate();

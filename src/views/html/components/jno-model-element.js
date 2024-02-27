@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import '../../../utils/view/html/components/jno-event-menu.js';
+import '../../../utils/view/html/components/dile-action-card.js';
 
 
 export class JnoModelElement extends LitElement {
@@ -9,17 +9,7 @@ export class JnoModelElement extends LitElement {
                 display: block;
                 margin-bottom: 1rem;
             }
-            section {
-                background-color: #f5f5f573;
-                padding: 0 1rem;
-                border: 2px solid #ccc;
-            }
            
-            div {
-                border: 1px solid #ddd;
-                background-color: #abaaaa73;
-                padding: 0 1rem;
-            }
         `
     ];
 
@@ -37,7 +27,7 @@ export class JnoModelElement extends LitElement {
         this.element = {};
         this.actionOptions = [];
         this.icons = [];
-        this.selectedAction = "";
+        this.selectedOption = "";
     }
 
     firstUpdated() {
@@ -46,19 +36,17 @@ export class JnoModelElement extends LitElement {
 
     render() {
         return html`
-        <section>
-            <jno-event-menu
+            <dile-action-card
                 title="${this.getTitle()}"
                 .options=${this.actionOptions} 
                 .icons=${this.icons}
                 selectedOption=${this.selectedOption}
-                @jno-event-menu-changed=${this.changeSelectedOption}
+                @dile-action-card-option-selected=${this.changeSelectedOption}
                 >
                  ${this._infoTemplate}
-                 ${this._extraActionsTemplate}
-            </jno-event-menu>
-            ${this._subElementsTemplate}
-        </section>
+                 ${this._subCardsButtonTemplate}
+                 ${this._subElementsTemplate}
+            </dile-action-card>
         `;
     }
 
@@ -74,26 +62,30 @@ export class JnoModelElement extends LitElement {
         `;
     }
 
-    get _extraActionsTemplate() {
+    get _subCardsButtonTemplate() {
         return html`
         <dile-button-icon 
-                    slot="extraAction"
+                    slot="subCardsButton"
                     @click=${() => this.toggleDiv(this.subelementsDiv)}
                     >
-                    Subelements
-                </dile-button-icon>
+                    ToogleSubelements
+        </dile-button-icon>
+            
         `;
     }
     get _subElementsTemplate() {
         return html`
-        <div id="subelements">
+        <div slot="subCards" id="subelements">
             Subelements
         </div>
         `
     }
+
     changeSelectedOption(e) {
-        this.selectedAction = e.detail.selectedOption;
-        this._doAction(this.selectedAction);
+        e.preventDefault();
+        e.stopPropagation();
+        this.selectedOption = e.detail.selectedOption;
+        this._doAction(this.selectedOption);
     }
 
     _doAction(action) {

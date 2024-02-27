@@ -43,10 +43,10 @@ export class JnoQuestionTeacher extends JnoModelElement {
         `;
     }
 
-    get _extraActionsTemplate() {
+    get _subCardsButtonTemplate() {
         return html`
             <dile-button-icon 
-                slot="extraAction"
+                slot="subCardsButton"
                 .icon=${listIcon}
                 @click=${() => this.toggleDiv(this.answersDiv)}
                 ?disabled=${this.element.getAnswers().length === 0}
@@ -57,18 +57,28 @@ export class JnoQuestionTeacher extends JnoModelElement {
     }
     get _subElementsTemplate() {
         return html`
-        <div id='answers' @evaluate-answer='${this.evaluate}'>
+        <div slot="subCards" id='answers' @evaluate-answer='${this.evaluate}'>
             <jno-answers-list
              .elements=${this.element.getAnswers()}
              .userState=${this.userState}
              ></jno-answers-list>
+             <jno-answer-evaluate></jno-answer-evaluate>
         </div>
-        <jno-answer-evaluate></jno-answer-evaluate>
         `
     }
 
     evaluate(e) {
         this.shadowRoot.querySelector('jno-answer-evaluate').initEvaluation(e.detail, this.element, this.userState.getCurrentUserName());
+    }
+
+    _doAction(action) {
+        switch (action) {
+            case "Evaluar":
+                this.showFeedbackSuccess(`Evaluando respuesta...`);
+            break;
+            default:
+                this.showFeedbackError(`ERROR: Aún no disponible...`);
+        }
     }
 
 }

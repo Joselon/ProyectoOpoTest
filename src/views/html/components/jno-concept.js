@@ -44,10 +44,10 @@ export class JnoConcept extends JnoModelElement {
                 </span>
                 `;
     }
-    get _extraActionsTemplate() {
+    get _subCardsButtonTemplate() {
         return html`
                  <dile-button-icon 
-                    slot="extraAction"
+                    slot="subCardsButton"
                     .icon=${listIcon}
                     @click=${() => this.toggleDiv(this.definitionsDiv)}
                     ?disabled=${this.element.getDefinitions().length === 0}
@@ -55,7 +55,7 @@ export class JnoConcept extends JnoModelElement {
                     Definiciones: ${this.element.getDefinitions().length}
                 </dile-button-icon>
                 <dile-button-icon 
-                    slot="extraAction"
+                    slot="subCardsButton"
                     .icon=${listIcon}
                     @click=${() => this.toggleDiv(this.relationsDiv)}
                     ?disabled=${this.element.getRelations().length === 0}
@@ -66,12 +66,12 @@ export class JnoConcept extends JnoModelElement {
     }
     get _subElementsTemplate() {
         return html`
-            <div id="definitions">
+            <div slot="subCards" id="definitions">
                 <small>Definiciones</small>
                 ${this.definitionsTemplate}
             </div>
-            <div id="relations">
-            <small>Relaciones</small>
+            <div slot="subCards" id="relations">
+                <small>Relaciones</small>
                 ${this.relationsTemplate}
             </div>
         </section>
@@ -107,7 +107,7 @@ export class JnoConcept extends JnoModelElement {
             case "Seleccionar":
                 this.userState.setCurrentConcept(this.element);
                 this.dispatchModelChangedEvent();
-                this.showFeedbackSuccess(`Cargadas PREGUNTAS`);
+                this.showFeedbackSuccess(`Consulta PREGUNTAS`);
                 break;
             case "Editar":
                 this.edit();

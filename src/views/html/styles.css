@@ -14,8 +14,9 @@ body {
 
 eit-info-overlay {
     --eit-info-overlay-icon-color: #481a29;
-    --eit-info-overlay-background-color: #ccccccdc;
+    --eit-info-overlay-background-color: #ccccccfa;
     --eit-info-overlay-width: fit-content;
+    z-index: 1;
 }
 
 header div {

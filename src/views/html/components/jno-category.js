@@ -41,22 +41,22 @@ export class JnoCategory extends JnoModelElement {
         `;
     }
 
-    get _extraActionsTemplate() {
+    get _subCardsButtonTemplate() {
         return html`
         <dile-button-icon 
-            slot="extraAction"
+            slot="subCardsButton"
             .icon=${listIcon}
             @click=${() => this.toggleDiv(this.subcategoriesDiv)}
             ?disabled=${this.element.getSubcategories().length === 0}
          >
-        Subcategorias: ${this.element.getSubcategories().length}
+            Subcategorias: ${this.element.getSubcategories().length}
         </dile-button-icon>
         `;
     }
 
     get _subElementsTemplate() {
         return html`
-        <div id="subcategories">
+        <div slot="subCards" id="subcategories">
             <jno-categories-list
              .elements=${this.element.getSubcategories()}
              .userState=${this.userState}

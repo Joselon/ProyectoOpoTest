@@ -32,7 +32,7 @@ export class JnoQuestion extends JnoModelElement {
         return html``;
     }
 
-    get _extraActionsTemplate() {
+    get _subCardsButtonTemplate() {
         return html`
         `;
     }
