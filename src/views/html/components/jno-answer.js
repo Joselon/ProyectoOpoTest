@@ -1,5 +1,5 @@
 import {  html, css, LitElement } from 'lit';
-import '../../../utils/view/html/components/dile-action-card.js';
+import '@dile/dile-action-card/dile-action-card.js';
 import { UpdateAtModelChangedMixin } from '../mixins/UpdateAtModelChangedMixin.js';
 import { doneIcon, clearIcon, priorityHighIcon } from '@dile/icons';
 

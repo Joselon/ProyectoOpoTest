@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import '../../../utils/view/html/components/dile-action-card.js';
+import '@dile/dile-action-card/dile-action-card.js';
 
 
 export class JnoModelElement extends LitElement {
